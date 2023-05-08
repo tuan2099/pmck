@@ -1,7 +1,13 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import RegisterLayout from './Layouts/RegisterLayout'
+import Login from './pages/Login'
 
 export default function useRouterElement() {
-  const routerElement = useRoutes([])
+  const routerElement = useRoutes([
+    {
+      path: '/login',
+      element: <Login />
+    }
+  ])
   return routerElement
 }

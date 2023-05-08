@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 
-function Button() {
-  return <div>Button</div>
+interface buttonType extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean
+}
+
+function Button(props: buttonType) {
+  const { isLoading, disabled, children, className, ...rest } = props
+
+  const newClassname = className
+
+  return (
+    <>
+      <button className={newClassname} {...rest}>
+        {children}
+      </button>
+    </>
+  )
 }
 
 export default Button
