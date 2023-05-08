@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Schema, schema } from 'src/utils/rule'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa'
+import { useMutation } from '@tanstack/react-query'
+import authApi from 'src/types/auth.types'
+import { AppContext } from 'src/context/app.context'
+import { isAxiosUnprocessableEntityError } from 'src/utils/uitls'
+import { ErrorResponse } from 'src/types/utils.type'
 
-type FormData = Pick<Schema, 'email' | 'password'>
-const loginSchema = schema.pick(['email', 'password'])
+type FormData = Pick<Schema, 'identifier' | 'password'>
+const loginSchema = schema.pick(['identifier', 'password'])
 
 function Login() {
+  // state from context
+  const { setIsAuthenticate, setProfile } = useContext(AppContext)
+
+  // navigate
+  const navigate = useNavigate()
+
+  // react hook form
   const {
     register,
     handleSubmit,
@@ -21,8 +33,27 @@ function Login() {
     resolver: yupResolver(loginSchema)
   })
 
+  // call api
+  const loginAccountMutation = useMutation({
+    mutationFn: (body: Omit<FormData, 'confirm_password'>) => authApi.login(body)
+  })
+
+  // form submit
   const onSubmit = handleSubmit((data) => {
-    console.log(data)
+    console.log(data, 'data chauw call api')
+    loginAccountMutation.mutate(data, {
+      onSuccess: (data) => {
+        setIsAuthenticate(true)
+        setProfile(data.data.user)
+        navigate('/')
+      },
+      onError: (error) => {
+        console.log(error)
+        // if(isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
+        //   const formError = error.response?
+        // }
+      }
+    })
   })
 
   return (
@@ -49,9 +80,9 @@ function Login() {
                   <Input
                     type='text'
                     placeholder='Nhập Email'
-                    name='email'
+                    name='identifier'
                     register={register}
-                    errorsMesage={errors.email?.message}
+                    errorsMesage={errors.identifier?.message}
                   />
                 </div>
                 <div>

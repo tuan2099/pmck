@@ -4,10 +4,10 @@ import { type } from 'os'
 import * as yup from 'yup'
 import type { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 
-type Rules = { [key in 'email' | 'password' | 'confirm_password']?: RegisterOptions }
+type Rules = { [key in 'identifier' | 'password' | 'confirm_password']?: RegisterOptions }
 
 export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
-  email: {
+  identifier: {
     required: {
       value: true,
       message: 'Vui lòng nhập Email'
@@ -72,7 +72,7 @@ const handleConfirmPasswordYup = (refString: string) => {
 
 // Yup setting
 export const schema = yup.object({
-  email: yup
+  identifier: yup
     .string()
     .required('Email là bắt buộc')
     .email('Email không hợp lệ')
