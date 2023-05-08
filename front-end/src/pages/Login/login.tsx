@@ -4,8 +4,10 @@ import Input from 'src/components/Input'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Schema, schema } from 'src/utils/rule'
-import logo from 'src/assets/logo.png'
 import { Link } from 'react-router-dom'
+import logo from 'src/assets/logo.png'
+import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa'
+
 type FormData = Pick<Schema, 'email' | 'password'>
 const loginSchema = schema.pick(['email', 'password'])
 
@@ -25,8 +27,8 @@ function Login() {
 
   return (
     <>
-      <div className=''>
-        <div className='relative w-full py-3 sm:mx-auto sm:w-6/12 sm:max-w-xl'>
+      <div className='flex h-screen items-center justify-center'>
+        <div className='relative w-full  py-3 sm:mx-auto sm:w-full sm:max-w-xl '>
           <div className='absolute inset-0 -skew-y-6 transform bg-gradient-to-r from-green-500 to-green-800 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl'></div>
           <div className='relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20'>
             <div className='mx-auto max-w-md'>
@@ -85,6 +87,17 @@ function Login() {
                       Đăng kí
                     </Link>{' '}
                   </p>
+                </div>
+                <div className='mx-auto mt-7 flex w-3/12 justify-between  text-slate-300'>
+                  <Link to='/'>
+                    <FaFacebook />
+                  </Link>
+                  <Link to='/'>
+                    <FaYoutube />{' '}
+                  </Link>
+                  <Link to='/'>
+                    <FaInstagram />
+                  </Link>
                 </div>
               </form>
             </div>
