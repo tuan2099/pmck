@@ -4,7 +4,7 @@ import { type } from 'os'
 import * as yup from 'yup'
 import type { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 
-type Rules = { [key in 'identifier' | 'password' | 'confirm_password']?: RegisterOptions }
+type Rules = { [key in 'identifier' | 'password' | 'confirm_password' | 'username']?: RegisterOptions }
 
 export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
   identifier: {
@@ -57,6 +57,20 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
       typeof getValues === 'function'
         ? (value) => value === getValues('password') || 'Nhập lại password lại không khớp'
         : undefined
+  },
+  username: {
+    required: {
+      value: true,
+      message: 'Vui lòng nhập tên hoặc email 1'
+    },
+    maxLength: {
+      value: 150,
+      message: 'Tối đã 150 kí tự'
+    },
+    minLength: {
+      value: 5,
+      message: 'Tối thiểu 5 kí tự'
+    }
   }
 })
 
@@ -64,10 +78,10 @@ export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
 const handleConfirmPasswordYup = (refString: string) => {
   return yup
     .string()
-    .required('Nhập lại password khôn chính xác ')
+    .required('Nhập lại password không chính xác ')
     .min(6, 'Độ dài từ 6- 160 kí tự')
     .max(160, 'Độ dài từ 6 - 160 kí tự')
-    .oneOf([yup.ref(refString)], 'Nhập lại password khôn khớp')
+    .oneOf([yup.ref(refString)], 'Nhập lại password không khớp')
 }
 
 // Yup setting
@@ -79,7 +93,12 @@ export const schema = yup.object({
     .min(5, 'Tối thiểu 5 kí tự')
     .max(160, 'Tối đa 160 kí tự'),
   password: yup.string().required('Password là bắt buộc').min(5, 'Tối thiểu 5 kí tự').max(160, 'Tối đa 160 kí tự'),
-  confirm_password: handleConfirmPasswordYup('password')
+  confirm_password: handleConfirmPasswordYup('password'),
+  username: yup
+    .string()
+    .required('Vui lòng nhập tên hoặc Email')
+    .min(5, 'Tối thiểu 5 kí tự')
+    .max(160, 'Tối đa 160 kí tự')
 })
 
 export type Schema = yup.InferType<typeof schema>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import { useForm } from 'react-hook-form'
@@ -8,10 +8,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa'
 import { useMutation } from '@tanstack/react-query'
-import authApi from 'src/types/auth.types'
+import authApi from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
-import { isAxiosUnprocessableEntityError } from 'src/utils/uitls'
-import { ErrorResponse } from 'src/types/utils.type'
 
 type FormData = Pick<Schema, 'identifier' | 'password'>
 const loginSchema = schema.pick(['identifier', 'password'])
@@ -40,18 +38,20 @@ function Login() {
 
   // form submit
   const onSubmit = handleSubmit((data) => {
-    console.log(data, 'data chauw call api')
     loginAccountMutation.mutate(data, {
       onSuccess: (data) => {
         setIsAuthenticate(true)
         setProfile(data.data.user)
-        navigate('/')
+        navigate('/user')
       },
-      onError: (error) => {
-        console.log(error)
-        // if(isAxiosUnprocessableEntityError<ErrorResponse<FormData>>(error)) {
-        //   const formError = error.response?
-        // }
+      onError: (error: any) => {
+        if (error.response.status > 200) {
+          const formErrorMessage = error.response?.data.error.message
+          setError('identifier', {
+            message: formErrorMessage,
+            type: 'Server'
+          })
+        }
       }
     })
   })
@@ -59,15 +59,15 @@ function Login() {
   return (
     <>
       <div className='flex h-screen items-center justify-center'>
-        <div className='relative w-full  py-3 sm:mx-auto sm:w-full sm:max-w-xl '>
+        <div className='relative w-full py-3 sm:mx-auto sm:w-full sm:max-w-[34rem] '>
           <div className='absolute inset-0 -skew-y-6 transform bg-gradient-to-r from-green-500 to-green-800 shadow-lg sm:-rotate-6 sm:skew-y-0 sm:rounded-3xl'></div>
-          <div className='relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20'>
+          <div className='relative bg-white px-4 py-10 shadow-lg sm:rounded-3xl lg:p-[2rem] '>
             <div className='mx-auto max-w-md'>
               <div className='mx-auto w-[250px]'>
                 <img src={logo} alt='logo' className='mx-auto w-full' />
               </div>
               <div>
-                <h1 className='text-2xl font-semibold'>Đăng nhập vào PMCK</h1>
+                <h1 className='text-center text-2xl font-semibold'>Đăng nhập vào PMCK</h1>
               </div>
               <form onSubmit={onSubmit} noValidate>
                 <div>
@@ -112,7 +112,7 @@ function Login() {
                   Sign in with Google
                 </button>
                 <div className='mt-4'>
-                  <p className='font-semibold'>
+                  <p className='text-center font-semibold'>
                     Bạn không có tài khoản?{' '}
                     <Link className='text-[#1e7115] underline decoration-1' to='/register'>
                       Đăng kí
