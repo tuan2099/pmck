@@ -4,10 +4,28 @@ import { type } from 'os'
 import * as yup from 'yup'
 import type { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 
-type Rules = { [key in 'identifier' | 'password' | 'confirm_password' | 'username']?: RegisterOptions }
+type Rules = { [key in 'identifier' | 'email' | 'password' | 'confirm_password' | 'username']?: RegisterOptions }
 
 export const getRules = (getValues?: UseFormGetValues<any>): Rules => ({
   identifier: {
+    required: {
+      value: true,
+      message: 'Vui lòng nhập Email'
+    },
+    pattern: {
+      value: /^\S+@\S+\.\S+$/,
+      message: 'Email khoong hợp lệ'
+    },
+    maxLength: {
+      value: 150,
+      message: 'Tối đã 150 kí tự'
+    },
+    minLength: {
+      value: 5,
+      message: 'Tối thiểu 5 kí tự'
+    }
+  },
+  email: {
     required: {
       value: true,
       message: 'Vui lòng nhập Email'
@@ -97,6 +115,12 @@ export const schema = yup.object({
   username: yup
     .string()
     .required('Vui lòng nhập tên hoặc Email')
+    .min(5, 'Tối thiểu 5 kí tự')
+    .max(160, 'Tối đa 160 kí tự'),
+  email: yup
+    .string()
+    .required('Email là bắt buộc')
+    .email('Email không hợp lệ')
     .min(5, 'Tối thiểu 5 kí tự')
     .max(160, 'Tối đa 160 kí tự')
 })

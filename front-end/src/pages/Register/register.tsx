@@ -1,4 +1,3 @@
-import React from 'react'
 import { useContext } from 'react'
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
@@ -11,13 +10,16 @@ import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa'
 import { useMutation } from '@tanstack/react-query'
 import authApi from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
+import omit from 'lodash/omit'
 
-type FormData = Pick<Schema, 'identifier' | 'username' | 'password' | 'confirm_password'>
-const registerSchema = schema.pick(['identifier', 'username', 'password', 'confirm_password'])
+type FormData = Pick<Schema, 'email' | 'username' | 'password' | 'confirm_password'>
+const registerSchema = schema.pick(['email', 'username', 'password', 'confirm_password'])
 
 function Register() {
+  const navigate = useNavigate()
+
   // get context
-  // const { setIsAuthenticate, setProfile } = useContext(AppContext)
+  const { setIsAuthenticate, setProfile } = useContext(AppContext)
 
   //
   const {
@@ -34,10 +36,26 @@ function Register() {
     mutationFn: (body: Omit<FormData, 'confirm_password'>) => authApi.registerAccount(body)
   })
 
-  console.log(authApi)
   // submit form
   const onSubmit = handleSubmit((data) => {
-    console.log(data)
+    const body = omit(data, ['confirm_password'])
+
+    registerAccountMutation.mutate(body, {
+      onSuccess: (data) => {
+        setIsAuthenticate(true)
+        setProfile(data.data.user)
+        navigate('/login')
+      },
+      onError: (error: any) => {
+        if (error.response.status > 200) {
+          const formErrorMessage = error.response?.data.error.message
+          setError('username', {
+            message: formErrorMessage,
+            type: 'Server'
+          })
+        }
+      }
+    })
   })
 
   return (
@@ -79,9 +97,9 @@ function Register() {
                   <Input
                     type='text'
                     placeholder='Nhập Email'
-                    name='identifier'
+                    name='email'
                     register={register}
-                    errorsMesage={errors.identifier?.message}
+                    errorsMesage={errors.email?.message}
                   />
                 </div>
                 <div>
@@ -114,7 +132,11 @@ function Register() {
                     errorsMesage={errors.confirm_password?.message}
                   />
                 </div>
-                <Button className='my-6 inline-block w-full rounded bg-gradient-to-r from-green-600 to-green-700 px-6 py-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#0b1526] outline-none transition duration-150 ease-in-out hover:bg-[#103a0b] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-[#103a0b] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-[#217a17] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'>
+                <Button
+                  isLoading={registerAccountMutation.isLoading}
+                  disabled={registerAccountMutation.isLoading}
+                  className='my-6 inline-block w-full rounded bg-gradient-to-r from-green-600 to-green-700 px-6 py-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#0b1526] outline-none transition duration-150 ease-in-out hover:bg-[#103a0b] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-[#103a0b] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-[#217a17] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'
+                >
                   Đăng kí
                 </Button>
                 <button className='flex w-full flex-wrap justify-center rounded-md border border-gray-300 px-2 py-1.5 hover:border-gray-500'>

@@ -4,7 +4,7 @@ export const URL_LOGIN = '/auth/local'
 export const URL_REGISTER = '/auth/local/register'
 
 const authApi = {
-  registerAccount(body: { username: string; identifier: string; password: string }) {
+  registerAccount(body: { username: string; email: string; password: string }) {
     return http.post(URL_REGISTER, body)
   },
   login(body: { identifier: string; password: string }) {

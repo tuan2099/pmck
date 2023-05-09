@@ -34,7 +34,7 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === '/auth/local') {
+        if (url === '/auth/local' || url === '/auth/local/register') {
           const data = response.data
           this.accessToken = data.jwt
           console.log(data, 'access token')
