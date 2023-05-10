@@ -37,7 +37,6 @@ class Http {
         if (url === '/auth/local' || url === '/auth/local/register') {
           const data = response.data
           this.accessToken = data.jwt
-          console.log(data, 'access token')
           saveAccesTokenToLocalStorage(this.accessToken)
           setProfileToLocalStorage(data.user)
         } else if (url === '/hi') {

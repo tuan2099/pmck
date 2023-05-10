@@ -1,12 +1,13 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import RegisterLayout from './Layouts/RegisterLayout'
 import { AppContext } from './context/app.context'
+import { useContext } from 'react'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
 import HomeGuest from './pages/HomeGuest'
-import { useContext } from 'react'
 import Homeuser from './pages/Homeuser'
+import ForgotPassword from './pages/ForgotPassword'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -37,6 +38,14 @@ export default function useRouterElement() {
           element: (
             <RegisterLayout>
               <Register />
+            </RegisterLayout>
+          )
+        },
+        {
+          path: '/forgot_password',
+          element: (
+            <RegisterLayout>
+              <ForgotPassword />
             </RegisterLayout>
           )
         }
