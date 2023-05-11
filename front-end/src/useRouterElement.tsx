@@ -26,6 +26,10 @@ export default function useRouterElement() {
       element: <RejectedRoute />,
       children: [
         {
+          path: '/',
+          element: <HomeGuest />
+        },
+        {
           path: '/login',
           element: (
             <RegisterLayout>
@@ -50,10 +54,6 @@ export default function useRouterElement() {
           )
         }
       ]
-    },
-    {
-      path: '/',
-      element: <HomeGuest />
     },
     {
       path: '',

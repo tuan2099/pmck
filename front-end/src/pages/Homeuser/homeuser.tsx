@@ -1,7 +1,12 @@
 import React from 'react'
+import SidebarUser from 'src/components/sidebarUser'
 
 function Homeuser() {
-  return <div>Homeuser</div>
+  return (
+    <>
+      <SidebarUser />
+    </>
+  )
 }
 
 export default Homeuser
