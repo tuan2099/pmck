@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import HomeGuest from './pages/HomeGuest'
 import Homeuser from './pages/Homeuser'
 import ForgotPassword from './pages/ForgotPassword'
+import HomeUserLayout from './Layouts/HomeUserLayout'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -61,7 +62,11 @@ export default function useRouterElement() {
       children: [
         {
           path: '/user',
-          element: <Homeuser />
+          element: (
+            <HomeUserLayout>
+              <Homeuser />
+            </HomeUserLayout>
+          )
         }
       ]
     }
