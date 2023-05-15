@@ -13,7 +13,7 @@ function HomeUserLayout({ children }: Props) {
         <div className='shrink-0'>
           <SidebarUser />
         </div>
-        <div>1{children}</div>
+        <div className='max-w-[calc(100%-96px)]'>{children}</div>
       </div>
     </>
   )

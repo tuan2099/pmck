@@ -12,7 +12,7 @@ class Http {
   constructor() {
     this.accessToken = getAccesTokenLocalStorage()
     this.instance = axios.create({
-      baseURL: 'https://pmck.onrender.com/api',
+      baseURL: 'http://localhost:1337/api',
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ class Http {
           this.accessToken = data.jwt
           saveAccesTokenToLocalStorage(this.accessToken)
           setProfileToLocalStorage(data.user)
-        } else if (url === '/hi') {
+        } else if (url === '/logout') {
           this.accessToken = ''
           clearAccesTokenFromLocalStorage()
         }

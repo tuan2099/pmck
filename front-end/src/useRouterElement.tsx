@@ -9,6 +9,7 @@ import HomeGuest from './pages/HomeGuest'
 import Homeuser from './pages/Homeuser'
 import ForgotPassword from './pages/ForgotPassword'
 import HomeUserLayout from './Layouts/HomeUserLayout'
+import New from './pages/New'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -17,19 +18,20 @@ function ProtectedRoute() {
 
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
-  return !isAuthenticated ? <Outlet /> : <Navigate to='/' />
+  return !isAuthenticated ? <Outlet /> : <Navigate to='/user' />
 }
 
 export default function useRouterElement() {
   const routerElement = useRoutes([
     {
+      path: '/',
+      element: <HomeGuest />,
+      index: true
+    },
+    {
       path: '',
       element: <RejectedRoute />,
       children: [
-        {
-          path: '/',
-          element: <HomeGuest />
-        },
         {
           path: '/login',
           element: (
@@ -69,6 +71,14 @@ export default function useRouterElement() {
           )
         }
       ]
+    },
+    {
+      path: '/new',
+      element: (
+        <HomeUserLayout>
+          <New />
+        </HomeUserLayout>
+      )
     }
   ])
   return routerElement

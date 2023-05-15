@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "list_courses",
+  "info": {
+    "singularName": "list-course",
+    "pluralName": "list-courses",
+    "displayName": "List_course",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "listcourseName": {
+      "type": "string"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course"
+    }
+  }
+}

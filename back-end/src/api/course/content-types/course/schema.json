@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "singularName": "course",
+    "pluralName": "courses",
+    "displayName": "Course",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "course_name": {
+      "type": "string"
+    },
+    "banner_course": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "course_description": {
+      "type": "richtext"
+    },
+    "rating": {
+      "type": "integer"
+    },
+    "author": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "lessons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson.lesson"
+    }
+  }
+}
