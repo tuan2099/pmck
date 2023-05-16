@@ -2,8 +2,8 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination, Navigation } from 'swiper'
 
-function Slider(imageSliderdata: any) {
-  console.log(imageSliderdata)
+function Slider(props: any) {
+  const { imageSliderdata } = props
   return (
     <>
       <Swiper
