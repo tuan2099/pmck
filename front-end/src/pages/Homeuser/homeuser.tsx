@@ -11,7 +11,6 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-  console.log(data?.data.data)
   return (
     <>
       <div className='relative w-full p-[25px]'>
