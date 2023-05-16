@@ -20,7 +20,7 @@ function Homeuser() {
       return courseApi.getCourse()
     }
   })
-  console.log(coursesData)
+  console.log(coursesData, '12')
   return (
     <>
       <div className='relative w-full p-[25px]'>
