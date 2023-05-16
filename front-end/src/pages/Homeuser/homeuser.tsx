@@ -12,15 +12,7 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-  // call api list course
-
-  const { data: coursesData } = useQuery({
-    queryKey: ['course'],
-    queryFn: () => {
-      return courseApi.getCourse()
-    }
-  })
-  console.log(coursesData, '12')
+  console.log(data?.data.data)
   return (
     <>
       <div className='relative w-full p-[25px]'>
