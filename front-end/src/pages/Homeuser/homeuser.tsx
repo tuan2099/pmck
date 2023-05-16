@@ -1,25 +1,35 @@
 import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Pagination, Navigation } from 'swiper'
 import { useQuery } from '@tanstack/react-query'
 import sliderApi from 'src/apis/slider.api'
+import Slider from './Component/Slider'
+import courseApi from 'src/apis/course.api'
 
 function Homeuser() {
-  const { data } = useQuery({
+  // call api slider
+  const { data: imageSliderdata } = useQuery({
     queryKey: ['sliderImage'],
     queryFn: () => {
       return sliderApi.getSlider()
     }
   })
-  console.log(data?.data.data)
+  // call api list course
+
+  const { data: coursesData } = useQuery({
+    queryKey: ['course'],
+    queryFn: () => {
+      return courseApi.getCourse()
+    }
+  })
+  console.log(coursesData)
   return (
     <>
       <div className='relative w-full p-[25px]'>
-        <Swiper
+        <Slider imageSliderdata={imageSliderdata} />
+        {/* <Swiper
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 3500,
+            delay: 9500,
             disableOnInteraction: false
           }}
           pagination={{
@@ -28,12 +38,25 @@ function Homeuser() {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className='mySwiper'
+          className='mySwiper rounded-xl'
         >
-          {data &&
-            data?.data.data.map((slider: any) => {
+          {imageSliderdata &&
+            imageSliderdata?.data?.data.map((slider: any) => {
               return (
-                <SwiperSlide key={slider.id}>
+                <SwiperSlide
+                  key={slider.id}
+                  className='h-[268px]'
+                  style={{
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundImage: `url(http://localhost:1337${slider.attributes.image_slider.data.map(
+                      (imageItem: any) => {
+                        return `${imageItem.attributes.formats.thumbnail.url}`
+                      }
+                    )})`
+                  }}
+                >
                   <div className=''>
                     <h3>{slider.attributes.title}</h3>
                     <p>{slider.attributes.short_description}</p>
@@ -41,7 +64,7 @@ function Homeuser() {
                 </SwiperSlide>
               )
             })}
-          {!data && (
+          {!imageSliderdata && (
             <>
               <div role='status' className='animate-pulse space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0'>
                 <div className='flex h-64 items-center justify-center rounded bg-gray-300 dark:bg-gray-700 sm:w-[110rem]'>
@@ -58,7 +81,35 @@ function Homeuser() {
               </div>
             </>
           )}
-        </Swiper>
+        </Swiper> */}
+      </div>
+      <div className='mt-[70px] overflow-hidden pl-[74px] pr-[44px]'>
+        <div className=' flex flex-wrap'>
+          {coursesData &&
+            coursesData?.data?.data?.map((courseItem: any) => {
+              return (
+                <>
+                  <div className='mb-[30px] w-3/12 px-3'>
+                    <div
+                      className='h-[232px] w-full rounded-2xl'
+                      style={{
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundImage: `url(http://localhost:1337${courseItem.attributes.banner_course.data?.map(
+                          (imageItem: any) => {
+                            return `${imageItem.attributes.formats.medium?.url}`
+                          }
+                        )})`
+                      }}
+                    ></div>
+                    <h5>{courseItem.attributes.course_name}</h5>
+                    <p>{courseItem.attributes.price}</p>
+                  </div>
+                </>
+              )
+            })}
+        </div>
       </div>
     </>
   )

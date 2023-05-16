@@ -4,7 +4,8 @@
   "info": {
     "singularName": "slider-image",
     "pluralName": "slider-images",
-    "displayName": "slider-image"
+    "displayName": "slider-image",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,16 +19,23 @@
       "type": "string"
     },
     "image_slider": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "Link": {
+      "type": "string"
+    },
+    "color_1": {
+      "type": "string"
+    },
+    "color_2": {
       "type": "string"
     }
   }
