@@ -17,8 +17,7 @@ function Slider(props: any) {
           clickable: true,
           dynamicBullets: true
         }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[Autoplay, Pagination]}
         className='mySwiper rounded-xl'
       >
         {imageSliderdata &&
@@ -27,21 +26,26 @@ function Slider(props: any) {
             return (
               <SwiperSlide
                 key={slider.id}
-                className='h-[268px]'
-                style={{
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundImage: `url(http://localhost:1337${slider.attributes.image_slider.data.map(
-                    (imageItem: any) => {
-                      return `${imageItem.attributes.formats.thumbnail.url}`
-                    }
-                  )})`
-                }}
+                className='h-[268px] bg-gradient-to-r from-blue-500 to-green-400'
+                // style={{
+                //   backgroundSize: 'cover',
+                //   backgroundPosition: 'center',
+                //   backgroundRepeat: 'no-repeat',
+                //   backgroundImage: `url(http://localhost:1337${slider.attributes.image_slider.data.map(
+                //     (imageItem: any) => {
+                //       return `${imageItem.attributes.formats.thumbnail.url}`
+                //     }
+                //   )})`
+                // }}
               >
-                <div className=''>
-                  <h3>{slider.attributes.title}</h3>
-                  <p>{slider.attributes.short_description}</p>
+                <div className='flex items-center'>
+                  <div className='px-[36px]'>
+                    <h3 className='text-5xl font-bold leading-normal text-white'>{slider.attributes.title}</h3>
+                    <p className='mb-[24px] max-w-[600px] text-white'>{slider.attributes.short_description}</p>
+                    <button className='rounded-[50px] border-2 border-white px-2.5 py-1 text-white transition hover:bg-white hover:text-black'>
+                      Tìm hiểu thêm
+                    </button>
+                  </div>
                 </div>
               </SwiperSlide>
             )
