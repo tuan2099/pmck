@@ -19,7 +19,9 @@ function CourseCard(props: any) {
             )})`
           }}
         ></div>
-        <h5>{courseItem.attributes.course_name}</h5>
+        <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-[#292929]'>
+          {courseItem.attributes.course_name}
+        </h5>
         <p>{courseItem.attributes.price}</p>
       </div>
     </>
