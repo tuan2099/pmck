@@ -4,7 +4,6 @@ import sliderApi from 'src/apis/slider.api'
 import Slider from './Component/Slider'
 import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
-import { Swiper } from 'swiper/react'
 
 function Homeuser() {
   // call api slider
