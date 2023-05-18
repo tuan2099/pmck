@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import sliderApi from 'src/apis/slider.api'
 import Slider from './Component/Slider'
 import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
+import { AppContext } from 'src/context/app.context'
+import { useNavigate } from 'react-router-dom'
 
 function Homeuser() {
   // call api slider

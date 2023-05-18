@@ -7,7 +7,7 @@ function CourseCard(props: any) {
     <>
       <div className='mb-[30px] w-3/12 px-3'>
         <div
-          className='h-[232px] w-full rounded-2xl'
+          className='w-full rounded-2xl pt-[56.25%]'
           style={{
             backgroundSize: 'cover',
             backgroundPosition: 'center',
