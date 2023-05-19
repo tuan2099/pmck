@@ -2,9 +2,17 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import ClickPopover from '../ClickPopover'
-import { clearAccesTokenFromLocalStorage } from 'src/utils/auth'
+import { useQuery } from '@tanstack/react-query'
+import profileApi from 'src/apis/user.api'
 
 function NavbarUser() {
+  const { data } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => {
+      return profileApi.getProfile()
+    }
+  })
+  console.log(data)
   return (
     <>
       <div className='sticky left-0 right-0 top-0 z-[2] flex items-center justify-between border-b border-[#e8ebed] bg-white px-7 py-2'>
