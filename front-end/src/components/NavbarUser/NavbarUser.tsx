@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import ClickPopover from '../ClickPopover'
 import { useQuery } from '@tanstack/react-query'
 import profileApi from 'src/apis/user.api'
+import { deleteStorage } from 'src/utils/storage'
+import { AppContext } from 'src/context/app.context'
 
 function NavbarUser() {
+  const navigate = useNavigate()
+  const { setIsAuthenticate, setProfile, profile } = useContext(AppContext)
+
   const { data } = useQuery({
     queryKey: ['profile'],
     queryFn: () => {
       return profileApi.getProfile()
     }
   })
-  console.log(data)
+
+  const handleLogout = () => {
+    deleteStorage('access_token')
+    deleteStorage('profile')
+    setIsAuthenticate(false)
+    setProfile(null)
+    navigate('/')
+  }
+
+  console.log(profile)
+
   return (
     <>
       <div className='sticky left-0 right-0 top-0 z-[2] flex items-center justify-between border-b border-[#e8ebed] bg-white px-7 py-2'>
@@ -71,8 +86,8 @@ function NavbarUser() {
                 <div className='flex items-center justify-between'>
                   <div className='ml-3 h-[40px] w-[40px] cursor-pointer rounded-[50%] bg-black'></div>
                   <div className='w-[65%] overflow-hidden text-ellipsis whitespace-nowrap '>
-                    <h5 className='font-semibold'>Hoàng Anh Tuấn</h5>
-                    <p className='text-[12px] text-[#757575]'>hoanganhtuan@gmail.com</p>
+                    <h5 className='font-semibold'>{profile?.username}</h5>
+                    <p className='text-[12px] text-[#757575]'>{profile?.email}</p>
                   </div>
                 </div>
                 <Link
@@ -96,7 +111,10 @@ function NavbarUser() {
                   Trang cá nhân
                 </Link>
                 <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
-                <div className='trasition my-2 block flex items-center px-2 py-2 text-[#757575] hover:bg-gray-100'>
+                <div
+                  className='trasition my-2 flex items-center px-2 py-2 text-[#757575] hover:cursor-pointer hover:bg-gray-100'
+                  onClick={handleLogout}
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -111,7 +129,7 @@ function NavbarUser() {
                       d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9'
                     />
                   </svg>
-                  Đăng xuất{' '}
+                  Đăng xuất
                 </div>
               </div>
             }
