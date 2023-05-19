@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from 'src/components/Footer'
 import NavbarUser from 'src/components/NavbarUser'
 import SidebarUser from 'src/components/sidebarUser'
 interface Props {
@@ -15,6 +16,7 @@ function HomeUserLayout({ children }: Props) {
         </div>
         <div className='max-w-[calc(100%-96px)]'>{children}</div>
       </div>
+      <Footer />
     </>
   )
 }

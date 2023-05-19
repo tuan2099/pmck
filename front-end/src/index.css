@@ -6,3 +6,20 @@
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.custom-shape-divider-top-1684486279 {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1684486279 svg {
+  position: relative;
+  display: block;
+  width: calc(150% + 1.3px);
+  height: 221px;
+}
+
+.custom-shape-divider-top-1684486279 .shape-fill {
+  fill: #ffffff;
+}

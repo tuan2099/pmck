@@ -30,6 +30,9 @@ function Homeuser() {
       </div>
 
       <div className='mt-[70px] overflow-hidden pl-[74px] pr-[44px]'>
+        <h4 className='mb-3 text-2xl font-bold'>
+          Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
+        </h4>
         <div className='flex flex-wrap'>
           {coursesData &&
             coursesData?.data?.data?.map((courseItem: any) => {
