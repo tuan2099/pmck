@@ -16,7 +16,7 @@ function HomeUserLayout({ children }: Props) {
         </div>
         <div className='max-w-[calc(100%-96px)]'>{children}</div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
