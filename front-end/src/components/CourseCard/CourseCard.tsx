@@ -4,7 +4,6 @@ import { formartCurrency, generateNameId } from 'src/utils/uitls'
 
 function CourseCard(props: any) {
   const { courseItem } = props
-  console.log(courseItem)
   return (
     <>
       <Link
