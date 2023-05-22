@@ -4,11 +4,7 @@ import useRouterElement from './useRouterElement'
 import ErrorBoundary from './components/ErrorBoundary'
 function App() {
   const routeElement = useRouterElement()
-  return (
-    <>
-      <ErrorBoundary>{routeElement}</ErrorBoundary>
-    </>
-  )
+  return <>{routeElement}</>
 }
 
 export default App

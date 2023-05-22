@@ -1,4 +1,4 @@
-import { EventHandler, memo, useEffect, useMemo, useRef, useState } from 'react'
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Coords, Position } from 'src/types/popover.types'
 import useClickOutSide from 'src/hooks/useClickOutSide'

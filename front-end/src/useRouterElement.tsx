@@ -10,6 +10,8 @@ import Homeuser from './pages/Homeuser'
 import ForgotPassword from './pages/ForgotPassword'
 import HomeUserLayout from './Layouts/HomeUserLayout'
 import New from './pages/New'
+import Course_detail from './pages/Course_detail'
+import Notfound from './pages/Notfound'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -79,6 +81,19 @@ export default function useRouterElement() {
           <New />
         </HomeUserLayout>
       )
+    },
+    {
+      path: ':id',
+      index: true,
+      element: (
+        <HomeUserLayout>
+          <Course_detail />
+        </HomeUserLayout>
+      )
+    },
+    {
+      path: '*',
+      element: <Notfound />
     }
   ])
   return routerElement

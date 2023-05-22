@@ -14,7 +14,7 @@ function HomeUserLayout({ children }: Props) {
         <div className='shrink-0'>
           <SidebarUser />
         </div>
-        <div className='max-w-[calc(100%-96px)]'>{children}</div>
+        <div className='w-[118rem] max-w-[calc(100%-96px)]'>{children}</div>
       </div>
       {/* <Footer /> */}
     </>
