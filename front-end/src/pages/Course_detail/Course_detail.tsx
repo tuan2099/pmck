@@ -7,7 +7,7 @@ import { getIdFromNameId } from 'src/utils/uitls'
 function Course_detail() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
-
+  const [openChaper, setOpenChaper] = useState()
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
@@ -87,7 +87,7 @@ function Course_detail() {
                   </div>
                   <div className='  text-[#1e7115]'>Mở rộng tất cả</div>
                 </div>
-                <div className='mt-[12px]'>
+                <div className='mt-[24px]'>
                   <div className='relative  w-full cursor-pointer items-center  rounded-md bg-[#f5f5f5] py-[14px] pl-[40px] pr-[30px] transition  hover:bg-[#f0f0f0]'>
                     <div className='flex justify-between'>
                       <h5 className='flex items-center font-bold'>
@@ -125,7 +125,7 @@ function Course_detail() {
                           bài học 1
                         </h5>
                       </div>
-                      <div className='flex w-full items-center border-slate-50 py-[10px] py-[10px] pl-[50px]'>
+                      <div className='flex w-full items-center border-slate-50 py-[10px]  pl-[50px]'>
                         <h5 className='flex items-center'>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
