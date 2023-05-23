@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import React, { useState } from 'react'
 import { FaPlus, FaHome, FaRoad, FaMicroblog, FaHourglassHalf } from 'react-icons/fa'
 
 import { Link, NavLink } from 'react-router-dom'

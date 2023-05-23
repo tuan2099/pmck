@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lesson_items",
+  "info": {
+    "singularName": "lesson-item",
+    "pluralName": "lesson-items",
+    "displayName": "lesson_item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "video_url": {
+      "type": "string"
+    }
+  }
+}

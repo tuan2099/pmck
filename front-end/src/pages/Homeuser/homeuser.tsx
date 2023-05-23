@@ -4,8 +4,6 @@ import sliderApi from 'src/apis/slider.api'
 import Slider from './Component/Slider'
 import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
-import { AppContext } from 'src/context/app.context'
-import { useNavigate } from 'react-router-dom'
 
 function Homeuser() {
   // call api slider
@@ -15,7 +13,6 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-
   // call api course
   // const { data: coursesData } = useQuery({
   //   queryKey: ['courseData'],
@@ -23,7 +20,6 @@ function Homeuser() {
   //     return courseApi.getCourse()
   //   }
   // })
-
   // call api list_course
   const { data: listCouseData } = useQuery({
     queryKey: ['listCourse'],
@@ -32,7 +28,6 @@ function Homeuser() {
     }
   })
 
-  // console.log(listCouseData?.data.data[0].attributes.courses.data)
   const listNewCourse = listCouseData?.data.data[0].attributes.courses.data
   const listFreeCourse = listCouseData?.data.data[1].attributes.courses.data
 
@@ -90,7 +85,6 @@ function Homeuser() {
         <div className='flex flex-wrap'>
           {listFreeCourse &&
             listFreeCourse.map((courseItem: any) => {
-              console.log(courseItem)
               return (
                 <>
                   <CourseCard key={courseItem.id} courseItem={courseItem} />

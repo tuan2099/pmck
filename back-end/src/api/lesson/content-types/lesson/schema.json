@@ -4,7 +4,8 @@
   "info": {
     "singularName": "lesson",
     "pluralName": "lessons",
-    "displayName": "Lesson"
+    "displayName": "Chapter",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,15 +18,10 @@
     "lesson_description": {
       "type": "string"
     },
-    "video_lesson": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": true
+    "lesson_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson-item.lesson-item"
     }
   }
 }

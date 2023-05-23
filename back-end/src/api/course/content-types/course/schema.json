@@ -44,7 +44,7 @@
     "price": {
       "type": "integer"
     },
-    "lessons": {
+    "chapters": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::lesson.lesson"
