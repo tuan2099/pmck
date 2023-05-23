@@ -10,7 +10,7 @@ const courseApi = {
     return http.get(COURSE_URL)
   },
   getDetailCourse(id: string) {
-    return http.get(`/courses/${id}?populate=*`)
+    return http.get(`/courses/${id}?populate[0]=banner_course&populate[1]=chapters.lesson_items`)
   }
 }
 

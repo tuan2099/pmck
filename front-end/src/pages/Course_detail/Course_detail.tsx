@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import { getIdFromNameId } from 'src/utils/uitls'
@@ -8,23 +8,21 @@ function Course_detail() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
   const [openChaper, setOpenChaper] = useState()
+
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
+  // test url image
+  // console.log(courseDetaildata?.data.data.attributes.banner_course.data[0].attributes.formats.medium.url)
+  console.log(courseDetaildata?.data.data.attributes.chapters.data)
   return (
     <>
       <div className='m-auto w-full '>
         <div className='mt-[24px] flex pl-[68px] pr-[44px]'>
           <section className='w-4/6  px-3'>
-            <h1 className='mb-5 mt-4 text-3xl font-bold'>
-              Nhập môn kế toán, phân tích và báo cáo tài chính doanh nghiệp
-            </h1>
-            <p>
-              Khóa học lập trình C++ từ cơ bản tới nâng cao dành cho người mới bắt đầu. Mục tiêu của khóa học này nhằm
-              giúp các bạn nắm được các khái niệm căn cơ của lập trình, giúp các bạn có nền tảng vững chắc để chinh phục
-              con đường trở thành một lập trình viên.
-            </p>
+            <h1 className='mb-5 mt-4 text-3xl font-bold'>{courseDetaildata?.data.data.attributes.course_name}</h1>
+            <p>{courseDetaildata?.data.data.attributes.course_description}</p>
             <div className='mt-[35px]'>
               <div className='sticky top-[66px] z-[2] bg-white pb-[4px] '>
                 <h2 className='my-[16px] text-xl font-bold'>Nội dung khóa học</h2>
@@ -88,64 +86,54 @@ function Course_detail() {
                   <div className='  text-[#1e7115]'>Mở rộng tất cả</div>
                 </div>
                 <div className='mt-[24px]'>
-                  <div className='relative  w-full cursor-pointer items-center  rounded-md bg-[#f5f5f5] py-[14px] pl-[40px] pr-[30px] transition  hover:bg-[#f0f0f0]'>
-                    <div className='flex justify-between'>
-                      <h5 className='flex items-center font-bold'>
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          strokeWidth={1.5}
-                          stroke='currentColor'
-                          className='mr-3 h-5 w-5 text-[#1e7115]'
-                        >
-                          <path strokeLinecap='round' strokeLinejoin='round' d='M12 4.5v15m7.5-7.5h-15' />
-                        </svg>
-                        1. Giới thiệu
-                      </h5>
-                      <p className='text-[#333333]'>3 bài học</p>
-                    </div>
-                    <div className='absolute left-[0] w-full px-[20px]'>
-                      <div className='flex w-full items-center border-b-2 border-slate-50 py-[10px] pl-[50px]'>
-                        <h5 className='flex items-center'>
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            strokeWidth={1.5}
-                            stroke='currentColor'
-                            className='align-center h-6 w-6 rounded-[50px] text-[#1e7115]'
+                  {courseDetaildata?.data.data.attributes.chapters.data.map((chapter: any) => (
+                    <details className='mb-[8px]' key={chapter.id}>
+                      <summary className='relative  w-full cursor-pointer items-center  rounded-md bg-[#f5f5f5] py-[14px] pl-[40px] pr-[30px] transition  hover:bg-[#f0f0f0]'>
+                        <div className='flex justify-between'>
+                          <h5 className='flex items-center font-bold'>
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              strokeWidth={1.5}
+                              stroke='currentColor'
+                              className='mr-3 h-5 w-5 text-[#1e7115]'
+                            >
+                              <path strokeLinecap='round' strokeLinejoin='round' d='M12 4.5v15m7.5-7.5h-15' />
+                            </svg>
+                            {chapter.attributes.lesson_name}
+                          </h5>
+                          <p className='text-[#333333]'>{chapter.attributes.lesson_items.data.length} bài học</p>
+                        </div>
+                      </summary>
+                      <div>
+                        {chapter.attributes.lesson_items.data.map((lesson_item: any) => (
+                          <div
+                            className='flex w-full items-center border-b-2 border-slate-50 py-[10px] pl-[50px]'
+                            key={lesson_item.id}
                           >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              d='M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z'
-                            />
-                          </svg>
-                          bài học 1
-                        </h5>
+                            <h5 className='flex items-center'>
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                strokeWidth={1.5}
+                                stroke='currentColor'
+                                className='align-center mr-3 h-6 w-6 rounded-[50px] text-[#1e7115]'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  d='M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z'
+                                />
+                              </svg>
+                              {lesson_item.attributes.title}
+                            </h5>
+                          </div>
+                        ))}
                       </div>
-                      <div className='flex w-full items-center border-slate-50 py-[10px]  pl-[50px]'>
-                        <h5 className='flex items-center'>
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            strokeWidth={1.5}
-                            stroke='currentColor'
-                            className='align-center h-6 w-6 rounded-[50px] text-[#1e7115]'
-                          >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              d='M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z'
-                            />
-                          </svg>
-                          bài học 1
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
+                    </details>
+                  ))}
                 </div>
               </div>
             </div>
@@ -156,7 +144,7 @@ function Course_detail() {
                 <div
                   className='w-full bg-cover bg-center bg-no-repeat pt-[56.25%]'
                   style={{
-                    backgroundImage: 'url(https://files.fullstack.edu.vn/f8-prod/courses/21/63e1bcbaed1dd.png)'
+                    backgroundImage: `url(http://localhost:1337${courseDetaildata?.data.data.attributes.banner_course.data[0].attributes.formats.medium.url})`
                   }}
                 ></div>
               </div>

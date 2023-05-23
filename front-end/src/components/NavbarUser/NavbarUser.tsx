@@ -9,8 +9,7 @@ import { AppContext } from 'src/context/app.context'
 
 function NavbarUser() {
   const navigate = useNavigate()
-  const { setIsAuthenticate, setProfile, profile, course } = useContext(AppContext)
-  console.log(course, 'lấy từ context')
+  const { setIsAuthenticate, setProfile, profile } = useContext(AppContext)
 
   // const { data } = useQuery({
   //   queryKey: ['profile'],
