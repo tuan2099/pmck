@@ -17,12 +17,24 @@ function Homeuser() {
   })
 
   // call api course
-  const { data: coursesData } = useQuery({
-    queryKey: ['courseData'],
+  // const { data: coursesData } = useQuery({
+  //   queryKey: ['courseData'],
+  //   queryFn: () => {
+  //     return courseApi.getCourse()
+  //   }
+  // })
+
+  // call api list_course
+  const { data: listCouseData } = useQuery({
+    queryKey: ['listCourse'],
     queryFn: () => {
-      return courseApi.getCourse()
+      return courseApi.getListcourse()
     }
   })
+
+  // console.log(listCouseData?.data.data[0].attributes.courses.data)
+  const listNewCourse = listCouseData?.data.data[0].attributes.courses.data
+  const listFreeCourse = listCouseData?.data.data[1].attributes.courses.data
 
   return (
     <>
@@ -35,15 +47,15 @@ function Homeuser() {
           Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
         </h4>
         <div className='flex flex-wrap'>
-          {coursesData &&
-            coursesData?.data?.data?.map((courseItem: any) => {
+          {listNewCourse &&
+            listNewCourse.map((courseItem: any) => {
               return (
                 <>
                   <CourseCard key={courseItem.id} courseItem={courseItem} />
                 </>
               )
             })}
-          {!coursesData && (
+          {!listNewCourse && (
             <div className='flex items-center justify-between'>
               {Array(4)
                 .fill(0)
@@ -75,6 +87,17 @@ function Homeuser() {
         <h4 className='mb-5 text-2xl font-bold'>
           Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Miễn phí</span>
         </h4>
+        <div className='flex flex-wrap'>
+          {listFreeCourse &&
+            listFreeCourse.map((courseItem: any) => {
+              console.log(courseItem)
+              return (
+                <>
+                  <CourseCard key={courseItem.id} courseItem={courseItem} />
+                </>
+              )
+            })}
+        </div>
       </div>
 
       <div className='mt-[70px] overflow-hidden pl-[74px] pr-[44px]'>
