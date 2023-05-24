@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "course_registrations",
+  "info": {
+    "singularName": "course-registration",
+    "pluralName": "course-registrations",
+    "displayName": "CourseRegistration",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "registration_date": {
+      "type": "datetime"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "course_registrations"
+    },
+    "status": {
+      "type": "boolean",
+      "default": false
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course.course",
+      "inversedBy": "course_registrations"
+    }
+  }
+}

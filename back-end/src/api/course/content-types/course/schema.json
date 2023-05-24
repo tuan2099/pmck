@@ -51,6 +51,12 @@
     },
     "status_course": {
       "type": "boolean"
+    },
+    "course_registrations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course-registration.course-registration",
+      "mappedBy": "courses"
     }
   }
 }
