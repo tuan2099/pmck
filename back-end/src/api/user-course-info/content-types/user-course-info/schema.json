@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_course_infos",
+  "info": {
+    "singularName": "user-course-info",
+    "pluralName": "user-course-infos",
+    "displayName": "user_course_info",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "status_user": {
+      "type": "boolean"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_course_infos"
+    }
+  }
+}

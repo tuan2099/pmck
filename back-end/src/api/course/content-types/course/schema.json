@@ -48,6 +48,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::lesson.lesson"
+    },
+    "status_course": {
+      "type": "boolean"
     }
   }
 }

@@ -13,13 +13,7 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-  // call api course
-  // const { data: coursesData } = useQuery({
-  //   queryKey: ['courseData'],
-  //   queryFn: () => {
-  //     return courseApi.getCourse()
-  //   }
-  // })
+
   // call api list_course
   const { data: listCouseData } = useQuery({
     queryKey: ['listCourse'],
@@ -75,6 +69,7 @@ function Homeuser() {
                 ))}
             </div>
           )}
+          {listNewCourse === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
         </div>
       </div>
 
@@ -116,6 +111,7 @@ function Homeuser() {
                 ))}
             </div>
           )}
+          {listFreeCourse === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
         </div>
       </div>
 
