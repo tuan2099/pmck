@@ -35,14 +35,10 @@ function Homeuser() {
         <h4 className='mb-5 text-2xl font-bold'>
           Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
         </h4>
-        <div className='flex flex-wrap'>
+        <div className='grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {listNewCourse &&
             listNewCourse.map((courseItem: any) => {
-              return (
-                <>
-                  <CourseCard key={courseItem.id} courseItem={courseItem} />
-                </>
-              )
+              return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
           {!listNewCourse && (
             <div className='flex items-center justify-between'>
@@ -77,14 +73,10 @@ function Homeuser() {
         <h4 className='mb-5 text-2xl font-bold'>
           Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Miễn phí</span>
         </h4>
-        <div className='flex flex-wrap'>
+        <div className='grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {listFreeCourse &&
             listFreeCourse.map((courseItem: any) => {
-              return (
-                <>
-                  <CourseCard key={courseItem.id} courseItem={courseItem} />
-                </>
-              )
+              return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
           {!listFreeCourse && (
             <div className='flex items-center justify-between'>

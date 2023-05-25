@@ -23,6 +23,15 @@ function RejectedRoute() {
   return !isAuthenticated ? <Outlet /> : <Navigate to='/user' />
 }
 
+export const ROUTES = {
+  login: '/login',
+  user: '/user',
+  home: '/',
+  register: '/register',
+  forgot_password: '/forgot_password',
+  new: '/new'
+}
+
 export default function useRouterElement() {
   const routerElement = useRoutes([
     {

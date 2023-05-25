@@ -70,6 +70,12 @@
       "relation": "manyToMany",
       "target": "api::course-registration.course-registration",
       "inversedBy": "users"
+    },
+    "course_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course-status.course-status",
+      "inversedBy": "users_permissions_users"
     }
   }
 }

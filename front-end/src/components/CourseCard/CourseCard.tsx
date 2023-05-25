@@ -1,28 +1,27 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
+import { generateImageUrl } from 'src/helper/generateImageUrl'
+
+import { CourseType } from 'src/types/course.type'
 import { formartCurrency, generateNameId } from 'src/utils/uitls'
 
-function CourseCard(props: any) {
+function CourseCard(props: { courseItem: CourseType }) {
   const { courseItem } = props
+
+  console.log(courseItem)
+
   return (
     <>
       <Link
         to={`/${generateNameId({ name: courseItem.attributes.course_name, id: courseItem.id })}`}
-        className='mb-[30px] w-3/12 cursor-pointer px-3 hover:bg-slate-50'
+        className='cursor-pointer'
       >
-        <div
-          className='w-full rounded-2xl pt-[56.25%] '
-          style={{
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundImage: `url(http://localhost:1337${courseItem.attributes.banner_course.data?.map(
-              (imageItem: any) => {
-                return `${imageItem.attributes.formats.medium?.url}`
-              }
-            )})`
-          }}
-        ></div>
+        <div className='w-full rounded-2xl'>
+          <img
+            src={generateImageUrl(courseItem.attributes.banner_course.data[0].attributes.formats)}
+            alt=''
+            className='h-full min-h-[165px] w-full rounded-lg object-cover lg:h-[160px] xl:h-[180px]'
+          />
+        </div>
         <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-[#292929]'>
           {courseItem.attributes.course_name}
         </h5>

@@ -7,6 +7,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 // eslint-disable-next-line import/no-unresolved
 import 'swiper/css/navigation'
+import 'swiper/css/autoplay'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
