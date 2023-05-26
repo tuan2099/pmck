@@ -57,12 +57,6 @@
       "relation": "manyToMany",
       "target": "api::course-registration.course-registration",
       "mappedBy": "courses"
-    },
-    "course_status": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::course-status.course-status",
-      "mappedBy": "course_code"
     }
   }
 }

@@ -4,7 +4,6 @@ import { CourseType } from 'src/types/course.type'
 import { ROUTES } from 'src/useRouterElement'
 
 const FeaturedCourse = ({ data }: { data?: CourseType[] }) => {
-  console.log(data)
   return (
     <div className='mt-9'>
       <h2 className='p-2 text-center text-2xl font-bold uppercase'>Khóa học nổi bật</h2>

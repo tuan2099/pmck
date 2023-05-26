@@ -12,18 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "registration_date": {
-      "type": "datetime"
-    },
     "users": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "mappedBy": "course_registrations"
-    },
-    "status": {
-      "type": "boolean",
-      "default": false
     },
     "courses": {
       "type": "relation",
