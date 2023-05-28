@@ -80,6 +80,15 @@ export default function useRouterElement() {
               <Homeuser />
             </HomeUserLayout>
           )
+        },
+        {
+          path: ':id',
+          index: true,
+          element: (
+            <HomeUserLayout>
+              <Course_detail />
+            </HomeUserLayout>
+          )
         }
       ]
     },
@@ -91,15 +100,7 @@ export default function useRouterElement() {
         </HomeUserLayout>
       )
     },
-    {
-      path: ':id',
-      index: true,
-      element: (
-        <HomeUserLayout>
-          <Course_detail />
-        </HomeUserLayout>
-      )
-    },
+
     {
       path: '*',
       element: <Notfound />

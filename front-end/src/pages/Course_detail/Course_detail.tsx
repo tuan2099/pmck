@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import { AppContext } from 'src/context/app.context'
@@ -8,13 +8,16 @@ import { getIdFromNameId } from 'src/utils/uitls'
 function Course_detail() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
+
   // state from context
   const { profile } = useContext(AppContext)
+
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
+  console.log(courseDetaildata)
   // register course func
   const courseRegisterMutation = useMutation(courseApi.registerCourse)
 
@@ -28,9 +31,7 @@ function Course_detail() {
       }
     )
   }
-  // test url image
-  // console.log(courseDetaildata?.data.data.attributes.banner_couse.data[0].attributes.formats.medium.url)
-  // console.log(courseDetaildata?.data.data.attributes.chapters.data)
+
   return (
     <>
       <div className='m-auto w-full '>
@@ -225,12 +226,21 @@ function Course_detail() {
                 ></div>
               </div>
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
-              <button
-                onClick={courseRegistration}
-                className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
-              >
-                Đăng kí học
-              </button>
+              {courseDetaildata?.data.data.attributes.status_course ? (
+                <button
+                  onClick={courseRegistration}
+                  className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
+                >
+                  Đăng kí học
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className='mt-4 min-w-[180px] rounded-[50px] bg-gray-300 px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
+                >
+                  khóa học chưa sẵn sàng ...
+                </button>
+              )}
             </div>
           </section>
         </div>
