@@ -6,7 +6,7 @@ const profileApi = {
   getProfile() {
     http.get(URL_ME, {
       headers: {
-        Authorization: `Bearer ${getAccesTokenLocalStorage()}`
+        Authorization: 'Bearer sabdahsgdash'
       }
     })
   }

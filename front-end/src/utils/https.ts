@@ -21,7 +21,7 @@ class Http {
     this.instance.interceptors.request.use(
       (config) => {
         if (this.accessToken && config.headers) {
-          config.headers.authorization = this.accessToken
+          config.headers.authorization = config.url === '/users/me' ? `Bearer ${this.accessToken}` : this.accessToken
           return config
         }
         return config
