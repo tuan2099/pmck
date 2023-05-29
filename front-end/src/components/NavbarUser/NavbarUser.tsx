@@ -11,12 +11,12 @@ function NavbarUser() {
   const navigate = useNavigate()
   const { setIsAuthenticate, setProfile, profile } = useContext(AppContext)
 
-  const { data } = useQuery({
-    queryKey: ['profile'],
-    queryFn: () => {
-      return profileApi.getProfile()
-    }
-  })
+  // const { data } = useQuery({
+  //   queryKey: ['profile'],
+  //   queryFn: () => {
+  //     return profileApi.getProfile()
+  //   }
+  // })
 
   const handleLogout = () => {
     deleteStorage('access_token')

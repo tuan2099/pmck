@@ -18,12 +18,16 @@ function Course_detail() {
   // state from context
   const { profile } = useContext(AppContext)
 
-  // -------------------------------
+  // call api user
   const { data: profileData } = useQuery({
-    queryKey: ['profileData'],
+    queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
-  console.log(profileData)
+  // check user đã đăng kí khóa học chưa ? return true or false
+  const checkUserIdExists = (id: number) => {
+    return profileData?.data.course_registrations.some((user: any) => user.id === id)
+  }
+  const isUserExists = checkUserIdExists(Number(idCourse))
 
   // call api detai course
   const { data: courseDetaildata } = useQuery({
