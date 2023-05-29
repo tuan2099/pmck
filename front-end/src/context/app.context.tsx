@@ -7,8 +7,6 @@ interface AppContextInterface {
   setIsAuthenticate: React.Dispatch<React.SetStateAction<boolean>>
   profile: User | null
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
-  //   extendPurchases: ExtendedPurchases[]
-  //   setExtendedPurchases: React.Dispatch<React.SetStateAction<ExtendedPurchases[]>>
   // reset: () => void
 }
 
@@ -17,8 +15,6 @@ const initialAppContext: AppContextInterface = {
   setIsAuthenticate: () => null,
   profile: getProfileFromLocalStorage(),
   setProfile: () => null
-  // extendPurchases: [],
-  // setExtendedPurchases: () => null,
   // reset: () => null
 }
 
