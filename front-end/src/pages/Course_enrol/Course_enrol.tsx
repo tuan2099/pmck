@@ -1,20 +1,15 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import React, { useContext, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import profileApi from 'src/apis/user.api'
 import { AppContext } from 'src/context/app.context'
 import { getIdFromNameId } from 'src/utils/uitls'
 
-function Course_detail() {
+function Course_enrol() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
-
-  // check isRegisterToNavigate
-  // useEffect(() => {
-  //   if(+idCourse === )
-  // }, [])
-
+  const navigate = useNavigate()
   // state from context
   const { profile } = useContext(AppContext)
 
@@ -23,12 +18,18 @@ function Course_detail() {
     queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
+
   // check user đã đăng kí khóa học chưa ? return true or false
   const checkUserIdExists = (id: number) => {
-    return profileData?.data.course_registrations.some((user: any) => user.id === id)
+    return profileData?.data.course_registrations.some((user: any) => user.courses[0].id === id)
   }
-  const isUserExists = checkUserIdExists(Number(idCourse))
 
+  const isUserIdExists = checkUserIdExists(+idCourse)
+  useEffect(() => {
+    if (isUserIdExists === true) {
+      navigate('')
+    }
+  }, [])
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
@@ -40,7 +41,7 @@ function Course_detail() {
 
   const courseRegistration = () => {
     courseRegisterMutation.mutate(
-      { users: profile?.id, courses: Number(idCourse) },
+      { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
       {
         onSuccess: (data) => {
           console.log('đăng kí khóa học thành công')
@@ -266,4 +267,4 @@ function Course_detail() {
   )
 }
 
-export default Course_detail
+export default Course_enrol

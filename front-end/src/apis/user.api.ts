@@ -1,5 +1,5 @@
 import http from 'src/utils/https'
-export const URL_ME = '/users/me?populate=*'
+export const URL_ME = '/users/me?populate[course_registrations][populate][0]=courses'
 
 const profileApi = {
   getProfile() {
