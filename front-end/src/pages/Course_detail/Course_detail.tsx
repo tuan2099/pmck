@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
+import profileApi from 'src/apis/user.api'
 import { AppContext } from 'src/context/app.context'
 import { getIdFromNameId } from 'src/utils/uitls'
 
@@ -9,21 +10,33 @@ function Course_detail() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
 
+  // check isRegisterToNavigate
+  // useEffect(() => {
+  //   if(+idCourse === )
+  // }, [])
+
   // state from context
   const { profile } = useContext(AppContext)
+
+  // -------------------------------
+  const { data: profileData } = useQuery({
+    queryKey: ['profileData'],
+    queryFn: () => profileApi.getProfile()
+  })
+  console.log(profileData)
 
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
-  console.log(courseDetaildata)
+
   // register course func
   const courseRegisterMutation = useMutation(courseApi.registerCourse)
 
   const courseRegistration = () => {
     courseRegisterMutation.mutate(
-      { users: profile.id, courses: Number(idCourse) },
+      { users: profile?.id, courses: Number(idCourse) },
       {
         onSuccess: (data) => {
           console.log('đăng kí khóa học thành công')
