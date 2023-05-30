@@ -13,6 +13,7 @@ import New from './pages/New'
 import Course_enrol from './pages/Course_enrol'
 import Notfound from './pages/Notfound'
 import Profile from './pages/Profile'
+import AllCoursePage from './pages/AllCourse/AllCoursePage'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -30,7 +31,8 @@ export const ROUTES = {
   home: '/',
   register: '/register',
   forgot_password: '/forgot_password',
-  new: '/new'
+  new: '/new',
+  allCourse: '/all-course'
 }
 
 export default function useRouterElement() {
@@ -38,6 +40,11 @@ export default function useRouterElement() {
     {
       path: '/',
       element: <HomeGuest />,
+      index: true
+    },
+    {
+      path: ROUTES.allCourse,
+      element: <AllCoursePage />,
       index: true
     },
     {

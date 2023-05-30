@@ -4,8 +4,11 @@ import { useCurrentView } from 'src/hooks/useCurrentWidth'
 import { CourseType } from 'src/types/course.type'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+const LIMIT_ITEM = 5
+
 const TypicalTeacher = ({ data }: { data?: CourseType[] }) => {
   const { sm, md, width } = useCurrentView()
+
   return (
     <div className='bg-cover bg-no-repeat px-4 py-10 lg:pl-10 lg:pr-4' style={{ backgroundImage: `url(${teacherBg})` }}>
       <div
@@ -33,7 +36,7 @@ const TypicalTeacher = ({ data }: { data?: CourseType[] }) => {
               slidesPerView={sm ? 2 : md ? 2.5 : 3.5}
               onSlideChange={() => console.log('slide change')}
             >
-              {data?.map((course, index) => (
+              {data?.slice(0, LIMIT_ITEM).map((course, index) => (
                 <SwiperSlide key={index}>
                   <CourseCard courseItem={course} />
                 </SwiperSlide>
