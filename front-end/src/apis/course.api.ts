@@ -14,7 +14,7 @@ const courseApi = {
   getDetailCourse(id: string) {
     return http.get(`/courses/${id}?populate[0]=banner_course&populate[1]=chapters.lesson_items`)
   },
-  registerCourse(body: { users?: number; courses: number }) {
+  registerCourse(body: { users?: number; courses: number; isRegistrationCourse: boolean }) {
     return http.post(`/course-registrations`, {
       data: body
     })

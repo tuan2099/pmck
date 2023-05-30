@@ -11,12 +11,12 @@ function NavbarUser() {
   const navigate = useNavigate()
   const { setIsAuthenticate, setProfile, profile } = useContext(AppContext)
 
-  const { data } = useQuery({
-    queryKey: ['profile'],
-    queryFn: () => {
-      return profileApi.getProfile()
-    }
-  })
+  // const { data } = useQuery({
+  //   queryKey: ['profile'],
+  //   queryFn: () => {
+  //     return profileApi.getProfile()
+  //   }
+  // })
 
   const handleLogout = () => {
     deleteStorage('access_token')
@@ -90,7 +90,7 @@ function NavbarUser() {
                 </div>
                 <Link
                   className='trasition my-2 block flex items-center px-2 py-2 text-[#757575] hover:bg-gray-100'
-                  to='/user'
+                  to='/me'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
