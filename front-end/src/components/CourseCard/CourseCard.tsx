@@ -11,7 +11,7 @@ function CourseCard(props: { courseItem: CourseType }) {
     <>
       <Link
         to={`/${generateNameId({ name: courseItem.attributes.course_name, id: courseItem.id })}`}
-        className='mb-[30px] w-full cursor-pointer px-3 hover:bg-slate-50'
+        className='mb-[30px] w-full cursor-pointer px-3'
       >
         <div
           className='w-full rounded-2xl pt-[56.25%] '
