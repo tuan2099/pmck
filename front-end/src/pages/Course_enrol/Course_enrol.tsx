@@ -54,7 +54,7 @@ function Course_enrol() {
     <>
       {isUserIdExists ? (
         <>
-          <div>1</div>
+          <div></div>
         </>
       ) : (
         <div className='m-auto w-full'>

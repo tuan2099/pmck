@@ -72,11 +72,40 @@
       "inversedBy": "users"
     },
     "profile_photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "about_me": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "top_skill": {
+      "type": "enumeration",
+      "enum": [
+        "buôn thuốc",
+        "chơi đồ ",
+        "ăn hại"
+      ]
+    },
+    "connect": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "integer"
+    },
+    "educations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::education.education"
     }
   }
 }
