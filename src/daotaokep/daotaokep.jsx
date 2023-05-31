@@ -478,12 +478,12 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-full h-full flex justify-center items-cente'>
+                            <div className='w-full h-24 flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-full h-full flex justify-center items-cente'>
+                            <div className='w-full h-24 flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -587,12 +587,12 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-full h-full flex justify-center items-cente'>
+                            <div className='w-full h-24 flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-full h-full flex justify-center items-cente'>
+                            <div className='w-full h-24 flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -696,12 +696,12 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-full h-full flex justify-center items-cente'>
+                            <div className='w-full h-24 flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-full h-full flex justify-center items-cente'>
+                            <div className='w-full h-24 flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
