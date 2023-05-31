@@ -1,7 +1,11 @@
 import React from 'react'
 
-function LessonLayout() {
-  return <div>LessonLayout</div>
+interface Props {
+  children?: React.ReactNode
+}
+
+function LessonLayout({ children }: Props) {
+  return <div>{children}</div>
 }
 
 export default LessonLayout
