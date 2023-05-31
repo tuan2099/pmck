@@ -151,92 +151,92 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326409117_583153713825445_2443539952735772681_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/anhDaiDien-1656573897898-b_a_l_ch_thi_tn_thpt_2022_2-300x255.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CAO-DANG-VIEN-THONG-300x53.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CD-kinh-te-KT-TP-HCM--300x60.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/DH-CN-DONG-NAI.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-1-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-2-300x112.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/10633371_739123549487297_6524170581567217581_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/13652963_596003043893230_5137228318280572542_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/17621816_1087765374700873_3788751442064783250_o-300x197.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/298794970_571371651357184_198597452629962398_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/301199165_488594839939716_1581784848597171227_n-150x150.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/302160424_453345586823442_8334757016940877507_n-300x244.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/304841413_512139780914898_476570155267302007_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/307374903_431998745688363_1961335789606844341_n-262x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -260,92 +260,92 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326409117_583153713825445_2443539952735772681_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/anhDaiDien-1656573897898-b_a_l_ch_thi_tn_thpt_2022_2-300x255.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CAO-DANG-VIEN-THONG-300x53.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CD-kinh-te-KT-TP-HCM--300x60.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/DH-CN-DONG-NAI.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-1-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-2-300x112.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/10633371_739123549487297_6524170581567217581_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/13652963_596003043893230_5137228318280572542_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/17621816_1087765374700873_3788751442064783250_o-300x197.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/298794970_571371651357184_198597452629962398_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/301199165_488594839939716_1581784848597171227_n-150x150.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/302160424_453345586823442_8334757016940877507_n-300x244.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/304841413_512139780914898_476570155267302007_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/307374903_431998745688363_1961335789606844341_n-262x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -369,92 +369,92 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326409117_583153713825445_2443539952735772681_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/anhDaiDien-1656573897898-b_a_l_ch_thi_tn_thpt_2022_2-300x255.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CAO-DANG-VIEN-THONG-300x53.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CD-kinh-te-KT-TP-HCM--300x60.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/DH-CN-DONG-NAI.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-1-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-2-300x112.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/10633371_739123549487297_6524170581567217581_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/13652963_596003043893230_5137228318280572542_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/17621816_1087765374700873_3788751442064783250_o-300x197.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/298794970_571371651357184_198597452629962398_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/301199165_488594839939716_1581784848597171227_n-150x150.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/302160424_453345586823442_8334757016940877507_n-300x244.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/304841413_512139780914898_476570155267302007_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/307374903_431998745688363_1961335789606844341_n-262x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -478,92 +478,92 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-cente'>
+                            <div className='w-full h-full flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-cente'>
+                            <div className='w-full h-full flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326409117_583153713825445_2443539952735772681_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/anhDaiDien-1656573897898-b_a_l_ch_thi_tn_thpt_2022_2-300x255.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CAO-DANG-VIEN-THONG-300x53.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CD-kinh-te-KT-TP-HCM--300x60.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/DH-CN-DONG-NAI.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-1-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-2-300x112.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/10633371_739123549487297_6524170581567217581_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/13652963_596003043893230_5137228318280572542_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/17621816_1087765374700873_3788751442064783250_o-300x197.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/298794970_571371651357184_198597452629962398_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/301199165_488594839939716_1581784848597171227_n-150x150.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/302160424_453345586823442_8334757016940877507_n-300x244.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/304841413_512139780914898_476570155267302007_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/307374903_431998745688363_1961335789606844341_n-262x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -587,92 +587,92 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-cente'>
+                            <div className='w-full h-full flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-cente'>
+                            <div className='w-full h-full flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326409117_583153713825445_2443539952735772681_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/anhDaiDien-1656573897898-b_a_l_ch_thi_tn_thpt_2022_2-300x255.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CAO-DANG-VIEN-THONG-300x53.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CD-kinh-te-KT-TP-HCM--300x60.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/DH-CN-DONG-NAI.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-1-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-2-300x112.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/10633371_739123549487297_6524170581567217581_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/13652963_596003043893230_5137228318280572542_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/17621816_1087765374700873_3788751442064783250_o-300x197.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/298794970_571371651357184_198597452629962398_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/301199165_488594839939716_1581784848597171227_n-150x150.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/302160424_453345586823442_8334757016940877507_n-300x244.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/304841413_512139780914898_476570155267302007_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/307374903_431998745688363_1961335789606844341_n-262x300.png'></img>
                             </div>
                         </SwiperSlide>
@@ -696,92 +696,92 @@ const NewPage = () => {
                         }}
                     >
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-cente'>
+                            <div className='w-full h-full flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/309573205_470300321781593_5845549841210194168_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-cente'>
+                            <div className='w-full h-full flex justify-center items-cente'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326223488_1562180727539749_6215405318986162840_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/326409117_583153713825445_2443539952735772681_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/anhDaiDien-1656573897898-b_a_l_ch_thi_tn_thpt_2022_2-300x255.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CAO-DANG-VIEN-THONG-300x53.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/CD-kinh-te-KT-TP-HCM--300x60.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/DH-CN-DONG-NAI.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-1-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/download-2-300x112.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/10633371_739123549487297_6524170581567217581_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/13652963_596003043893230_5137228318280572542_o-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/17621816_1087765374700873_3788751442064783250_o-300x197.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/298794970_571371651357184_198597452629962398_n-300x300.png'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/301199165_488594839939716_1581784848597171227_n-150x150.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/302160424_453345586823442_8334757016940877507_n-300x244.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/304841413_512139780914898_476570155267302007_n-300x300.jpg'></img>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide >
-                            <div className='w-24 h-24 flex justify-center items-center'>
+                            <div className='w-full h-24 flex justify-center items-center'>
                                 <img className='max-w-full max-h-full' src='http://bravekids.vn/wp-content/uploads/2023/02/307374903_431998745688363_1961335789606844341_n-262x300.png'></img>
                             </div>
                         </SwiperSlide>
