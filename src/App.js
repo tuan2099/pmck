@@ -5,7 +5,7 @@ import Partner from './partner/partner';
 function App() {
   return (
     <div className="App">
-      <Partner />
+      <NewPage />
     </div>
   );
 }
