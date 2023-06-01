@@ -14,7 +14,8 @@ module.exports = {
         yellowColor: '#eab830',
         grayColor: '#ced4da',
         mainGreenColor: 'rgb(30, 113, 21)',
-        subGreenColor: 'rgb(137, 180, 73)'
+        subGreenColor: 'rgb(137, 180, 73)',
+        blueColor:"rgb(0, 86, 210)"
       }
     }
   },
