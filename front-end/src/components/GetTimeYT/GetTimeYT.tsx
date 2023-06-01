@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
 
 interface videoProps {
-  link?: string
+  video_url?: string
   className?: string
 }
 
-function GetTimeYT({ link, className }: videoProps) {
+function GetTimeYT({ video_url, className }: videoProps) {
   const [videoLength, setVideoLength] = useState(null)
-  const handleDuration = (duration: any) => {
+
+  const handleDuration = async (duration: any) => {
     setVideoLength(duration)
   }
 
@@ -16,12 +17,13 @@ function GetTimeYT({ link, className }: videoProps) {
     const minutes = Math.floor(seconds / 60)
     const remainingSeconds = seconds % 60
 
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}` // return ->  minute:second
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
   }
+
   return (
     <>
       <div className={className}>
-        <ReactPlayer url={link} controls={false} width={0} height={0} onDuration={handleDuration} />
+        <ReactPlayer url={video_url} controls={false} width={0} height={0} onDuration={handleDuration} />
         {convertSecondsToMinutes(videoLength)}
       </div>
     </>
