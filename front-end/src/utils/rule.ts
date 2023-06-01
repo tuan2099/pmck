@@ -125,4 +125,26 @@ export const schema = yup.object({
     .max(160, 'Tối đa 160 kí tự')
 })
 
+export const profileSchema = yup.object({
+  username: yup.string().required('Vui lòng điền thông tin'),
+  employment_status: yup.string(),
+  industry: yup.string(),
+  employer: yup.string(),
+  occupation: yup.string(),
+  experience_level: yup.string(),
+  is_current_employer: yup.boolean(),
+  highest_degree: yup.string(),
+  university: yup.string(),
+  field_or_major: yup.string(),
+  is_student: yup.boolean(),
+  open_new_job: yup.boolean(),
+  location: yup.string(),
+  skills_wanted: yup.string(),
+  interested_in_getting: yup.string(),
+  learning_goal: yup.string(),
+  preferred_occupation: yup.string(),
+  career_industry: yup.string(),
+  preferred_level: yup.string()
+})
+
 export type Schema = yup.InferType<typeof schema>
