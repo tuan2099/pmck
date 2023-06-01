@@ -14,11 +14,8 @@ import Course_enrol from './pages/Course_enrol'
 import Notfound from './pages/Notfound'
 import Profile from './pages/Profile'
 import AllCoursePage from './pages/AllCourse/AllCoursePage'
-<<<<<<< HEAD
 import Course_detail from './pages/Courrse_detail'
-=======
 import EditProfile from './pages/Profile/EditProfile'
->>>>>>> e05d8483271e83089391d906416fa6bf33f2ef1e
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -99,11 +96,14 @@ export default function useRouterElement() {
         {
           path: '/course/:id',
           index: true,
-          element: <Course_enrol />
+          element: (
+            <HomeUserLayout>
+              <Course_enrol />
+            </HomeUserLayout>
+          )
         },
         {
           path: '/learning/:id',
-          index: true,
           element: <Course_detail />
         },
         {
