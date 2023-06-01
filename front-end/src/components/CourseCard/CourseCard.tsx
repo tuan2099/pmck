@@ -10,7 +10,7 @@ function CourseCard(props: { courseItem: CourseType }) {
   return (
     <>
       <Link
-        to={`/${generateNameId({ name: courseItem.attributes.course_name, id: courseItem.id })}`}
+        to={`/course/${generateNameId({ name: courseItem.attributes.course_name, id: courseItem.id })}`}
         className='mb-[30px] w-full cursor-pointer px-3'
       >
         <div

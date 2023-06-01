@@ -14,6 +14,7 @@ import Course_enrol from './pages/Course_enrol'
 import Notfound from './pages/Notfound'
 import Profile from './pages/Profile'
 import AllCoursePage from './pages/AllCourse/AllCoursePage'
+import Course_detail from './pages/Courrse_detail'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -90,9 +91,14 @@ export default function useRouterElement() {
           )
         },
         {
-          path: ':id',
+          path: '/course/:id',
           index: true,
           element: <Course_enrol />
+        },
+        {
+          path: '/learning/:id',
+          index: true,
+          element: <Course_detail />
         },
         {
           path: '/me',
