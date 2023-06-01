@@ -6,27 +6,39 @@ interface videoProps {
   className?: string
 }
 
-function GetTimeYT({ video_url, className }: videoProps) {
-  const [videoLength, setVideoLength] = useState(null)
-
-  const handleDuration = async (duration: any) => {
-    setVideoLength(duration)
+function getTimeFromYouTubeUrl(url: any) {
+  // Tách lấy ID video từ URL
+  const videoId = url.split('v=')[1]
+  // Nếu không tìm thấy ID video
+  if (!videoId) {
+    return null
   }
 
-  function convertSecondsToMinutes(seconds: any) {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
+  // Lấy thời gian từ ID video
+  const timeInSeconds = parseInt(videoId, 10) % 86400
+  console.log(timeInSeconds)
+  // Chuyển đổi thời gian sang định dạng hh:mm:ss
+  const hours = Math.floor(timeInSeconds / 3600)
+  const minutes = Math.floor((timeInSeconds % 3600) / 60)
+  const seconds = timeInSeconds % 60
 
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
-  }
+  const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`
+
+  return formattedTime
+}
+
+function GetTimeYT() {
+  const youtubeUrl = 'https://www.youtube.com/watch?v=Z37ukFI4Ot0'
+
+  const time = getTimeFromYouTubeUrl(youtubeUrl)
 
   return (
-    <>
-      <div className={className}>
-        <ReactPlayer url={video_url} controls={false} width={0} height={0} onDuration={handleDuration} />
-        {convertSecondsToMinutes(videoLength)}
-      </div>
-    </>
+    <div>
+      <h1>Thời gian từ URL YouTube:</h1>
+      <p>{time}</p>
+    </div>
   )
 }
 
