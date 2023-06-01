@@ -95,11 +95,7 @@ export default function useRouterElement() {
         {
           path: ':id',
           index: true,
-          element: (
-            <HomeUserLayout>
-              <Course_enrol />
-            </HomeUserLayout>
-          )
+          element: <Course_enrol />
         },
         {
           path: '/me',

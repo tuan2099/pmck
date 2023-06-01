@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from 'src/components/Footer'
 import NavbarUser from 'src/components/NavbarUser'
 import SidebarUser from 'src/components/sidebarUser'
+
 interface Props {
   children?: React.ReactNode
 }
