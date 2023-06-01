@@ -9,6 +9,7 @@ import { getIdFromNameId } from 'src/utils/uitls'
 import Course_detail from '../Courrse_detail'
 import HomeUserLayout from 'src/Layouts/HomeUserLayout'
 import LessonLayout from 'src/Layouts/LessonLayout'
+import GetTimeYT from 'src/components/GetTimeYT'
 
 function Course_enrol() {
   const { id } = useParams()
@@ -167,7 +168,7 @@ function Course_enrol() {
                           <div>
                             {chapter.attributes.lesson_items.data.map((lesson_item: any) => (
                               <div
-                                className='flex w-full items-center border-b-2 border-slate-50 py-[10px] pl-[50px]'
+                                className='flex w-full items-center justify-between border-b-2 border-slate-50 px-[50px] py-[10px]'
                                 key={lesson_item.id}
                               >
                                 <h5 className='flex items-center'>
@@ -187,6 +188,7 @@ function Course_enrol() {
                                   </svg>
                                   {lesson_item.attributes.title}
                                 </h5>
+                                <GetTimeYT className='text-[#979ba0]' link={lesson_item.attributes.video_url} />
                               </div>
                             ))}
                           </div>
