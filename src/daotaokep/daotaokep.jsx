@@ -9,7 +9,7 @@ const NewPage = () => {
     SwiperCore.use([Autoplay]);
     return (
         <div className=''>
-            <div className='max-w-[1200px] mx-auto  max-xl:mr-20 max-xl:ml-20'>
+            <div className='max-w-[1200px] mx-auto  max-xl:mx-20 max-425:mx-3 max-480:mx-3'>
                 <div className='grid grid-cols-2 gap-40 max-lg:grid-cols-1 	'>
                     <div className='text-left max-lg:order-2'>
                         <h1 className='text-5xl mt-6 mb-8 font-semibold'>Đào tạo kép
@@ -26,7 +26,7 @@ const NewPage = () => {
                 </div >
             </div >
 
-            <div className='max-w-[1200px] mx-auto'>
+            <div className='max-w-[1200px] mx-auto max-425:mx-3 max-480:mx-3'>
                 <div className='mt-24 mb-24'>
                     <h2 className='text-4xl'>Với phương châm " Học trong công việc học qua trải nghiệm  " và chiến lược 3 trụ cột
                         <span className='text-4xl text-[#1e7115] font-semibold'> Knowledge - Skill - Attitude</span>
@@ -34,7 +34,7 @@ const NewPage = () => {
                 </div>
 
 
-                <div className='ml-12 mr-12'>
+                <div className='ml-12 mr-12 max-425:mx-3 max-480:mx-3 '>
                     {/* <div className=' grid grid-cols-9 m-15 '> */}
                     <div className='w-full flex justify-center flex-wrap'>
                         <img className='m-4 w-20' src='https://149343988.v2.pressablecdn.com/wp-content/uploads/2019/09/universtity-of-london.png'></img>
@@ -60,8 +60,8 @@ const NewPage = () => {
             </div>
 
 
-            <div className='bg-green-50 px-[]'>
-                <div className='max-w-[1200px] mx-auto mt-16 pt-20 max-xl:mr-20 max-xl:ml-20 '>
+            <div className='bg-green-50 pb-14'>
+                <div className='max-w-[1200px] mx-auto mt-16 pt-20 max-xl:mr-20 max-xl:ml-20 max-425:mx-3 max-480:mx-3'>
                     <h1 className='text-4xl'>Thay đổi phương pháp học cùng PMCK</h1>
                     <div className='grid grid-cols-2 mt-20 gap-10 max-lg:grid-cols-1'>
                         <div className='text-left text-lg max-lg:order-2'>
@@ -90,7 +90,7 @@ const NewPage = () => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-5 grid-rows-3 max-xl:ml-20 max-xl:mr-20 mt-16 pt-12 max-w-[1200px] mx-auto max-md:grid-cols-1'>
+            <div className='grid grid-cols-3 gap-5 grid-rows-3 max-xl:ml-20 max-xl:mr-20 mt-16 pt-12 max-w-[1200px] mx-auto max-md:grid-cols-1 max-425:mx-3 max-480:mx-3 max-480:mb-14 '>
                 <img className='col-span-2 row-span-2 max-md:row-span-1 max-md:col-span-1' src='http://bravekids.vn/wp-content/uploads/2023/03/banner-to.jpg'></img>
                 <img className='grid-cols-1 grid-rows-1' src='http://bravekids.vn/wp-content/uploads/2023/03/0-02-06-b01b82e6c610171900e94794476c07984e8473262dfaaedd83745e032a0411cb_4727c8f3f51bdd36.jpg'></img>
                 <img className='grid-cols-1 grid-rows-1' src='http://bravekids.vn/wp-content/uploads/2023/03/0-02-06-1729bb0ae39dba7ca57966fc5ea7ea7b1ebc66b25e8a461ea745cd14f4d630a3_2b8d9a095438d1ab-e1679285066252.jpg'></img>
@@ -99,8 +99,8 @@ const NewPage = () => {
                 <img className='grid-cols-1 grid-rows-1' src='http://bravekids.vn/wp-content/uploads/2023/03/Screenshot_1-1.png'></img>
             </div>
 
-            <div className='bg-blue-900 p-32 '>
-                <h2 className='text-white text-4xl font-semibold pb-12 max-w-[1100px] mx-auto'>Học viên mới nói gì về PMCK</h2>
+            <div className='bg-blue-900 p-32 max-425:mx-3 max-480:mx-3 max-425:p-3'>
+                <h2 className='text-white text-4xl font-semibold pb-12 max-w-[1100px] mx-auto '>Học viên mới nói gì về PMCK</h2>
                 <div className='grid grid-cols-3 max-lg:grid-cols-1 max-w-[1100px] mx-auto'>
                     <div className='text-left col-span-1  '>
                         <h1 className='text-8xl max-lg:text-7xl text-white font-semibold'>+3 Triệu</h1>
@@ -137,8 +137,8 @@ const NewPage = () => {
                 </div>
             </div>
 
-            <div className=' mt-28  max-xl:ml-20  max-xl:mr-20 pb-24 max-w-[1200px] mx-auto'>
-                <h2 className='text-4xl mt-28 mb-[25px] ml-20 mr-20 max-md:text-xl'>Là đối tác tin cậy của hơn 30+ trường Đại Học và Cao Đẳng</h2>
+            <div className=' mt-28  max-xl:ml-20  max-xl:mr-20 pb-24 max-w-[1200px] mx-auto max-425:mx-3 max-480:mx-3'>
+                <h2 className='text-4xl mt-28 mb-[25px] ml-20 mr-20 max-md:text-xl max-425:mx-3 max-480:mx-3'>Là đối tác tin cậy của hơn 30+ trường Đại Học và Cao Đẳng</h2>
                 <div className='max-lg:hidden ' >
                     <Swiper className=' grid place-items-center'
                         slidesPerView={6}

@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       screens: {
         '480': '480px',
+        '425': '425px',
         '360': '360px',
       },
       lineHeight: {

@@ -7,7 +7,7 @@ import './partner.css';
 const Partner = () => {
     return (
         <div >
-            <div className='grid grid-cols-2 pt-5 pb-5 max-lg:grid-cols-1 ml-20 mr-20 max-xl:ml-2 max-xl:mr-2'>
+            <div className='grid grid-cols-2 pt-5 pb-5 max-lg:grid-cols-1 max-xl:ml-20 max-xl:mr-20 max-w-[1200px] mx-auto'>
                 <div className='text-left max-lg:order-2'>
                     <h1 className='text-5xl font-semibold mb-6 '> Tiếp cận các trường học và chuyên gia giáo dục hàng đầu </h1>
                     <h2 className='text-2xl'> Cơ hội sinh viên thực tập và trải nghiệm </h2>
@@ -31,13 +31,13 @@ const Partner = () => {
                         </button>
                     </div>
                 </div>
-                <div className='max-lg:order-1  '>
+                <div className='max-lg:order-1 max-lg:max-w-[50%] max-lg:mx-auto '>
                     <img className='' src='http://bravekids.vn/wp-content/uploads/2023/03/0-02-06-25b60fc4753ce1fcd87e8a2b03f59683e5befa3b484ea817f5d3505d18f36d3a_1fccca1a5dec421a.jpg'></img>
                 </div>
             </div>
 
-            <div className=' grid grid-cols-2 mt-32 mb-32 gap-32 ml-20 mr-20 max-sm:grid-cols-1'>
-                <div className='max-sm:order-2'>
+            <div className='max-w-[1200px] mx-auto grid grid-cols-2 mt-32 mb-32 gap-32 max-xl:ml-20 max-xl:mr-20 max-sm:grid-cols-1'>
+                <div className='max-sm:order-2 '>
                     <Swiper
                         slidesPerView={1}
                         spaceBetween={30}
@@ -110,7 +110,7 @@ const Partner = () => {
                     </Swiper>
                 </div>
                 <div className='max-sm:order-1 flex justify-center items-center'>
-                    <h2 className='text-4xl font-semibold'>Trên
+                    <h2 className='text-[2.75rem] font-semibold'>Trên
                         <span className='text-green-700 text-6xl '> 30+ </span>
                         trường đại học cao đẳng lựa chọn PMCK
                     </h2>
