@@ -5,8 +5,12 @@ import Slider from './Component/Slider'
 import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
 import { Link } from 'react-router-dom'
+import profileApi from 'src/apis/user.api'
+import { AppContext } from 'src/context/app.context'
 
 function Homeuser() {
+  // get data from context
+  const { setUserInfo } = useContext(AppContext)
   // call api slider
   const { data: imageSliderdata } = useQuery({
     queryKey: ['sliderImage'],
