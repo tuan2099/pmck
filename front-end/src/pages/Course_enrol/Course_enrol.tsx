@@ -36,6 +36,7 @@ function Course_enrol() {
       navigate('/learning/:id')
     }
   }, [isUserIdExists, navigate])
+
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],

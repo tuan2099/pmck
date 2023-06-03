@@ -1,4 +1,5 @@
 export type CourseType = {
+  course_name: string
   id: number
   attributes: {
     author?: string
