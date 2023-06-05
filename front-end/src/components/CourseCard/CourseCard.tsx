@@ -1,11 +1,29 @@
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { generateImageUrl } from 'src/helper/generateImageUrl'
+import { AppContext } from 'src/context/app.context'
 
 import { CourseType } from 'src/types/course.type'
 import { formartCurrency, generateNameId } from 'src/utils/uitls'
 
-function CourseCard(props: { courseItem: CourseType }) {
-  const { courseItem } = props
+interface IProps {
+  courseItem: CourseType
+  list?: any
+}
+
+function CourseCard(props: IProps) {
+  const { courseItem, list } = props
+  const { profile } = useContext(AppContext)
+  const [isRegisted, setIsRegisted] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (list && courseItem) {
+      const a = list?.find((element: any) => element.attributes.courses.data[0].id === courseItem.id)
+      if (a) {
+        let check = a.attributes?.users?.data?.some((element: any) => element.id === profile?.id)
+        setIsRegisted(check)
+      }
+    }
+  }, [list])
 
   return (
     <>
@@ -29,6 +47,8 @@ function CourseCard(props: { courseItem: CourseType }) {
         <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-[#292929]'>
           {courseItem.attributes.course_name}
         </h5>
+        {isRegisted && <p>OK</p>}
+
         <p className='flex text-sm text-slate-400'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

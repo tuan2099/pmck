@@ -21,7 +21,13 @@ function GetTimeYT({ link, className }: videoProps) {
   return (
     <>
       <div className={className}>
-        <ReactPlayer url={link} controls={false} width={0} height={0} onDuration={handleDuration} />
+        <ReactPlayer
+          url={link}
+          controls={false}
+          width={0}
+          height={0}
+          onDuration={(duration) => console.log(link, duration)}
+        />
         {convertSecondsToMinutes(videoLength)}
       </div>
     </>

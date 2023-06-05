@@ -18,6 +18,9 @@ const courseApi = {
     return http.post(`/course-registrations`, {
       data: body
     })
+  },
+  registerCoursess() {
+    return http.get(`/course-registrations?populate=*`)
   }
 }
 

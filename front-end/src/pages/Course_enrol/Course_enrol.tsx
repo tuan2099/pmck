@@ -188,7 +188,11 @@ function Course_enrol() {
                                   </svg>
                                   {lesson_item.attributes.title}
                                 </h5>
-                                <GetTimeYT className='text-[#979ba0]' link={lesson_item.attributes.video_url} />
+                                <GetTimeYT
+                                  className='text-[#979ba0]'
+                                  link={lesson_item.attributes.video_url}
+                                  key={lesson_item.attributes.video_url}
+                                />
                               </div>
                             ))}
                           </div>

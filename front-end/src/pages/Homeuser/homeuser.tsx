@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import sliderApi from 'src/apis/slider.api'
 import Slider from './Component/Slider'
 import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function Homeuser() {
   // call api slider
@@ -20,6 +20,13 @@ function Homeuser() {
     queryKey: ['listCourse'],
     queryFn: () => {
       return courseApi.getListcourse()
+    }
+  })
+
+  const { data: rg } = useQuery({
+    queryKey: ['registerCourse'],
+    queryFn: () => {
+      return courseApi.registerCoursess()
     }
   })
 
@@ -56,7 +63,7 @@ function Homeuser() {
         <div className='grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {listNewCourse &&
             listNewCourse.map((courseItem: any) => {
-              return <CourseCard key={courseItem.id} courseItem={courseItem} />
+              return <CourseCard key={courseItem.id} courseItem={courseItem} list={rg?.data.data} />
             })}
           {!listNewCourse && (
             <div className='flex items-center justify-between'>
