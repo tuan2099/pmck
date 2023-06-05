@@ -1,22 +1,20 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import ClickPopover from '../ClickPopover'
-import { useQuery } from '@tanstack/react-query'
-import profileApi from 'src/apis/user.api'
 import { deleteStorage } from 'src/utils/storage'
 import { AppContext } from 'src/context/app.context'
+import { useQuery } from '@tanstack/react-query'
+import profileApi from 'src/apis/user.api'
 
 function NavbarUser() {
   const navigate = useNavigate()
   const { setIsAuthenticate, setProfile, profile } = useContext(AppContext)
-
-  // const { data } = useQuery({
-  //   queryKey: ['profile'],
-  //   queryFn: () => {
-  //     return profileApi.getProfile()
-  //   }
-  // })
+  // call api userinfo
+  const { data: profileData } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: () => profileApi.getProfile()
+  })
 
   const handleLogout = () => {
     deleteStorage('access_token')
@@ -26,6 +24,10 @@ function NavbarUser() {
     navigate('/')
   }
 
+  function handleKeyDown(event: any): void {
+    throw new Error('Function not implemented.')
+  }
+
   return (
     <>
       <div className='sticky left-0 right-0 top-0 z-[2] flex items-center justify-between border-b border-[#e8ebed] bg-white px-7 py-2'>
@@ -33,7 +35,7 @@ function NavbarUser() {
           <img className='w-full' src={logo} alt='logo website' />
         </div>
         <div className='flex items-center'>
-          <Link className='mr-4' to='/user'>
+          <Link className='mr-4' to='/my-course'>
             Khóa học của tôi
           </Link>
           <ClickPopover
@@ -84,8 +86,8 @@ function NavbarUser() {
                 <div className='flex items-center justify-between'>
                   <div className='ml-3 h-[40px] w-[40px] cursor-pointer rounded-[50%] bg-black'></div>
                   <div className='w-[65%] overflow-hidden text-ellipsis whitespace-nowrap '>
-                    <h5 className='font-semibold'>{profile?.username}</h5>
-                    <p className='text-[12px] text-[#757575]'>{profile?.email}</p>
+                    <h5 className='font-semibold'>{profileData?.data.username}</h5>
+                    <p className='text-[12px] text-[#757575]'>{profileData?.data?.email}</p>
                   </div>
                 </div>
                 <Link
@@ -110,6 +112,9 @@ function NavbarUser() {
                 </Link>
                 <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
                 <div
+                  onKeyDown={handleKeyDown}
+                  role={'button'}
+                  tabIndex={0}
                   className='trasition my-2 flex items-center px-2 py-2 text-[#757575] hover:cursor-pointer hover:bg-gray-100'
                   onClick={handleLogout}
                 >
