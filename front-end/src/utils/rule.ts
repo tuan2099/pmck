@@ -1,6 +1,3 @@
-// quản lý form
-import { type } from 'os'
-// import { yupResolver } from '@hookform/resolvers'
 import * as yup from 'yup'
 import type { RegisterOptions, UseFormGetValues } from 'react-hook-form'
 
@@ -126,25 +123,13 @@ export const schema = yup.object({
 })
 
 export const profileSchema = yup.object({
-  username: yup.string().required('Vui lòng điền thông tin'),
-  employment_status: yup.string(),
-  industry: yup.string(),
-  employer: yup.string(),
-  occupation: yup.string(),
-  experience_level: yup.string(),
-  is_current_employer: yup.boolean(),
-  highest_degree: yup.string(),
-  university: yup.string(),
-  field_or_major: yup.string(),
-  is_student: yup.boolean(),
-  open_new_job: yup.boolean(),
+  username: yup.string(),
+  full_name: yup.string(),
+  about_me: yup.string(),
   location: yup.string(),
-  skills_wanted: yup.string(),
-  interested_in_getting: yup.string(),
-  learning_goal: yup.string(),
-  preferred_occupation: yup.string(),
-  career_industry: yup.string(),
-  preferred_level: yup.string()
+  top_skil: yup.string(),
+  connect: yup.string(),
+  phone_number: yup.string()
 })
 
 export type Schema = yup.InferType<typeof schema>
