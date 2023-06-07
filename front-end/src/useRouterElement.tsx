@@ -35,7 +35,6 @@ export const ROUTES = {
   register: '/register',
   forgot_password: '/forgot_password',
   new: '/new',
-  allCourse: '/all-course',
   editProfile: '/edit-profile',
   profile: '/me'
 }
@@ -45,11 +44,6 @@ export default function useRouterElement() {
     {
       path: '/',
       element: <HomeGuest />,
-      index: true
-    },
-    {
-      path: ROUTES.allCourse,
-      element: <AllCoursePage />,
       index: true
     },
     {
@@ -86,6 +80,14 @@ export default function useRouterElement() {
       path: '',
       element: <ProtectedRoute />,
       children: [
+        {
+          path: '/courses',
+          element: (
+            <HomeUserLayout>
+              <AllCoursePage />
+            </HomeUserLayout>
+          )
+        },
         {
           path: '/my-course',
           element: (
