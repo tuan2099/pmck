@@ -81,7 +81,7 @@ function EditProfile() {
                     </div>
                   </div>
                 )}
-                {previewImg && <img className='h-32 w-32 object-cover' src={previewImg} />}
+                {previewImg && <img className='h-32 w-32 object-cover' src={previewImg} alt='img' />}
               </label>
               <input id='profile_photo' type='file' hidden onChange={handlePreviewImg} />
               <div className='flex flex-col gap-3'>

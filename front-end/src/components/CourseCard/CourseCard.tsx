@@ -21,19 +21,26 @@ function CourseCard(props: IProps) {
     if (list && courseItem) {
       const a = list?.find((element: any) => element.attributes.courses.data[0].id === courseItem.id)
       if (a) {
-        let check = a.attributes?.users?.data?.some((element: any) => element.id === profile?.id)
+        const check = a.attributes?.users?.data?.some((element: any) => element.id === profile?.id)
         setIsRegisted(check)
       }
     }
-  }, [list])
+  }, [courseItem, list, profile?.id])
 
   return (
     <>
       <Link
-        to={`/course/${generateNameId({
-          name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
-          id: courseItem.id
-        })}`}
+        to={
+          isRegisted
+            ? `/learning/${generateNameId({
+                name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
+                id: courseItem.id
+              })}`
+            : `/course/${generateNameId({
+                name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
+                id: courseItem.id
+              })}`
+        }
         className='mb-[30px] w-full cursor-pointer px-3'
       >
         <div
@@ -52,7 +59,6 @@ function CourseCard(props: IProps) {
         <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-[#292929]'>
           {courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name}
         </h5>
-        {isRegisted && <p>Đã đăng ký</p>}
         <p className='flex text-sm text-slate-400'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
