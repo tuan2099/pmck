@@ -5,6 +5,9 @@ export const URL_ME = '/users/me?populate[course_registrations][populate][0]=cou
 const profileApi = {
   getProfile() {
     return http.get<User>(URL_ME)
+  },
+  updateProfile(data: { id: number; data: any }) {
+    return http.put(`/users/${data.id}`, data.data)
   }
 }
 

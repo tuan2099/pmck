@@ -9,7 +9,15 @@ export interface User {
   date_of_birth?: string // ISO 8610
   avatar?: string
   address?: string
-  phone?: string
+  phone_number?: string
   createdAt: string
   updatedAt: string
+  about_me: string
+  blocked: boolean
+  confirmed: boolean
+  connect: string
+  full_name: string
+  location: string
+  provider: string
+  top_skill: string
 }
