@@ -71,13 +71,13 @@ function Course_enrol() {
                 </div>
               )}
             </h1>
-            <p>
+            <div>
               {courseDetaildata?.data.data.attributes.course_description ? (
                 courseDetaildata?.data.data.attributes.course_description
               ) : (
                 <SkeletonTypography dataSkeletonTypography={5} />
               )}
-            </p>
+            </div>
             <div className='mt-[35px]'>
               <div className='sticky top-[66px] z-[2] bg-white pb-[4px] '>
                 <h2 className='my-[16px] text-xl font-bold'>Nội dung khóa học</h2>

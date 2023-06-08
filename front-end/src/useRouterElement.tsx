@@ -36,13 +36,14 @@ export const ROUTES = {
   forgot_password: '/forgot_password',
   new: '/new',
   editProfile: '/edit-profile',
-  profile: '/me'
+  profile: '/me',
+  courses: '/courses'
 }
 
 export default function useRouterElement() {
   const routerElement = useRoutes([
     {
-      path: '/',
+      path: ROUTES.home,
       element: <HomeGuest />,
       index: true
     },
@@ -51,7 +52,7 @@ export default function useRouterElement() {
       element: <RejectedRoute />,
       children: [
         {
-          path: '/login',
+          path: ROUTES.login,
           element: (
             <RegisterLayout>
               <Login />
@@ -59,7 +60,7 @@ export default function useRouterElement() {
           )
         },
         {
-          path: '/register',
+          path: ROUTES.register,
           element: (
             <RegisterLayout>
               <Register />
@@ -67,7 +68,7 @@ export default function useRouterElement() {
           )
         },
         {
-          path: '/forgot_password',
+          path: ROUTES.forgot_password,
           element: (
             <RegisterLayout>
               <ForgotPassword />
@@ -81,7 +82,7 @@ export default function useRouterElement() {
       element: <ProtectedRoute />,
       children: [
         {
-          path: '/courses',
+          path: ROUTES.courses,
           element: (
             <HomeUserLayout>
               <AllCoursePage />
@@ -118,7 +119,7 @@ export default function useRouterElement() {
           element: <Course_detail />
         },
         {
-          path: '/me',
+          path: ROUTES.profile,
           element: (
             <HomeUserLayout>
               <Profile />
@@ -136,7 +137,7 @@ export default function useRouterElement() {
       ]
     },
     {
-      path: '/new',
+      path: ROUTES.new,
       element: (
         <HomeUserLayout>
           <New />
