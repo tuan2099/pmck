@@ -26,7 +26,7 @@ const Partner = () => {
                                 Tích lũy tín chỉ cho mục tiêu tương lai
                             </li>
                         </div>
-                        <button className='bg-[#1e7115             ] mt-8 pt-4 pb-4 pl-8 pr-8'>
+                        <button className='bg-[#1e7115] mt-8 pt-4 pb-4 pl-8 pr-8'>
                             <a className='text-white font-semibold'>Liên hệ</a>
                         </button>
                     </div>
@@ -44,9 +44,9 @@ const Partner = () => {
                         loop={true}
                         navigation={true}
                         modules={[Pagination, Navigation]}
-                        className="mySwiper font-semibold">
+                        className="mySwiper font-semibold text-[#1e7115] max-lg:hidden">
                         <SwiperSlide >
-                            <div className='grid grid-cols-3  grid-rows-3 border border-black-50 border-1'>
+                            <div className='grid grid-cols-3 place-items-center  grid-rows-3 border border-black-50 border-1'>
                                 <div className='w-full h-24 border border-black-50 border-0.5 flex justify-center items-center'>
                                     <img className='grid-cols-1 grid-rows-1 max-w-full max-h-full pl-12 pr-12 pt-2 pb-2 max-xl:pl-6 max-xl:pr-6 max-lg:pl-4 max-lg:pr-4 max-md:pl-2 max-md:pr-2' src='http://bravekids.vn/wp-content/uploads/2023/02/200px-Logo_Truong_Dai_Hoc_Van_Hien-150x150.png'></img>
                                 </div>
@@ -110,8 +110,8 @@ const Partner = () => {
                     </Swiper>
                 </div>
                 <div className='max-sm:order-1 flex justify-center items-center'>
-                    <h2 className='text-[2.75rem] font-semibold'>Trên
-                        <span className='text-[#1e7115             ] text-6xl '> 30+ </span>
+                    <h2 className='text-[2.75rem] font-semibold max-lg:text-3xl'>Trên
+                        <span className='text-[#1e7115] text-6xl '> 30+ </span>
                         trường đại học cao đẳng lựa chọn PMCK
                     </h2>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import './becomteacher.css';
 const Becometeacher = () => {
     return (
-        <div className='py-6 px-[39px]'>
+        <div className='p-6 my-[70px]'>
             <div className="bg-[url('https://s.udemycdn.com/teaching/billboard-desktop-2x-v4.jpg')] bg-no-repeat bg-contain h-screen ">
                 <div className='w-[448px] pl-8 text-left my-auto'>
                     <h1 className='text-5xl font-semibold'>Hãy đến giảng dạy với chúng tôi</h1>
@@ -12,7 +12,7 @@ const Becometeacher = () => {
                     </button>
                 </div>
             </div>
-            <div className='px-6 py-20'>
+            <div className='px-6 py-20 '>
                 <h2 className='text-[32px] font-semibold'>Có quá nhiều lý do để bắt đầu</h2>
                 <div className='grid grid-cols-3'>
                     <div className='grid-cols-1 px-2'>
@@ -34,7 +34,7 @@ const Becometeacher = () => {
                 </div>
             </div>
 
-            <div className='flex justify-center flex-wrap  bg-[#5624d0]'>
+            <div className='flex space-x-12 justify-center flex-wrap  bg-[#5624d0]'>
                 <div className='py-4 px-6  text-white font-semibold'>
                     <div className='text-[28px]'>
                         <span> 57</span>
@@ -72,16 +72,16 @@ const Becometeacher = () => {
                 </div>
             </div>
 
-            <div>
-                <div>Cách thức bắt đầu</div>
-                <div>
-                    <div>Lên kế hoạch cho khung chương trình</div>
-                    <div>Quay video</div>
-                    <div>Ra mắt khóa học</div>
+            <div className='px-6 py-[88px]'>
+                <div className='text-[32px] font-semibold'>Cách thức bắt đầu</div>
+                <div className='flex justify-center items-center text-[18px] my-5'>
+                    <div className='px-5 py-2 font-semibold'>Lên kế hoạch cho khung chương trình</div>
+                    <div className='px-5 py-2 font-semibold'>Quay video</div>
+                    <div className='px-5 py-2 font-semibold'>Ra mắt khóa học</div>
                 </div>
                 <div>
-                    <div>
-                        <div>
+                    <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4'>
+                        <div className='text-[16px]  pt-8'>
                             <p>
                                 Hãy bắt đầu với niềm đam mê và kiến thức của bạn. Sau đó, bạn có
                                 thể chọn một chủ đề triển vọng với sự trợ giúp của công cụ Thông
@@ -90,7 +90,7 @@ const Becometeacher = () => {
                             <p>
                                 Bạn là người quyết định phương pháp cũng như kiến thức giảng dạy
                             </p>
-                            <h4>Cách chúng tôi giúp bạn</h4>
+                            <h4 className=' font-semibold'>Cách chúng tôi giúp bạn</h4>
                             <p>
                                 Chúng tôi cung cấp nhiều tài nguyên về cách tạo khóa học đầu tiên.
                                 Ngoài ra, bảng điều khiển của giảng viên và trang khung chương
@@ -99,8 +99,8 @@ const Becometeacher = () => {
                         </div>
                         <img src='https://s.udemycdn.com/teaching/plan-your-curriculum-v3.jpg'></img>
                     </div>
-                    <div>
-                        <div>
+                    <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4'>
+                        <div className='pt-8'>
                             <p>
                                 Sử dụng các công cụ cơ bản như điện thoại thông minh hoặc camera
                                 DSLR. Thêm một chiếc micrô tốt là bạn đã sẵn sàng bắt đầu.
@@ -118,8 +118,8 @@ const Becometeacher = () => {
                         </div>
                         <img src='https://s.udemycdn.com/teaching/record-your-video-v3.jpg'></img>
                     </div>
-                    <div>
-                        <div>
+                    <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4'>
+                        <div className='pt-8'>
                             <p>
                                 Thu thập các xếp hạng và đánh giá đầu tiên bằng cách quảng bá khóa
                                 học trên mạng xã hội và mạng lưới nghề nghiệp của bạn.

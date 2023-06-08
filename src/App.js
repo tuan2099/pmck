@@ -6,7 +6,7 @@ import Becometeacher from './becomteacher/becomteacher';
 function App() {
   return (
     <div className="App">
-      <NewPage />
+      <Partner />
     </div>
   );
 }
