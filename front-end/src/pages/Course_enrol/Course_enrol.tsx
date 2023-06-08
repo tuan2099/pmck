@@ -19,7 +19,6 @@ function Course_enrol() {
   const navigate = useNavigate()
   // state from context
   const { profile } = useContext(AppContext)
-  console.log(profile)
   // call api user
   const { data: profileData } = useQuery({
     queryKey: ['userInfo'],
@@ -52,38 +51,34 @@ function Course_enrol() {
   })
   // register course func
   const courseRegisterMutation = useMutation(courseApi.registerCourse)
-  const courseRegisterMutationUpdate = useMutation(courseApi.updateCourseRegisted)
+  // const courseRegisterMutationUpdate = useMutation(courseApi.updateCourseRegisted)
 
-  function checkUserIdInNestedArray(userIdToCheck: any, nestedArray: any[]) {
-    return (
-      nestedArray &&
-      nestedArray.some((innerArray) => {
-        return innerArray.attributes.users.data.find((user: { id: any }) => user.id === userIdToCheck) !== undefined
-      })
-    )
-  }
+  // function checkUserIdInNestedArray(userIdToCheck: any, nestedArray: any[]) {
+  //   return (
+  //     nestedArray &&
+  //     nestedArray.some((innerArray) => {
+  //       return innerArray.attributes.users.data.find((user: { id: any }) => user.id === userIdToCheck) !== undefined
+  //     })
+  //   )
+  // }
 
-  const courseRegistration = () => {
-    if (checkUserIdInNestedArray(profile?.id, courseRegistationData?.data.data)) {
-      // courseRegisterMutationUpdate.mutate({
-      //   // id: profile?.id,
-      //   // attributes: {
-      //   //   ...registeItem.attributes,
-      //   //   courses: { data: [...registeItem.attributes.courses.data, courseInfo] }
-      //   // }
-      // })
-    } else {
-      courseRegisterMutation.mutate(
-        { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
-        {
-          onSuccess: (data) => {
-            console.log('đăng kí khóa học thành công')
-          }
-        }
-      )
-    }
-  }
-
+  // const courseRegistration = () => {
+  //   if (checkUserIdInNestedArray(profile?.id, courseRegistationData?.data.data)) {
+  //     return
+  //   } else {
+  //     courseRegisterMutation.mutate(
+  //       { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
+  //       {
+  //         onSuccess: (data) => {
+  //           console.log('đăng kí khóa học thành công')
+  //         }
+  //       }
+  //     )
+  //   }
+  // }
+  const { handleRegisteCourse } = useRegisteCourse({
+    courseInfo: courseDetaildata?.data.data
+  })
   return (
     <>
       <div className='m-auto w-full'>
@@ -172,7 +167,7 @@ function Course_enrol() {
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
               {courseDetaildata?.data.data.attributes.status_course ? (
                 <button
-                  onClick={courseRegistration}
+                  onClick={() => handleRegisteCourse()}
                   className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
                 >
                   Đăng kí học
