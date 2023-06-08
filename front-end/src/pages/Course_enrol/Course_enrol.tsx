@@ -9,6 +9,8 @@ import { getIdFromNameId } from 'src/utils/uitls'
 import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
+import useRegisteCourse from 'src/hooks/useRegisteCourse'
+import { getStorage } from 'src/utils/storage'
 
 function Course_enrol() {
   const { id } = useParams()
@@ -56,6 +58,10 @@ function Course_enrol() {
       }
     )
   }
+
+  const { handleRegisteCourse } = useRegisteCourse({
+    courseInfo: courseDetaildata?.data.data
+  })
 
   return (
     <>
@@ -145,7 +151,7 @@ function Course_enrol() {
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
               {courseDetaildata?.data.data.attributes.status_course ? (
                 <button
-                  onClick={courseRegistration}
+                  onClick={() => handleRegisteCourse()}
                   className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
                 >
                   Đăng kí học

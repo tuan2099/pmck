@@ -21,6 +21,17 @@ const courseApi = {
   },
   registerCoursess() {
     return http.get(`/course-registrations?populate=*`)
+  },
+  updateCourseRegisted({ id, data }: { id: string | number; data: any }) {
+    return http.put(
+      `/course-registrations/${id}`,
+      { data },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+      }
+    )
   }
 }
 
