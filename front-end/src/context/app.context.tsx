@@ -1,6 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
 import { useState, createContext } from 'react'
-import profileApi from 'src/apis/user.api'
 import { User } from 'src/types/user.type'
 import { getAccesTokenLocalStorage, getProfileFromLocalStorage } from 'src/utils/auth'
 
@@ -11,6 +9,8 @@ interface AppContextInterface {
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
   userInfo: any
   setUserInfo: any
+  courseRegisted: any
+  setCourseRegisted: React.Dispatch<React.SetStateAction<any>>
   // reset: () => void
 }
 
@@ -20,7 +20,9 @@ const initialAppContext: AppContextInterface = {
   profile: getProfileFromLocalStorage(),
   setProfile: () => null,
   setUserInfo: () => null,
-  userInfo: []
+  userInfo: [],
+  courseRegisted: [],
+  setCourseRegisted: () => {}
   // reset: () => null
 }
 
@@ -30,9 +32,21 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticate] = useState<boolean>(initialAppContext.isAuthenticated)
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   const [userInfo, setUserInfo] = useState(initialAppContext.userInfo)
+  const [courseRegisted, setCourseRegisted] = useState([])
 
   return (
-    <AppContext.Provider value={{ isAuthenticated, setIsAuthenticate, profile, setProfile, setUserInfo, userInfo }}>
+    <AppContext.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticate,
+        profile,
+        setProfile,
+        setUserInfo,
+        userInfo,
+        courseRegisted,
+        setCourseRegisted
+      }}
+    >
       {children}
     </AppContext.Provider>
   )

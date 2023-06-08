@@ -11,6 +11,7 @@ import { AppContext } from 'src/context/app.context'
 function Homeuser() {
   // get data from context
   const { setUserInfo } = useContext(AppContext)
+
   // call api slider
   const { data: imageSliderdata } = useQuery({
     queryKey: ['sliderImage'],
@@ -36,6 +37,8 @@ function Homeuser() {
 
   const listNewCourse = listCouseData?.data.data[0].attributes.courses.data || null
   const listFreeCourse = listCouseData?.data.data[1].attributes.courses.data || null
+
+  // console.log(isRegisted)
 
   return (
     <>
