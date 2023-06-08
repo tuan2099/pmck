@@ -14,8 +14,6 @@ function App() {
     enabled: !Boolean(courseRegisted.length)
   })
 
-  console.log(courseRegisted)
-
   const routeElement = useRouterElement()
   return <>{routeElement}</>
 }

@@ -11,6 +11,7 @@ import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
 import { getStorage } from 'src/utils/storage'
+import courseRegistationApi from 'src/apis/courseRegistation'
 
 function Course_enrol() {
   const { id } = useParams()
@@ -18,7 +19,7 @@ function Course_enrol() {
   const navigate = useNavigate()
   // state from context
   const { profile } = useContext(AppContext)
-
+  console.log(profile)
   // call api user
   const { data: profileData } = useQuery({
     queryKey: ['userInfo'],
@@ -44,24 +45,44 @@ function Course_enrol() {
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
-
+  // call api coursegitation
+  const { data: courseRegistationData } = useQuery({
+    queryKey: ['courseRegistation'],
+    queryFn: () => courseRegistationApi.courseRegistation()
+  })
   // register course func
   const courseRegisterMutation = useMutation(courseApi.registerCourse)
+  const courseRegisterMutationUpdate = useMutation(courseApi.updateCourseRegisted)
 
-  const courseRegistration = () => {
-    courseRegisterMutation.mutate(
-      { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
-      {
-        onSuccess: (data) => {
-          console.log('đăng kí khóa học thành công')
-        }
-      }
+  function checkUserIdInNestedArray(userIdToCheck: any, nestedArray: any[]) {
+    return (
+      nestedArray &&
+      nestedArray.some((innerArray) => {
+        return innerArray.attributes.users.data.find((user: { id: any }) => user.id === userIdToCheck) !== undefined
+      })
     )
   }
 
-  const { handleRegisteCourse } = useRegisteCourse({
-    courseInfo: courseDetaildata?.data.data
-  })
+  const courseRegistration = () => {
+    if (checkUserIdInNestedArray(profile?.id, courseRegistationData?.data.data)) {
+      // courseRegisterMutationUpdate.mutate({
+      //   // id: profile?.id,
+      //   // attributes: {
+      //   //   ...registeItem.attributes,
+      //   //   courses: { data: [...registeItem.attributes.courses.data, courseInfo] }
+      //   // }
+      // })
+    } else {
+      courseRegisterMutation.mutate(
+        { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
+        {
+          onSuccess: (data) => {
+            console.log('đăng kí khóa học thành công')
+          }
+        }
+      )
+    }
+  }
 
   return (
     <>
@@ -151,7 +172,7 @@ function Course_enrol() {
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
               {courseDetaildata?.data.data.attributes.status_course ? (
                 <button
-                  onClick={() => handleRegisteCourse()}
+                  onClick={courseRegistration}
                   className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
                 >
                   Đăng kí học

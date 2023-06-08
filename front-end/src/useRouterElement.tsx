@@ -107,7 +107,6 @@ export default function useRouterElement() {
         },
         {
           path: '/course/:id',
-          index: true,
           element: (
             <HomeUserLayout>
               <Course_enrol />
