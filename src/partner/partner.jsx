@@ -13,18 +13,22 @@ const Partner = () => {
                     <h2 className='text-2xl'> Cơ hội sinh viên thực tập và trải nghiệm </h2>
                     <div>
                         <div className='text-base mt-16 opacity-70 leading-loose'>
-                            <li>
+                            <div className='flex'>
+                                <img className='w-4 h-4 mt-2' src='https://cdn.pixabay.com/photo/2017/04/08/18/17/correct-2214020_1280.png'></img>
                                 Chương trình cấp bằng trực tuyến tốt nhất từ các trường đại học hàng đầu
-                            </li>
-                            <li>
+                            </div>
+                            <div className='flex'>
+                                <img className='w-4 h-4 mt-2' src='https://cdn.pixabay.com/photo/2017/04/08/18/17/correct-2214020_1280.png'></img>
                                 Các lớp học trực tuyến trực tiếp với các giảng viên 3-4 giờ mỗi tuần
-                            </li>
-                            <li>
+                            </div>
+                            <div className='flex'>
+                                <img className='w-4 h-4 mt-2' src='https://cdn.pixabay.com/photo/2017/04/08/18/17/correct-2214020_1280.png'></img>
                                 Chia sẻ suy nghĩ của bạn và kết nối với học viên trên toàn cầu
-                            </li>
-                            <li>
+                            </div>
+                            <div className='flex'>
+                                <img className='w-4 h-4 mt-2' src='https://cdn.pixabay.com/photo/2017/04/08/18/17/correct-2214020_1280.png'></img>
                                 Tích lũy tín chỉ cho mục tiêu tương lai
-                            </li>
+                            </div>
                         </div>
                         <button className='bg-[#1e7115] mt-8 pt-4 pb-4 pl-8 pr-8'>
                             <a className='text-white font-semibold'>Liên hệ</a>
