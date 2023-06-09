@@ -1,32 +1,56 @@
 import React from 'react';
 import './becomteacher.css';
 const Becometeacher = () => {
+    const buttons = document.querySelectorAll('.flex button');
+    const sections = document.querySelectorAll('.hidden');
+
+    buttons.forEach((button) => {
+        button.addEventListener('focus', (event) => {
+            const target = event.target.getAttribute('id');
+            sections.forEach((section) => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(target).classList.remove('hidden');
+        });
+    });
+
     return (
-        <div className='p-6 my-[70px]'>
-            <div className="bg-[url('https://s.udemycdn.com/teaching/billboard-desktop-2x-v4.jpg')] bg-no-repeat bg-contain h-screen ">
-                <div className='w-[448px] pl-8 text-left my-auto'>
-                    <h1 className='text-5xl font-semibold'>Hãy đến giảng dạy với chúng tôi</h1>
-                    <p className='text-lg pt-2'>Trở thành giảng viên và thay đổi cuộc sống của mọi người,bao gồm cả cuộc sống của chính bạn</p>
-                    <button className='bg-[#1c1d1f] w-[100%] py-4  mt-7 '>
-                        <a className='text-white font-semibold'>Bắt đầu</a>
+        <div className='p-6 mx-[4%] '>
+
+            <div>
+                <img className=' max-h-[600px] max-w-[1800px] h-full  w-full grid grid-cols-1 mx-auto' src='https://s.udemycdn.com/teaching/billboard-desktop-2x-v4.jpg' bg-no-repeat bg-contain alt='' />
+                <div className='mx-[15%] max-4xl:mx-[10%] max-3xl:mx-[7%] max-2xl:mx-[6%] max-xl:mx-[5%] top-40 max-2xl:top-20 max-xl:top-10 absolute w-[480px]  max-lg:w-[288px] max-md:relative max-md:w-full max-md:pl-0 max-md:mx-0  pl-8 text-left my-auto   '>
+                    <h1 className='text-5xl font-semibold  max-lg:text-[24px]'>Hãy đến giảng dạy với chúng tôi</h1>
+                    <p className='text-lg pt-2  max-lg:text-[14px]'>Trở thành giảng viên và thay đổi cuộc sống của mọi người,bao gồm cả cuộc sống của chính bạn</p>
+                    <button className='bg-[#1c1d1f] w-[100%] py-4  mt-7 max-842:mt-0 max-md:mt-7'>
+                        <a className='text-white font-semibold max-lg:text-[12px]'>Bắt đầu</a>
                     </button>
                 </div>
             </div>
+
+            {/* <div className='w-[480px]  max-lg:w-[288px]  pl-8 text-left my-auto top-1/2 transform translate-y-1/2 max-xl:translate-y-1/4 max-lg:translate-y-[1/5]'>
+                    <h1 className='text-5xl font-semibold  max-lg:text-[24px]'>Hãy đến giảng dạy với chúng tôi</h1>
+                    <p className='text-lg pt-2  max-lg:text-[14px]'>Trở thành giảng viên và thay đổi cuộc sống của mọi người,bao gồm cả cuộc sống của chính bạn</p>
+                    <button className='bg-[#1c1d1f] w-[100%] py-4  mt-7 '>
+                        <a className='text-white font-semibold max-lg:text-[12px]'>Bắt đầu</a>
+                    </button>
+                </div> */}
+
             <div className='px-6 py-20 '>
                 <h2 className='text-[32px] font-semibold'>Có quá nhiều lý do để bắt đầu</h2>
-                <div className='grid grid-cols-3'>
-                    <div className='grid-cols-1 px-2'>
+                <div className='w-full grid grid-cols-3 max-601:grid-cols-2 max-601:grid-rows-2 max-500:grid-cols-1 '>
+                    <div className=' px-[10px]  grid-cols-1'>
                         <img className='mx-auto' src='https://s.udemycdn.com/teaching/value-prop-teach-2x-v3.jpg'></img>
                         <h3 className='text-[16px] font-semibold'>Giảng dạy theo cách của bạn</h3>
                         <p className='text-[14px]'> Xuất bản khóa học mong muốn, theo cách mong muốn và bạn luôn có quyền kiểm soát nội dung của riêng mình.
                         </p>
                     </div>
-                    <div className='grid-cols-1 px-2'>
+                    <div className=' px-[10px]  grid-cols-1'>
                         <img className='mx-auto' src="https://s.udemycdn.com/teaching/value-prop-inspire-2x-v3.jpg"></img>
                         <h3 className='text-[16px] font-semibold'>Truyền cảm hứng cho học viên </h3>
                         <p className='text-[14px]'>Dạy những gì bạn biết và giúp học viên khám phá sở thích, tiếp thu kỹ năng mới và thăng tiến trong sự nghiệp của họ. </p>
                     </div>
-                    <div className='grid-cols-1 px-2'>
+                    <div className=' px-[10px]  grid-cols-1'>
                         <img className='mx-auto' src='https://s.udemycdn.com/teaching/value-prop-get-rewarded-2x-v3.jpg'></img>
                         <h3 className='text-[16px] font-semibold'>Nhận phần thưởng</h3>
                         <p className='text-[14px]'>Mở rộng mạng lưới nghề nghiệp, xây dựng kiến thức chuyên môn và kiếm thu nhập từ mỗi lượt ghi danh có trả phí.</p>
@@ -34,7 +58,7 @@ const Becometeacher = () => {
                 </div>
             </div>
 
-            <div className='flex space-x-12 justify-center flex-wrap  bg-[#5624d0]'>
+            <div className='flex justify-evenly flex-wrap  bg-[#5624d0]'>
                 <div className='py-4 px-6  text-white font-semibold'>
                     <div className='text-[28px]'>
                         <span> 57</span>
@@ -72,16 +96,17 @@ const Becometeacher = () => {
                 </div>
             </div>
 
-            <div className='px-6 py-[88px]'>
+            <div className='px-6 py-[88px] mx-[175px] max-500:hidden '>
                 <div className='text-[32px] font-semibold'>Cách thức bắt đầu</div>
                 <div className='flex justify-center items-center text-[18px] my-5'>
-                    <div className='px-5 py-2 font-semibold'>Lên kế hoạch cho khung chương trình</div>
-                    <div className='px-5 py-2 font-semibold'>Quay video</div>
-                    <div className='px-5 py-2 font-semibold'>Ra mắt khóa học</div>
+                    <button id='kehoach' className='px-5 py-2 font-semibold text-[#ccc] focus:text-[#000]'>Lên kế hoạch cho khung chương trình</button>
+                    <button id='video' className='px-5 py-2 font-semibold text-[#ccc] focus:text-[#000]'>Quay video</button>
+                    <button id='khoahoc' className='px-5 py-2 font-semibold text-[#ccc] focus:text-[#000]'>Ra mắt khóa học</button>
                 </div>
                 <div>
-                    <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4'>
-                        <div className='text-[16px]  pt-8'>
+
+                    <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4  '>
+                        <div className='text-[16px]  pt-8 '>
                             <p>
                                 Hãy bắt đầu với niềm đam mê và kiến thức của bạn. Sau đó, bạn có
                                 thể chọn một chủ đề triển vọng với sự trợ giúp của công cụ Thông
@@ -99,6 +124,8 @@ const Becometeacher = () => {
                         </div>
                         <img src='https://s.udemycdn.com/teaching/plan-your-curriculum-v3.jpg'></img>
                     </div>
+
+
                     <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4'>
                         <div className='pt-8'>
                             <p>
@@ -118,6 +145,8 @@ const Becometeacher = () => {
                         </div>
                         <img src='https://s.udemycdn.com/teaching/record-your-video-v3.jpg'></img>
                     </div>
+
+
                     <div className='grid grid-cols-2 gap-5 text-left leading-loose pt-4'>
                         <div className='pt-8'>
                             <p>
@@ -140,10 +169,12 @@ const Becometeacher = () => {
                         </div>
                         <img src='https://s.udemycdn.com/teaching/launch-your-course-v3.jpg'></img>
                     </div>
+
+
                 </div>
             </div>
 
-            <div>
+            <div className='py-[88px] px-[24px] bg-violet-50'>
                 <h2 className='text-[32px] font-semibold'>Trở thành giảng viên ngay hôm nay</h2>
                 <p className='text-[18px] mt-3 '>Tham gia một trong những thị trường học tập trực tuyến lớn nhất thế giới.</p>
                 <button className='bg-[#1c1d1f] py-[10px] px-[60px] mt-6'>
@@ -151,6 +182,10 @@ const Becometeacher = () => {
                 </button>
             </div>
         </div >
+
+
+
+
     );
 };
 
