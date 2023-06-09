@@ -10,8 +10,6 @@ import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
-import { getStorage } from 'src/utils/storage'
-import courseRegistationApi from 'src/apis/courseRegistation'
 
 function Course_enrol() {
   const { id } = useParams()
@@ -44,23 +42,9 @@ function Course_enrol() {
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
-  // call api coursegitation
-  const { data: courseRegistationData } = useQuery({
-    queryKey: ['courseRegistation'],
-    queryFn: () => courseRegistationApi.courseRegistation()
-  })
+
   // register course func
   const courseRegisterMutation = useMutation(courseApi.registerCourse)
-  // const courseRegisterMutationUpdate = useMutation(courseApi.updateCourseRegisted)
-
-  // function checkUserIdInNestedArray(userIdToCheck: any, nestedArray: any[]) {
-  //   return (
-  //     nestedArray &&
-  //     nestedArray.some((innerArray) => {
-  //       return innerArray.attributes.users.data.find((user: { id: any }) => user.id === userIdToCheck) !== undefined
-  //     })
-  //   )
-  // }
 
   // const courseRegistration = () => {
   //   if (checkUserIdInNestedArray(profile?.id, courseRegistationData?.data.data)) {
