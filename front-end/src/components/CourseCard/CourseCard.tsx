@@ -13,7 +13,6 @@ interface IProps {
 
 function CourseCard(props: IProps) {
   const { courseItem, list } = props
-  console.log(courseItem, list)
   const { profile } = useContext(AppContext)
   const [isRegisted, setIsRegisted] = useState<boolean>(false)
 

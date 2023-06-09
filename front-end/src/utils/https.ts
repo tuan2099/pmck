@@ -22,7 +22,7 @@ class Http {
       (config) => {
         if (this.accessToken && config.headers) {
           config.headers.authorization =
-            config.url === '/users/me?populate[course_registrations][populate][0]=courses'
+            config.url === '/users/me?populate[course_registrations][populate][courses][populate]=*'
               ? `Bearer ${this.accessToken}`
               : this.accessToken
           return config

@@ -1,6 +1,6 @@
 import { User } from 'src/types/user.type'
 import http from 'src/utils/https'
-export const URL_ME = '/users/me?populate[course_registrations][populate][0]=courses'
+export const URL_ME = '/users/me?populate[course_registrations][populate][courses][populate]=*'
 
 const profileApi = {
   getProfile() {
