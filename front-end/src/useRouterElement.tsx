@@ -17,6 +17,7 @@ import AllCoursePage from './pages/AllCourse/AllCoursePage'
 import Course_detail from './pages/Courrse_detail'
 import EditProfile from './pages/Profile/EditProfile'
 import MyCourse from './pages/MyCourse'
+import LearningPath from './pages/LearningPath'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -146,6 +147,14 @@ export default function useRouterElement() {
     {
       path: '*',
       element: <Notfound />
+    },
+    {
+      path: '/learning-paths',
+      element: (
+        <HomeUserLayout>
+          <LearningPath />
+        </HomeUserLayout>
+      )
     }
   ])
   return routerElement

@@ -25,7 +25,7 @@ function SidebarUser() {
           <div className='text-sm'>Home</div>
         </NavLink>
         <NavLink
-          to='/'
+          to='/learning-paths'
           className={({ isActive }) =>
             classNames(
               'mt-3 flex h-[72px] w-[72px] cursor-pointer flex-col items-center justify-center rounded-[16px] text-2xl text-zinc-900 transition hover:bg-[#e8ebed]',

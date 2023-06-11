@@ -1,4 +1,5 @@
 export type CourseType = {
+  price: number
   course_name: string
   id: number
   attributes: {
