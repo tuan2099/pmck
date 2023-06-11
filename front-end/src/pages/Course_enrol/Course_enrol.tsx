@@ -1,23 +1,19 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import React, { useContext, useEffect, useLayoutEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import profileApi from 'src/apis/user.api'
 import SkeletonTypography from 'src/components/SkeletonTypography'
-import { AppContext } from 'src/context/app.context'
 import { getIdFromNameId } from 'src/utils/uitls'
 import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
-import { getStorage } from 'src/utils/storage'
 
 function Course_enrol() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
   const navigate = useNavigate()
-  // state from context
-  const { profile } = useContext(AppContext)
 
   // call api user
   const { data: profileData } = useQuery({
@@ -45,21 +41,7 @@ function Course_enrol() {
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
 
-  // register course func
-  const courseRegisterMutation = useMutation(courseApi.registerCourse)
-
-  const courseRegistration = () => {
-    courseRegisterMutation.mutate(
-      { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
-      {
-        onSuccess: (data) => {
-          console.log('đăng kí khóa học thành công')
-        }
-      }
-    )
-  }
-
-  const { handleRegisteCourse } = useRegisteCourse({
+  const { handleRegisteCourse, isRegisted } = useRegisteCourse({
     courseInfo: courseDetaildata?.data.data
   })
 
@@ -77,13 +59,13 @@ function Course_enrol() {
                 </div>
               )}
             </h1>
-            <p>
+            <div>
               {courseDetaildata?.data.data.attributes.course_description ? (
                 courseDetaildata?.data.data.attributes.course_description
               ) : (
                 <SkeletonTypography dataSkeletonTypography={5} />
               )}
-            </p>
+            </div>
             <div className='mt-[35px]'>
               <div className='sticky top-[66px] z-[2] bg-white pb-[4px] '>
                 <h2 className='my-[16px] text-xl font-bold'>Nội dung khóa học</h2>
@@ -149,14 +131,23 @@ function Course_enrol() {
                 ></div>
               </div>
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
-              {courseDetaildata?.data.data.attributes.status_course ? (
+              {courseDetaildata?.data.data.attributes.status_course && isRegisted && (
+                <button
+                  disabled
+                  className='mt-4 min-w-[180px] rounded-[50px] bg-gray-300 px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
+                >
+                  Bạn đã đăng ký.
+                </button>
+              )}
+              {courseDetaildata?.data.data.attributes.status_course && !isRegisted && (
                 <button
                   onClick={() => handleRegisteCourse()}
                   className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
                 >
                   Đăng kí học
                 </button>
-              ) : (
+              )}
+              {!courseDetaildata?.data.data.attributes.status_course && (
                 <button
                   disabled
                   className='mt-4 min-w-[180px] rounded-[50px] bg-gray-300 px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
