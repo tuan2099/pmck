@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useContext, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import profileApi from 'src/apis/user.api'
@@ -9,14 +9,11 @@ import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
-import { AppContext } from 'src/context/app.context'
 
 function Course_enrol() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
   const navigate = useNavigate()
-  // state from context
-  const { profile } = useContext(AppContext)
   // call api user
   const { data: profileData } = useQuery({
     queryKey: ['userInfo'],
@@ -43,24 +40,7 @@ function Course_enrol() {
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
 
-  // register course func
-  const courseRegisterMutation = useMutation(courseApi.registerCourse)
-
-  // const courseRegistration = () => {
-  //   if (checkUserIdInNestedArray(profile?.id, courseRegistationData?.data.data)) {
-  //     return
-  //   } else {
-  //     courseRegisterMutation.mutate(
-  //       { users: profile?.id, courses: Number(idCourse), isRegistrationCourse: true },
-  //       {
-  //         onSuccess: (data) => {
-  //           console.log('đăng kí khóa học thành công')
-  //         }
-  //       }
-  //     )
-  //   }
-  // }
-  const { handleRegisteCourse } = useRegisteCourse({
+  const { handleRegisteCourse, isRegisted } = useRegisteCourse({
     courseInfo: courseDetaildata?.data.data
   })
   return (

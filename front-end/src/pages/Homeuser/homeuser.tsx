@@ -28,17 +28,8 @@ function Homeuser() {
     }
   })
 
-  const { data: rg } = useQuery({
-    queryKey: ['registerCourse'],
-    queryFn: () => {
-      return courseApi.registerCoursess()
-    }
-  })
-
   const listNewCourse = listCouseData?.data.data[0].attributes.courses.data || null
   const listFreeCourse = listCouseData?.data.data[1].attributes.courses.data || null
-
-  // console.log(isRegisted)
 
   return (
     <>
@@ -70,7 +61,7 @@ function Homeuser() {
         <div className='grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {listNewCourse &&
             listNewCourse.map((courseItem: any) => {
-              return <CourseCard key={courseItem.id} courseItem={courseItem} list={rg?.data.data} />
+              return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
           {!listNewCourse && (
             <div className='flex items-center justify-between'>
