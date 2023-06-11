@@ -1,15 +1,15 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import React, { useContext, useEffect, useLayoutEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import profileApi from 'src/apis/user.api'
 import SkeletonTypography from 'src/components/SkeletonTypography'
-import { AppContext } from 'src/context/app.context'
 import { getIdFromNameId } from 'src/utils/uitls'
 import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
+import { AppContext } from 'src/context/app.context'
 
 function Course_enrol() {
   const { id } = useParams()
@@ -149,14 +149,23 @@ function Course_enrol() {
                 ></div>
               </div>
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
-              {courseDetaildata?.data.data.attributes.status_course ? (
+              {courseDetaildata?.data.data.attributes.status_course && isRegisted && (
+                <button
+                  disabled
+                  className='mt-4 min-w-[180px] rounded-[50px] bg-gray-300 px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
+                >
+                  Bạn đã đăng ký.
+                </button>
+              )}
+              {courseDetaildata?.data.data.attributes.status_course && !isRegisted && (
                 <button
                   onClick={() => handleRegisteCourse()}
                   className='mt-4 min-w-[180px] rounded-[50px] bg-[#1e7115] px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
                 >
                   Đăng kí học
                 </button>
-              ) : (
+              )}
+              {!courseDetaildata?.data.data.attributes.status_course && (
                 <button
                   disabled
                   className='mt-4 min-w-[180px] rounded-[50px] bg-gray-300 px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
