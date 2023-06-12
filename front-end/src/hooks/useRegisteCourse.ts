@@ -9,19 +9,21 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
   const [registeItem, setRegisteItem] = React.useState<any>(null)
   const [isRegisted, setIsRegisted] = React.useState<boolean>(false)
 
+  // nhận vào 1 mảng cũ + id khóa học mới trả về 1 mảng gồm cả 2 pt
+  function getUserIds(users: any, id: number) {
+    const idCourse = users.map((user: any) => user.id)
+    const newArr = [...idCourse, id]
+    return newArr
+  }
   const { mutate } = useMutation({
     mutationFn: () => {
       if (registeItem && courseInfo && !isRegisted) {
         const data = {
           ...registeItem,
-          attributes: {
-            ...registeItem.attributes,
-            courses: { data: [...registeItem.attributes.courses.data, courseInfo] }
-          }
+          courses: getUserIds(registeItem.attributes.courses.data, courseInfo.id)
         }
         return courseApi.updateCourseRegisted({ id: registeItem.id, data })
       }
-
       // truong khong nguoi dung chua tung dang ky khoa hoc nao => tao post moi
       return Promise.reject()
     },
@@ -29,7 +31,7 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
     onError: (error) => console.log(error)
   })
 
-  const handleRegisteCourse = useCallback(mutate, [isRegisted])
+  const handleRegisteCourse = useCallback(mutate, [mutate])
 
   React.useEffect(() => {
     if (courseInfo && courseRegisted) {

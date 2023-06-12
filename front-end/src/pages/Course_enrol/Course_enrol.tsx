@@ -129,14 +129,6 @@ function Course_enrol() {
                 ></div>
               </div>
               <h5 className='text-3xl uppercase text-[#1e7115] opacity-80'>Miễn phí</h5>
-              {courseDetaildata?.data.data.attributes.status_course && isRegisted && (
-                <button
-                  disabled
-                  className='mt-4 min-w-[180px] rounded-[50px] bg-gray-300 px-[16px] py-[10px] font-semibold uppercase text-white transition hover:opacity-90'
-                >
-                  Bạn đã đăng ký.
-                </button>
-              )}
               {courseDetaildata?.data.data.attributes.status_course && !isRegisted && (
                 <button
                   onClick={() => handleRegisteCourse()}
