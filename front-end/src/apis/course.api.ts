@@ -32,6 +32,17 @@ const courseApi = {
         }
       }
     )
+  },
+  createCourseRegisted(data: any) {
+    return http.post(
+      '/course-registrations',
+      { data },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+      }
+    )
   }
 }
 
