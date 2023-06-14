@@ -12,8 +12,9 @@ function MyCourse() {
     queryFn: () => profileApi.getProfile()
   })
   return (
-    <>
-      <div className='mt-[100px] grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+    <div className='mt-[50px]'>
+      <h1 className='pl-3 text-xl font-bold uppercase'>Khóa học của tôi</h1>
+      <div className='mt-[50px] grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {profileData &&
           profileData?.data.course_registrations[0].courses.map((myCourseItem: any) => {
             return (
@@ -22,6 +23,23 @@ function MyCourse() {
               </>
             )
           })}
+        <Link
+          to='/courses'
+          className='relative mb-[30px] w-full cursor-pointer rounded-2xl border-4 border-dashed px-3 transition hover:border-[#1e7115] hover:text-[#1e7115]'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='absolute left-[50%] top-[50%] h-[150px] w-[150px] translate-x-[-50%] translate-y-[-50%] text-slate-300   '
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z' />
+          </svg>
+
+          <div className='absolute bottom-[10%] left-[50%] translate-x-[-50%] font-semibold'>Thêm khóa học</div>
+        </Link>
       </div>
       {!profileData && (
         <div className='flex items-center justify-between'>
@@ -74,7 +92,7 @@ function MyCourse() {
           </div>
         </>
       )}
-    </>
+    </div>
   )
 }
 

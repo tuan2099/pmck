@@ -10,9 +10,8 @@ interface IProps {
 
 function CourseCard(props: IProps) {
   const { courseItem } = props
-
+  console.log(courseItem)
   const { isRegisted } = useRegisteCourse({ courseInfo: courseItem })
-
   return (
     <>
       <Link
@@ -35,11 +34,11 @@ function CourseCard(props: IProps) {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            backgroundImage: `url(http://localhost:1337${courseItem.attributes?.banner_course.data?.map(
-              (imageItem: any) => {
-                return `${imageItem.attributes?.formats.medium?.url}`
-              }
-            )})`
+            backgroundImage: `url(http://localhost:1337${
+              courseItem.attributes?.banner_course
+                ? courseItem.attributes?.banner_course.data[0].attributes?.formats.medium?.url
+                : courseItem.banner_course[0].formats.medium.url
+            } )`
           }}
         ></div>
         <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-[#292929]'>

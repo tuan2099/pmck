@@ -1,4 +1,5 @@
 export type CourseType = {
+  banner_course: any
   price: number
   course_name: string
   id: number
