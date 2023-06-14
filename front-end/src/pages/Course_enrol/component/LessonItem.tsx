@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import useTimeFormat from 'src/hooks/useTimeFormat'
 
 interface Props {
   lesson_item: any
@@ -6,6 +7,29 @@ interface Props {
 }
 
 function LessonItem({ lesson_item }: Props) {
+  const [durationVideo, setDurationVideo] = useState(null)
+
+  useEffect(() => {
+    getYouTubeVideoDuration(lesson_item.attributes.video_url)
+  }, [lesson_item.attributes.video_url])
+
+  function getYouTubeVideoDuration(videoId: string) {
+    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=AIzaSyB4j74m6L8f90SnuoyuzzYX5fy0aGnf64U`
+
+    return fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const duration = data.items[0].contentDetails.duration
+        setDurationVideo(duration)
+      })
+      .catch((error) => {
+        console.error('Failed to get video duration:', error)
+        return null
+      })
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const videoDurationst = durationVideo ? useTimeFormat(durationVideo) : ''
   return (
     <div
       className='flex w-full items-center justify-between border-b-2 border-slate-50 px-[50px] py-[10px]'
@@ -28,6 +52,7 @@ function LessonItem({ lesson_item }: Props) {
         </svg>
         {lesson_item.attributes.title}
       </h5>
+      {videoDurationst}
     </div>
   )
 }

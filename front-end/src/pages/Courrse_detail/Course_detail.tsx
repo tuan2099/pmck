@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactPlayer from 'react-player'
 
 function Course_detail() {
   // const handleDuration = (duration: any) => {
@@ -101,16 +100,7 @@ function Course_detail() {
             </div>
           </div>
           <div className='bottonm-[50px] fixed left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
-            <div className='w-full bg-black px-[8.5%]'>
-              <ReactPlayer
-                className=''
-                width='100%'
-                height='650px'
-                url='https://www.youtube.com/watch?v=zZMl1Ees4V4'
-                controls={true}
-                // onDuration={handleDuration}
-              />
-            </div>
+            <div className='w-full bg-black px-[8.5%]'></div>
           </div>
           <div className='fixed bottom-0 left-0 right-0 z-[2] flex h-[50px] items-center justify-center bg-[#f0f0f0]'>
             <button className='flex items-center uppercase'>

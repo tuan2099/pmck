@@ -20,7 +20,7 @@ function ClickPopover({ children, renderPopover, className }: any) {
   }
   return (
     <>
-      <div className=''>
+      <div className='transform transition-all duration-300'>
         <div className='relative' ref={nodeRef}>
           <button className='cursor-pointer' onClick={handleToggleSettings} ref={elmRef} tabIndex={0}>
             {children}

@@ -1,5 +1,3 @@
-import React from 'react'
-
 function ChapterItem({ chapter }: any) {
   return (
     <div className='flex justify-between'>

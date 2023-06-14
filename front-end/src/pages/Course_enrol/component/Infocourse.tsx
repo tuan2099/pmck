@@ -1,6 +1,23 @@
 import React from 'react'
 
-function Infocourse() {
+function Infocourse({ courseInfodata }: any) {
+  function formatNumber(number: number) {
+    if (number < 10) {
+      return '0' + number
+    } else {
+      return number.toString()
+    }
+  }
+
+  function sumSubArrayLengths(arr: any) {
+    let sum = 0
+    for (let i = 0; i < arr.length; i++) {
+      sum += arr[i].attributes.lesson_items.data.length
+    }
+
+    return formatNumber(sum)
+  }
+
   return (
     <div className='flex cursor-pointer justify-between'>
       <div className='flex items-center'>
@@ -20,7 +37,15 @@ function Infocourse() {
         </svg>
 
         <p className='mr-[20px]'>
-          <span className=' font-bold'>11 </span>chương
+          <span className=' font-bold'>
+            {' '}
+            {formatNumber(
+              courseInfodata?.data.data.attributes.chapters.data.length
+                ? courseInfodata?.data.data.attributes.chapters.data.length
+                : ''
+            )}{' '}
+          </span>
+          chương
         </p>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -38,7 +63,14 @@ function Infocourse() {
         </svg>
 
         <p className='mr-[20px]'>
-          <span className='font-bold'>123 </span>bài học
+          <span className='font-bold'>
+            {sumSubArrayLengths(
+              courseInfodata?.data.data.attributes.chapters.data
+                ? courseInfodata?.data.data.attributes.chapters.data
+                : ''
+            )}{' '}
+          </span>
+          bài học
         </p>
         <svg
           xmlns='http://www.w3.org/2000/svg'

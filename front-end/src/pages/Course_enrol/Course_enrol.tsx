@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import profileApi from 'src/apis/user.api'
@@ -9,10 +9,12 @@ import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
+import Popup from './component/Popup'
 
 function Course_enrol() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
+  const [isOpenPopup, setIsopenPopup] = useState(false)
   const navigate = useNavigate()
   // call api user
   const { data: profileData } = useQuery({
@@ -39,10 +41,14 @@ function Course_enrol() {
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
-
   const { handleRegisteCourse, isRegisted } = useRegisteCourse({
     courseInfo: courseDetaildata?.data.data
   })
+
+  const togglePopup = () => {
+    setIsopenPopup(!isOpenPopup)
+  }
+
   return (
     <>
       <div className='m-auto w-full'>
@@ -57,17 +63,21 @@ function Course_enrol() {
                 </div>
               )}
             </h1>
-            <div>
+            <div className='line-clamp-2'>
               {courseDetaildata?.data.data.attributes.course_description ? (
                 courseDetaildata?.data.data.attributes.course_description
               ) : (
                 <SkeletonTypography dataSkeletonTypography={5} />
-              )}
+              )}{' '}
             </div>
+            <button className='font-bold text-[#1e7115]' onClick={togglePopup}>
+              Xem thêm
+            </button>
+            {isOpenPopup && <Popup courseDetaildata={courseDetaildata} togglePopup={togglePopup} />}
             <div className='mt-[35px]'>
               <div className='sticky top-[66px] z-[2] bg-white pb-[4px] '>
                 <h2 className='my-[16px] text-xl font-bold'>Nội dung khóa học</h2>
-                <Infocourse />
+                <Infocourse courseInfodata={courseDetaildata} />
                 <div className='mt-[24px]'>
                   {courseDetaildata?.data.data.attributes.chapters.data.map((chapter: any) => (
                     <details className='mb-[8px]' key={chapter.id}>

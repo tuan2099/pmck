@@ -51,29 +51,27 @@ function EditProfile() {
     <div className='h-full bg-[#F5F5F5] px-4 py-5 md:px-6 lg:px-10'>
       <div className='bg-white p-5'>
         <div className='mb-9 flex flex-col justify-start gap-5 border-b border-gray-200 pb-9 md:flex-row md:items-center md:justify-between'>
-          <h1 className='text-xl md:text-3xl'>Edit my profile</h1>
+          <h1 className='text-xl md:text-3xl'>Chỉnh sửa thông tin cá nhân</h1>
           <div>
             <Link
-              className='rounded-sm bg-[#0156b8] px-4 py-2 text-sm font-semibold text-white md:px-8 md:py-3 md:text-lg'
+              className='rounded-sm bg-[#1e7115] px-4 py-2 text-sm font-semibold text-white md:px-8 md:py-3 '
               to={ROUTES.profile}
             >
-              View Profile
+              Xem hồ sơ
             </Link>
           </div>
         </div>
 
-        <h2 className='mb-2 text-xl'>Introduction</h2>
+        <h2 className='mb-2 text-xl'>Giới thiệu</h2>
         <p className='mb-4 mt-2 text-xs md:text-base'>
-          Let the Coursera community of other learners and instructors recognize you.
+          Hãy để cộng đồng PMCK gồm những người học và người hướng dẫn khác nhận ra bạn.
         </p>
         <FormProvider {...forms}>
           <form encType='multipart/form-data' onSubmit={forms.handleSubmit((data) => handleUpdateProfile.mutate(data))}>
             <InputGroup name='full_name' lable='Full Name' defaultValue={profile?.full_name} />
             <div className='flex flex-col gap-5 md:flex-row'>
               <label htmlFor='profile_photo' className='flex flex-col gap-5 md:flex-row'>
-                <div className='w-full font-semibold hover:cursor-pointer md:w-40 md:text-right lg:w-56'>
-                  Profile Photo
-                </div>
+                <div className='w-full font-semibold hover:cursor-pointer md:w-40 md:text-right lg:w-56'>Ảnh hồ sơ</div>
                 {!previewImg && (
                   <div className='flex h-32 w-32 bg-[#B0E5FB] hover:cursor-pointer'>
                     <div className='m-auto text-5xl text-white'>
@@ -86,34 +84,34 @@ function EditProfile() {
               <input id='profile_photo' type='file' hidden onChange={handlePreviewImg} />
               <div className='flex flex-col gap-3'>
                 <div>
-                  <button className='rounded-sm bg-blueColor px-4 py-2 text-sm font-medium text-white'>
-                    Upload photo
+                  <button className='rounded-sm bg-[#1e7115] px-4 py-2 text-sm font-medium text-white'>
+                    Tải ảnh lên
                   </button>
                 </div>
-                <span className='text-sm'>Maximum size of 1MB. JPG, GIF, or PNG.</span>
+                <span className='text-sm'>Kích thước tối đa 1MB. JPG, GIF, or PNG.</span>
               </div>
             </div>
 
             <div className='my-9 border-t'></div>
-            <h2 className='mb-2 text-xl'>User Information</h2>
+            <h2 className='mb-2 text-xl'>Thông tin người dùng</h2>
             <p className='mb-4 mt-2'>
-              Tell us about your experience and education to get a personalized learning experience with course
-              recommendations.
+              Hãy cho chúng tôi biết về kinh nghiệm và trình độ học vấn của bạn để có được trải nghiệm học tập được cá
+              nhân hóa với các đề xuất khóa học.
             </p>
-            <InputGroup lable='About me' name='about_me' defaultValue={profile?.about_me} />
-            <InputGroup lable='Location' name='location' defaultValue={profile?.location} />
+            <InputGroup lable='Thông tin cá nhân' name='about_me' defaultValue={profile?.about_me} />
+            <InputGroup lable='Địa chỉ' name='location' defaultValue={profile?.location} />
             <SelectGroup name='top_skill' lable='Top skill' defaultValue={profile?.top_skill || 'Choose here'}>
               <option value='ăn hại'>Select your skill</option>
               <option value='buôn thuốc'>Intern / Trainee</option>
               <option value='chơi đồ'>Junior / Entry-level (0-2 years experience)</option>
             </SelectGroup>
-            <InputGroup lable='Connect' name='connect' defaultValue={profile?.connect} />
-            <InputGroup lable='Phone number' name='phone_number' defaultValue={profile?.phone_number} />
+            <InputGroup lable='Kết nối' name='connect' defaultValue={profile?.connect} />
+            <InputGroup lable='Số điện thoại' name='phone_number' defaultValue={profile?.phone_number} />
             <button
-              className='rounded-sm bg-[#0156b8] px-8 py-2 text-sm font-semibold text-white md:px-8 md:py-3 md:text-lg'
+              className='rounded-sm bg-[#1e7115] px-7 py-1 text-sm font-semibold text-white md:px-8 md:py-3 '
               type='submit'
             >
-              Save
+              Lưu
             </button>
           </form>
         </FormProvider>
