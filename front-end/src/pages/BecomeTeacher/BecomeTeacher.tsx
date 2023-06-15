@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 const Becometeacher = () => {
     const buttons = document.querySelectorAll('.flex button');
     const sections = document.querySelectorAll('.hidden');
-    const onChange = (key: number) => {
+    const onChange = (key: string) => {
         console.log(key);
     };
     const items = [
