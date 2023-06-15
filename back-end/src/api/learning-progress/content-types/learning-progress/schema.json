@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "learning_progresses",
+  "info": {
+    "singularName": "learning-progress",
+    "pluralName": "learning-progresses",
+    "displayName": "LearningProgress",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "something": {
+      "type": "string"
+    },
+    "completed": {
+      "type": "boolean"
+    }
+  }
+}

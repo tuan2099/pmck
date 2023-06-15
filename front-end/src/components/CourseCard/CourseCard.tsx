@@ -10,7 +10,6 @@ interface IProps {
 
 function CourseCard(props: IProps) {
   const { courseItem } = props
-  console.log(courseItem)
   const { isRegisted } = useRegisteCourse({ courseInfo: courseItem })
   return (
     <>

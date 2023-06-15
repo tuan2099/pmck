@@ -22,6 +22,7 @@ const initialAppContext: AppContextInterface = {
   setUserInfo: () => null,
   userInfo: [],
   courseRegisted: [],
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCourseRegisted: () => {}
   // reset: () => null
 }

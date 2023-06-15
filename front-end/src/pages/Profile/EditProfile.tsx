@@ -100,7 +100,7 @@ function EditProfile() {
             </p>
             <InputGroup lable='Thông tin cá nhân' name='about_me' defaultValue={profile?.about_me} />
             <InputGroup lable='Địa chỉ' name='location' defaultValue={profile?.location} />
-            <SelectGroup name='top_skill' lable='Top skill' defaultValue={profile?.top_skill || 'Choose here'}>
+            <SelectGroup name='top_skill' lable='Kĩ năng' defaultValue={profile?.top_skill || 'Choose here'}>
               <option value='ăn hại'>Select your skill</option>
               <option value='buôn thuốc'>Intern / Trainee</option>
               <option value='chơi đồ'>Junior / Entry-level (0-2 years experience)</option>

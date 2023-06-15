@@ -58,9 +58,10 @@ function Profile() {
                 <input
                   type='text'
                   id='website-admin'
-                  className='block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+                  className='block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
                   placeholder='elonmusk'
-                  disabled
+                  readOnly
+                  value='hi'
                 />
               </div>
             </div>
@@ -79,6 +80,59 @@ function Profile() {
                 required
                 disabled
               />
+            </div>
+            <hr className=' h-px border-0 bg-gray-100 dark:bg-gray-100'></hr>
+            <div className='my-6 flex items-start justify-between'>
+              <div className='text-lg font-semibold'>
+                Kết nối
+                <br />
+                <span className='text-xs font-normal text-slate-400'>
+                  * Nhập link facebook cá nhân
+                  <br />* Số điện thoại đăng kí Viber ( nếu có )
+                  <br /> * Số điện thoại đăng kí Zalo ( nếu có )
+                </span>
+              </div>
+              <div className='mr-[20%] w-3/6'>
+                <div className=' flex w-full'>
+                  <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm font-semibold text-gray-400 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400'>
+                    Facebook
+                  </span>
+                  <input
+                    type='text'
+                    id='website-admin'
+                    className='block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+                    placeholder='elonmusk'
+                    readOnly
+                    value='hi'
+                  />
+                </div>
+                <div className='mt-7 flex w-full'>
+                  <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm font-semibold text-gray-400 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400'>
+                    Zalo
+                  </span>
+                  <input
+                    type='text'
+                    id='website-admin'
+                    className='block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+                    placeholder='elonmusk'
+                    readOnly
+                    value='hi'
+                  />
+                </div>
+                <div className='mt-7 flex w-full'>
+                  <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm font-semibold text-gray-400 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400'>
+                    Viber
+                  </span>
+                  <input
+                    type='text'
+                    id='website-admin'
+                    className='block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+                    placeholder='elonmusk'
+                    readOnly
+                    value='hi'
+                  />
+                </div>
+              </div>
             </div>
             <hr className=' h-px border-0 bg-gray-100 dark:bg-gray-100'></hr>
           </div>
