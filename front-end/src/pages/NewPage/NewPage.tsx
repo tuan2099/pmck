@@ -109,14 +109,16 @@ const NewPage = () => {
                     </div>
                     <div className='col-span-2 max-lg:hidden'>
                         <Swiper
+                            slidesPerView={1}
+                            spaceBetween={0}
+                            modules={[Autoplay, Pagination]}
                             grabCursor={true}
                             loop={true}
                             autoplay={{
                                 delay: 2500,
                                 disableOnInteraction: false,
                             }}
-                            spaceBetween={0}
-                            slidesPerView={1}>
+                        >
                             <SwiperSlide>
                                 <img src='http://bravekids.vn/wp-content/uploads/2023/02/anh_Viber_2023-02-27_17-42-16-545.jpg' />
                             </SwiperSlide>

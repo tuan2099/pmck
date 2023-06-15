@@ -1,6 +1,6 @@
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { Autoplay } from 'swiper'
 
 const Partner = () => {
     return (
@@ -39,14 +39,18 @@ const Partner = () => {
                 </div>
             </div>
 
-            <div className='max-w-[1200px] mx-auto grid grid-cols-2 mt-32 mb-32 gap-32 max-xl:ml-20 max-xl:mr-20 max-sm:grid-cols-1 max-480:mx-3'>
+            <div className='pb-[60px] max-w-[1200px] mx-auto grid grid-cols-2 mt-32 mb-32 gap-32 max-xl:ml-20 max-xl:mr-20 max-sm:grid-cols-1 max-480:mx-3'>
                 <div className='max-sm:order-2 '>
                     <Swiper hashNavigation
                         slidesPerView={1}
                         spaceBetween={30}
                         loop={true}
-                        navigation={true}
-                        modules={[Pagination]}
+                        // navigation={true}
+                        modules={[Pagination, Autoplay]}
+                        autoplay={{
+                            delay: 4000,
+                            disableOnInteraction: false,
+                        }}
                         className="mySwiper font-semibold text-[#1e7115] ">
                         <SwiperSlide >
                             <div className='grid grid-cols-3 place-items-center  grid-rows-3 border border-black-50 border-1'>
