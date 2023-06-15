@@ -102,7 +102,7 @@ const Becometeacher = () => {
 
             <div>
                 <img className=' max-h-[600px] max-w-[1800px] h-full  w-full grid grid-cols-1 mx-auto' src='https://s.udemycdn.com/teaching/billboard-desktop-2x-v4.jpg' bg-no-repeat bg-contain alt='' />
-                <div className='mx-[15%] max-4xl:mx-[10%] max-3xl:mx-[7%] max-2xl:mx-[6%] max-xl:mx-[5%] top-40 max-2xl:top-20 max-xl:top-10 absolute w-[480px]  max-lg:w-[288px] max-md:relative max-md:w-full max-md:pl-0 max-md:mx-0  pl-8 text-left my-auto   '>
+                <div className='mx-[15%] max-4xl:mx-[10%] max-3xl:mx-[7%] max-2xl:mx-[6%] max-xl:mx-[5%] top-40 max-2xl:top-20 max-xl:top-10 absolute w-[480px]  max-lg:w-[288px] max-md:relative max-md:text-center max-md:w-full max-md:pl-0 max-md:mx-0  pl-8 text-left my-auto   '>
                     <h1 className='text-5xl font-semibold  max-lg:text-[24px]'>Hãy đến giảng dạy với chúng tôi</h1>
                     <p className='text-lg pt-2  max-lg:text-[14px]'>Trở thành giảng viên và thay đổi cuộc sống của mọi người,bao gồm cả cuộc sống của chính bạn</p>
                     <button className='bg-[#1c1d1f] w-[100%] py-4  mt-7 max-842:mt-0 max-md:mt-7'>
