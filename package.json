@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "antd": "^5.6.1",
+    "swiper": "^9.4.1"
+  },
+  "devDependencies": {
+    "@types/swiper": "^6.0.0"
+  }
+}

@@ -18,7 +18,9 @@ import Course_detail from './pages/Courrse_detail'
 import EditProfile from './pages/Profile/EditProfile'
 import MyCourse from './pages/MyCourse'
 import LearningPath from './pages/LearningPath'
-
+import NewPage from './pages/NewPage/NewPage'
+import Partner from './pages/Partner/Partner'
+import Becometeacher from './pages/BecomeTeacher/BecomeTeacher'
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
   return isAuthenticated ? <Outlet /> : <Navigate to='/login' />
@@ -38,7 +40,10 @@ export const ROUTES = {
   new: '/new',
   editProfile: '/edit-profile',
   profile: '/me',
-  courses: '/courses'
+  courses: '/courses',
+  NewPage: '/newpage',
+  Partner: '/partner',
+  Becometeacher: '/becometeacher'
 }
 
 export default function useRouterElement() {
@@ -142,6 +147,24 @@ export default function useRouterElement() {
         <HomeUserLayout>
           <New />
         </HomeUserLayout>
+      )
+    },
+    {
+      path: ROUTES.NewPage,
+      element: (
+        <NewPage />
+      )
+    },
+    {
+      path: ROUTES.Partner,
+      element: (
+        <Partner />
+      )
+    },
+    {
+      path: ROUTES.Becometeacher,
+      element: (
+        <Becometeacher />
       )
     },
     {
