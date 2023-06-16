@@ -16,6 +16,12 @@
     },
     "video_url": {
       "type": "string"
+    },
+    "learning_progresses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::learning-progress.learning-progress",
+      "mappedBy": "lesson_items"
     }
   }
 }

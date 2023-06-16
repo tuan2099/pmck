@@ -21,21 +21,6 @@ function Course_enrol() {
     queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
-  // check userIsRegisterCCourse return true or false
-
-  const checkUserIdExists = (id: number) => {
-    return (
-      profileData?.data.course_registrations &&
-      profileData?.data.course_registrations.some((user: any) => user.courses[0].id === id)
-    )
-  }
-  const isUserIdExists = checkUserIdExists(+idCourse)
-  useEffect(() => {
-    if (isUserIdExists === true) {
-      navigate('/learning/:id')
-    }
-  }, [isUserIdExists, navigate])
-
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
@@ -44,6 +29,12 @@ function Course_enrol() {
   const { handleRegisteCourse, isRegisted } = useRegisteCourse({
     courseInfo: courseDetaildata?.data.data
   })
+
+  useEffect(() => {
+    if (isRegisted === true) {
+      navigate('/learning/:id')
+    }
+  }, [isRegisted, navigate])
 
   const togglePopup = () => {
     setIsopenPopup(!isOpenPopup)

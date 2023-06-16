@@ -57,6 +57,12 @@
       "relation": "manyToMany",
       "target": "api::course-registration.course-registration",
       "mappedBy": "courses"
+    },
+    "learning_progresses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::learning-progress.learning-progress",
+      "mappedBy": "courses"
     }
   }
 }

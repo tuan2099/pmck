@@ -17,6 +17,18 @@
     },
     "completed": {
       "type": "boolean"
+    },
+    "lesson_items": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lesson-item.lesson-item",
+      "inversedBy": "learning_progresses"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course.course",
+      "inversedBy": "learning_progresses"
     }
   }
 }
