@@ -147,9 +147,11 @@ function Course_detail() {
               {videoUrl && (
                 <Youtube
                   opts={{
-                    width: youtubeContainerRef.current?.offsetWidth,
+                    width: youtubeContainerRef.current?.offsetWidth
+                      ? youtubeContainerRef.current?.offsetWidth - 84 * 2
+                      : 0,
                     height: youtubeContainerRef.current?.offsetWidth
-                      ? (youtubeContainerRef.current?.offsetWidth / 16) * 9
+                      ? ((youtubeContainerRef.current?.offsetWidth - 84 * 2) / 16) * 9
                       : 0
                   }}
                   videoId={videoUrl}
