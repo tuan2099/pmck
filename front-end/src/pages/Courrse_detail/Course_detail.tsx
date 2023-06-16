@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import Youtube from 'react-youtube'
@@ -7,6 +7,7 @@ import Youtube from 'react-youtube'
 function Course_detail() {
   const [videoUrl, setVideoUrl] = useState('')
 
+  const youtubeContainerRef = useRef<HTMLDivElement | null>(null)
   const { id } = useParams()
   const pageID = id?.split('-')[id?.split('-').length - 1]
 
@@ -18,6 +19,11 @@ function Course_detail() {
 
   const [total, setTotal] = useState<number>(0)
 
+  console.log({
+    width: youtubeContainerRef.current?.offsetWidth,
+    height: youtubeContainerRef.current?.offsetWidth ? (youtubeContainerRef.current?.offsetWidth * 16) / 9 : 0
+  })
+
   useEffect(() => {
     const courseTotal = courseData.data?.data.data.attributes.chapters.data.reduce(
       (currentTotal: number, currentItem: any) => {
@@ -27,6 +33,8 @@ function Course_detail() {
     )
     setTotal(courseTotal)
   }, courseData.data?.data)
+
+  console.log(youtubeContainerRef.current?.offsetWidth)
 
   return (
     <>
@@ -135,8 +143,19 @@ function Course_detail() {
             </div>
           </div>
           <div className='bottonm-[50px] fixed left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
-            <div className='w-full bg-black px-[8.5%]'> {videoUrl && <Youtube videoId={videoUrl} />}</div>
-            <div className='w-full bg-black px-[8.5%]'> {videoUrl && <Youtube videoId={videoUrl} />}</div>
+            <div className='w-full bg-black px-[8.5%]' ref={youtubeContainerRef}>
+              {videoUrl && (
+                <Youtube
+                  opts={{
+                    width: youtubeContainerRef.current?.offsetWidth,
+                    height: youtubeContainerRef.current?.offsetWidth
+                      ? (youtubeContainerRef.current?.offsetWidth / 16) * 9
+                      : 0
+                  }}
+                  videoId={videoUrl}
+                />
+              )}
+            </div>
           </div>
           <div className='fixed bottom-0 left-0 right-0 z-[2] flex h-[50px] items-center justify-center bg-[#f0f0f0]'>
             <button className='flex items-center uppercase'>
