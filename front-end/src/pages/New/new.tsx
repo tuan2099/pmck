@@ -30,7 +30,7 @@ function New() {
                     <h3 className='w-8/12 text-2xl font-bold'>{item.attributes.title}</h3>
                     <br />
                     <p className='line-clamp-2 text-slate-400'>{item.attributes.description}</p>
-                    <div className='mt-2  flex'>
+                    <div className='mt-2 flex'>
                       <div
                         className='mr-4 h-[30px] w-[30px] rounded-full'
                         style={{
