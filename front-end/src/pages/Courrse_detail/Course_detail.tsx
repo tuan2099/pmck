@@ -1,9 +1,33 @@
-import React from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import courseApi from 'src/apis/course.api'
+import Youtube from 'react-youtube'
 
 function Course_detail() {
-  // const handleDuration = (duration: any) => {
-  //   console.log('Thời gian video:', duration)
-  // }
+  const [videoUrl, setVideoUrl] = useState('')
+
+  const { id } = useParams()
+  const pageID = id?.split('-')[id?.split('-').length - 1]
+
+  const courseData = useQuery({
+    queryKey: ['course detail', pageID],
+    queryFn: () => courseApi.getDetailCourse(pageID as string),
+    enabled: Boolean(pageID)
+  })
+
+  const [total, setTotal] = useState<number>(0)
+
+  useEffect(() => {
+    const courseTotal = courseData.data?.data.data.attributes.chapters.data.reduce(
+      (currentTotal: number, currentItem: any) => {
+        return currentTotal + currentItem.attributes.lesson_items.data.length
+      },
+      0
+    )
+    setTotal(courseTotal)
+  }, courseData.data?.data)
+
   return (
     <>
       <div>
@@ -61,7 +85,7 @@ function Course_detail() {
                     d='M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z'
                   />
                 </svg>
-                <div>1/23 bài học</div>
+                <div>1/{total} bài học</div>
               </div>
             </div>
           </div>
@@ -71,36 +95,48 @@ function Course_detail() {
                 <h1>Nội dung khóa học</h1>
               </header>
               <div className='overflow-y-auto overscroll-contain'>
-                <details>
-                  <summary>
-                    <div className='sticky top-0 z-[2] flex cursor-pointer flex-col flex-wrap justify-between border-b-2 bg-[#f7f8fa] px-[20px] py-[8px] transition hover:bg-[#edeff1]'>
-                      <h3 className='text-base font-semibold text-black'>1. khái niệm cần biết</h3>
-                      <span className='mt-[4px] text-xs font-normal text-black'>somethign</span>
-                      <span className='absolute right-[23px] top-[12px] text-base text-black'>
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          strokeWidth={1.5}
-                          stroke='currentColor'
-                          className='h-5 w-5'
+                {courseData.data?.data.data.attributes.chapters.data?.map((item: any) => (
+                  <details>
+                    <summary>
+                      <div className='sticky top-0 z-[2] flex cursor-pointer flex-col flex-wrap justify-between border-b-2 bg-[#f7f8fa] px-[20px] py-[8px] transition hover:bg-[#edeff1]'>
+                        <h3 className='text-base font-semibold text-black'>{item.attributes.lesson_name}</h3>
+                        <span className='mt-[4px] text-xs font-normal text-black'>
+                          {item.attributes.lesson_description}
+                        </span>
+                        <span className='absolute right-[23px] top-[12px] text-base text-black'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth={1.5}
+                            stroke='currentColor'
+                            className='h-5 w-5'
+                          >
+                            <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
+                          </svg>
+                        </span>
+                      </div>
+                    </summary>
+                    <div className='flex flex-col'>
+                      {item.attributes.lesson_items.data?.map((item: any, id: number) => (
+                        <div
+                          onClick={() => setVideoUrl(item.attributes.video_url)}
+                          className={`px-[20px] py-[10px] hover:cursor-pointer ${
+                            id % 2 === 0 ? 'bg-blue-50 hover:bg-blue-100' : 'bg-slate-50 hover:bg-slate-100'
+                          }`}
                         >
-                          <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
-                        </svg>
-                      </span>
+                          <h3 className='text-base font-normal text-black'>{item.attributes.title}</h3>
+                        </div>
+                      ))}
                     </div>
-                  </summary>
-                  <div className='flex flex-row px-[20px] py-[10px]'>
-                    <div className=''>
-                      <h3 className='text-base font-normal text-black'>1. bài 1</h3>
-                    </div>
-                  </div>
-                </details>
+                  </details>
+                ))}
               </div>
             </div>
           </div>
           <div className='bottonm-[50px] fixed left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
-            <div className='w-full bg-black px-[8.5%]'></div>
+            <div className='w-full bg-black px-[8.5%]'> {videoUrl && <Youtube videoId={videoUrl} />}</div>
+            <div className='w-full bg-black px-[8.5%]'> {videoUrl && <Youtube videoId={videoUrl} />}</div>
           </div>
           <div className='fixed bottom-0 left-0 right-0 z-[2] flex h-[50px] items-center justify-center bg-[#f0f0f0]'>
             <button className='flex items-center uppercase'>
