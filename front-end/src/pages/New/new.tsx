@@ -5,9 +5,9 @@ import newApi from 'src/apis/new.api'
 
 function New() {
   const { data: newsData } = useQuery({
-    queryKey: ['sliderImage'],
+    queryKey: ['new'],
     queryFn: () => {
-      return newApi.getSlider()
+      return newApi.getNews()
     }
   })
 
