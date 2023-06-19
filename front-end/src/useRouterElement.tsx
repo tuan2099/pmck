@@ -151,21 +151,15 @@ export default function useRouterElement() {
     },
     {
       path: ROUTES.NewPage,
-      element: (
-        <NewPage />
-      )
+      element: <NewPage />
     },
     {
       path: ROUTES.Partner,
-      element: (
-        <Partner />
-      )
+      element: <Partner />
     },
     {
       path: ROUTES.Becometeacher,
-      element: (
-        <Becometeacher />
-      )
+      element: <Becometeacher />
     },
     {
       path: '*',

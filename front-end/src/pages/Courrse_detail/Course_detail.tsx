@@ -8,7 +8,6 @@ import Control from './Component/Control'
 
 function Course_detail() {
   const [videoUrl, setVideoUrl] = useState('')
-
   const youtubeContainerRef = useRef<HTMLDivElement | null>(null)
   const { id } = useParams()
   const pageID = id?.split('-')[id?.split('-').length - 1]
@@ -139,7 +138,7 @@ function Course_detail() {
             </div>
           </div>
           <div className='bottonm-[50px] fixed left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain bg-black px-[8.5%] '>
-            <div className='w-full bg-black  ' ref={youtubeContainerRef}>
+            <div className='w-full bg-black' ref={youtubeContainerRef}>
               {videoUrl && (
                 <Youtube
                   opts={{
