@@ -5,6 +5,7 @@ import courseApi from 'src/apis/course.api'
 import Youtube from 'react-youtube'
 import Nav_course_detail from './Component/Nav_course_detail'
 import Control from './Component/Control'
+import learningProcessApi from 'src/apis/learningprocess.api'
 
 function Course_detail() {
   const [videoUrl, setVideoUrl] = useState('')
@@ -18,6 +19,12 @@ function Course_detail() {
     queryFn: () => courseApi.getDetailCourse(pageID as string),
     enabled: Boolean(pageID)
   })
+
+  const { data: lessondata } = useQuery({
+    queryKey: ['lesson'],
+    queryFn: () => learningProcessApi.getLesson()
+  })
+  console.log(lessondata)
   const [total, setTotal] = useState<number>(0)
   const [_, setParams] = useSearchParams()
 

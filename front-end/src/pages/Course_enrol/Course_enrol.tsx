@@ -16,11 +16,7 @@ function Course_enrol() {
   const idCourse = getIdFromNameId(id as string)
   const [isOpenPopup, setIsopenPopup] = useState(false)
   const navigate = useNavigate()
-  // call api user
-  const { data: profileData } = useQuery({
-    queryKey: ['userInfo'],
-    queryFn: () => profileApi.getProfile()
-  })
+
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],
