@@ -4,7 +4,8 @@
   "info": {
     "singularName": "lesson-item",
     "pluralName": "lesson-items",
-    "displayName": "lesson_item"
+    "displayName": "lesson_item",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

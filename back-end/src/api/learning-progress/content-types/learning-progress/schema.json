@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "something": {
-      "type": "string"
-    },
     "completed": {
       "type": "boolean"
     },
@@ -29,6 +26,12 @@
       "relation": "manyToMany",
       "target": "api::course.course",
       "inversedBy": "learning_progresses"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "learning_progresses"
     }
   }
 }

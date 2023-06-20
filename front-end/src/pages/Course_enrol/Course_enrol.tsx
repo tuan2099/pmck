@@ -18,11 +18,7 @@ function Course_enrol() {
   const [totalTime, setTotalTime] = useState<number>(0)
 
   const navigate = useNavigate()
-  // call api user
-  const { data: profileData } = useQuery({
-    queryKey: ['userInfo'],
-    queryFn: () => profileApi.getProfile()
-  })
+
   // call api detai course
   const { data: courseDetaildata } = useQuery({
     queryKey: ['detailCourse', idCourse],

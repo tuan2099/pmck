@@ -4,7 +4,7 @@ const URL_NEWS = '/news?populate=*'
 const URL_NEW = ''
 
 const newApi = {
-  getSlider() {
+  getNews() {
     return http.get(URL_NEWS)
   }
 }
