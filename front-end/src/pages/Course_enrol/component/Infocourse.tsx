@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
-function Infocourse({ courseInfodata }: any) {
+function Infocourse({ courseInfodata, totalTime }: { courseInfodata: any; totalTime: number }) {
   function formatNumber(number: number) {
     if (number < 10) {
       return '0' + number
@@ -17,6 +17,23 @@ function Infocourse({ courseInfodata }: any) {
 
     return formatNumber(sum)
   }
+
+  const convertTimeString = useMemo(() => {
+    const time = totalTime / 2
+    if (time >= 3600) {
+      if (time % 3600 === 0) {
+        return `${Math.floor(time / 3600)} giờ`
+      } else {
+        return `${Math.floor(time / 3600)} giờ ${Math.floor((time % 3600) / 60)} phút`
+      }
+    } else if (time < 3600 && time >= 60) {
+      if (time % 60 === 0) {
+        return `${Math.floor(time / 60)} phút`
+      } else {
+        return `${Math.floor(time / 60)} phút ${time % 60} giây`
+      }
+    } else return `${time} giây`
+  }, [totalTime])
 
   return (
     <div className='flex cursor-pointer justify-between'>
@@ -84,7 +101,8 @@ function Infocourse({ courseInfodata }: any) {
         </svg>
 
         <p>
-          <span>Thời lượng </span>10 giờ 30 phút
+          <span>Thời lượng </span>
+          {convertTimeString}
         </p>
       </div>
       <div className='  text-[#1e7115]'>Mở rộng tất cả</div>

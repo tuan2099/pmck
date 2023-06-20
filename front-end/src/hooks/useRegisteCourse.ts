@@ -33,7 +33,9 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
       // truong khong nguoi dung chua tung dang ky khoa hoc nao => tao post moi
       return Promise.reject()
     },
-    onSuccess: (data) => console.log(data),
+    onSuccess: () => {
+      setIsRegisted(true)
+    },
     onError: (error) => console.log(error)
   })
 

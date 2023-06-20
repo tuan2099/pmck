@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import useTimeFormat from 'src/hooks/useTimeFormat'
 
 interface Props {
   lesson_item: any
-  key: number
+  setTotalTime: React.Dispatch<React.SetStateAction<number>>
 }
 
-function LessonItem({ lesson_item }: Props) {
+function LessonItem({ lesson_item, setTotalTime }: Props) {
   const [durationVideo, setDurationVideo] = useState(null)
 
   useEffect(() => {
@@ -20,6 +20,12 @@ function LessonItem({ lesson_item }: Props) {
       .then((response) => response.json())
       .then((data) => {
         const duration = data.items[0].contentDetails.duration
+        const timeArray = duration.match(/\d+/g)
+        const minutes = parseInt(timeArray[0], 10)
+        const seconds = parseInt(timeArray[1], 10)
+        setTotalTime((prev: number) => {
+          return prev + minutes * 60 + seconds
+        })
         setDurationVideo(duration)
       })
       .catch((error) => {
@@ -57,4 +63,4 @@ function LessonItem({ lesson_item }: Props) {
   )
 }
 
-export default LessonItem
+export default memo(LessonItem)
