@@ -12,6 +12,7 @@ function Course_detail() {
   const { id } = useParams()
   const pageID = id?.split('-')[id?.split('-').length - 1]
 
+  // Get data course detail
   const courseData = useQuery({
     queryKey: ['course detail', pageID],
     queryFn: () => courseApi.getDetailCourse(pageID as string),
@@ -30,6 +31,7 @@ function Course_detail() {
     setTotal(courseTotal)
   }, [courseData.data?.data])
 
+  // Handle Video
   const handlePause = () => {
     console.log(123)
   }

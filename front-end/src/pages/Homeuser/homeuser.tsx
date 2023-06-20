@@ -8,7 +8,129 @@ import { Link } from 'react-router-dom'
 import profileApi from 'src/apis/user.api'
 import { AppContext } from 'src/context/app.context'
 
+const learningProgresses = [
+  {
+    id: 1,
+    createdAt: '2023-06-16T10:55:58.871Z',
+    updatedAt: '2023-06-19T09:14:34.512Z',
+    publishedAt: '2023-06-16T10:57:36.376Z',
+    completed: true,
+    lesson_items: [
+      {
+        id: 1,
+        title: 'Giới thiệu',
+        video_url: 'FYKnp98bMpk',
+        createdAt: '2023-05-24T04:34:38.239Z',
+        updatedAt: '2023-06-19T02:23:09.177Z',
+        publishedAt: '2023-05-24T04:34:43.989Z'
+      }
+    ],
+    courses: [
+      {
+        id: 1,
+        course_name: 'Nhập môn kế toán, phân tích và báo cáo tài chính doanh nghiệp',
+        course_description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the\n              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and\n              scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into\n              electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release\n              of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software\n              like Aldus PageMaker including versions of Lorem Ipsum.",
+        createdAt: '2023-05-12T04:57:34.082Z',
+        updatedAt: '2023-06-14T03:55:21.247Z',
+        publishedAt: '2023-05-12T04:57:35.115Z',
+        rating: 5,
+        author: 'công ty PMC',
+        language: 'Vietnamese',
+        short_description: 'mô tả ngắn',
+        price: 200,
+        status_course: true
+      }
+    ]
+  },
+  {
+    id: 3,
+    createdAt: '2023-06-19T09:14:49.443Z',
+    updatedAt: '2023-06-19T09:14:50.725Z',
+    publishedAt: '2023-06-19T09:14:50.719Z',
+    completed: null,
+    lesson_items: [
+      {
+        id: 2,
+        title: 'bài 1',
+        video_url: 'bE8xuSFwzgw',
+        createdAt: '2023-05-24T04:36:57.770Z',
+        updatedAt: '2023-06-19T01:39:41.129Z',
+        publishedAt: '2023-05-24T04:36:58.374Z'
+      }
+    ],
+    courses: [
+      {
+        id: 1,
+        course_name: 'Nhập môn kế toán, phân tích và báo cáo tài chính doanh nghiệp',
+        course_description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the\n              industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and\n              scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into\n              electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release\n              of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software\n              like Aldus PageMaker including versions of Lorem Ipsum.",
+        createdAt: '2023-05-12T04:57:34.082Z',
+        updatedAt: '2023-06-14T03:55:21.247Z',
+        publishedAt: '2023-05-12T04:57:35.115Z',
+        rating: 5,
+        author: 'công ty PMC',
+        language: 'Vietnamese',
+        short_description: 'mô tả ngắn',
+        price: 200,
+        status_course: true
+      }
+    ]
+  },
+  {
+    id: 4,
+    createdAt: '2023-06-20T07:11:51.970Z',
+    updatedAt: '2023-06-20T07:11:53.291Z',
+    publishedAt: '2023-06-20T07:11:53.286Z',
+    completed: null,
+    lesson_items: [
+      {
+        id: 3,
+        title: 'bài 2',
+        video_url: 'zZMl1Ees4V4',
+        createdAt: '2023-05-24T04:37:06.197Z',
+        updatedAt: '2023-06-19T01:40:02.137Z',
+        publishedAt: '2023-05-24T04:37:08.496Z'
+      }
+    ],
+    courses: [
+      {
+        id: 2,
+        course_name: 'Kế toán quản trị, phân tích chỉ tiêu, lập báo cáo tài chính',
+        course_description: 'mô tả khóa học 1',
+        createdAt: '2023-05-16T03:09:09.339Z',
+        updatedAt: '2023-06-20T07:10:29.907Z',
+        publishedAt: '2023-05-16T03:09:10.091Z',
+        rating: 5,
+        author: 'công ty PMC',
+        language: 'Vietnamese',
+        short_description: 'mô tả ngắn',
+        price: 20000,
+        status_course: null
+      }
+    ]
+  }
+]
+
 function Homeuser() {
+  function getLessonItemsByCourseId(courseId: any) {
+    const lessonItems = []
+
+    for (const progress of learningProgresses) {
+      for (const course of progress.courses) {
+        if (course.id === courseId) {
+          lessonItems.push(...progress.lesson_items)
+          break
+        }
+      }
+    }
+
+    return lessonItems
+  }
+
+  const courseId = 2
+  const lessonItems = getLessonItemsByCourseId(courseId)
+  console.log(lessonItems)
   // get data from context
   const { setUserInfo } = useContext(AppContext)
 

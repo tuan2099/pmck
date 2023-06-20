@@ -99,11 +99,6 @@
     "connect": {
       "type": "string"
     },
-    "educations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::education.education"
-    },
     "phone_number": {
       "type": "string"
     },
