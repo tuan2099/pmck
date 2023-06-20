@@ -21,6 +21,7 @@ import LearningPath from './pages/LearningPath'
 import NewPage from './pages/NewPage/NewPage'
 import Partner from './pages/Partner/Partner'
 import Becometeacher from './pages/BecomeTeacher/BecomeTeacher'
+import Question from './pages/Question'
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
   return isAuthenticated ? <Outlet /> : <Navigate to='/login' />
@@ -160,6 +161,10 @@ export default function useRouterElement() {
     {
       path: ROUTES.Becometeacher,
       element: <Becometeacher />
+    },
+    {
+      path: '/faq',
+      element: <Question />
     },
     {
       path: '*',
