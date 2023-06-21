@@ -8,9 +8,12 @@ import Control from './Component/Control'
 import learningProcessApi from 'src/apis/learningprocess.api'
 
 function Course_detail() {
+  // setting video from Youtube
   const [videoUrl, setVideoUrl] = useState('')
   const youtubeContainerRef = useRef<HTMLDivElement | null>(null)
+  // get id from url
   const { id } = useParams()
+  // convert id get from url
   const pageID = id?.split('-')[id?.split('-').length - 1]
 
   // Get data course detail
@@ -19,12 +22,18 @@ function Course_detail() {
     queryFn: () => courseApi.getDetailCourse(pageID as string),
     enabled: Boolean(pageID)
   })
-
+  // Get lesson data
   const { data: lessondata } = useQuery({
     queryKey: ['lesson'],
     queryFn: () => learningProcessApi.getLesson()
   })
-  console.log(lessondata)
+  // getComplete lesson
+  const { data: completedLessonData } = useQuery({
+    queryKey: ['complete lesson'],
+    queryFn: () => learningProcessApi.getCompleteLesson()
+  })
+  console.log(completedLessonData)
+
   const [total, setTotal] = useState<number>(0)
   const [_, setParams] = useSearchParams()
 

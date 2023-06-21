@@ -34,7 +34,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   const [userInfo, setUserInfo] = useState(initialAppContext.userInfo)
   const [courseRegisted, setCourseRegisted] = useState([])
-
   return (
     <AppContext.Provider
       value={{
