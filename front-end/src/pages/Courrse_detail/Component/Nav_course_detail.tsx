@@ -1,10 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Nav_course_detail({ total }: any) {
   return (
     <>
       <div className='relative z-[1] flex h-[50px] items-center bg-[#29303b]'>
-        <div>1</div>
+        <Link to='/user' className='ml-[16px] flex items-center uppercase text-white'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='mr-2 h-6 w-6 text-white'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
+          </svg>
+          Quay lại
+        </Link>
         <div className='ml-[auto] flex items-center justify-between'>
           <div className='mr-[16px] flex items-center text-sm text-white'>
             <svg

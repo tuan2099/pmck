@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import profileApi from 'src/apis/user.api'
@@ -15,6 +15,8 @@ function Course_enrol() {
   const { id } = useParams()
   const idCourse = getIdFromNameId(id as string)
   const [isOpenPopup, setIsopenPopup] = useState(false)
+  const [totalTime, setTotalTime] = useState<number>(0)
+
   const navigate = useNavigate()
 
   // call api detai course
@@ -64,7 +66,7 @@ function Course_enrol() {
             <div className='mt-[35px]'>
               <div className='sticky top-[66px] z-[2] bg-white pb-[4px] '>
                 <h2 className='my-[16px] text-xl font-bold'>Nội dung khóa học</h2>
-                <Infocourse courseInfodata={courseDetaildata} />
+                <Infocourse courseInfodata={courseDetaildata} totalTime={totalTime} />
                 <div className='mt-[24px]'>
                   {courseDetaildata?.data.data.attributes.chapters.data.map((chapter: any) => (
                     <details className='mb-[8px]' key={chapter.id}>
@@ -73,7 +75,7 @@ function Course_enrol() {
                       </summary>
                       <div>
                         {chapter.attributes.lesson_items.data.map((lesson_item: any) => (
-                          <LessonItem lesson_item={lesson_item} key={lesson_item.id} />
+                          <LessonItem lesson_item={lesson_item} key={lesson_item.id} setTotalTime={setTotalTime} />
                         ))}
                       </div>
                     </details>

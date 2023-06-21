@@ -109,7 +109,7 @@ function Course_detail() {
                           >
                             <div className=''>
                               <div>
-                                <h3 className='text-left text-base font-normal text-black'>{item.attributes.title}</h3>
+                                <h3 className=' text-left text-base font-normal text-black'>{item.attributes.title}</h3>
                               </div>
                               <svg
                                 xmlns='http://www.w3.org/2000/svg'
