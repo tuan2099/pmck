@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
@@ -10,32 +10,53 @@ import learningProcessApi from 'src/apis/learningprocess.api'
 function Course_detail() {
   // setting video from Youtube
   const [videoUrl, setVideoUrl] = useState('')
+  const [total, setTotal] = useState<number>(0)
+  const [completeLesson, setCompleteLesson] = useState([])
+  const [newArrLesson, setNewArrLesson] = useState([])
+  const [lessonId, setLessonId] = useState(null)
   const youtubeContainerRef = useRef<HTMLDivElement | null>(null)
+  const [_, setParams] = useSearchParams()
   // get id from url
   const { id } = useParams()
   // convert id get from url
   const pageID = id?.split('-')[id?.split('-').length - 1]
-
   // Get data course detail
   const courseData = useQuery({
     queryKey: ['course detail', pageID],
     queryFn: () => courseApi.getDetailCourse(pageID as string),
     enabled: Boolean(pageID)
   })
-  // Get lesson data
-  const { data: lessondata } = useQuery({
-    queryKey: ['lesson'],
-    queryFn: () => learningProcessApi.getLesson()
-  })
+
   // getComplete lesson
   const { data: completedLessonData } = useQuery({
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson()
   })
-  console.log(completedLessonData)
+  // format complete course func
+  function getLessonItemsByCourseId(courseId: number) {
+    const lessonItems = []
 
-  const [total, setTotal] = useState<number>(0)
-  const [_, setParams] = useSearchParams()
+    for (const progress of completeLesson) {
+      for (const course of progress.courses) {
+        if (course.id === courseId) {
+          lessonItems.push(...progress.lesson_items)
+          break
+        }
+      }
+    }
+
+    return lessonItems
+  }
+  useEffect(() => {
+    const completedArrLesson = getLessonItemsByCourseId(Number(pageID))
+    setNewArrLesson(completedArrLesson)
+  }, [completeLesson])
+  //
+  useEffect(() => {
+    if (completedLessonData) {
+      setCompleteLesson(completedLessonData?.data.learning_progresses)
+    }
+  }, [completedLessonData])
 
   useEffect(() => {
     const courseTotal = courseData.data?.data?.data?.attributes.chapters.data.reduce(
@@ -46,23 +67,38 @@ function Course_detail() {
     )
     setTotal(courseTotal)
   }, [courseData.data?.data])
-
-  // Handle Video
-  const handlePause = () => {
-    console.log(123)
+  // check id duplicate
+  const isIdMatching = (id: number) => {
+    return newArrLesson.some((item: any) => item.id === id)
   }
+  // Handle Video
   const handleKeyDown = () => {
     console.log('')
   }
+  const handlePostVideoOnEnd = useMutation(learningProcessApi.createLearningProgesses)
+
   const handleEndVideo = () => {
-    console.log('end video')
+    handlePostVideoOnEnd.mutate(
+      {
+        data: {
+          lesson_items: lessonId,
+          courses: pageID,
+          users_permissions_users: 1
+        }
+      },
+      {
+        onSuccess: (data) => {
+          console.log(data)
+        }
+      }
+    )
   }
 
   return (
     <>
       <div>
         <section className='m-auto w-full'>
-          <Nav_course_detail total={total} />
+          <Nav_course_detail total={total} completeLesson={newArrLesson} />
           <div className='fixed bottom-[50px] right-0 top-0 z-[2] mt-[50px] w-[23%] border-l-2'>
             <div className='flex h-full w-full flex-col bg-white'>
               <header className='flex select-none items-center justify-between px-[16px] py-[12px]'>
@@ -93,7 +129,7 @@ function Course_detail() {
                     </summary>
                     <div className='flex flex-col'>
                       {item.attributes.lesson_items &&
-                        item.attributes.lesson_items.data?.map((item: any, id: number) => (
+                        item.attributes.lesson_items.data?.map((item: any) => (
                           <div
                             key={item.id}
                             role={'button'}
@@ -105,6 +141,7 @@ function Course_detail() {
                                 return { ...prev, id: item.attributes.title + item.id }
                               })
                               setVideoUrl(item.attributes.video_url)
+                              setLessonId(item.id)
                             }}
                           >
                             <div className=''>
@@ -132,20 +169,26 @@ function Course_detail() {
                               </svg>
                             </div>
                             <div>
-                              <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                                strokeWidth={1.5}
-                                stroke='currentColor'
-                                className='h-5 w-5 rounded-full bg-[#5db85c] text-white'
-                              >
-                                <path
-                                  strokeLinecap='round'
-                                  strokeLinejoin='round'
-                                  d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                                />
-                              </svg>
+                              {isIdMatching(item.id) ? (
+                                <>
+                                  <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    strokeWidth={1.5}
+                                    stroke='currentColor'
+                                    className='h-5 w-5 rounded-full bg-[#5db85c] text-white'
+                                  >
+                                    <path
+                                      strokeLinecap='round'
+                                      strokeLinejoin='round'
+                                      d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                                    />
+                                  </svg>
+                                </>
+                              ) : (
+                                <span className='h-5 w-5 rounded-full  text-white'></span>
+                              )}
                             </div>
                           </div>
                         ))}

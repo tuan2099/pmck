@@ -13,6 +13,13 @@ const learningProcessApi = {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`
       }
     })
+  },
+  createLearningProgesses(data: any) {
+    return http.post('/learning-progresses', data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+      }
+    })
   }
 }
 

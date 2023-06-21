@@ -1,10 +1,13 @@
 import { User } from 'src/types/user.type'
 import http from 'src/utils/https'
-export const URL_ME = '/users/me?populate[course_registrations][populate][courses][populate]=*'
 
 const profileApi = {
   getProfile() {
-    return http.get<User>(URL_ME)
+    return http.get<User>('/users/me?populate[course_registrations][populate][courses][populate]=*', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`
+      }
+    })
   },
   updateProfile(data: { id: number; data: any }) {
     return http.put(`/users/${data.id}`, data.data)
