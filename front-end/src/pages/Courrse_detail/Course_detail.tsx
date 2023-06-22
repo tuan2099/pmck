@@ -28,31 +28,31 @@ function Course_detail() {
   })
 
   // getComplete lesson
-  const { data: completedLessonData } = useQuery({
+  const { data: completedLessonData, refetch } = useQuery({
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson()
   })
 
   // format complete course func
-  // function getLessonItemsByCourseId(courseId: number) {
-  //   const lessonItems = []
+  function getLessonItemsByCourseId(courseId: number) {
+    const lessonItems = []
 
-  //   for (const progress of completeLesson) {
-  //     for (const course of progress.courses) {
-  //       if (course.id === courseId) {
-  //         lessonItems.push(...progress.lesson_items)
-  //         break
-  //       }
-  //     }
-  //   }
+    for (const progress of completeLesson) {
+      for (const course of progress.courses) {
+        if (course.id === courseId) {
+          lessonItems.push(...progress.lesson_items)
+          break
+        }
+      }
+    }
 
-  //   return lessonItems
-  // }
-  // useEffect(() => {
-  //   const completedArrLesson = getLessonItemsByCourseId(Number(pageID))
-  //   setNewArrLesson(completedArrLesson)
-  // }, [completeLesson])
-  //
+    return lessonItems
+  }
+  useEffect(() => {
+    const completedArrLesson = getLessonItemsByCourseId(Number(pageID))
+    setNewArrLesson(completedArrLesson)
+  }, [completeLesson])
+
   useEffect(() => {
     if (completedLessonData) {
       setCompleteLesson(completedLessonData?.data.learning_progresses)
@@ -90,6 +90,7 @@ function Course_detail() {
       {
         onSuccess: (data) => {
           console.log(data)
+          refetch()
         }
       }
     )
@@ -199,21 +200,32 @@ function Course_detail() {
               </div>
             </div>
           </div>
-          <div className='bottonm-[50px] fixed left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain bg-black px-[8.5%] '>
-            <div className='w-full bg-black' ref={youtubeContainerRef}>
-              {videoUrl && (
-                <Youtube
-                  opts={{
-                    width: youtubeContainerRef.current?.offsetWidth ? youtubeContainerRef.current?.offsetWidth : 0,
-                    height: youtubeContainerRef.current?.offsetWidth
-                      ? (youtubeContainerRef.current?.offsetWidth / 16) * 9
-                      : 0
-                  }}
-                  videoId={videoUrl}
-                  onEnd={handleEndVideo}
-                  // onStateChange={onPlayerStateChange}
-                />
-              )}
+          <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
+            <div className='relative w-full select-none bg-black px-[8.5%]' ref={youtubeContainerRef}>
+              <div className='relative pt-[56.25%]'>
+                {videoUrl && (
+                  <Youtube
+                    className='absolute inset-0 overflow-hidden'
+                    opts={{
+                      width: '100%',
+                      height: '100%'
+                    }}
+                    videoId={videoUrl}
+                    onEnd={handleEndVideo}
+                  />
+                )}
+              </div>
+            </div>
+            <div className='min-h-[400px] px-[8.5%]'>
+              <div>1</div>
+              <div>1</div>
+              <div>1</div>
+
+              <div>1</div>
+              <div>1</div>
+              <div>1</div>
+              <div>1</div>
+              <div>1</div>
             </div>
           </div>
           <Control />
