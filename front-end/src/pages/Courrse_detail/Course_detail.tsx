@@ -32,25 +32,26 @@ function Course_detail() {
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson()
   })
+
   // format complete course func
-  function getLessonItemsByCourseId(courseId: number) {
-    const lessonItems = []
+  // function getLessonItemsByCourseId(courseId: number) {
+  //   const lessonItems = []
 
-    for (const progress of completeLesson) {
-      for (const course of progress.courses) {
-        if (course.id === courseId) {
-          lessonItems.push(...progress.lesson_items)
-          break
-        }
-      }
-    }
+  //   for (const progress of completeLesson) {
+  //     for (const course of progress.courses) {
+  //       if (course.id === courseId) {
+  //         lessonItems.push(...progress.lesson_items)
+  //         break
+  //       }
+  //     }
+  //   }
 
-    return lessonItems
-  }
-  useEffect(() => {
-    const completedArrLesson = getLessonItemsByCourseId(Number(pageID))
-    setNewArrLesson(completedArrLesson)
-  }, [completeLesson])
+  //   return lessonItems
+  // }
+  // useEffect(() => {
+  //   const completedArrLesson = getLessonItemsByCourseId(Number(pageID))
+  //   setNewArrLesson(completedArrLesson)
+  // }, [completeLesson])
   //
   useEffect(() => {
     if (completedLessonData) {

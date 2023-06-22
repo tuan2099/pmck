@@ -5,7 +5,7 @@ import courseApi from 'src/apis/course.api'
 import { AppContext } from 'src/context/app.context'
 
 const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
-  const { courseRegisted, profile } = useContext(AppContext)
+  const { courseRegisted, profile, refetchRegistedCourse } = useContext(AppContext)
   const [registeItem, setRegisteItem] = React.useState<any>(null)
   const [isRegisted, setIsRegisted] = React.useState<boolean>(false)
 
@@ -39,7 +39,12 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
     onError: (error) => console.log(error)
   })
 
-  const handleRegisteCourse = useCallback(mutate, [mutate])
+  const handleRegisteCourse = useCallback(async () => {
+    try {
+      mutate()
+      await refetchRegistedCourse()
+    } catch (error) {}
+  }, [mutate])
 
   React.useEffect(() => {
     if (courseInfo && courseRegisted) {

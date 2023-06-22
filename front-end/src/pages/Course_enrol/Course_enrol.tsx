@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
-import profileApi from 'src/apis/user.api'
 import SkeletonTypography from 'src/components/SkeletonTypography'
-import { getIdFromNameId } from 'src/utils/uitls'
+import { generateNameId, getIdFromNameId } from 'src/utils/uitls'
 import LessonItem from './component/LessonItem'
 import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
@@ -30,7 +29,9 @@ function Course_enrol() {
 
   useEffect(() => {
     if (isRegisted === true) {
-      navigate('/learning/:id')
+      navigate(
+        `/learning/${generateNameId({ name: courseDetaildata?.data.data.attributes.course_name, id: +idCourse })}`
+      )
     }
   }, [isRegisted, navigate])
 

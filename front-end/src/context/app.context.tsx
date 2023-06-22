@@ -1,4 +1,6 @@
+import { useQuery } from '@tanstack/react-query'
 import { useState, createContext } from 'react'
+import courseApi from 'src/apis/course.api'
 import { User } from 'src/types/user.type'
 import { getAccesTokenLocalStorage, getProfileFromLocalStorage } from 'src/utils/auth'
 
@@ -11,7 +13,7 @@ interface AppContextInterface {
   setUserInfo: any
   courseRegisted: any
   setCourseRegisted: React.Dispatch<React.SetStateAction<any>>
-  // reset: () => void
+  refetchRegistedCourse: any
 }
 
 const initialAppContext: AppContextInterface = {
@@ -23,8 +25,8 @@ const initialAppContext: AppContextInterface = {
   userInfo: [],
   courseRegisted: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setCourseRegisted: () => {}
-  // reset: () => null
+  setCourseRegisted: () => {},
+  refetchRegistedCourse: () => {}
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -34,6 +36,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   const [userInfo, setUserInfo] = useState(initialAppContext.userInfo)
   const [courseRegisted, setCourseRegisted] = useState([])
+
+  const { refetch } = useQuery({
+    queryKey: ['courseRegisted'],
+    queryFn: () => courseApi.registerCoursess(),
+    onSuccess: (data) => setCourseRegisted(data.data.data),
+    enabled: !Boolean(courseRegisted.length)
+  })
+
   return (
     <AppContext.Provider
       value={{
@@ -44,7 +54,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setUserInfo,
         userInfo,
         courseRegisted,
-        setCourseRegisted
+        setCourseRegisted,
+        refetchRegistedCourse: refetch
       }}
     >
       {children}
