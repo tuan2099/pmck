@@ -44,8 +44,10 @@ function Course_detail() {
     const lessonItems = []
 
     for (const progress of data) {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       for (const course of progress?.courses) {
         if (course.id === courseId) {
+          // eslint-disable-next-line no-unsafe-optional-chaining
           lessonItems.push(...progress?.lesson_items)
           break
         }
