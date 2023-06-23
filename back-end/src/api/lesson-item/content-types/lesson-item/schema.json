@@ -23,6 +23,22 @@
       "relation": "manyToMany",
       "target": "api::learning-progress.learning-progress",
       "mappedBy": "lesson_items"
+    },
+    "lesson_roles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson-role.lesson-role"
+    },
+    "text_lesson": {
+      "type": "richtext"
+    },
+    "document_lesson": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

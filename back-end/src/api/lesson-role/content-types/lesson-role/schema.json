@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lesson_roles",
+  "info": {
+    "singularName": "lesson-role",
+    "pluralName": "lesson-roles",
+    "displayName": "lesson-role",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "role_description": {
+      "type": "string"
+    }
+  }
+}
