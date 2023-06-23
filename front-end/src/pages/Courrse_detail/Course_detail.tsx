@@ -1,21 +1,23 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import Youtube from 'react-youtube'
 import Nav_course_detail from './Component/Nav_course_detail'
 import Control from './Component/Control'
 import learningProcessApi from 'src/apis/learningprocess.api'
+import { AppContext } from 'src/context/app.context'
+import LessonItem from './Component/LessonItem'
 
 function Course_detail() {
   // setting video from Youtube
-  const [videoUrl, setVideoUrl] = useState('')
+  const [videoUrl, setVideoUrl] = useState<string>('')
   const [total, setTotal] = useState<number>(0)
-  const [completeLesson, setCompleteLesson] = useState([])
-  const [newArrLesson, setNewArrLesson] = useState([])
+  const [newArrLesson, setNewArrLesson] = useState<any[]>([])
   const [lessonId, setLessonId] = useState(null)
-  const youtubeContainerRef = useRef<HTMLDivElement | null>(null)
-  const [_, setParams] = useSearchParams()
+
+  const { profile } = useContext(AppContext)
+
   // get id from url
   const { id } = useParams()
   // convert id get from url
@@ -28,36 +30,29 @@ function Course_detail() {
   })
 
   // getComplete lesson
-  const { data: completedLessonData, refetch } = useQuery({
+  const { refetch } = useQuery({
     queryKey: ['complete lesson'],
-    queryFn: () => learningProcessApi.getCompleteLesson()
+    queryFn: () => learningProcessApi.getCompleteLesson(),
+    onSuccess: (data) => {
+      const completedArrLesson = getLessonItemsByCourseId(Number(pageID), data?.data.learning_progresses)
+      setNewArrLesson(completedArrLesson)
+    }
   })
 
   // format complete course func
-  function getLessonItemsByCourseId(courseId: number) {
+  function getLessonItemsByCourseId(courseId: number, data: any) {
     const lessonItems = []
 
-    for (const progress of completeLesson) {
-      for (const course of progress.courses) {
+    for (const progress of data) {
+      for (const course of progress?.courses) {
         if (course.id === courseId) {
-          lessonItems.push(...progress.lesson_items)
+          lessonItems.push(...progress?.lesson_items)
           break
         }
       }
     }
-
     return lessonItems
   }
-  useEffect(() => {
-    const completedArrLesson = getLessonItemsByCourseId(Number(pageID))
-    setNewArrLesson(completedArrLesson)
-  }, [completeLesson])
-
-  useEffect(() => {
-    if (completedLessonData) {
-      setCompleteLesson(completedLessonData?.data.learning_progresses)
-    }
-  }, [completedLessonData])
 
   useEffect(() => {
     const courseTotal = courseData.data?.data?.data?.attributes.chapters.data.reduce(
@@ -68,32 +63,27 @@ function Course_detail() {
     )
     setTotal(courseTotal)
   }, [courseData.data?.data])
-  // check id duplicate
-  const isIdMatching = (id: number) => {
-    return newArrLesson.some((item: any) => item.id === id)
-  }
-  // Handle Video
-  const handleKeyDown = () => {
-    console.log('')
-  }
+
   const handlePostVideoOnEnd = useMutation(learningProcessApi.createLearningProgesses)
 
-  const handleEndVideo = () => {
-    handlePostVideoOnEnd.mutate(
-      {
-        data: {
-          lesson_items: lessonId,
-          courses: pageID,
-          users_permissions_users: 1
+  const handleEndVideo = (id: any) => {
+    const check = newArrLesson.some((lesson: any) => lesson.id === id)
+    if (check) {
+      handlePostVideoOnEnd.mutate(
+        {
+          data: {
+            lesson_items: lessonId,
+            courses: pageID,
+            users_permissions_users: profile?.id
+          }
+        },
+        {
+          onSuccess: () => {
+            refetch()
+          }
         }
-      },
-      {
-        onSuccess: (data) => {
-          console.log(data)
-          refetch()
-        }
-      }
-    )
+      )
+    }
   }
 
   return (
@@ -132,67 +122,13 @@ function Course_detail() {
                     <div className='flex flex-col'>
                       {item.attributes.lesson_items &&
                         item.attributes.lesson_items.data?.map((item: any) => (
-                          <div
+                          <LessonItem
+                            item={item}
+                            setLessonId={setLessonId}
+                            setVideoUrl={setVideoUrl}
                             key={item.id}
-                            role={'button'}
-                            tabIndex={0}
-                            onKeyDown={handleKeyDown}
-                            className='flex cursor-pointer items-center justify-between px-[20px] py-[10px]'
-                            onClick={() => {
-                              setParams((prev) => {
-                                return { ...prev, id: item.attributes.title + item.id }
-                              })
-                              setVideoUrl(item.attributes.video_url)
-                              setLessonId(item.id)
-                            }}
-                          >
-                            <div className=''>
-                              <div>
-                                <h3 className=' text-left text-base font-normal text-black'>{item.attributes.title}</h3>
-                              </div>
-                              <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                fill='none'
-                                viewBox='0 0 24 24'
-                                strokeWidth={1.5}
-                                stroke='currentColor'
-                                className='h-4 w-4'
-                              >
-                                <path
-                                  strokeLinecap='round'
-                                  strokeLinejoin='round'
-                                  d='M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                                />
-                                <path
-                                  strokeLinecap='round'
-                                  strokeLinejoin='round'
-                                  d='M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z'
-                                />
-                              </svg>
-                            </div>
-                            <div>
-                              {isIdMatching(item.id) ? (
-                                <>
-                                  <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    strokeWidth={1.5}
-                                    stroke='currentColor'
-                                    className='h-5 w-5 rounded-full bg-[#5db85c] text-white'
-                                  >
-                                    <path
-                                      strokeLinecap='round'
-                                      strokeLinejoin='round'
-                                      d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                                    />
-                                  </svg>
-                                </>
-                              ) : (
-                                <span className='h-5 w-5 rounded-full  text-white'></span>
-                              )}
-                            </div>
-                          </div>
+                            completedLessonList={newArrLesson}
+                          />
                         ))}
                     </div>
                   </details>
@@ -201,7 +137,7 @@ function Course_detail() {
             </div>
           </div>
           <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
-            <div className='relative w-full select-none bg-black px-[8.5%]' ref={youtubeContainerRef}>
+            <div className='relative w-full select-none bg-black px-[8.5%]'>
               <div className='relative pt-[56.25%]'>
                 {videoUrl && (
                   <Youtube
