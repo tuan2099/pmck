@@ -1,11 +1,21 @@
 import classNames from 'classnames'
 import { FaPlus, FaHome, FaRoad, FaMicroblog, FaHourglassHalf } from 'react-icons/fa'
-
+import Dialog from '@mui/material/Dialog'
 import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
 
 function SidebarUser() {
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const handleClickOpen = () => {
+    setOpenDialog(true)
+  }
+
+  const handleClose = () => {
+    setOpenDialog(false)
+  }
+
   return (
-    <>
+    <div className='flex flex-col justify-between'>
       <div className='sticky left-0 top-[94px] flex w-[96px] flex-col items-center px-[8px]'>
         <div className='flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-[50px] bg-[#1e7115] py-4 text-xl text-white transition hover:bg-[#103a0b]'>
           <FaPlus />
@@ -67,7 +77,13 @@ function SidebarUser() {
           <div className='text-sm'>Học</div>
         </NavLink>
       </div>
-    </>
+      <button onClick={handleClickOpen} className='fixed bottom-5 left-1 bg-slate-400 p-5'>
+        Pop-up
+      </button>
+      <Dialog open={openDialog} onClose={handleClose}>
+        <div className='h-72 w-60 bg-white'></div>
+      </Dialog>
+    </div>
   )
 }
 
