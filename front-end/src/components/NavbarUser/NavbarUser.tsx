@@ -6,6 +6,7 @@ import { deleteStorage } from 'src/utils/storage'
 import { AppContext } from 'src/context/app.context'
 import { useQuery } from '@tanstack/react-query'
 import profileApi from 'src/apis/user.api'
+import { ListMenuItems } from './component/dataMenu'
 
 function NavbarUser() {
   const navigate = useNavigate()
@@ -15,7 +16,6 @@ function NavbarUser() {
     queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
-
   const handleLogout = () => {
     deleteStorage('access_token')
     deleteStorage('profile')
@@ -61,6 +61,23 @@ function NavbarUser() {
                   </h5>
                   <h6 className='cursor-pointer px-1 transition hover:bg-gray-200'>Đánh dấu đã đọc</h6>
                 </div>
+                <div>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={1.5}
+                    stroke='currentColor'
+                    className='m-auto my-8 h-[150px] w-[150px] text-[#e5e7eb]'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M9.143 17.082a24.248 24.248 0 003.844.148m-3.844-.148a23.856 23.856 0 01-5.455-1.31 8.964 8.964 0 002.3-5.542m3.155 6.852a3 3 0 005.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 003.536-1.003A8.967 8.967 0 0118 9.75V9A6 6 0 006.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53'
+                    />
+                  </svg>
+                  <p className='text-center text-[#e5e7eb]'>Hiện tại chưa có thông báo nào</p>
+                </div>
               </div>
             }
             className='w-[400px] rounded bg-white px-5 py-6 shadow-3xl'
@@ -90,29 +107,7 @@ function NavbarUser() {
                     <p className='text-[12px] text-[#757575]'>{profileData?.data?.email}</p>
                   </div>
                 </div>
-                <div
-                  onKeyDown={handleKeyDown}
-                  role={'button'}
-                  tabIndex={0}
-                  className='trasition my-2 flex items-center px-2 py-2 text-[#757575] hover:cursor-pointer hover:bg-gray-100'
-                  onClick={handleLogout}
-                >
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='mr-2 h-6 w-6'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25'
-                    />
-                  </svg>
-                  Đổi tài khoản
-                </div>
+
                 <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
                 <Link
                   className='trasition my-2 block flex items-center px-2 py-2 text-[#757575] hover:bg-gray-100'
