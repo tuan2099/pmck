@@ -154,16 +154,31 @@ function Course_detail() {
                 )}
               </div>
             </div>
-            <div className='min-h-[400px] px-[8.5%]'>
-              <div>1</div>
-              <div>1</div>
-              <div>1</div>
-
-              <div>1</div>
-              <div>1</div>
-              <div>1</div>
-              <div>1</div>
-              <div>1</div>
+            <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
+              <div className='w-'>
+                <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>Khóa học tài chính kế toán</h1>
+                <p className='text-[14px] text-slate-400'>Cập nhật tháng 12 năm 2023</p>
+                <p className=''></p>
+              </div>
+              <div className='mt-[48px]'>
+                <button className='flex items-center rounded bg-[#ebebeb] px-[16px] py-[6px] transition hover:bg-[#b6b6b6]'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={1.5}
+                    stroke='currentColor'
+                    className='mr-2 h-6 w-6 '
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
+                    />
+                  </svg>
+                  Thêm ghi chú tạm thời
+                </button>
+              </div>
             </div>
           </div>
           <Control />
