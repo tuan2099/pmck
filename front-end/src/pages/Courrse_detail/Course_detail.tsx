@@ -8,14 +8,14 @@ import Control from './Component/Control'
 import learningProcessApi from 'src/apis/learningprocess.api'
 import { AppContext } from 'src/context/app.context'
 import LessonItem from './Component/LessonItem'
-
+import Drawer from '@mui/material/Drawer'
 function Course_detail() {
   // setting video from Youtube
   const [videoUrl, setVideoUrl] = useState<string>('')
   const [total, setTotal] = useState<number>(0)
   const [newArrLesson, setNewArrLesson] = useState<any[]>([])
   const [lessonId, setLessonId] = useState(null)
-
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const { profile } = useContext(AppContext)
 
   // get id from url
@@ -87,7 +87,9 @@ function Course_detail() {
       )
     }
   }
-
+  const toogleDrawer = () => {
+    setOpenDrawer(!openDrawer)
+  }
   return (
     <>
       <div>
@@ -161,7 +163,10 @@ function Course_detail() {
                 <p className=''></p>
               </div>
               <div className='mt-[48px]'>
-                <button className='flex items-center rounded bg-[#ebebeb] px-[16px] py-[6px] transition hover:bg-[#b6b6b6]'>
+                <button
+                  onClick={toogleDrawer}
+                  className='flex items-center rounded bg-[#ebebeb] px-[16px] py-[6px] transition hover:bg-[#b6b6b6]'
+                >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -178,6 +183,14 @@ function Course_detail() {
                   </svg>
                   Thêm ghi chú tạm thời
                 </button>
+                <Drawer open={openDrawer} anchor='right' onClose={toogleDrawer}>
+                  <div className='w-[43%] min-w-[720px] max-w-full'>
+                    <div className='p-6'>
+                      <h2 className='text-2xl font-bold'>Ghi chú của tôi</h2>
+                    </div>
+                    <div className='p-6'>1</div>
+                  </div>
+                </Drawer>
               </div>
             </div>
           </div>

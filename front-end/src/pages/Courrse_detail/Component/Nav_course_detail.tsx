@@ -44,8 +44,25 @@ function Nav_course_detail({ total, completeLesson }: any) {
               />
             </svg>
             <button onClick={handleClickOpen}>Hướng dẫn</button>
-            <Dialog open={openDialog} onClose={handleClose}>
-              <div className='h-72 w-60 bg-white'></div>
+            <Dialog open={openDialog} onClose={handleClose} maxWidth='lg' fullWidth>
+              <div className='p-6 '>
+                <div className='flex justify-between'>
+                  <h2 className='text-2xl font-bold'>Bản tin PMCK</h2>
+                  <div className='cursor-pointer' onClick={handleClose}>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      strokeWidth={1.5}
+                      stroke='currentColor'
+                      className='h-6 w-6'
+                    >
+                      <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+                    </svg>
+                  </div>
+                </div>
+                <div style={{ height: 'calc(100vh - 200px)' }}></div>
+              </div>
             </Dialog>
           </div>
           <div className='mr-[16px] flex items-center text-sm text-white'>

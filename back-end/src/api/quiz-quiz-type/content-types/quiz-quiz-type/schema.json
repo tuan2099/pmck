@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_quiz_types",
+  "info": {
+    "singularName": "quiz-quiz-type",
+    "pluralName": "quiz-quiz-types",
+    "displayName": "Quiz_QuizType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "quizzes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::quiz.quiz",
+      "inversedBy": "quiz_quiz_types"
+    },
+    "quiz_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::quiz-type.quiz-type",
+      "inversedBy": "quiz_quiz_types"
+    }
+  }
+}

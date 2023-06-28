@@ -11,8 +11,8 @@ function HomeUserLayout({ children }: Props) {
   return (
     <>
       <NavbarUser />
-      <div className='flex h-screen overflow-y-hidden'>
-        <div className='h-full shrink-0 overflow-y-hidden'>
+      <div className='flex h-screen '>
+        <div className='h-full shrink-0'>
           <SidebarUser />
         </div>
         <div className='w-[118rem] max-w-[calc(100%-96px)]'>{children}</div>

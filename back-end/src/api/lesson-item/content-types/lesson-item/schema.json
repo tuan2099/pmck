@@ -24,21 +24,29 @@
       "target": "api::learning-progress.learning-progress",
       "mappedBy": "lesson_items"
     },
-    "lesson_roles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::lesson-role.lesson-role"
-    },
     "text_lesson": {
       "type": "richtext"
     },
     "document_lesson": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "lesson_lesson_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lesson-lesson-type.lesson-lesson-type",
+      "mappedBy": "lesson_items"
+    },
+    "quizzes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::quiz.quiz",
+      "mappedBy": "lesson_items"
     }
   }
 }

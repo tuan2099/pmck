@@ -3,6 +3,8 @@ import { FaPlus, FaHome, FaRoad, FaMicroblog, FaHourglassHalf } from 'react-icon
 import Dialog from '@mui/material/Dialog'
 import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
+import Tooltip from '@mui/material/Tooltip'
+import { Fab } from '@mui/material'
 
 function SidebarUser() {
   const [openDialog, setOpenDialog] = useState<boolean>(false)
@@ -15,11 +17,11 @@ function SidebarUser() {
   }
 
   return (
-    <div className='flex flex-col justify-between'>
+    <>
       <div className='sticky left-0 top-[94px] flex w-[96px] flex-col items-center px-[8px]'>
-        <div className='flex h-[45px] w-[45px] cursor-pointer items-center justify-center rounded-[50px] bg-[#1e7115] py-4 text-xl text-white transition hover:bg-[#103a0b]'>
+        <Fab color='primary' aria-label='add'>
           <FaPlus />
-        </div>
+        </Fab>
         <NavLink
           to='/user'
           className={({ isActive }) =>
@@ -77,13 +79,45 @@ function SidebarUser() {
           <div className='text-sm'>Học</div>
         </NavLink>
       </div>
-      <button onClick={handleClickOpen} className='fixed bottom-5 left-1 bg-slate-400 p-5'>
-        Pop-up
-      </button>
-      <Dialog open={openDialog} onClose={handleClose}>
-        <div className='h-72 w-60 bg-white'></div>
+      <div className='fixed bottom-5 left-4 rounded-full p-3'>
+        <Tooltip title='Bảng tin' onClick={handleClickOpen} className=''>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='h-[50px] w-[50px] cursor-pointer rounded-full bg-[#f3f3f3]  p-3 transition hover:bg-[#c4c4c4]'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z'
+            />
+          </svg>
+        </Tooltip>
+      </div>
+      <Dialog open={openDialog} onClose={handleClose} maxWidth='lg' fullWidth>
+        <div className='p-6 '>
+          <div className='flex justify-between'>
+            <h2 className='text-2xl font-bold'>Bản tin PMCK</h2>
+            <button className='cursor-pointer' onClick={handleClose}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='h-6 w-6'
+              >
+                <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
+              </svg>
+            </button>
+          </div>
+          <div style={{ height: 'calc(100vh - 200px)' }}></div>
+        </div>
       </Dialog>
-    </div>
+    </>
   )
 }
 

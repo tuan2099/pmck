@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lesson_lesson_types",
+  "info": {
+    "singularName": "lesson-lesson-type",
+    "pluralName": "lesson-lesson-types",
+    "displayName": "Lesson_LessonType",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "lesson_roles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lesson-role.lesson-role",
+      "inversedBy": "lesson_lesson_types"
+    },
+    "lesson_items": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lesson-item.lesson-item",
+      "inversedBy": "lesson_lesson_types"
+    }
+  }
+}

@@ -16,6 +16,7 @@ function NavbarUser() {
     queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
+  //
   const handleLogout = () => {
     deleteStorage('access_token')
     deleteStorage('profile')
@@ -109,16 +110,18 @@ function NavbarUser() {
 
                 <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
                 {ListMenuItems.map((menuItem: any) => {
-                  return <Link
-                  key={menuItem.id}
-                  className='trasition my-2 block flex items-center px-2 py-2 text-[#757575] hover:bg-gray-100'
-                  to={`${menuItem.link}`}
-                >
-                  {menuItem.icon}
-                  {menuItem.name}
-                </Link>
-                } ) }
-                
+                  return (
+                    <Link
+                      key={menuItem.id}
+                      className='trasition my-2 block flex items-center px-2 py-2 text-[#757575] hover:bg-gray-100'
+                      to={`/${menuItem.link}`}
+                    >
+                      {menuItem.icon}
+                      {menuItem.name}
+                    </Link>
+                  )
+                })}
+
                 <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
                 <div
                   onKeyDown={handleKeyDown}

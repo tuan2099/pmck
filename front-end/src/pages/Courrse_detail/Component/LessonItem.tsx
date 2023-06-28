@@ -16,8 +16,6 @@ const LessonItem = (props: IProps) => {
   const [_, setParams] = useSearchParams()
 
   useEffect(() => {
-    console.log(completedLessonList)
-    console.log('item.id', item.id)
     setIsCompleted(completedLessonList.some((lesson: any) => lesson.id === item.id))
   }, [completedLessonList])
 
