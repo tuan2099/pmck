@@ -41,12 +41,6 @@
       "relation": "manyToMany",
       "target": "api::lesson-lesson-type.lesson-lesson-type",
       "mappedBy": "lesson_items"
-    },
-    "quizzes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::quiz.quiz",
-      "mappedBy": "lesson_items"
     }
   }
 }
