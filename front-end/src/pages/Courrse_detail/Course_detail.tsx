@@ -9,9 +9,10 @@ import learningProcessApi from 'src/apis/learningprocess.api'
 import { AppContext } from 'src/context/app.context'
 import LessonItem from './Component/LessonItem'
 import Drawer from '@mui/material/Drawer'
+import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 function Course_detail() {
   // setting video from Youtube
-  const [videoUrl, setVideoUrl] = useState<string>('')
+  const [chooseItem, setChooseItem] = useState<any>()
   const [total, setTotal] = useState<number>(0)
   const [newArrLesson, setNewArrLesson] = useState<any[]>([])
   const [lessonId, setLessonId] = useState(null)
@@ -90,6 +91,7 @@ function Course_detail() {
   const toogleDrawer = () => {
     setOpenDrawer(!openDrawer)
   }
+
   return (
     <>
       <div>
@@ -128,8 +130,9 @@ function Course_detail() {
                         item.attributes.lesson_items.data?.map((item: any) => (
                           <LessonItem
                             item={item}
+                            chooseItem={chooseItem}
                             setLessonId={setLessonId}
-                            setVideoUrl={setVideoUrl}
+                            setChooseItem={setChooseItem}
                             key={item.id}
                             completedLessonList={newArrLesson}
                           />
@@ -143,14 +146,14 @@ function Course_detail() {
           <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
             <div className='relative w-full select-none bg-black px-[8.5%]'>
               <div className='relative pt-[56.25%]'>
-                {videoUrl && (
+                {chooseItem && (
                   <Youtube
                     className='absolute inset-0 overflow-hidden'
                     opts={{
                       width: '100%',
                       height: '100%'
                     }}
-                    videoId={videoUrl}
+                    videoId={chooseItem?.attributes.video_url.toString() || ''}
                     onEnd={handleEndVideo}
                   />
                 )}
@@ -158,8 +161,11 @@ function Course_detail() {
             </div>
             <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
               <div className='w-'>
-                <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>Khóa học tài chính kế toán</h1>
-                <p className='text-[14px] text-slate-400'>Cập nhật tháng 12 năm 2023</p>
+                <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.attributes.title}</h1>
+                <p className='text-[14px] text-slate-400'>
+                  {Boolean(chooseItem?.attributes.updatedAt) &&
+                    `Cập nhập ${covertTimeStamp(chooseItem?.attributes.updatedAt)}`}
+                </p>
                 <p className=''></p>
               </div>
               <div className='mt-[48px]'>

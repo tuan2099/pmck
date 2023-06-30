@@ -16,6 +16,9 @@ export type CourseType = {
     short_description: string
     status_course?: number | string | null
     updatedAt: string
+    course_categories: {
+      data: { id: number; attributes: { name: string; title: string } }[]
+    }
   }
 }
 

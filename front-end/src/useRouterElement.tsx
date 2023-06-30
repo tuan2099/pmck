@@ -41,7 +41,7 @@ export const ROUTES = {
   new: '/new',
   editProfile: '/edit-profile',
   profile: '/me',
-  courses: '/courses',
+  courses: '/courses/:category',
   NewPage: '/newpage',
   Partner: '/partner',
   Becometeacher: '/becometeacher'

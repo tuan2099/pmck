@@ -1,16 +1,28 @@
-import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
+import { AppContext } from 'src/context/app.context'
+import { CourseType } from 'src/types/course.type'
 
 const AllCoursePage = () => {
-  const [searchValue, setSearchValue] = useState<string>('')
+  const [list, setList] = useState<CourseType[]>([])
+  const { allCourse } = useContext(AppContext)
+  const { category } = useParams()
 
-  const { data } = useQuery({
-    queryKey: ['all course'],
-    queryFn: () => courseApi.getCourse()
-  })
+  useEffect(() => {
+    if (category && allCourse.length) {
+      if (category === 'all') setList(allCourse)
+      else {
+        const newList = allCourse.filter((course) => {
+          const check = course.attributes.course_categories.data.some((item) => item.attributes.name === category)
+          if (check) return course
+        })
+
+        setList(newList)
+      }
+    }
+  }, [category, allCourse])
 
   return (
     <div className='mt-9'>
@@ -20,11 +32,15 @@ const AllCoursePage = () => {
         <div className='mb-5 flex justify-end px-3'>
           <input type='text' className='rounded-md border px-3 py-2' placeholder='Tìm kiếm ...' />
         </div>
-        <div className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {data?.data.data.map((course) => (
-            <CourseCard courseItem={course} key={course.id} />
-          ))}
-        </div>
+        {Boolean(list.length) && (
+          <div className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+            {list.map((course) => (
+              <CourseCard courseItem={course} key={course.id} />
+            ))}
+          </div>
+        )}
+
+        {!Boolean(list.length) && <h3>Không có khóa học nào.</h3>}
       </div>
     </div>
   )

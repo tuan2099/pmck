@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { useState, createContext } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import courseApi from 'src/apis/course.api'
+import { CourseType } from 'src/types/course.type'
 import { User } from 'src/types/user.type'
 import { getAccesTokenLocalStorage, getProfileFromLocalStorage } from 'src/utils/auth'
 
@@ -14,6 +15,11 @@ interface AppContextInterface {
   courseRegisted: any
   setCourseRegisted: React.Dispatch<React.SetStateAction<any>>
   refetchRegistedCourse: any
+  allCourse: CourseType[]
+  setAllCourse: React.Dispatch<React.SetStateAction<CourseType[]>>
+  refetchAllCourse: any
+  newCourses: CourseType[]
+  freeCourse: CourseType[]
 }
 
 const initialAppContext: AppContextInterface = {
@@ -26,7 +32,12 @@ const initialAppContext: AppContextInterface = {
   courseRegisted: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCourseRegisted: () => {},
-  refetchRegistedCourse: () => {}
+  refetchRegistedCourse: () => {},
+  allCourse: [],
+  setAllCourse: () => {},
+  refetchAllCourse: () => {},
+  newCourses: [],
+  freeCourse: []
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -36,6 +47,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
   const [userInfo, setUserInfo] = useState(initialAppContext.userInfo)
   const [courseRegisted, setCourseRegisted] = useState([])
+  const [allCourse, setAllCourse] = useState<CourseType[]>([])
+  const [newCourses, setNewCourses] = useState<CourseType[]>([])
+  const [freeCourse, setFreeCourses] = useState<CourseType[]>([])
 
   const { refetch } = useQuery({
     queryKey: ['courseRegisted'],
@@ -43,6 +57,30 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     onSuccess: (data) => setCourseRegisted(data.data.data),
     enabled: !Boolean(courseRegisted.length)
   })
+
+  const getAllCourse = useQuery({
+    queryKey: ['allCourse'],
+    queryFn: () => courseApi.getCourse(),
+    onSuccess: (data) => {
+      setAllCourse(data?.data.data)
+    },
+    enabled: allCourse.length === 0
+  })
+
+  useEffect(() => {
+    const news = allCourse.filter((course) => {
+      const check = course.attributes.course_categories.data.some((item) => item.attributes.name === 'new_course')
+      if (check) return course
+    })
+
+    const free = allCourse.filter((course) => {
+      const check = course.attributes.course_categories.data.some((item) => item.attributes.name === 'free_course')
+      if (check) return course
+    })
+
+    setFreeCourses(free)
+    setNewCourses(news)
+  }, [allCourse])
 
   return (
     <AppContext.Provider
@@ -55,7 +93,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         userInfo,
         courseRegisted,
         setCourseRegisted,
-        refetchRegistedCourse: refetch
+        refetchRegistedCourse: refetch,
+        allCourse,
+        setAllCourse,
+        refetchAllCourse: getAllCourse.refetch,
+        freeCourse,
+        newCourses
       }}
     >
       {children}

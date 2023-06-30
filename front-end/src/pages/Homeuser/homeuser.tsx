@@ -1,16 +1,15 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import sliderApi from 'src/apis/slider.api'
 import Slider from './Component/Slider'
-import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
 import { Link } from 'react-router-dom'
-import profileApi from 'src/apis/user.api'
+
 import { AppContext } from 'src/context/app.context'
 
 function Homeuser() {
   // get data from context
-  const { setUserInfo } = useContext(AppContext)
+  const { freeCourse, newCourses } = useContext(AppContext)
 
   // call api slider
   const { data: imageSliderdata } = useQuery({
@@ -19,17 +18,6 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-
-  // call api list_course
-  const { data: listCouseData } = useQuery({
-    queryKey: ['listCourse'],
-    queryFn: () => {
-      return courseApi.getListcourse()
-    }
-  })
-
-  const listNewCourse = listCouseData?.data.data[0].attributes.courses.data || null
-  const listFreeCourse = listCouseData?.data.data[1].attributes.courses.data || null
 
   return (
     <>
@@ -43,7 +31,7 @@ function Homeuser() {
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
-            <Link to={'#'} className='flex items-center'>
+            <Link to={'/courses/new_course'} className='flex items-center'>
               Xem tất cả{'   '}
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -59,11 +47,11 @@ function Homeuser() {
           </p>
         </div>
         <div className='grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {listNewCourse &&
-            listNewCourse.map((courseItem: any) => {
+          {newCourses &&
+            newCourses.map((courseItem: any) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
-          {!listNewCourse && (
+          {!newCourses && (
             <div className='flex items-center justify-between'>
               {Array(4)
                 .fill(0)
@@ -88,7 +76,7 @@ function Homeuser() {
                 ))}
             </div>
           )}
-          {listNewCourse === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
+          {newCourses.length === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
         </div>
       </div>
 
@@ -98,7 +86,7 @@ function Homeuser() {
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Miễn phí</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
-            <Link to={'#'} className='flex items-center'>
+            <Link to={'/courses/free_course'} className='flex items-center'>
               Xem tất cả{'   '}
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -114,11 +102,11 @@ function Homeuser() {
           </p>
         </div>
         <div className='grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {listFreeCourse &&
-            listFreeCourse.map((courseItem: any) => {
+          {freeCourse &&
+            freeCourse.map((courseItem: any) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
-          {!listFreeCourse && (
+          {!freeCourse && (
             <div className='flex items-center justify-between'>
               {Array(4)
                 .fill(0)
@@ -143,7 +131,7 @@ function Homeuser() {
                 ))}
             </div>
           )}
-          {listFreeCourse === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
+          {freeCourse.length === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
         </div>
       </div>
 
