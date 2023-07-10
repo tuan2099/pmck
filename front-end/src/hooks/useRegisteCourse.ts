@@ -43,7 +43,9 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
     try {
       mutate()
       await refetchRegistedCourse()
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }, [mutate])
 
   React.useEffect(() => {
