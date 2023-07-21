@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */ // hide err in line 44
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
