@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_menu_infos",
+  "info": {
+    "displayName": "Info"
+  },
+  "options": {},
+  "attributes": {
+    "Address": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_menu_blockfooters",
+  "info": {
+    "displayName": "Blockfooter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Logo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

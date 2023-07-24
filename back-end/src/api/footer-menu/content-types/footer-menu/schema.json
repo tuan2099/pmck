@@ -16,7 +16,9 @@
       "type": "dynamiczone",
       "components": [
         "menu.link",
-        "menu.dropdown"
+        "menu.dropdown",
+        "menu.info",
+        "menu.blockfooter"
       ]
     }
   }
