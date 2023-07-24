@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "page_questions",
+  "info": {
+    "singularName": "page-question",
+    "pluralName": "page-questions",
+    "displayName": "Page-Question"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}
