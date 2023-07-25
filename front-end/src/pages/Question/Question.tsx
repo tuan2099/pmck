@@ -1,7 +1,17 @@
 import React from 'react'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
+import { useQuery } from '@tanstack/react-query'
+import faqQuestionApi from 'src/apis/faqQuestion.api'
+
 function Question() {
+  const { data: faqQuestion } = useQuery({
+    queryKey: ['FAQQuestion'],
+    queryFn: () => {
+      return faqQuestionApi.getFaqQuestions()
+    }
+  })
+  console.log(faqQuestion, 'data FAQ')
   return (
     <>
       <div className='m-auto w-full max-w-[1200px] py-[25px]'>
@@ -25,7 +35,7 @@ function Question() {
           <div className=''>
             <h3>Here are the most frequently asked questions you may check before getting started</h3>
           </div>
-          <div className=''>st</div>
+          <div className=''></div>
         </div>
       </div>
     </>
