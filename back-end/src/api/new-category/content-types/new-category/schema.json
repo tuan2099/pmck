@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "new_categories",
+  "info": {
+    "singularName": "new-category",
+    "pluralName": "new-categories",
+    "displayName": "New_category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "category_name": {
+      "type": "string"
+    }
+  }
+}

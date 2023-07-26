@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "new_tags",
+  "info": {
+    "singularName": "new-tag",
+    "pluralName": "new-tags",
+    "displayName": "New_tag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tag_name": {
+      "type": "string"
+    }
+  }
+}
