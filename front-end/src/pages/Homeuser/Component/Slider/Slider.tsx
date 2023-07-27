@@ -1,9 +1,11 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
+import { Link } from 'react-router-dom'
 
 function Slider(props: any) {
   const { imageSliderdata } = props
+  console.log(imageSliderdata)
   return (
     <>
       <Swiper
@@ -24,13 +26,28 @@ function Slider(props: any) {
           imageSliderdata?.data?.data.map((slider: any) => {
             return (
               <SwiperSlide key={slider.id} className='h-[268px] bg-gradient-to-r from-blue-500 to-green-400'>
-                <div className='flex items-center'>
+                <div className='flex items-center justify-between'>
                   <div className='mt-3 w-[50%] px-[36px]'>
                     <h3 className='text-4xl font-bold leading-normal text-white'>{slider.attributes.title}</h3>
                     <p className='mb-[24px] max-w-[600px] text-white'>{slider.attributes.short_description}</p>
                     <button className='rounded-[50px] border-2 border-white px-2.5 py-1 text-white transition hover:bg-white hover:text-black'>
                       Tìm hiểu thêm
                     </button>
+                  </div>
+                  <div className='w-[40%] '>
+                    <div className=''>
+                      <Link to='/'>
+                        <img
+                          className='h-full '
+                          src={
+                            slider.attributes.image_slider.data
+                              ? `http://localhost:1337${slider.attributes.image_slider.data[0]?.attributes.url}`
+                              : ''
+                          }
+                          alt=''
+                        />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>

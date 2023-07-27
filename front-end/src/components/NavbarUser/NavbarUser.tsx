@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
 import ClickPopover from '../ClickPopover'
@@ -7,10 +7,30 @@ import { AppContext } from 'src/context/app.context'
 import { useQuery } from '@tanstack/react-query'
 import profileApi from 'src/apis/user.api'
 import { ListMenuItems } from './component/dataMenu'
-
+import Box from '@mui/material/Box'
+import Avatar from '@mui/material/Avatar'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import Divider from '@mui/material/Divider'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import Tooltip from '@mui/material/Tooltip'
+// import PersonAdd from '@mui/icons-material/PersonAdd'
+// import Settings from '@mui/icons-material/Settings';
+// import Logout from '@mui/icons-material/Logout';
 function NavbarUser() {
   const navigate = useNavigate()
   const { setIsAuthenticate, setProfile, profile } = useContext(AppContext)
+
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
   // call api userinfo
   const { data: profileData } = useQuery({
     queryKey: ['userInfo'],
@@ -25,9 +45,6 @@ function NavbarUser() {
     navigate('/')
   }
 
-  function handleKeyDown(event: any): void {
-    throw new Error('Function not implemented.')
-  }
   return (
     <>
       <div className='sticky left-0 right-0 top-0 z-[2] flex items-center justify-between border-b border-[#e8ebed] bg-white px-7 py-2'>
@@ -97,63 +114,76 @@ function NavbarUser() {
             </svg>
           </ClickPopover>
 
-          <ClickPopover
-            renderPopover={
-              <div className=''>
-                <div className='flex items-center justify-between'>
-                  <div className='ml-3 h-[40px] w-[40px] cursor-pointer rounded-[50%] bg-black'></div>
-                  <div className='w-[65%] overflow-hidden text-ellipsis whitespace-nowrap '>
-                    <h5 className='font-semibold'>{profileData?.data.username}</h5>
-                    <p className='text-[12px] text-[#757575]'>{profileData?.data?.email}</p>
-                  </div>
-                </div>
-
-                <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
-                {ListMenuItems.map((menuItem: any) => {
-                  return (
-                    <Link
-                      key={menuItem.id}
-                      className='trasition my-2 block flex items-center px-2 py-2 text-[#757575] hover:bg-gray-100'
-                      to={`/${menuItem.link}`}
-                    >
-                      {menuItem.icon}
-                      {menuItem.name}
-                    </Link>
-                  )
-                })}
-
-                <hr className=' h-px border-0 bg-gray-200 dark:bg-gray-100'></hr>
-                <div
-                  onKeyDown={handleKeyDown}
-                  role={'button'}
-                  tabIndex={0}
-                  className='trasition my-2 flex items-center px-2 py-2 text-[#757575] hover:cursor-pointer hover:bg-gray-100'
-                  onClick={handleLogout}
-                >
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='mr-2 h-6 w-6'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9'
-                    />
-                  </svg>
-                  Đăng xuất
-                </div>
-              </div>
-            }
-            className='w-[250px] rounded bg-white px-5 py-6 shadow-3xl'
+          <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+            <Tooltip title='Account settings'>
+              <IconButton
+                onClick={handleClick}
+                size='small'
+                sx={{ ml: 2 }}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup='true'
+                aria-expanded={open ? 'true' : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+              </IconButton>
+            </Tooltip>
+          </Box>
+          <Menu
+            anchorEl={anchorEl}
+            id='account-menu'
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1
+                },
+                '&:before': {
+                  content: '""',
+                  display: 'block',
+                  position: 'absolute',
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: 'background.paper',
+                  transform: 'translateY(-50%) rotate(45deg)',
+                  zIndex: 0
+                }
+              }
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <div className=''>
-              <div className='ml-3 h-[40px] w-[40px] cursor-pointer rounded-[50%] bg-black'></div>
-            </div>
-          </ClickPopover>
+            {ListMenuItems.map((menuItem: any) => {
+              return (
+                <MenuItem onClick={handleClose} key={menuItem.id}>
+                  <Link key={menuItem.id} className='my-1 block flex items-center' to={`/${menuItem.link}`}>
+                    {menuItem.icon}
+                    {menuItem.name}
+                  </Link>
+                </MenuItem>
+              )
+            })}
+
+            <Divider />
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>{/* <PersonAdd fontSize='small' /> */}</ListItemIcon>
+              Add another account
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>{/* <Logout fontSize='small' /> */}</ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
         </div>
       </div>
     </>
