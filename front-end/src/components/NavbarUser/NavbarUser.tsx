@@ -49,7 +49,9 @@ function NavbarUser() {
     <>
       <div className='sticky left-0 right-0 top-0 z-[2] flex items-center justify-between border-b border-[#e8ebed] bg-white px-7 py-2'>
         <div className='w-[100px]'>
-          <img className='w-full' src={logo} alt='logo website' />
+          <Link to='/user'>
+            <img className='w-full' src={logo} alt='logo website' />
+          </Link>
         </div>
         <div className='flex items-center'>
           <Link className='mr-4' to='/my-course'>
