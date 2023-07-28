@@ -33,7 +33,8 @@ function Login() {
 
   // call api
   const loginAccountMutation = useMutation({
-    mutationFn: (body: Omit<FormData, 'confirm_password'>) => authApi.login(body)
+    mutationFn: (body: Omit<FormData, 'confirm_password'>) => authApi.login(body),
+    onSuccess: (data) => console.log(data)
   })
 
   // form submit

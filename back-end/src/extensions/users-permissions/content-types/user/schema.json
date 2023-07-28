@@ -107,6 +107,9 @@
       "relation": "manyToMany",
       "target": "api::learning-progress.learning-progress",
       "inversedBy": "users_permissions_users"
+    },
+    "admin_page": {
+      "type": "boolean"
     }
   }
 }
