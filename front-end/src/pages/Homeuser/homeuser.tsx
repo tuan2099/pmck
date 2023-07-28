@@ -31,7 +31,7 @@ function Homeuser() {
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
-            <Link to={'/courses/new_course'} className='flex items-center'>
+            <Link to={'/courses?category=new_course'} className='flex items-center'>
               Xem tất cả{'   '}
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -86,7 +86,7 @@ function Homeuser() {
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Miễn phí</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
-            <Link to={'/courses/free_course'} className='flex items-center'>
+            <Link to={'/courses?category=free_course'} className='flex items-center'>
               Xem tất cả{'   '}
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -141,7 +141,7 @@ function Homeuser() {
             Tin tức <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Nổi bật</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
-            <Link to={'#'} className='flex items-center'>
+            <Link to='/course' className='flex items-center'>
               Xem tất cả{'   '}
               <svg
                 xmlns='http://www.w3.org/2000/svg'

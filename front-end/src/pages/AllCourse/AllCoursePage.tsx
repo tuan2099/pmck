@@ -1,6 +1,6 @@
 /* eslint-disable no-extra-boolean-cast */ // hide err in line 44
 import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import CourseCard from 'src/components/CourseCard'
 import { AppContext } from 'src/context/app.context'
@@ -9,7 +9,8 @@ import { CourseType } from 'src/types/course.type'
 const AllCoursePage = () => {
   const [list, setList] = useState<CourseType[]>([])
   const { allCourse } = useContext(AppContext)
-  const { category } = useParams()
+  const [serchParams, _] = useSearchParams()
+  const category = serchParams.get('category')
 
   useEffect(() => {
     if (category && allCourse.length) {
@@ -22,6 +23,8 @@ const AllCoursePage = () => {
 
         setList(newList)
       }
+    } else {
+      setList(allCourse)
     }
   }, [category, allCourse])
 
