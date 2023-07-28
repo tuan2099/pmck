@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "singularName": "question",
+    "pluralName": "questions",
+    "displayName": "Question",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "questiontext": {
+      "type": "richtext"
+    },
+    "defaultmark": {
+      "type": "integer"
+    },
+    "penalty": {
+      "type": "integer"
+    },
+    "questionformat": {
+      "type": "integer"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "modified": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "qtype": {
+      "type": "enumeration",
+      "enum": [
+        "true/false",
+        "multichoice"
+      ]
+    },
+    "question_media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "questions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question.question"
+    },
+    "question_answers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question-answer.question-answer"
+    },
+    "question_multianswers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question-multianswer.question-multianswer"
+    },
+    "question_truefalses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question-truefalse.question-truefalse"
+    }
+  }
+}

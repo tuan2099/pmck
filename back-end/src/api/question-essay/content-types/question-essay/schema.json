@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "question_essays",
+  "info": {
+    "singularName": "question-essay",
+    "pluralName": "question-essays",
+    "displayName": "Question Essay"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "something": {
+      "type": "string"
+    }
+  }
+}

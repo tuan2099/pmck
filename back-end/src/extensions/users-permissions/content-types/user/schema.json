@@ -110,6 +110,12 @@
     },
     "admin_page": {
       "type": "boolean"
+    },
+    "quiz_grade": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::quiz-grade.quiz-grade",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

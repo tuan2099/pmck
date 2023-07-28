@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "question_answers",
+  "info": {
+    "singularName": "question-answer",
+    "pluralName": "question-answers",
+    "displayName": "Question Answer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "answer": {
+      "type": "richtext"
+    },
+    "fraction": {
+      "type": "integer"
+    },
+    "feedback": {
+      "type": "richtext"
+    },
+    "answerformat": {
+      "type": "integer"
+    },
+    "feedbackformat": {
+      "type": "richtext"
+    },
+    "answer_media": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

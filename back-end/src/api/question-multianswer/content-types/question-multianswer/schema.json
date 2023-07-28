@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "question_multianswers",
+  "info": {
+    "singularName": "question-multianswer",
+    "pluralName": "question-multianswers",
+    "displayName": "Question Multianswer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "squencce": {
+      "type": "richtext"
+    }
+  }
+}

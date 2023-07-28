@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_grades",
+  "info": {
+    "singularName": "quiz-grade",
+    "pluralName": "quiz-grades",
+    "displayName": "Quiz_grade"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "gr": {
+      "type": "integer"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "quiz_grade"
+    },
+    "quiz": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::quiz.quiz",
+      "inversedBy": "quiz_grade"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "question_bank_entries",
+  "info": {
+    "singularName": "question-bank-entrie",
+    "pluralName": "question-bank-entries",
+    "displayName": "Question Bank Entrie"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "st": {
+      "type": "string"
+    }
+  }
+}
