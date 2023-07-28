@@ -36,11 +36,10 @@
         "files"
       ]
     },
-    "lesson_lesson_types": {
+    "lesson_roles": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::lesson-lesson-type.lesson-lesson-type",
-      "mappedBy": "lesson_items"
+      "relation": "oneToMany",
+      "target": "api::lesson-role.lesson-role"
     }
   }
 }

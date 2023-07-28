@@ -14,12 +14,6 @@
   "attributes": {
     "role_description": {
       "type": "string"
-    },
-    "lesson_lesson_types": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::lesson-lesson-type.lesson-lesson-type",
-      "mappedBy": "lesson_roles"
     }
   }
 }

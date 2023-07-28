@@ -22,6 +22,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::lesson-item.lesson-item"
+    },
+    "quizzes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quiz.quiz"
     }
   }
 }
