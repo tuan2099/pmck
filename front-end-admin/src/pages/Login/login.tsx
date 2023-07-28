@@ -10,6 +10,7 @@ import authApi from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
 import Input from 'src/components/Input'
 import Button from 'src/components/Button'
+import { toast } from 'react-toastify'
 
 type FormData = Pick<Schema, 'identifier' | 'password'>
 const loginSchema = schema.pick(['identifier', 'password'])
@@ -44,6 +45,8 @@ function LoginAdmin() {
           setIsAuthenticate(true)
           setProfile(data.data.user)
           navigate('/admin')
+        } else {
+          toast('Bạn không có quyền đăng nhập.')
         }
       },
       onError: (error: any) => {
@@ -109,22 +112,7 @@ function LoginAdmin() {
                 >
                   Đăng nhập
                 </Button>
-                <button className='flex w-full flex-wrap justify-center rounded-md border border-gray-300 px-2 py-1.5 hover:border-gray-500'>
-                  <img
-                    className='mr-2 w-5'
-                    alt=''
-                    src='https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA'
-                  />
-                  Sign in with Google
-                </button>
-                <div className='mt-4'>
-                  <p className='text-center font-semibold'>
-                    Bạn không có tài khoản?{' '}
-                    <Link className='text-[#1e7115] underline decoration-1' to='/register'>
-                      Đăng kí
-                    </Link>{' '}
-                  </p>
-                </div>
+
                 <div className='mx-auto mt-7 flex w-3/12 justify-between  text-slate-300'>
                   <Link to='/'>
                     <FaFacebook />
