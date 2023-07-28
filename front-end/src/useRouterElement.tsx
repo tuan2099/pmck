@@ -22,8 +22,7 @@ import NewPage from './pages/NewPage/NewPage'
 import Partner from './pages/Partner/Partner'
 import Becometeacher from './pages/BecomeTeacher/BecomeTeacher'
 import Question from './pages/Question'
-import LoginAdmin from './pages-admin/Login'
-import Admin from './pages-admin/admin/Admin'
+
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
   return isAuthenticated ? <Outlet /> : <Navigate to='/login' />
@@ -177,22 +176,6 @@ export default function useRouterElement() {
       element: (
         <HomeUserLayout>
           <LearningPath />
-        </HomeUserLayout>
-      )
-    },
-    {
-      path: '/login-admin',
-      element: (
-        <RegisterLayout>
-          <LoginAdmin />
-        </RegisterLayout>
-      )
-    },
-    {
-      path: '/admin',
-      element: (
-        <HomeUserLayout>
-          <Admin />
         </HomeUserLayout>
       )
     }

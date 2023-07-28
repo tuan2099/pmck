@@ -1,6 +1,4 @@
 import { useContext } from 'react'
-import Button from 'src/components/Button'
-import Input from 'src/components/Input'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Schema, schema } from 'src/utils/rule'
@@ -10,6 +8,8 @@ import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa'
 import { useMutation } from '@tanstack/react-query'
 import authApi from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
+import Input from 'src/components/Input'
+import Button from 'src/components/Button'
 
 type FormData = Pick<Schema, 'identifier' | 'password'>
 const loginSchema = schema.pick(['identifier', 'password'])
