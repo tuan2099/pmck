@@ -44,11 +44,6 @@
     "price": {
       "type": "integer"
     },
-    "chapters": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::lesson.lesson"
-    },
     "status_course": {
       "type": "boolean"
     },
@@ -68,6 +63,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::course-category.course-category"
+    },
+    "chapters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chapter.chapter"
     }
   }
 }

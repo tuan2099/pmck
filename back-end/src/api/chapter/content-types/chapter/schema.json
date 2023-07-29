@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "lessons",
+  "collectionName": "chapters",
   "info": {
-    "singularName": "lesson",
-    "pluralName": "lessons",
-    "displayName": "Chapter",
-    "description": ""
+    "singularName": "chapter",
+    "pluralName": "chapters",
+    "displayName": "Chapter"
   },
   "options": {
     "draftAndPublish": true
@@ -13,20 +12,20 @@
   "pluginOptions": {},
   "attributes": {
     "lesson_name": {
-      "type": "string"
+      "type": "text"
     },
     "lesson_description": {
-      "type": "string"
-    },
-    "lesson_items": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::lesson-item.lesson-item"
+      "type": "text"
     },
     "quizzes": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::quiz.quiz"
+    },
+    "lesson_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lesson-item.lesson-item"
     }
   }
 }
