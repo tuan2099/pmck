@@ -55,11 +55,6 @@
         "audios"
       ]
     },
-    "questions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::question.question"
-    },
     "question_answers": {
       "type": "relation",
       "relation": "oneToMany",

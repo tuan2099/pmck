@@ -13,7 +13,8 @@ import {
   AccordionDetails,
   FormGroup,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  styled
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
@@ -51,7 +52,7 @@ const AllCoursePage = () => {
 
   return (
     <div className='mt-9'>
-      <h2 className='p-2 text-center text-2xl font-bold uppercase'>Tất cả khóa học</h2>
+      <h2 className='px-20 text-2xl font-bold uppercase'>Tất cả khóa học</h2>
       <div className=' items-top mt-5 flex px-4 md:mt-14 md:px-20'>
         <div className='w-[75%] px-[15px]'>
           <div className='flex items-center justify-between pb-[50px]'>
@@ -116,7 +117,7 @@ const AllCoursePage = () => {
           )}
 
           {!Boolean(list.length) && <h3>Không có khóa học nào.</h3>}
-          <div>
+          <div className='my-8 flex justify-center'>
             <Stack spacing={2}>
               <Pagination count={10} />
             </Stack>
@@ -125,7 +126,7 @@ const AllCoursePage = () => {
         <div className='w-[25%] px-[15px]'>
           <div className='pb-[50px]'>
             <div className='mt-[25px] flex items-center justify-between rounded border p-[10px]'>
-              <h4 className='flex items-center text-[20px] font-semibold'>
+              <h4 className='flex items-center text-[16px] font-semibold'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
