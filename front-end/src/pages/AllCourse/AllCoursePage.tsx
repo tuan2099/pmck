@@ -101,9 +101,8 @@ const AllCoursePage = () => {
                   <MenuItem value=''>
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={10}>Từ A-Z</MenuItem>
+                  <MenuItem value={20}>Từ Z-A</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -125,7 +124,7 @@ const AllCoursePage = () => {
         </div>
         <div className='w-[25%] px-[15px]'>
           <div className='pb-[50px]'>
-            <div className='mt-[30px] flex items-center justify-between'>
+            <div className='mt-[25px] flex items-center justify-between rounded border p-[10px]'>
               <h4 className='flex items-center text-[20px] font-semibold'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -143,7 +142,7 @@ const AllCoursePage = () => {
                 </svg>
                 Tìm kiếm
               </h4>
-              <div className=''>Hiện toàn bộ</div>
+              <div className='cursor-pointer'>Hiện toàn bộ</div>
             </div>
           </div>
           <div className=''>
