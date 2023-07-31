@@ -13,25 +13,32 @@ import {
   AccordionDetails,
   FormGroup,
   FormControlLabel,
-  Checkbox,
-  styled
+  Checkbox
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import CourseCard from 'src/components/CourseCard'
 import { AppContext } from 'src/context/app.context'
 import { CourseType } from 'src/types/course.type'
 
+const COURSE_PER_PAGE = 2
+
 const AllCoursePage = () => {
-  const [list, setList] = useState<CourseType[]>([])
   const { allCourse } = useContext(AppContext)
-  const [serchParams, _] = useSearchParams()
+  const [serchParams, setSearchParams] = useSearchParams()
   const category = serchParams.get('category')
+
+  const [list, setList] = useState<CourseType[]>([])
+  const [data, setData] = useState<CourseType[]>([])
+  const [page, setPage] = useState<number>(1)
+  const [sortByName, setSortByName] = useState<string>('none')
+  const [expanded, setExpanded] = useState<string | false>(false)
 
   useEffect(() => {
     if (category && allCourse.length) {
-      if (category === 'all') setList(allCourse)
-      else {
+      if (category === 'all') {
+        setList(allCourse)
+      } else {
         const newList = allCourse.filter((course) => {
           const check = course.attributes.course_categories.data.some((item) => item.attributes.name === category)
           if (check) return course
@@ -44,10 +51,46 @@ const AllCoursePage = () => {
     }
   }, [category, allCourse])
 
-  const [expanded, setExpanded] = useState<string | false>(false)
+  useEffect(() => {
+    const newData = JSON.parse(JSON.stringify(list))
+    const start = (page - 1) * COURSE_PER_PAGE
+    const end = start + COURSE_PER_PAGE
+    const currentCourse = newData.slice(start, end)
+    switch (sortByName) {
+      case 'A-Z':
+        currentCourse.sort((a: any, b: any) => a.attributes.course_name.localeCompare(b.attributes.course_name))
+        break
+      case 'Z-A':
+        currentCourse.sort((a: any, b: any) => b.attributes.course_name.localeCompare(a.attributes.course_name))
+        break
+      default:
+        currentCourse
+    }
+
+    setData(currentCourse)
+  }, [sortByName, page, list])
 
   const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false)
+  }
+
+  const handleChangeCategory = (checked: boolean, name: string) => {
+    if (checked) {
+      if (category === '') {
+        setSearchParams({ ...Object.fromEntries([...serchParams]), category: name })
+      } else {
+        const newCategory = category?.split('+')
+        newCategory?.push(name)
+        setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
+      }
+      const newCategory = category?.split('+')
+      newCategory?.push(name)
+      setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
+    } else {
+      const cloneCategory = category?.split('+')
+      const newCategory = cloneCategory?.filter((item) => item != name)
+      setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
+    }
   }
 
   return (
@@ -93,33 +136,41 @@ const AllCoursePage = () => {
                   </svg>
                 </div>
               </Tooltip>
-              <p className='ml-[10px] border-l-2 pl-4 text-[16px] font-medium text-black'>Hiển thị 9/50 khóa học </p>
+              <p className='ml-[10px] border-l-2 pl-4 text-[16px] font-medium text-black'>
+                {`Hiển thị ${data.length}/${list.length} khóa học`}{' '}
+              </p>
             </div>
             <div className='flex w-[40%] items-center justify-end'>
               <FormControl variant='standard' sx={{ m: 1, minWidth: 240 }}>
                 <InputLabel id='demo-simple-select-standard-label'>Sắp xếp theo tên</InputLabel>
-                <Select labelId='demo-simple-select-standard-label' id='demo-simple-select-standard' label='Age'>
-                  <MenuItem value=''>
+                <Select
+                  labelId='demo-simple-select-standard-label'
+                  id='demo-simple-select-standard'
+                  label='Age'
+                  value={sortByName}
+                  onChange={(e) => setSortByName(e.target.value)}
+                >
+                  <MenuItem value='none'>
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Từ A-Z</MenuItem>
-                  <MenuItem value={20}>Từ Z-A</MenuItem>
+                  <MenuItem value='A-Z'>Từ A-Z</MenuItem>
+                  <MenuItem value='Z-A'>Từ Z-A</MenuItem>
                 </Select>
               </FormControl>
             </div>
           </div>
-          {Boolean(list.length) && (
+          {Boolean(data.length) && (
             <div className='grid gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
-              {list.map((course) => (
+              {data.map((course) => (
                 <CourseCard courseItem={course} key={course.id} />
               ))}
             </div>
           )}
 
-          {!Boolean(list.length) && <h3>Không có khóa học nào.</h3>}
+          {!Boolean(data.length) && <h3>Không có khóa học nào.</h3>}
           <div className='my-8 flex justify-center'>
             <Stack spacing={2}>
-              <Pagination count={10} />
+              <Pagination count={Math.ceil(list.length / COURSE_PER_PAGE)} onChange={(_, value) => setPage(value)} />
             </Stack>
           </div>
         </div>
@@ -170,13 +221,32 @@ const AllCoursePage = () => {
                   </AccordionSummary>
                   <AccordionDetails>
                     <FormGroup>
-                      <FormControlLabel control={<Checkbox defaultChecked />} label='Label' />
-                      <FormControlLabel required control={<Checkbox />} label='Required' />
-                      <FormControlLabel required control={<Checkbox />} label='Required' />
-                      <FormControlLabel required control={<Checkbox />} label='Required' />
-                      <FormControlLabel required control={<Checkbox />} label='Required' />
-                      <FormControlLabel required control={<Checkbox />} label='Required' />
-                      <FormControlLabel required control={<Checkbox />} label='Required' />
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked />}
+                        label='Tất cả khóa học'
+                        value='all'
+                        onChange={(_, checked) => {
+                          handleChangeCategory(checked, 'all')
+                        }}
+                      />
+                      <FormControlLabel
+                        required
+                        control={<Checkbox />}
+                        label='Khóa học miễn phí'
+                        value='free_course'
+                        onChange={(_, checked) => {
+                          handleChangeCategory(checked, 'free_course')
+                        }}
+                      />
+                      <FormControlLabel
+                        required
+                        control={<Checkbox />}
+                        label='Khóa học mới'
+                        value='new_course'
+                        onChange={(_, checked) => {
+                          handleChangeCategory(checked, 'new_course')
+                        }}
+                      />
                     </FormGroup>
                   </AccordionDetails>
                 </Accordion>
