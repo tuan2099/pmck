@@ -32,7 +32,12 @@ const AllCoursePage = () => {
   const [data, setData] = useState<CourseType[]>([])
   const [page, setPage] = useState<number>(1)
   const [sortByName, setSortByName] = useState<string>('none')
-  const [expanded, setExpanded] = useState<string | false>(false)
+  const [expanded, setExpanded] = useState({
+    panel1: false,
+    panel2: false
+  })
+  const [listStyle, setListStyle] = useState<'list' | 'grid'>('grid')
+  const [isShowAll, setIsShowAll] = useState(false)
 
   useEffect(() => {
     if (category && allCourse.length) {
@@ -70,8 +75,29 @@ const AllCoursePage = () => {
     setData(currentCourse)
   }, [sortByName, page, list])
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-    setExpanded(isExpanded ? panel : false)
+  const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
+    const newExpanded = JSON.parse(JSON.stringify(expanded))
+    for (const key in expanded) {
+      if (key === panel) {
+        newExpanded[key] = isExpanded
+      }
+    }
+    setExpanded(newExpanded)
+  }
+
+  const handleShowAllPanel = () => {
+    const newExpanded = JSON.parse(JSON.stringify(expanded))
+    if (isShowAll) {
+      for (const key in expanded) {
+        newExpanded[key] = false
+      }
+    } else {
+      for (const key in expanded) {
+        newExpanded[key] = true
+      }
+    }
+    setExpanded(newExpanded)
+    setIsShowAll(!isShowAll)
   }
 
   const handleChangeCategory = (checked: boolean, name: string) => {
@@ -100,7 +126,7 @@ const AllCoursePage = () => {
         <div className='w-[75%] px-[15px]'>
           <div className='flex items-center justify-between pb-[50px]'>
             <div className='flex w-[40%] items-center '>
-              <Tooltip title='Hiển thị dạng danh sách' placement='top'>
+              <Tooltip title='Hiển thị dạng danh sách' placement='top' onClick={() => setListStyle('list')}>
                 <div className='mx-[5px] flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-[5px] border hover:border-[#1e7115] hover:text-[#1e7115]'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -118,7 +144,7 @@ const AllCoursePage = () => {
                   </svg>
                 </div>
               </Tooltip>
-              <Tooltip title='Hiển thị dạng lưới' placement='top'>
+              <Tooltip title='Hiển thị dạng lưới' placement='top' onClick={() => setListStyle('grid')}>
                 <div className='mx-[5px] flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-[5px] border hover:border-[#1e7115] hover:text-[#1e7115]'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -159,7 +185,7 @@ const AllCoursePage = () => {
               </FormControl>
             </div>
           </div>
-          {Boolean(data.length) && (
+          {Boolean(data.length) && listStyle === 'grid' && (
             <div className='grid gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
               {data.map((course) => (
                 <CourseCard courseItem={course} key={course.id} />
@@ -167,20 +193,28 @@ const AllCoursePage = () => {
             </div>
           )}
 
-          {/* dạng list đây nhé  */}
-          <div className='items-top flex w-full bg-white p-[12px]'>
-            <div className='mr-[24px] w-[240px]'>
-              <img
-                src='http://pmck.edu.vn/pluginfile.php?file=%2F19%2Fcourse%2Foverviewfiles%2F230203%20-%20poster%20Mr%20S%C6%A1n%20-%20l%E1%BB%9Bp%20k%E1%BA%BF%20to%C3%A1n%20%28%E1%BA%A3nh%20n%E1%BB%81n%20kh%C3%B3a%20h%E1%BB%8Dc%29.png'
-                alt=''
-              />
+          {Boolean(data.length) && listStyle === 'list' && (
+            <div className='grid gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
+              {data.map((course) => (
+                <div className='items-top flex w-full bg-white p-[12px]'>
+                  <div className='mr-[24px] w-[240px]'>
+                    <img
+                      src={`http://localhost:1337${
+                        course.attributes?.banner_course
+                          ? course.attributes?.banner_course.data[0].attributes?.formats.medium?.url
+                          : course.banner_course[0].formats.medium.url
+                      }`}
+                      alt=''
+                    />
+                  </div>
+                  <div>
+                    <h4>{course.attributes.course_name}</h4>
+                    <p>{course.attributes.short_description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div>
-              <h4>Tiêu đề khóa học</h4>
-              <p>Mô tả khóa học</p>
-            </div>
-          </div>
-          {/* dạng list đây nhé  */}
+          )}
 
           {!Boolean(data.length) && <h3>Không có khóa học nào.</h3>}
           <div className='my-8 flex justify-center'>
@@ -209,13 +243,15 @@ const AllCoursePage = () => {
                 </svg>
                 Tìm kiếm
               </h4>
-              <div className='cursor-pointer'>Hiện toàn bộ</div>
+              <div className='cursor-pointer' onClick={handleShowAllPanel}>
+                Hiện toàn bộ
+              </div>
             </div>
           </div>
           <div className=''>
             <div>
               <div>
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                <Accordion expanded={expanded.panel1} onChange={handleChange('panel1')}>
                   <AccordionSummary
                     expandIcon={
                       <svg
@@ -265,7 +301,7 @@ const AllCoursePage = () => {
                     </FormGroup>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                <Accordion expanded={expanded.panel2} onChange={handleChange('panel2')}>
                   <AccordionSummary
                     expandIcon={
                       <svg
