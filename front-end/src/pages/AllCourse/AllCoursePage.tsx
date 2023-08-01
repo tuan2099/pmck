@@ -167,6 +167,21 @@ const AllCoursePage = () => {
             </div>
           )}
 
+          {/* dạng list đây nhé  */}
+          <div className='items-top flex w-full bg-white p-[12px]'>
+            <div className='mr-[24px] w-[240px]'>
+              <img
+                src='http://pmck.edu.vn/pluginfile.php?file=%2F19%2Fcourse%2Foverviewfiles%2F230203%20-%20poster%20Mr%20S%C6%A1n%20-%20l%E1%BB%9Bp%20k%E1%BA%BF%20to%C3%A1n%20%28%E1%BA%A3nh%20n%E1%BB%81n%20kh%C3%B3a%20h%E1%BB%8Dc%29.png'
+                alt=''
+              />
+            </div>
+            <div>
+              <h4>Tiêu đề khóa học</h4>
+              <p>Mô tả khóa học</p>
+            </div>
+          </div>
+          {/* dạng list đây nhé  */}
+
           {!Boolean(data.length) && <h3>Không có khóa học nào.</h3>}
           <div className='my-8 flex justify-center'>
             <Stack spacing={2}>
