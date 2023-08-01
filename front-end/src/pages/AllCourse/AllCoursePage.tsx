@@ -250,6 +250,56 @@ const AllCoursePage = () => {
                     </FormGroup>
                   </AccordionDetails>
                 </Accordion>
+                <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                  <AccordionSummary
+                    expandIcon={
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        strokeWidth={1.5}
+                        stroke='currentColor'
+                        className='h-6 w-6'
+                      >
+                        <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
+                      </svg>
+                    }
+                    aria-controls='panel1bh-content'
+                    id='panel1bh-header'
+                  >
+                    <Typography sx={{ width: '50%', flexShrink: 0 }}>Danh mục khóa học</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <FormGroup>
+                      <FormControlLabel
+                        control={<Checkbox defaultChecked />}
+                        label='Tất cả khóa học'
+                        value='all'
+                        onChange={(_, checked) => {
+                          handleChangeCategory(checked, 'all')
+                        }}
+                      />
+                      <FormControlLabel
+                        required
+                        control={<Checkbox />}
+                        label='Khóa học miễn phí'
+                        value='free_course'
+                        onChange={(_, checked) => {
+                          handleChangeCategory(checked, 'free_course')
+                        }}
+                      />
+                      <FormControlLabel
+                        required
+                        control={<Checkbox />}
+                        label='Khóa học mới'
+                        value='new_course'
+                        onChange={(_, checked) => {
+                          handleChangeCategory(checked, 'new_course')
+                        }}
+                      />
+                    </FormGroup>
+                  </AccordionDetails>
+                </Accordion>
               </div>
             </div>
           </div>
