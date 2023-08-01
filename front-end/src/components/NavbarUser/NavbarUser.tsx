@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
-import ClickPopover from '../ClickPopover'
 import { AppContext } from 'src/context/app.context'
 import { useQuery } from '@tanstack/react-query'
 import profileApi from 'src/apis/user.api'
