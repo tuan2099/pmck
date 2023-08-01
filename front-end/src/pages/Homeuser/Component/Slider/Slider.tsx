@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 function Slider(props: any) {
   const { imageSliderdata } = props
-  console.log(imageSliderdata)
   return (
     <>
       <Swiper

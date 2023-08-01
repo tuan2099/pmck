@@ -1,9 +1,17 @@
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { FaFacebookSquare, FaViber, FaYoutube, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import footerApi from 'src/apis/footer.api'
 import logo from 'src/assets/logo.png'
 
 function Footer() {
+  const { data: footerData } = useQuery({
+    queryKey: ['footerdata'],
+    queryFn: () => {
+      return footerApi.getFooter()
+    }
+  })
   return (
     <footer>
       <div className='bg-[#181821] pb-[50px] pt-[65px] text-[#a9b3bb]'>
@@ -23,18 +31,23 @@ function Footer() {
                 cần thiết trong lĩnh dịch vụ Bất động sản.
               </p>
             </section>
-            <section>
-              <h4 className=' font-semibold uppercase'>Về PMCK</h4>
-              <p></p>
-            </section>
-            <section>
-              <h4 className=' font-semibold uppercase'>Cộng đồng PMCK</h4>
-              <p></p>
-            </section>
-            <section>
-              <h4 className=' font-semibold uppercase'>Liên hệ</h4>
-              <p></p>
-            </section>
+            {footerData &&
+              footerData.data?.data?.attributes.body.map((footerdata: any) => {
+                return (
+                  <section key={footerdata.id}>
+                    <h4 className=' font-semibold uppercase'>{footerdata.sections.data[0].attributes.label}</h4>
+                    <ul className='mt-[30px] leading-[40px]'>
+                      {footerdata.sections.data[0].attributes.links.map((items: any) => {
+                        return (
+                          <li key={items.id}>
+                            <Link to={`/${items.url}`}>{items.label}</Link>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </section>
+                )
+              })}
           </div>
           <div className='m-auto my-8 h-[1px] w-10/12 bg-[#555555]'></div>
           <div className=''>
