@@ -6,6 +6,7 @@ import CourseCard from 'src/components/CourseCard'
 import { Link } from 'react-router-dom'
 
 import { AppContext } from 'src/context/app.context'
+import Cardnew from './Component/Cardnew'
 
 function Homeuser() {
   // get data from context
@@ -155,6 +156,9 @@ function Homeuser() {
               </svg>
             </Link>
           </p>
+        </div>
+        <div className='grid grid-cols-4 gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          <Cardnew />
         </div>
       </div>
     </>
