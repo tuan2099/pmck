@@ -40,16 +40,17 @@ const AllCoursePage = () => {
   const [isShowAll, setIsShowAll] = useState(false)
 
   useEffect(() => {
+    const categoryList = category?.split('+')
     if (category && allCourse.length) {
-      if (category === 'all') {
+      if (category === 'all' || category === '') {
         setList(allCourse)
       } else {
-        const newList = allCourse.filter((course) => {
-          const check = course.attributes.course_categories.data.some((item) => item.attributes.name === category)
-          if (check) return course
-        })
-
-        setList(newList)
+        const data = allCourse?.filter((item) =>
+          categoryList?.every((cate) =>
+            item.attributes.course_categories.data.some((obj) => obj.attributes.name === cate)
+          )
+        )
+        setList(data)
       }
     } else {
       setList(allCourse)
@@ -101,22 +102,25 @@ const AllCoursePage = () => {
   }
 
   const handleChangeCategory = (checked: boolean, name: string) => {
+    const cloneCategory = category?.split('+')
+    const isExist = cloneCategory?.indexOf(name)
     if (checked) {
       if (category === '') {
         setSearchParams({ ...Object.fromEntries([...serchParams]), category: name })
       } else {
-        const newCategory = category?.split('+')
-        newCategory?.push(name)
-        setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
+        if (isExist === -1) {
+          cloneCategory?.push(name)
+          setSearchParams({ ...Object.fromEntries([...serchParams]), category: cloneCategory?.join('+') as string })
+        }
       }
-      const newCategory = category?.split('+')
-      newCategory?.push(name)
-      setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
     } else {
-      const cloneCategory = category?.split('+')
       const newCategory = cloneCategory?.filter((item) => item != name)
       setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
     }
+  }
+
+  const checkIncludeCategory = (name: string) => {
+    return category?.split('+').includes(name)
   }
 
   return (
@@ -273,7 +277,7 @@ const AllCoursePage = () => {
                   <AccordionDetails>
                     <FormGroup>
                       <FormControlLabel
-                        control={<Checkbox defaultChecked />}
+                        control={<Checkbox checked={checkIncludeCategory('all') || checkIncludeCategory('')} />}
                         label='Tất cả khóa học'
                         value='all'
                         onChange={(_, checked) => {
@@ -282,7 +286,7 @@ const AllCoursePage = () => {
                       />
                       <FormControlLabel
                         required
-                        control={<Checkbox />}
+                        control={<Checkbox checked={checkIncludeCategory('free_course')} />}
                         label='Khóa học miễn phí'
                         value='free_course'
                         onChange={(_, checked) => {
@@ -291,7 +295,7 @@ const AllCoursePage = () => {
                       />
                       <FormControlLabel
                         required
-                        control={<Checkbox />}
+                        control={<Checkbox checked={checkIncludeCategory('new_course')} />}
                         label='Khóa học mới'
                         value='new_course'
                         onChange={(_, checked) => {
