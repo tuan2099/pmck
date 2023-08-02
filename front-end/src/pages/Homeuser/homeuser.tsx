@@ -4,9 +4,9 @@ import sliderApi from 'src/apis/slider.api'
 import Slider from './Component/Slider'
 import CourseCard from 'src/components/CourseCard'
 import { Link } from 'react-router-dom'
-
 import { AppContext } from 'src/context/app.context'
 import Cardnew from './Component/Cardnew'
+import newApi from 'src/apis/new.api'
 
 function Homeuser() {
   // get data from context
@@ -17,6 +17,13 @@ function Homeuser() {
     queryKey: ['sliderImage'],
     queryFn: () => {
       return sliderApi.getSlider()
+    }
+  })
+
+  const { data: newsData } = useQuery({
+    queryKey: ['new'],
+    queryFn: () => {
+      return newApi.getNews()
     }
   })
 
@@ -142,7 +149,7 @@ function Homeuser() {
             Tin tức <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Nổi bật</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
-            <Link to='/course' className='flex items-center'>
+            <Link to='/new' className='flex items-center'>
               Xem tất cả{'   '}
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -158,7 +165,7 @@ function Homeuser() {
           </p>
         </div>
         <div className='grid grid-cols-4 gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          <Cardnew />
+          <Cardnew newsData={newsData} />
         </div>
       </div>
     </>

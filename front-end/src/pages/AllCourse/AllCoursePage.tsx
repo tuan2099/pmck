@@ -2,7 +2,6 @@
 import {
   Select,
   MenuItem,
-  InputLabel,
   FormControl,
   Pagination,
   Stack,
@@ -13,21 +12,24 @@ import {
   AccordionDetails,
   FormGroup,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Button
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import CourseCard from 'src/components/CourseCard'
 import { AppContext } from 'src/context/app.context'
 import { CourseType } from 'src/types/course.type'
+import Slider from '../Homeuser/Component/Slider'
+import { useQuery } from '@tanstack/react-query'
+import sliderApi from 'src/apis/slider.api'
 
-const COURSE_PER_PAGE = 2
+const COURSE_PER_PAGE = 9
 
 const AllCoursePage = () => {
   const { allCourse } = useContext(AppContext)
   const [serchParams, setSearchParams] = useSearchParams()
   const category = serchParams.get('category')
-
   const [list, setList] = useState<CourseType[]>([])
   const [data, setData] = useState<CourseType[]>([])
   const [page, setPage] = useState<number>(1)
@@ -123,9 +125,23 @@ const AllCoursePage = () => {
     return category?.split('+').includes(name)
   }
 
+  // call api slider
+  const { data: imageSliderdata } = useQuery({
+    queryKey: ['sliderImage'],
+    queryFn: () => {
+      return sliderApi.getSlider()
+    }
+  })
+
   return (
-    <div className='mt-9'>
-      <h2 className='px-20 text-2xl font-bold uppercase'>Tất cả khóa học</h2>
+    <div className=''>
+      <div className=' p-[25px]'>
+        <Slider imageSliderdata={imageSliderdata} />
+      </div>
+      <h2 className='px-20 text-center text-2xl font-bold uppercase'>Tất cả khóa học</h2>
+      <p className='mt-4 text-center text-[#afafaf]'>
+        Khám phá tri thức, thú vị và thành công với khóa học của chúng tôi
+      </p>
       <div className=' items-top mt-5 flex px-4 md:mt-14 md:px-20'>
         <div className='w-[75%] px-[15px]'>
           <div className='flex items-center justify-between pb-[50px]'>
@@ -171,8 +187,7 @@ const AllCoursePage = () => {
               </p>
             </div>
             <div className='flex w-[40%] items-center justify-end'>
-              <FormControl variant='standard' sx={{ m: 1, minWidth: 240 }}>
-                <InputLabel id='demo-simple-select-standard-label'>Sắp xếp theo tên</InputLabel>
+              <FormControl sx={{ m: 1, minWidth: 240 }}>
                 <Select
                   labelId='demo-simple-select-standard-label'
                   id='demo-simple-select-standard'
@@ -181,7 +196,7 @@ const AllCoursePage = () => {
                   onChange={(e) => setSortByName(e.target.value)}
                 >
                   <MenuItem value='none'>
-                    <em>None</em>
+                    <em className='text-[15px]'>Sắp xếp theo tên</em>
                   </MenuItem>
                   <MenuItem value='A-Z'>Từ A-Z</MenuItem>
                   <MenuItem value='Z-A'>Từ Z-A</MenuItem>
@@ -200,7 +215,7 @@ const AllCoursePage = () => {
           {Boolean(data.length) && listStyle === 'list' && (
             <div className='grid gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
               {data.map((course) => (
-                <div className='items-top flex w-full bg-white p-[12px]'>
+                <div className='items-top flex w-full bg-white p-[12px]' key={course.id}>
                   <div className='mr-[24px] w-[240px]'>
                     <img
                       src={`http://localhost:1337${
@@ -229,7 +244,7 @@ const AllCoursePage = () => {
         </div>
         <div className='w-[25%] px-[15px]'>
           <div className='pb-[50px]'>
-            <div className='mt-[25px] flex items-center justify-between rounded border p-[10px]'>
+            <div className='mt-[8px] flex items-center justify-between rounded border p-[10px]'>
               <h4 className='flex items-center text-[16px] font-semibold'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -247,9 +262,9 @@ const AllCoursePage = () => {
                 </svg>
                 Tìm kiếm
               </h4>
-              <div className='cursor-pointer' onClick={handleShowAllPanel}>
-                Hiện toàn bộ
-              </div>
+              <Button className='cursor-pointer' onClick={handleShowAllPanel}>
+                <p className='font-semibold text-black'>Hiện toàn bộ</p>
+              </Button>
             </div>
           </div>
           <div className=''>
@@ -272,7 +287,7 @@ const AllCoursePage = () => {
                     aria-controls='panel1bh-content'
                     id='panel1bh-header'
                   >
-                    <Typography sx={{ width: '50%', flexShrink: 0 }}>Danh mục khóa học</Typography>
+                    <Typography sx={{ width: '70%', flexShrink: 0 }}>Danh mục khóa học</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <FormGroup>
@@ -322,7 +337,7 @@ const AllCoursePage = () => {
                     aria-controls='panel1bh-content'
                     id='panel1bh-header'
                   >
-                    <Typography sx={{ width: '50%', flexShrink: 0 }}>Danh mục khóa học</Typography>
+                    <Typography sx={{ width: '70%', flexShrink: 0 }}>Danh mục khóa học</Typography>
                   </AccordionSummary>
                   <AccordionDetails>
                     <FormGroup>
