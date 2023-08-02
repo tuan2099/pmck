@@ -15,13 +15,15 @@ import {
   FormControlLabel,
   Checkbox
 } from '@mui/material'
+import { useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import courseApi from 'src/apis/course.api'
 import CourseCard from 'src/components/CourseCard'
 import { AppContext } from 'src/context/app.context'
 import { CourseType } from 'src/types/course.type'
 
-const COURSE_PER_PAGE = 2
+const COURSE_PER_PAGE = 9
 
 const AllCoursePage = () => {
   const { allCourse } = useContext(AppContext)
@@ -39,6 +41,11 @@ const AllCoursePage = () => {
   const [listStyle, setListStyle] = useState<'list' | 'grid'>('grid')
   const [isShowAll, setIsShowAll] = useState(false)
 
+  const { data: courseCategories } = useQuery({
+    queryKey: ['course-categories'],
+    queryFn: () => courseApi.getCourseCategories()
+  })
+
   useEffect(() => {
     const categoryList = category?.split('+')
     if (category && allCourse.length) {
@@ -46,9 +53,9 @@ const AllCoursePage = () => {
         setList(allCourse)
       } else {
         const data = allCourse?.filter((item) =>
-          categoryList?.every((cate) =>
-            item.attributes.course_categories.data.some((obj) => obj.attributes.name === cate)
-          )
+          categoryList
+            ?.filter((item) => item !== 'all')
+            ?.every((cate) => item.attributes.course_categories.data.some((obj) => obj.attributes.name === cate))
         )
         setList(data)
       }
@@ -105,7 +112,7 @@ const AllCoursePage = () => {
     const cloneCategory = category?.split('+')
     const isExist = cloneCategory?.indexOf(name)
     if (checked) {
-      if (category === '') {
+      if (category === '' || !category) {
         setSearchParams({ ...Object.fromEntries([...serchParams]), category: name })
       } else {
         if (isExist === -1) {
@@ -277,31 +284,23 @@ const AllCoursePage = () => {
                   <AccordionDetails>
                     <FormGroup>
                       <FormControlLabel
-                        control={<Checkbox checked={checkIncludeCategory('all') || checkIncludeCategory('')} />}
+                        control={<Checkbox checked={checkIncludeCategory('all')} />}
                         label='Tất cả khóa học'
                         value='all'
                         onChange={(_, checked) => {
                           handleChangeCategory(checked, 'all')
                         }}
                       />
-                      <FormControlLabel
-                        required
-                        control={<Checkbox checked={checkIncludeCategory('free_course')} />}
-                        label='Khóa học miễn phí'
-                        value='free_course'
-                        onChange={(_, checked) => {
-                          handleChangeCategory(checked, 'free_course')
-                        }}
-                      />
-                      <FormControlLabel
-                        required
-                        control={<Checkbox checked={checkIncludeCategory('new_course')} />}
-                        label='Khóa học mới'
-                        value='new_course'
-                        onChange={(_, checked) => {
-                          handleChangeCategory(checked, 'new_course')
-                        }}
-                      />
+                      {courseCategories?.data.data.map((item: any) => (
+                        <FormControlLabel
+                          required
+                          control={<Checkbox checked={checkIncludeCategory(item.attributes.name)} />}
+                          label={item.attributes.title}
+                          onChange={(_, checked) => {
+                            handleChangeCategory(checked, item.attributes.name)
+                          }}
+                        />
+                      ))}
                     </FormGroup>
                   </AccordionDetails>
                 </Accordion>

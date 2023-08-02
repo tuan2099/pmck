@@ -45,6 +45,9 @@ const courseApi = {
         }
       }
     )
+  },
+  getCourseCategories() {
+    return http.get('/course-categories')
   }
 }
 
