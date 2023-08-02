@@ -23,7 +23,6 @@ import CourseCard from 'src/components/CourseCard'
 import { AppContext } from 'src/context/app.context'
 import { CourseType } from 'src/types/course.type'
 import Slider from '../Homeuser/Component/Slider'
-import { useQuery } from '@tanstack/react-query'
 import sliderApi from 'src/apis/slider.api'
 
 const COURSE_PER_PAGE = 9
