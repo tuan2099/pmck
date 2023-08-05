@@ -10,6 +10,7 @@ import { AppContext } from 'src/context/app.context'
 import LessonItem from './Component/LessonItem'
 import Drawer from '@mui/material/Drawer'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
+import LessonItemQuiz from './Component/LessonItemQuiz'
 function Course_detail() {
   // setting video from Youtube
   const [chooseItem, setChooseItem] = useState<any>()
@@ -29,7 +30,6 @@ function Course_detail() {
     queryFn: () => courseApi.getDetailCourse(pageID as string),
     enabled: Boolean(pageID)
   })
-
   // getComplete lesson
   const { refetch } = useQuery({
     queryKey: ['complete lesson'],
@@ -135,6 +135,16 @@ function Course_detail() {
                             setChooseItem={setChooseItem}
                             key={item.id}
                             completedLessonList={newArrLesson}
+                          />
+                        ))}
+                      {item.attributes.quizzes &&
+                        item.attributes.quizzes.data?.map((item: any) => (
+                          <LessonItemQuiz
+                            item={item}
+                            key={item.id}
+                            chooseItem={chooseItem}
+                            setLessonId={setLessonId}
+                            setChooseItem={setChooseItem}
                           />
                         ))}
                     </div>
