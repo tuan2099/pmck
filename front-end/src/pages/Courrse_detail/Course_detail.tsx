@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import Youtube from 'react-youtube'
 import Nav_course_detail from './Component/Nav_course_detail'
@@ -11,14 +11,16 @@ import LessonItem from './Component/LessonItem'
 import Drawer from '@mui/material/Drawer'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 import LessonItemQuiz from './Component/LessonItemQuiz'
+import QuizzDetail from './Component/QuizDetail'
 function Course_detail() {
   // setting video from Youtube
-  const [chooseItem, setChooseItem] = useState<any>()
+  const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | ''; data: any }>({ type: '', data: null })
   const [total, setTotal] = useState<number>(0)
   const [newArrLesson, setNewArrLesson] = useState<any[]>([])
   const [lessonId, setLessonId] = useState(null)
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const { profile } = useContext(AppContext)
+  const [_, setParams] = useSearchParams()
 
   // get id from url
   const { id } = useParams()
@@ -28,7 +30,15 @@ function Course_detail() {
   const courseData = useQuery({
     queryKey: ['course detail', pageID],
     queryFn: () => courseApi.getDetailCourse(pageID as string),
-    enabled: Boolean(pageID)
+    enabled: Boolean(pageID),
+    onSuccess: (data) => {
+      const firstLeson = data.data.data.attributes.chapters.data[0].attributes.lesson_items.data[0]
+      setParams((prev) => {
+        return { ...prev, id: firstLeson.attributes.title + firstLeson.id }
+      })
+      setChooseItem({ type: 'video', data: firstLeson })
+      setLessonId(firstLeson.id)
+    }
   })
   // getComplete lesson
   const { refetch } = useQuery({
@@ -154,27 +164,34 @@ function Course_detail() {
             </div>
           </div>
           <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
-            <div className='relative w-full select-none bg-black px-[8.5%]'>
-              <div className='relative pt-[56.25%]'>
-                {chooseItem && (
-                  <Youtube
-                    className='absolute inset-0 overflow-hidden'
-                    opts={{
-                      width: '100%',
-                      height: '100%'
-                    }}
-                    videoId={chooseItem?.attributes.video_url.toString() || ''}
-                    onEnd={handleEndVideo}
-                  />
+            {chooseItem.type === 'video' && (
+              <>
+                {!chooseItem?.data?.attributes.video_url && <div>Video hiện đang gặp sự cố</div>}
+                {chooseItem?.data?.attributes.video_url && (
+                  <div className='relative w-full select-none bg-black px-[8.5%]'>
+                    <div className='relative pt-[56.25%]'>
+                      <Youtube
+                        className='absolute inset-0 overflow-hidden'
+                        opts={{
+                          width: '100%',
+                          height: '100%'
+                        }}
+                        videoId={chooseItem?.data?.attributes.video_url.toString() || ''}
+                        onEnd={handleEndVideo}
+                      />
+                    </div>
+                  </div>
                 )}
-              </div>
-            </div>
+              </>
+            )}
+
+            {chooseItem.type === 'quizz' && <QuizzDetail id={chooseItem.data.id} />}
             <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
               <div className='w-'>
-                <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.attributes.title}</h1>
+                <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.data?.attributes.title}</h1>
                 <p className='text-[14px] text-slate-400'>
-                  {Boolean(chooseItem?.attributes.updatedAt) &&
-                    `Cập nhập ${covertTimeStamp(chooseItem?.attributes.updatedAt)}`}
+                  {Boolean(chooseItem?.data?.attributes.updatedAt) &&
+                    `Cập nhập ${covertTimeStamp(chooseItem?.data?.attributes.updatedAt)}`}
                 </p>
                 <p className=''></p>
               </div>

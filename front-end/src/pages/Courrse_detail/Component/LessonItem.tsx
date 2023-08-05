@@ -27,7 +27,7 @@ const LessonItem = (props: IProps) => {
         setParams((prev) => {
           return { ...prev, id: item.attributes.title + item.id }
         })
-        setChooseItem(item)
+        setChooseItem({ type: 'video', data: item })
         setLessonId(item.id)
       }}
       style={{

@@ -14,7 +14,7 @@ function LessonItemQuiz({ item, chooseItem, setLessonId, setChooseItem }: any) {
           setParams((prev) => {
             return { ...prev, id: item.attributes.title + item.id }
           })
-          setChooseItem(item)
+          setChooseItem({ type: 'quizz', data: item })
           setLessonId(item.id)
         }}
         style={{

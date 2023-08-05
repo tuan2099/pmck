@@ -33,3 +33,8 @@ export type CourseResponseType = {
     }
   }
 }
+
+export type TResults = {
+  id: string
+  fraction: number
+}
