@@ -1,31 +1,19 @@
 /* eslint-disable no-extra-boolean-cast */ // hide err in line 44
-import {
-  Select,
-  MenuItem,
-  FormControl,
-  Pagination,
-  Stack,
-  Tooltip,
-  Accordion,
-  AccordionSummary,
-  Typography,
-  AccordionDetails,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Button
-} from '@mui/material'
+import { Pagination, Stack, Button } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
-import CourseCard from 'src/components/CourseCard'
 import { AppContext } from 'src/context/app.context'
 import { CourseType } from 'src/types/course.type'
 import Slider from '../Homeuser/Component/Slider'
 import sliderApi from 'src/apis/slider.api'
+import SearchAllCourse from './Component/searchAllCourse'
+import ListCourse from './Component/ListCourse'
+import GridCourse from './Component/GridCourse'
+import Fillter from './Component/Fillter'
 
-const COURSE_PER_PAGE = 9
+const COURSE_PER_PAGE = 9 // show number in course
 
 const AllCoursePage = () => {
   const { allCourse } = useContext(AppContext)
@@ -41,11 +29,6 @@ const AllCoursePage = () => {
   })
   const [listStyle, setListStyle] = useState<'list' | 'grid'>('grid')
   const [isShowAll, setIsShowAll] = useState(false)
-
-  const { data: courseCategories } = useQuery({
-    queryKey: ['course-categories'],
-    queryFn: () => courseApi.getCourseCategories()
-  })
 
   useEffect(() => {
     const categoryList = category?.split('+')
@@ -84,6 +67,7 @@ const AllCoursePage = () => {
     setData(currentCourse)
   }, [sortByName, page, list])
 
+  // toogle show fillter box
   const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
     const newExpanded = JSON.parse(JSON.stringify(expanded))
     for (const key in expanded) {
@@ -94,6 +78,7 @@ const AllCoursePage = () => {
     setExpanded(newExpanded)
   }
 
+  // toogle show all fillter boxex
   const handleShowAllPanel = () => {
     const newExpanded = JSON.parse(JSON.stringify(expanded))
     if (isShowAll) {
@@ -109,6 +94,7 @@ const AllCoursePage = () => {
     setIsShowAll(!isShowAll)
   }
 
+  // setting checkbox filter
   const handleChangeCategory = (checked: boolean, name: string) => {
     const cloneCategory = category?.split('+')
     const isExist = cloneCategory?.indexOf(name)
@@ -127,6 +113,7 @@ const AllCoursePage = () => {
     }
   }
 
+  // setting checkbox filter
   const checkIncludeCategory = (name: string) => {
     return category?.split('+').includes(name)
   }
@@ -137,6 +124,12 @@ const AllCoursePage = () => {
     queryFn: () => {
       return sliderApi.getSlider()
     }
+  })
+
+  // call api course Category
+  const { data: courseCategories } = useQuery({
+    queryKey: ['course-categories'],
+    queryFn: () => courseApi.getCourseCategories()
   })
 
   return (
@@ -150,96 +143,16 @@ const AllCoursePage = () => {
       </p>
       <div className=' items-top mt-5 flex px-4 md:mt-14 md:px-20'>
         <div className='w-[75%] px-[15px]'>
-          <div className='flex items-center justify-between pb-[50px]'>
-            <div className='flex w-[40%] items-center '>
-              <Tooltip title='Hiển thị dạng danh sách' placement='top' onClick={() => setListStyle('list')}>
-                <div className='mx-[5px] flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-[5px] border hover:border-[#1e7115] hover:text-[#1e7115]'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='h-7 w-7 font-semibold'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z'
-                    />
-                  </svg>
-                </div>
-              </Tooltip>
-              <Tooltip title='Hiển thị dạng lưới' placement='top' onClick={() => setListStyle('grid')}>
-                <div className='mx-[5px] flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-[5px] border hover:border-[#1e7115] hover:text-[#1e7115]'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='h-7 w-7'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5'
-                    />
-                  </svg>
-                </div>
-              </Tooltip>
-              <p className='ml-[10px] border-l-2 pl-4 text-[16px] font-medium text-black'>
-                {`Hiển thị ${data.length}/${list.length} khóa học`}{' '}
-              </p>
-            </div>
-            <div className='flex w-[40%] items-center justify-end'>
-              <FormControl sx={{ m: 1, minWidth: 240 }}>
-                <Select
-                  labelId='demo-simple-select-standard-label'
-                  id='demo-simple-select-standard'
-                  label='Age'
-                  value={sortByName}
-                  onChange={(e) => setSortByName(e.target.value)}
-                >
-                  <MenuItem value='none'>
-                    <em className='text-[15px]'>Sắp xếp theo tên</em>
-                  </MenuItem>
-                  <MenuItem value='A-Z'>Từ A-Z</MenuItem>
-                  <MenuItem value='Z-A'>Từ Z-A</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-          </div>
-          {Boolean(data.length) && listStyle === 'grid' && (
-            <div className='grid gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
-              {data.map((course) => (
-                <CourseCard courseItem={course} key={course.id} />
-              ))}
-            </div>
-          )}
+          <SearchAllCourse
+            setListStyle={setListStyle}
+            list={list}
+            data={data}
+            setSortByName={setSortByName}
+            sortByName={sortByName}
+          />
+          <GridCourse data={data} listStyle={listStyle} />
 
-          {Boolean(data.length) && listStyle === 'list' && (
-            <div className='grid gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'>
-              {data.map((course) => (
-                <div className='items-top flex w-full bg-white p-[12px]' key={course.id}>
-                  <div className='mr-[24px] w-[240px]'>
-                    <img
-                      src={`http://localhost:1337${
-                        course.attributes?.banner_course
-                          ? course.attributes?.banner_course.data[0].attributes?.formats.medium?.url
-                          : course.banner_course[0].formats.medium.url
-                      }`}
-                      alt=''
-                    />
-                  </div>
-                  <div>
-                    <h4>{course.attributes.course_name}</h4>
-                    <p>{course.attributes.short_description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <ListCourse data={data} listStyle={listStyle} />
 
           {!Boolean(data.length) && <h3>Không có khóa học nào.</h3>}
           <div className='my-8 flex justify-center'>
@@ -274,102 +187,13 @@ const AllCoursePage = () => {
             </div>
           </div>
           <div className=''>
-            <div>
-              <div>
-                <Accordion expanded={expanded.panel1} onChange={handleChange('panel1')}>
-                  <AccordionSummary
-                    expandIcon={
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        strokeWidth={1.5}
-                        stroke='currentColor'
-                        className='h-6 w-6'
-                      >
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
-                      </svg>
-                    }
-                    aria-controls='panel1bh-content'
-                    id='panel1bh-header'
-                  >
-                    <Typography sx={{ width: '70%', flexShrink: 0 }}>Danh mục khóa học</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox checked={checkIncludeCategory('all')} />}
-                        label='Tất cả khóa học'
-                        value='all'
-                        onChange={(_, checked) => {
-                          handleChangeCategory(checked, 'all')
-                        }}
-                      />
-                      {courseCategories?.data.data.map((item: any) => (
-                        <FormControlLabel
-                          required
-                          control={<Checkbox checked={checkIncludeCategory(item.attributes.name)} />}
-                          label={item.attributes.title}
-                          onChange={(_, checked) => {
-                            handleChangeCategory(checked, item.attributes.name)
-                          }}
-                        />
-                      ))}
-                    </FormGroup>
-                  </AccordionDetails>
-                </Accordion>
-                <Accordion expanded={expanded.panel2} onChange={handleChange('panel2')}>
-                  <AccordionSummary
-                    expandIcon={
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        strokeWidth={1.5}
-                        stroke='currentColor'
-                        className='h-6 w-6'
-                      >
-                        <path strokeLinecap='round' strokeLinejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' />
-                      </svg>
-                    }
-                    aria-controls='panel1bh-content'
-                    id='panel1bh-header'
-                  >
-                    <Typography sx={{ width: '70%', flexShrink: 0 }}>Danh mục khóa học</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox defaultChecked />}
-                        label='Tất cả khóa học'
-                        value='all'
-                        onChange={(_, checked) => {
-                          handleChangeCategory(checked, 'all')
-                        }}
-                      />
-                      <FormControlLabel
-                        required
-                        control={<Checkbox />}
-                        label='Khóa học miễn phí'
-                        value='free_course'
-                        onChange={(_, checked) => {
-                          handleChangeCategory(checked, 'free_course')
-                        }}
-                      />
-                      <FormControlLabel
-                        required
-                        control={<Checkbox />}
-                        label='Khóa học mới'
-                        value='new_course'
-                        onChange={(_, checked) => {
-                          handleChangeCategory(checked, 'new_course')
-                        }}
-                      />
-                    </FormGroup>
-                  </AccordionDetails>
-                </Accordion>
-              </div>
-            </div>
+            <Fillter
+              handleChange={handleChange}
+              checkIncludeCategory={checkIncludeCategory}
+              handleChangeCategory={handleChangeCategory}
+              courseCategories={courseCategories}
+              expanded={expanded}
+            />
           </div>
         </div>
       </div>

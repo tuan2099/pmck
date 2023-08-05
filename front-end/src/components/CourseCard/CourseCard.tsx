@@ -25,7 +25,7 @@ function CourseCard(props: IProps) {
                 id: courseItem.id
               })}`
         }
-        className='mb-[30px] w-full cursor-pointer px-3'
+        className='mb-[30px] w-full cursor-pointer px-1'
       >
         <div
           className='w-full rounded-2xl pt-[56.25%] '
