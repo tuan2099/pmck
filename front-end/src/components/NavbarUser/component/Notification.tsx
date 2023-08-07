@@ -18,7 +18,7 @@ function Notification() {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title='Hồ sơ người dùng'>
+        <Tooltip title='Thông báo'>
           <IconButton
             onClick={handleClick}
             size='small'
