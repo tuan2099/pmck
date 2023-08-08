@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { styled, alpha } from '@mui/material/styles'
 import { AppContext } from 'src/context/app.context'
-import { ROUTES } from 'src/useRouterElement'
-import FeaturedCourse from './components/FeaturedCourse'
 import { useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import { FaChalkboardTeacher, FaHandsHelping, FaSchool, FaUserGraduate } from 'react-icons/fa'
 // import Button from 'src/components/Button'
+import { FaMoneyCheckAlt, FaSitemap } from 'react-icons/fa'
 import logo from 'src/assets/logo.png'
 import { Menu, Button, MenuProps } from '@mui/material'
 const COUNT_UP_LIST = [
@@ -145,19 +144,19 @@ function HomeGuest() {
                     <li>
                       <Link to='/' className='my-4 flex items-center rounded-[10px] p-3 transition hover:bg-[#f4fcf3]'>
                         <div>
-                          <img src='' alt='icon' />
+                          <FaMoneyCheckAlt className='text-3xl' />
                         </div>
                         <div className='ml-3'>
-                          <h5 className='font-semibold'>Đây là tiêu đề</h5>
+                          <h5 className='font-semibold'>Quản lý tài chính kế toán</h5>
                           <p className='text-sm'>Form là một phần khá là quan trọng </p>
                         </div>
                       </Link>
                       <Link to='/' className='my-4 flex items-center rounded-[10px] p-3 transition hover:bg-[#f4fcf3]'>
                         <div>
-                          <img src='' alt='icon' />
+                          <FaSitemap className='text-3xl' />
                         </div>
                         <div className='ml-3'>
-                          <h5 className='font-semibold'>Đây là tiêu đề</h5>
+                          <h5 className='font-semibold'>Orientation</h5>
                           <p className='text-sm'>Form là một phần khá là quan trọng </p>
                         </div>
                       </Link>
