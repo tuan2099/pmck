@@ -166,7 +166,33 @@ function Course_detail() {
           <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
             {chooseItem.type === 'video' && (
               <>
-                {!chooseItem?.data?.attributes.video_url && <div>Video hiện đang gặp sự cố</div>}
+                {!chooseItem?.data?.attributes.video_url && (
+                  <>
+                    <div className='relative w-full select-none bg-black px-[8.5%]'>
+                      <div className='relative pt-[56.25%]'>
+                        <div className=' absolute bottom-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth={1.5}
+                            stroke='currentColor'
+                            className='h-20 w-20 text-white'
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z'
+                            />
+                          </svg>
+                          <div className='ml-4 text-xl text-white'>
+                            Bài học đang gặp sự cố, vui lòng liên hệ Admin để giải quyết
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
                 {chooseItem?.data?.attributes.video_url && (
                   <div className='relative w-full select-none bg-black px-[8.5%]'>
                     <div className='relative pt-[56.25%]'>
@@ -195,36 +221,38 @@ function Course_detail() {
                 </p>
                 <p className=''></p>
               </div>
-              <div className='mt-[48px]'>
-                <button
-                  onClick={toogleDrawer}
-                  className='flex items-center rounded bg-[#ebebeb] px-[16px] py-[6px] transition hover:bg-[#b6b6b6]'
-                >
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='mr-2 h-6 w-6 '
+              {chooseItem?.data?.attributes.video_url && (
+                <div className='mt-[48px]'>
+                  <button
+                    onClick={toogleDrawer}
+                    className='flex items-center rounded bg-[#ebebeb] px-[16px] py-[6px] transition hover:bg-[#b6b6b6]'
                   >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-                  Thêm ghi chú tạm thời
-                </button>
-                <Drawer open={openDrawer} anchor='right' onClose={toogleDrawer}>
-                  <div className='w-[43%] min-w-[720px] max-w-full'>
-                    <div className='p-6'>
-                      <h2 className='text-2xl font-bold'>Ghi chú của tôi</h2>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      strokeWidth={1.5}
+                      stroke='currentColor'
+                      className='mr-2 h-6 w-6 '
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
+                      />
+                    </svg>
+                    Thêm ghi chú tạm thời
+                  </button>
+                  <Drawer open={openDrawer} anchor='right' onClose={toogleDrawer}>
+                    <div className='w-[43%] min-w-[720px] max-w-full'>
+                      <div className='p-6'>
+                        <h2 className='text-2xl font-bold'>Ghi chú của tôi</h2>
+                      </div>
+                      <div className='p-6'>1</div>
                     </div>
-                    <div className='p-6'>1</div>
-                  </div>
-                </Drawer>
-              </div>
+                  </Drawer>
+                </div>
+              )}
             </div>
           </div>
           <Control />

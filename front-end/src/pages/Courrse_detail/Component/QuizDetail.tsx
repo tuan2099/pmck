@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
+import { Button } from '@mui/material'
 
 const QuizzDetail = ({ id }: { id: any }) => {
   const navigate = useNavigate()
@@ -81,17 +82,25 @@ const QuizzDetail = ({ id }: { id: any }) => {
   }, [timeLimit])
 
   return (
-    <div className='px-4'>
-      <h1>{quizz?.attributes.name}</h1>
-      <h2>{`Thời gian làm bài: ${convertMinutes(timeLimit)}`}</h2>
-      <div className='flex flex-col gap-5'>
+    <div className='w-full px-[10%]'>
+      <div className='my-8 flex items-center justify-between border-t-4 p-3'>
+        <h1 className='text-xl font-semibold uppercase'>{quizz?.attributes.name}</h1>
+        <h2>
+          Thời gian làm bài:{' '}
+          <span className='rounded-[5px] bg-[#1e7115] p-2 text-xl font-semibold text-white'>
+            {convertMinutes(timeLimit)}
+          </span>
+        </h2>
+      </div>
+      <div className=' my-5 flex flex-col gap-5'>
         {quizz?.attributes?.questions?.data.map((question: any) => (
           <QuizzGroup quizz={question} key={question.id} onChangeResult={onChangeResult} />
         ))}
       </div>
-      <button className='mt-5 rounded bg-slate-200 px-4 py-2 shadow-xl' onClick={handleSubmit}>
+
+      <Button variant='contained' color='success' onClick={handleSubmit}>
         Nộp bài
-      </button>
+      </Button>
     </div>
   )
 }

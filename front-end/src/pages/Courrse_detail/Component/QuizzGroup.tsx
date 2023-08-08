@@ -1,3 +1,4 @@
+import { Checkbox } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { TResults } from 'src/types/course.type'
 import { QUESTION_TYPE } from 'src/utils/constant'
@@ -44,11 +45,20 @@ const QuizzGroup = (props: IProps) => {
 
   return (
     <div className='flex flex-col gap-2' key={quizz.id}>
-      <h3 className='font-semibold'>{`${quizz.attributes.name}: ${quizz.attributes.questiontext}`}</h3>
+      <div className='items-top mt-4 flex text-xl '>
+        <h4 className='w-[12%] font-semibold'>{quizz.attributes.name} : </h4>
+
+        <p className='mt-1 w-[80%] text-base'>{quizz.attributes.questiontext}</p>
+      </div>
       {Boolean(quizz.attributes.question_media.data) && (
         <div className='flex gap-5'>
           {quizz.attributes.question_media.data.map((image: any) => (
-            <img className='h-32 w-52 object-cover' src={`http://localhost:1337${image.attributes.url}`} />
+            <img
+              key={image.id}
+              className='h-32 w-52 object-cover'
+              src={`http://localhost:1337${image.attributes.url}`}
+              alt='hình ảnh'
+            />
           ))}
         </div>
       )}
@@ -57,8 +67,7 @@ const QuizzGroup = (props: IProps) => {
         <div>
           {quizz.attributes.question_answers.data.map((answer: any) => (
             <div key={answer.id}>
-              <input
-                type='checkbox'
+              <Checkbox
                 value={answer.attributes.fraction}
                 id={`quizz ${quizz.id} answer ${answer.id}`}
                 name={`quizz ${quizz.id} answer ${answer.id}`}
@@ -102,6 +111,7 @@ const QuizzGroup = (props: IProps) => {
                 <img
                   className='h-32 w-52 object-cover'
                   src={`http://localhost:1337${answer.attributes.answers_media.data[0].attributes.url}`}
+                  alt='hình ảnh'
                 />
               </label>
             </div>
