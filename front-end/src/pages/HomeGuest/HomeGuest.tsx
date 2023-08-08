@@ -92,7 +92,7 @@ function HomeGuest() {
   let timeoutId: NodeJS.Timeout | null = null
 
   const handleClose = () => {
-    if (!!timeoutId) {
+    if (timeoutId) {
       clearTimeout(timeoutId)
     }
     timeoutId = setTimeout(() => {
@@ -105,7 +105,7 @@ function HomeGuest() {
   }
 
   const handleMenuEnter = () => {
-    if (!!timeoutId) {
+    if (timeoutId) {
       clearTimeout(timeoutId)
     }
   }
