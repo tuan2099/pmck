@@ -41,9 +41,9 @@
     "timeopen": {
       "type": "datetime"
     },
-    "quiz_grade": {
+    "quiz_grades": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::quiz-grade.quiz-grade",
       "mappedBy": "quiz"
     }

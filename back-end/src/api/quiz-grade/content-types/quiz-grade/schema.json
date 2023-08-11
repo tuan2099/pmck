@@ -4,7 +4,8 @@
   "info": {
     "singularName": "quiz-grade",
     "pluralName": "quiz-grades",
-    "displayName": "Quiz_grade"
+    "displayName": "Quiz_grade",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,9 +23,9 @@
     },
     "quiz": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::quiz.quiz",
-      "inversedBy": "quiz_grade"
+      "inversedBy": "quiz_grades"
     }
   }
 }
