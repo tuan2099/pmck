@@ -1,17 +1,19 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
 import { Button } from '@mui/material'
+import { AppContext } from 'src/context/app.context'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import courseApi from 'src/apis/course.api'
 
 const QuizzDetail = ({ id }: { id: any }) => {
   const navigate = useNavigate()
+  const { profile } = useContext(AppContext)
 
   const [quizz, setQuizz] = useState<any | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [results, setResults] = useState<TResults[]>([])
   const [timeLimit, setTimeLimit] = useState<number | null>(null)
 
@@ -28,47 +30,47 @@ const QuizzDetail = ({ id }: { id: any }) => {
     setResults(newResults)
   }
 
-  const handleSubmit = async () => {
-    const scorePerQuestion = 10 / quizz?.attributes?.questions?.data.length
-    const totalScore = results.reduce((total, question) => {
-      if (question.fraction) {
-        return total + scorePerQuestion
-      } else {
-        return total
+  const handleSubmit = useMutation({
+    mutationFn: () => {
+      const scorePerQuestion = 10 / quizz?.attributes?.questions?.data.length
+      const totalScore = results.reduce((total, question) => {
+        if (question.fraction) {
+          return total + scorePerQuestion
+        } else {
+          return total
+        }
+      }, 0)
+      const data = {
+        users_permissions_user: 3,
+        quiz: 1,
+        gr: totalScore
       }
-    }, 0)
-    const data = {
-      user: 3,
-      quiz: 1,
-      grade: totalScore
+      return courseApi.postQuizGrade(data)
+    },
+    onSuccess: (data) => {
+      toast(`Bạn được ${data.data.data.attributes.gr} điểm.`)
     }
+  })
 
-    await axios.post(`http://localhost:1337/api/quiz-grades`, { data })
-    // navigate('/')
-    toast(`Bạn đã đạt được ${totalScore}`)
-  }
-
-  const getQuizzDetail = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:1337/api/quizzes/${id}?populate[0]=questions.question_media&populate=questions.question_answers.answers_media`
-      )
-      setQuizz(response.data.data)
-      setTimeLimit(response.data.data.attributes.timelimit)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
+  const checkQuizCompleted = useQuery({
+    queryKey: ['checkQuizCompleted', id, profile?.id],
+    queryFn: () => courseApi.checkQuizComplete({ quizID: id, userID: profile?.id as number }),
+    onSuccess: (data) => {
+      if (data.data.isCompleted) {
+        toast('Bạn đã hoàn thành bài thi')
+      }
     }
-  }
+  })
 
-  useEffect(() => {
-    getQuizzDetail()
-  }, [])
+  const quizData = useQuery({
+    queryKey: ['getQuizDetail', id],
+    queryFn: () => courseApi.getQuizDetail(id),
+    enabled: !checkQuizCompleted.data?.data.isCompleted
+  })
 
   useEffect(() => {
     if (timeLimit === 0) {
-      handleSubmit()
+      handleSubmit.mutate()
       return
     }
 
@@ -78,30 +80,65 @@ const QuizzDetail = ({ id }: { id: any }) => {
       }
     }, 1000)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+    }
   }, [timeLimit])
 
-  return (
-    <div className='w-full px-[10%]'>
-      <div className='my-8 flex items-center justify-between border-t-4 p-3'>
-        <h1 className='text-xl font-semibold uppercase'>{quizz?.attributes.name}</h1>
-        <h2>
-          Thời gian làm bài:{' '}
-          <span className='rounded-[5px] bg-[#1e7115] p-2 text-xl font-semibold text-white'>
-            {convertMinutes(timeLimit)}
-          </span>
-        </h2>
-      </div>
-      <div className=' my-5 flex flex-col gap-5'>
-        {quizz?.attributes?.questions?.data.map((question: any) => (
-          <QuizzGroup quizz={question} key={question.id} onChangeResult={onChangeResult} />
-        ))}
-      </div>
+  useEffect(() => {
+    window.addEventListener('beforeunload', () => {
+      handleSubmit.mutate()
+    })
+    return () => {
+      window.removeEventListener('beforeunload', () => {
+        handleSubmit.mutate()
+      })
+    }
+  }, [])
 
-      <Button variant='contained' color='success' onClick={handleSubmit}>
-        Nộp bài
-      </Button>
-    </div>
+  return (
+    <>
+      {!quizz && (
+        <div className='flex h-[90vh] w-full'>
+          <div className='m-auto'>
+            {!checkQuizCompleted.data?.data.isCompleted && quizData.data?.data.data && (
+              <Button variant='contained' color='success' onClick={() => setQuizz(quizData.data.data.data)}>
+                Bắt đầu làm bài
+              </Button>
+            )}
+
+            {checkQuizCompleted.data?.data.isCompleted && (
+              <Button variant='contained' color='success'>
+                Bạn đã hoàn thành bài thi rồi
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {quizz && (
+        <div className='w-full px-[10%]'>
+          <div className='my-8 flex items-center justify-between border-t-4 p-3'>
+            <h1 className='text-xl font-semibold uppercase'>{quizz?.attributes.name}</h1>
+            <h2>
+              Thời gian làm bài:{' '}
+              <span className='rounded-[5px] bg-[#1e7115] p-2 text-xl font-semibold text-white'>
+                {convertMinutes(timeLimit)}
+              </span>
+            </h2>
+          </div>
+          <div className=' my-5 flex flex-col gap-5'>
+            {quizz?.attributes?.questions?.data.map((question: any) => (
+              <QuizzGroup quizz={question} key={question.id} onChangeResult={onChangeResult} />
+            ))}
+          </div>
+
+          <Button variant='contained' color='success' onClick={() => handleSubmit.mutate()}>
+            Nộp bài
+          </Button>
+        </div>
+      )}
+    </>
   )
 }
 
