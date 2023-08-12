@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleMenuItem } from './styleMenuItem'
 import { Link } from 'react-router-dom'
 import { StyledMenu } from './styleMenu'
-import { FaAngleDown, FaMoneyCheckAlt, FaSitemap } from 'react-icons/fa'
+import { FaAngleDown } from 'react-icons/fa'
 import { Button } from '@mui/material'
 import MainMenuItem from './MainMenuItem'
 
