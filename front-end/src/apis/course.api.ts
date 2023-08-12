@@ -48,6 +48,17 @@ const courseApi = {
   },
   getCourseCategories() {
     return http.get('/course-categories')
+  },
+  getQuizDetail(id: string | number) {
+    return http.get(
+      `/quizzes/${id}?populate[0]=questions.question_media&populate=questions.question_answers.answers_media`
+    )
+  },
+  checkQuizComplete({ quizID, userID }: { quizID: string | number; userID: string | number }) {
+    return http.get(`/check-quiz-completed?quizID=${quizID}&userID=${userID}`)
+  },
+  postQuizGrade(data: { users_permissions_user: number; quiz: number; gr: number }) {
+    return http.post('/quiz-grades', { data })
   }
 }
 
