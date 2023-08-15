@@ -1,18 +1,28 @@
-import { block1 } from './dataMenu'
+import { useQuery } from '@tanstack/react-query'
 import MainMenuList from './mainMenuList'
+import mainmenuApi from 'src/apis/menuApi'
 
 function MainMenu() {
+  // get data main menu
+  const { data: mainMenuData } = useQuery({
+    queryKey: ['mainMenuData'],
+    queryFn: () => {
+      return mainmenuApi.getMainmenu()
+    }
+  })
   return (
     <>
       <ul className='flex  items-center justify-between'>
-        <li className='font-semibold'>Về chúng tôi</li>
-        <li>
-          <MainMenuList block1={block1} title='Học tập' />
-        </li>
-        <li>
-          <MainMenuList block1={block1} title='Cộng đồng' />
-        </li>
-        <li className='font-semibold'>Tin tức</li>
+        {mainMenuData &&
+          mainMenuData?.data.data.attributes.body?.map((item: any) => {
+            console.log(item)
+
+            return (
+              <>
+                <MainMenuList key={item.id} items={item} title={item.label} />
+              </>
+            )
+          })}
       </ul>
     </>
   )

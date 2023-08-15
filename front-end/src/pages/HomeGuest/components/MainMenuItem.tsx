@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom'
 
-function MainMenuItem({ images, link, title, description }: any) {
+function MainMenuItem({ item }: any) {
   return (
     <li>
-      <Link to={link} className='my-4 flex items-center rounded-[10px] p-3 transition hover:bg-[#f4fcf3]'>
-        <div>{images}</div>
+      <Link to={item.url} className='my-2 flex items-center rounded-[10px] p-3 transition hover:bg-[#f4fcf3]'>
+        <div className='w-[50px]'>
+          <img src={`http://localhost:1337${item.icon}`} alt='icon' />
+          {}
+        </div>
         <div className='ml-3'>
-          <h5 className='font-semibold'>{title}</h5>
-          <p className='text-sm'>{description}</p>
+          <h5 className='font-semibold'>{item.label}</h5>
+          <p className='text-sm font-normal text-slate-400'>{item.description}</p>
         </div>
       </Link>
     </li>

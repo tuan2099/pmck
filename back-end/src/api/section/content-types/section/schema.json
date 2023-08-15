@@ -31,10 +31,14 @@
       "repeatable": true,
       "component": "menu.link"
     },
-    "link4": {
-      "type": "component",
-      "repeatable": true,
-      "component": "menu.link"
+    "label_col_1": {
+      "type": "string"
+    },
+    "label_col_2": {
+      "type": "string"
+    },
+    "label_col_3": {
+      "type": "string"
     }
   }
 }
