@@ -1,12 +1,31 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import useRegisteCourse from 'src/hooks/useRegisteCourse'
+import { generateNameId } from 'src/utils/uitls'
 
 function ListCourse({ data, listStyle }: any) {
+  const { isRegisted } = useRegisteCourse({ courseInfo: data })
   return (
     <>
       {Boolean(data.length) && listStyle === 'list' && (
         <div className=''>
           {data.map((course: any) => (
-            <div className='items-top flex w-full bg-white p-[12px]' key={course.id}>
+            <Link
+              to={
+                isRegisted
+                  ? `/learning/${generateNameId({
+                      name: data.attributes?.course_name ? data.attributes?.course_name : data.course_name,
+                      id: data.id
+                    })}`
+                  : `/course/${generateNameId({
+                      name: data.attributes?.course_name ? data.attributes?.course_name : data.course_name,
+                      id: data.id
+                    })}`
+              }
+              // to='/'
+              className='items-top flex w-full bg-white p-[12px]'
+              key={course.id}
+            >
               <div className='mr-[24px] w-[240px]'>
                 <img
                   src={`http://localhost:1337${
@@ -18,10 +37,10 @@ function ListCourse({ data, listStyle }: any) {
                 />
               </div>
               <div>
-                <h4>{course.attributes.course_name}</h4>
+                <h4 className='mt-3 text-xl font-semibold'>{course.attributes.course_name}</h4>
                 <p>{course.attributes.short_description}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
