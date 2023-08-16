@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import logo from 'src/assets/logo.png'
 import MainMenu from './components/MainMenu'
+import Couter from './components/Couter'
 
 function HomeGuest() {
   const { isAuthenticated } = useContext(AppContext)
@@ -21,7 +22,7 @@ function HomeGuest() {
   // })
 
   return (
-    <div>
+    <>
       <div className='m-auto flex w-full max-w-[1296px] items-center justify-between px-[12px]'>
         <div className='w-[100px]'>
           <img src={logo} alt='logo web' />
@@ -38,7 +39,18 @@ function HomeGuest() {
           </button>
         </div>
       </div>
-    </div>
+      <section>
+        <div className='relative '>
+          <div className='absolute'>
+            <img src='' alt='' />
+          </div>
+          <div className='absolute'>
+            <img src='' alt='' />
+          </div>
+        </div>
+      </section>
+      <Couter />
+    </>
   )
 }
 
