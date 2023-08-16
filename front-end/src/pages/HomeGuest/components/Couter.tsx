@@ -7,8 +7,8 @@ import img4count from '../../../assets/images/img4count.png'
 function Couter() {
   return (
     <>
-      <div className='max-1618:mx-[72px] max-769:mx-[12px] max-426:mx-0 max-769:grid-cols-1 mx-[300px] grid grid-cols-2'>
-        <div className='max-769:order-2 max-600:order-1 max-426:px-0 px-[12px]'>
+      <div className='m-auto flex w-full max-w-[1320px] flex-wrap md:flex-col'>
+        <div className='w-[50%] px-[12px] md:w-full '>
           <span className='max-1041:text-[#1e7115] text-[20px] font-semibold leading-[150%] text-[#1e7115]'>
             Learn with DreamLMS
           </span>
@@ -25,11 +25,11 @@ function Couter() {
             Learn more
           </button>
         </div>
-        <div>
+        <div className='w-[50%] md:w-full'>
           <div>
             <div className='flex flex-wrap'>
               <div className='w-[50%] p-[12px]'>
-                <div className='mb-24px flex h-[300px] items-center justify-center rounded-[10px] border bg-white shadow-blue-custom'>
+                <div className='mb-24px flex items-center justify-center rounded-[10px] border bg-white shadow-blue-custom md:h-[300px] lg:h-[250px] xl:h-[300px]'>
                   <div className='text-center'>
                     <div className='text-center'>
                       <img className='m-auto' src={img1count} alt='img' />
@@ -42,7 +42,7 @@ function Couter() {
                 </div>
               </div>
               <div className='w-[50%] p-[12px]'>
-                <div className='mb-24px mt-[-33px] flex h-[300px] items-center justify-center rounded-[10px] border bg-white shadow-blue-custom'>
+                <div className='mb-24px mt-[-33px] flex items-center justify-center rounded-[10px] border bg-white shadow-blue-custom lg:h-[250px] xl:h-[300px]'>
                   <div className='text-center'>
                     <div className='text-center'>
                       <img className='m-auto' src={img1count} alt='img' />
@@ -55,7 +55,7 @@ function Couter() {
                 </div>
               </div>
               <div className='w-[50%] p-[12px]'>
-                <div className='mb-24px flex h-[300px] items-center justify-center rounded-[10px] border bg-white shadow-blue-custom'>
+                <div className='mb-24px flex items-center justify-center rounded-[10px] border bg-white shadow-blue-custom lg:h-[250px] xl:h-[300px]'>
                   <div className='text-center'>
                     <div className='text-center'>
                       <img className='m-auto' src={img1count} alt='img' />
@@ -68,7 +68,7 @@ function Couter() {
                 </div>
               </div>
               <div className='w-[50%] p-[12px]'>
-                <div className='mb-24px mt-[-33px] flex h-[300px] items-center justify-center rounded-[10px] border bg-white shadow-blue-custom'>
+                <div className='mb-24px mt-[-33px] flex items-center justify-center rounded-[10px] border bg-white shadow-blue-custom lg:h-[250px] xl:h-[300px]'>
                   <div className='text-center'>
                     <div className='text-center'>
                       <img className='m-auto' src={img1count} alt='img' />
