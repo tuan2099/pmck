@@ -6,6 +6,7 @@ import courseApi from 'src/apis/course.api'
 import logo from 'src/assets/logo.png'
 import MainMenu from './components/MainMenu'
 import Couter from './components/Couter'
+import ListCategory from './components/ListCategory'
 
 function HomeGuest() {
   const { isAuthenticated } = useContext(AppContext)
@@ -50,6 +51,7 @@ function HomeGuest() {
         </div>
       </section>
       <Couter />
+      <ListCategory />
     </>
   )
 }

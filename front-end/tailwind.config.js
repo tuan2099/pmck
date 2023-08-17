@@ -14,7 +14,7 @@ module.exports = {
         modalColor: 'rgba(0,0,0,0.7)',
         yellowColor: '#eab830',
         grayColor: '#ced4da',
-        mainGreenColor: 'rgb(30, 113, 21)',
+        mainGreenColor: '#1e7115',
         subGreenColor: 'rgb(137, 180, 73)',
         blueColor: 'rgb(0, 86, 210)'
       },

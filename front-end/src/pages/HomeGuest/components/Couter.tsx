@@ -37,12 +37,12 @@ const infoCouterData = [
 function Couter() {
   return (
     <>
-      <div className='m-auto flex w-full max-w-[1320px] flex-wrap md:flex-col lg:flex-row'>
+      <section className='m-auto flex w-full max-w-[1320px] flex-wrap md:flex-col lg:flex-row'>
         <div className='px-[12px] md:w-full lg:w-[50%] '>
           <span className='max-1041:text-[#1e7115] text-[20px] font-semibold leading-[150%] text-[#1e7115]'>
             Khám phá cùng PMC Knowledge
           </span>
-          <h1 className='max-600:text-[20px] mb-[20px] pt-[15px] text-[32px] font-bold leading-[120%] text-[#4F4F4F] md:mb-[20px] lg:mb-[50px]'>
+          <h1 className='mb-[20px] pt-[15px] text-[20px] font-bold leading-[120%] text-[#4F4F4F] md:mb-[20px] lg:mb-[50px] lg:text-[32px]'>
             Được đào tạo bởi các chuyên gia hàng đầu trong lĩnh vực quản lý bất động sản
           </h1>
           <p className='max-600:text-[15px] mb-[20px] text-[16px] leading-[150%] md:mb-[20px] lg:mb-[50px]'>
@@ -68,13 +68,13 @@ function Couter() {
             </Link>
           </button>
         </div>
-        <div className='sm:w-fu;; w-full md:mt-[20px] md:w-full lg:w-[50%]'>
+        <div className='w-full sm:w-full md:mt-[20px] md:w-full lg:w-[50%]'>
           <div>
             <div className='flex flex-wrap'>
               {infoCouterData.map((item: any) => {
                 return (
                   <>
-                    <div className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:mt-[30px] sm:w-[50%] md:w-[50%]'>
+                    <div className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:w-[50%] md:w-[50%]'>
                       <div
                         style={{ marginTop: `${item.margin}px` }}
                         className='mb-24px flex items-center justify-center rounded-[10px] border bg-white p-2 shadow-blue-custom md:h-[300px] lg:h-[230px] xl:h-[300px]'
@@ -96,7 +96,7 @@ function Couter() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   )
 }
