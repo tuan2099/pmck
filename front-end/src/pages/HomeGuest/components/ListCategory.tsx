@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function ListCategory() {
   return (
@@ -21,18 +22,19 @@ function ListCategory() {
             {Array(8)
               .fill(0)
               .map((_, index) => (
-                <div
-                  key={index}
-                  className=' w-full rounded-[10px] bg-[#631a1a] p-[12px] sm:w-[47%] lg:w-[25%]  xl:mx-3'
-                >
-                  <img src='' alt='' />
-                  <div>
-                    <p className='text-colortextcategory max-1025:h-[48px] text-[20px] font-bold leading-[120%]'>
-                      Angular Development
-                    </p>
-                    <p className='text-[16px] font-normal leading-[150%] text-[#22100D]'>40 Instructors</p>
+                <Link to='' key={index} className=' w-full rounded-[10px]  px-[12px] sm:w-[47%] lg:w-[25%] '>
+                  <div className='group mb-[24px] rounded-[10px] bg-white p-[30px] shadow-blue-custom  duration-500 hover:bg-[#392c7d]'>
+                    <img src='' alt='' />
+                    <div>
+                      <p className='text-colortextcategory max-1025:h-[48px] text-[20px] font-bold leading-[120%] duration-500 group-hover:text-white'>
+                        Angular Development
+                      </p>
+                      <p className='text-[16px] font-normal leading-[150%] text-[#22100D] duration-500 group-hover:text-white'>
+                        40 Instructors
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
           </div>
           <button className='max-1041:bg-orange1040 mx-auto mt-[40px] flex h-[50px] items-center justify-center rounded-[5px] bg-mainGreenColor px-[46px] py-[13px] text-[16px] font-bold leading-[150%] text-[#FFF]'>

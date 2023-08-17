@@ -77,7 +77,7 @@ function Couter() {
                     <div className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:w-[50%] md:w-[50%]'>
                       <div
                         style={{ marginTop: `${item.margin}px` }}
-                        className='mb-24px flex items-center justify-center rounded-[10px] border bg-white p-2 shadow-blue-custom md:h-[300px] lg:h-[230px] xl:h-[300px]'
+                        className='mb-24px flex items-center justify-center rounded-[10px] border bg-white p-2 shadow-blue-custom duration-500 hover:shadow-none md:h-[300px] lg:h-[230px] xl:h-[300px]'
                       >
                         <div className='text-center'>
                           <div className='text-center'>
