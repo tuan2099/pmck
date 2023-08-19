@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from 'src/context/app.context'
@@ -9,6 +8,7 @@ import MainMenu from './components/MainMenu'
 import Couter from './components/Couter'
 import ListCategory from './components/ListCategory'
 import Growup from './components/Growup'
+import InfoCertified from './components/InfoCertified'
 
 function HomeGuest() {
   const { isAuthenticated } = useContext(AppContext)
@@ -55,20 +55,7 @@ function HomeGuest() {
       <Couter />
       <ListCategory />
       <Growup />
-      <section>
-        <div className='py-[60px] text-center'>
-          <span className='max-1041:text-orange1040 text-[20px] font-semibold leading-[150%] text-mainGreenColor'>
-            What's New
-          </span>
-          <h1 className='max-600:text-[20px]  pb-[25px] pt-[15px] text-[32px] font-bold leading-[120%] text-[#4F4F4F]'>
-            Master the skills to drive your career
-          </h1>
-          <p className='m-auto text-[16px] leading-[150%] text-[#5C5C5C] xl:w-[45%]'>
-            Get certified, master modern tech skills, and level up your career — whether you’re starting out or a
-            seasoned pro. 95% of eLearning learners report our hands-on content directly helped their careers.
-          </p>
-        </div>
-      </section>
+      <InfoCertified />
     </>
   )
 }

@@ -15,8 +15,6 @@ function MainMenu() {
       <ul className='flex  items-center justify-between'>
         {mainMenuData &&
           mainMenuData?.data.data.attributes.body?.map((item: any) => {
-            console.log(item)
-
             return (
               <>
                 <MainMenuList key={item.id} items={item} title={item.label} />

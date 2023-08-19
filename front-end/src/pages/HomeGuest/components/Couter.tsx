@@ -38,6 +38,34 @@ function Couter() {
   return (
     <>
       <section className='m-auto flex w-full max-w-[1320px] flex-wrap md:flex-col lg:flex-row'>
+        <div className='w-full sm:w-full md:mt-[20px] md:w-full lg:w-[50%]'>
+          <div>
+            <div className='flex flex-wrap'>
+              {infoCouterData.map((item: any) => {
+                return (
+                  <>
+                    <div className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:w-[50%] md:w-[50%]'>
+                      <div
+                        style={{ marginTop: `${item.margin}px` }}
+                        className='mb-24px flex items-center justify-center rounded-[10px] border bg-white p-2 shadow-blue-custom duration-500 hover:shadow-none md:h-[300px] lg:h-[230px] xl:h-[300px]'
+                      >
+                        <div className='text-center'>
+                          <div className='text-center'>
+                            <img className='m-auto' src={item.image} alt='img' />
+                          </div>
+                          <div>
+                            <h4 className='mt-[20px] text-[28px] font-bold uppercase text-[#21B477]'>{item.title}</h4>
+                            <p className='text-[20px] font-medium text-[#5C5C5C]'>{item.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
+          </div>
+        </div>
         <div className='px-[12px] md:w-full lg:w-[50%] '>
           <span className='max-1041:text-[#1e7115] text-[20px] font-semibold leading-[150%] text-[#1e7115]'>
             Khám phá cùng PMC Knowledge
@@ -67,34 +95,6 @@ function Couter() {
               </svg>
             </Link>
           </button>
-        </div>
-        <div className='w-full sm:w-full md:mt-[20px] md:w-full lg:w-[50%]'>
-          <div>
-            <div className='flex flex-wrap'>
-              {infoCouterData.map((item: any) => {
-                return (
-                  <>
-                    <div className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:w-[50%] md:w-[50%]'>
-                      <div
-                        style={{ marginTop: `${item.margin}px` }}
-                        className='mb-24px flex items-center justify-center rounded-[10px] border bg-white p-2 shadow-blue-custom duration-500 hover:shadow-none md:h-[300px] lg:h-[230px] xl:h-[300px]'
-                      >
-                        <div className='text-center'>
-                          <div className='text-center'>
-                            <img className='m-auto' src={item.image} alt='img' />
-                          </div>
-                          <div>
-                            <h4 className='mt-[20px] text-[28px] font-bold uppercase text-[#21B477]'>{item.title}</h4>
-                            <p className='text-[20px] font-medium text-[#5C5C5C]'>{item.description}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )
-              })}
-            </div>
-          </div>
         </div>
       </section>
     </>
