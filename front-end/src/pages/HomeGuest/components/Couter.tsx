@@ -37,7 +37,7 @@ const infoCouterData = [
 function Couter() {
   return (
     <>
-      <section className='m-auto flex w-full max-w-[1320px] flex-wrap md:flex-col lg:flex-row'>
+      <section className='m-auto mt-[55px] flex w-full max-w-[1320px] flex-wrap md:flex-col lg:flex-row'>
         <div className='w-full sm:w-full md:mt-[20px] md:w-full lg:w-[50%]'>
           <div>
             <div className='flex flex-wrap'>

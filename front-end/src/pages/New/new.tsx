@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import newApi from 'src/apis/new.api'
-import NewCard from './Component/NewCard'
+// import NewCard from './Component/NewCard'
 
 export interface NewType {
   id: number
@@ -35,7 +35,7 @@ function New() {
                 <div className=''>
                   {newsData &&
                     newsData?.data.data.map((item: NewType) => {
-                      return <NewCard {...item} key={item.id} />
+                      // return <NewCard {...item} key={item.id} />
                     })}
                 </div>
               </div>

@@ -8,7 +8,8 @@ module.exports = {
       },
       boxShadow: {
         '3xl': '0 -4px 32px rgba(0,0,0,.2);',
-        'blue-custom': '0px 4px 34px #e0ebff;'
+        'blue-custom': '0px 4px 34px #e0ebff;',
+        'teacher-shadown': '0 5px 13px 6px rgb(212 211 254/23%)'
       },
       colors: {
         modalColor: 'rgba(0,0,0,0.7)',

@@ -9,6 +9,10 @@ import Couter from './components/Couter'
 import ListCategory from './components/ListCategory'
 import Growup from './components/Growup'
 import InfoCertified from './components/InfoCertified'
+import Mentor from './components/Mentor'
+import Teacher from './components/Teacher'
+import HeroSlice from './components/HeroSlice'
+import Event from './components/Event'
 
 function HomeGuest() {
   const { isAuthenticated } = useContext(AppContext)
@@ -42,46 +46,14 @@ function HomeGuest() {
           </button>
         </div>
       </div>
-      <section>
-        <div className='relative '>
-          <div className='absolute'>
-            <img src='' alt='' />
-          </div>
-          <div className='absolute'>
-            <img src='' alt='' />
-          </div>
-        </div>
-      </section>
+      <HeroSlice />
       <Couter />
       <ListCategory />
       <Growup />
       <InfoCertified />
-      <section className='w-full bg-[#fbfcff]'>
-        <div>
-          <div className='flex flex-wrap items-center'>
-            <div className='w-full lg:w-1/2'>
-              <div
-                className='h-[700px] w-full bg-cover bg-center bg-no-repeat'
-                style={{ backgroundImage: 'url(https://dreamslms.dreamguystech.com/html/assets/img/joing-us.png)' }}
-              ></div>
-            </div>
-            <div className='w-full lg:w-1/2'>
-              <div className='flex justify-center px-[30px] pt-[30px]'>
-                <div>
-                  <h2 className='text-20px mb-[25px] font-bold text-[#5C5C5C] lg:text-[32px]'>
-                    Want to share your knowledge? Join us a Mentor
-                  </h2>
-                  <p className='mb-[47px] text-[16px] font-normal'>
-                    High-definition video is video of higher resolution and quality than standard-definition. While
-                    there is no standardized meaning for high-definition, generally any video.
-                  </p>
-                </div>
-                <div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Teacher />
+      <Mentor />
+      <Event />
     </>
   )
 }

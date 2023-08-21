@@ -24,7 +24,9 @@ function ListCategory() {
               .map((_, index) => (
                 <Link to='' key={index} className=' w-full rounded-[10px]  px-[12px] sm:w-[47%] lg:w-[25%] '>
                   <div className='group mb-[24px] rounded-[10px] bg-white p-[30px] shadow-blue-custom  duration-500 hover:bg-[#392c7d]'>
-                    <img src='' alt='' />
+                    <div className='mb-3'>
+                      <img src='https://dreamslms.dreamguystech.com/html/assets/img/category/category-1.svg' alt='' />
+                    </div>
                     <div>
                       <p className='text-colortextcategory max-1025:h-[48px] text-[20px] font-bold leading-[120%] duration-500 group-hover:text-white'>
                         Angular Development
