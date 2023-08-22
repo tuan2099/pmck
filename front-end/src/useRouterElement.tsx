@@ -2,7 +2,6 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import RegisterLayout from './Layouts/RegisterLayout'
 import { AppContext } from './context/app.context'
 import { useContext } from 'react'
-
 import Login from './pages/Login'
 import Register from './pages/Register'
 import HomeGuest from './pages/HomeGuest'
@@ -18,7 +17,6 @@ import Course_detail from './pages/Courrse_detail'
 import EditProfile from './pages/Profile/EditProfile'
 import MyCourse from './pages/MyCourse'
 import LearningPath from './pages/LearningPath'
-
 import Question from './pages/Question'
 
 function ProtectedRoute() {

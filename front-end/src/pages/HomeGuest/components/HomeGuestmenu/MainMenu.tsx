@@ -12,7 +12,7 @@ function MainMenu() {
   })
   return (
     <>
-      <ul className='flex  items-center justify-between'>
+      <ul className='flex items-center justify-between'>
         {mainMenuData &&
           mainMenuData?.data.data.attributes.body?.map((item: any) => {
             return (
