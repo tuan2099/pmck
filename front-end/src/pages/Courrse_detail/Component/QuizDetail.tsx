@@ -99,8 +99,8 @@ const QuizzDetail = ({ id }: { id: any }) => {
   return (
     <>
       {!quizz && (
-        <div className='flex h-[90vh] w-full'>
-          <div className='m-auto'>
+        <div className=' m-auto mt-6 h-[90vh] w-11/12'>
+          {/* <div className='m-auto'>
             {!checkQuizCompleted.data?.data.isCompleted && quizData.data?.data.data && (
               <Button variant='contained' color='success' onClick={() => setQuizz(quizData.data.data.data)}>
                 Bắt đầu làm bài
@@ -112,7 +112,57 @@ const QuizzDetail = ({ id }: { id: any }) => {
                 Bạn đã hoàn thành bài thi rồi
               </Button>
             )}
-          </div>
+          </div> */}
+          <section className='flex flex-wrap items-center'>
+            <div className='w-[50%]'>
+              <h3>title</h3>
+              <div>
+                <div>
+                  <img src='' alt='' />
+                </div>
+                <div>Strpipe</div>
+              </div>
+              <div>
+                <h2 className='mb-5 text-3xl font-bold'>Tiêu đề bài kiểm tra</h2>
+                <p>
+                  It is a long established fact that a reader will be distracted by the readable content of a page when
+                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                  distribution of letters, as opposed to using Content here,
+                </p>
+              </div>
+              <div className='mt-10 flex items-center justify-between'>
+                <h2 className='text-lg'>
+                  Thời gian làm bài:{' '}
+                  <span className='rounded-[5px] bg-mainGreenColor px-3 py-1 text-lg font-bold text-white'>30:00</span>
+                </h2>
+                <Button variant='outlined'>
+                  <div className='flex items-center font-semibold '>
+                    Bắt đầu làm bài{' '}
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      strokeWidth={1.5}
+                      stroke='currentColor'
+                      className='ml-2 h-6 w-6'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75'
+                      />
+                    </svg>
+                  </div>
+                </Button>
+              </div>
+            </div>
+            <div className='w-[50%]'>
+              <img src='' alt='' />
+            </div>
+          </section>
+          <section>
+            <div></div>
+          </section>
         </div>
       )}
 
