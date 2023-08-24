@@ -1,18 +1,16 @@
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
-import { Button } from '@mui/material'
+import { Alert, Avatar, Button, Divider } from '@mui/material'
 import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
+import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
 
 const QuizzDetail = ({ id }: { id: any }) => {
-  const navigate = useNavigate()
   const { profile } = useContext(AppContext)
-
   const [quizz, setQuizz] = useState<any | null>(null)
   const [results, setResults] = useState<TResults[]>([])
   const [timeLimit, setTimeLimit] = useState<number | null>(null)
@@ -99,29 +97,22 @@ const QuizzDetail = ({ id }: { id: any }) => {
   return (
     <>
       {!quizz && (
-        <div className=' m-auto mt-6 h-[90vh] w-11/12'>
-          {/* <div className='m-auto'>
-            {!checkQuizCompleted.data?.data.isCompleted && quizData.data?.data.data && (
-              <Button variant='contained' color='success' onClick={() => setQuizz(quizData.data.data.data)}>
-                Bắt đầu làm bài
-              </Button>
-            )}
-
-            {checkQuizCompleted.data?.data.isCompleted && (
-              <Button variant='contained' color='success'>
-                Bạn đã hoàn thành bài thi rồi
-              </Button>
-            )}
-          </div> */}
-          <section className='flex flex-wrap items-center'>
+        <div className=' m-auto mt-6 h-[90vh] w-10/12'>
+          <section className='mb-10 flex flex-wrap items-center justify-between'>
+            <div className='flex items-center '>
+              <Avatar sx={{ bgcolor: '#1e7115' }}>
+                <FaFileAlt />
+              </Avatar>
+              <div className='ml-3 font-semibold text-[#685f78]'>Bài kiểm tra</div>
+            </div>
+            <div className=''>
+              <Alert severity='warning' color='warning'>
+                Vui lòng báo lại Admin nếu gặp sự cố !
+              </Alert>
+            </div>
+          </section>
+          <section className='mb-10 flex flex-wrap items-center'>
             <div className='w-[50%]'>
-              <h3>title</h3>
-              <div>
-                <div>
-                  <img src='' alt='' />
-                </div>
-                <div>Strpipe</div>
-              </div>
               <div>
                 <h2 className='mb-5 text-3xl font-bold'>Tiêu đề bài kiểm tra</h2>
                 <p>
@@ -135,8 +126,12 @@ const QuizzDetail = ({ id }: { id: any }) => {
                   Thời gian làm bài:{' '}
                   <span className='rounded-[5px] bg-mainGreenColor px-3 py-1 text-lg font-bold text-white'>30:00</span>
                 </h2>
-                <Button variant='outlined'>
-                  <div className='flex items-center font-semibold '>
+
+                {!checkQuizCompleted.data?.data.isCompleted && quizData.data?.data.data && (
+                  <button
+                    onClick={() => setQuizz(quizData.data.data.data)}
+                    className='mr-[20px] flex items-center rounded-[5px] bg-[#392C7D] px-[20px] py-[10px] text-white transition hover:bg-[#2a205c]'
+                  >
                     Bắt đầu làm bài{' '}
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -152,16 +147,28 @@ const QuizzDetail = ({ id }: { id: any }) => {
                         d='M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75'
                       />
                     </svg>
-                  </div>
-                </Button>
+                  </button>
+                )}
+
+                {checkQuizCompleted.data?.data.isCompleted && (
+                  <button className='mr-[20px] flex cursor-not-allowed items-center rounded-[5px] bg-[#898891] px-[20px] py-[10px] text-white transition'>
+                    Bạn đã hoàn thành bài thi rồi
+                  </button>
+                )}
               </div>
             </div>
             <div className='w-[50%]'>
-              <img src='' alt='' />
+              <img className='m-auto w-1/2' src='http://localhost:1337/uploads/icons8_quiz_100_4764f560a2.png' alt='' />
             </div>
           </section>
           <section>
-            <div></div>
+            <div className='flex items-center'>
+              <Avatar sx={{ bgcolor: '#1e7115' }}>
+                <FaInfoCircle />
+              </Avatar>
+              <p className='my-4 ml-3 font-semibold text-[#685f78]'>Lưu ý khi làm bài kiểm tra</p>
+            </div>
+            <Divider />
           </section>
         </div>
       )}

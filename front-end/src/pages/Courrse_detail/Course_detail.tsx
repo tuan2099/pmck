@@ -11,7 +11,7 @@ import LessonItem from './Component/LessonItem'
 import Drawer from '@mui/material/Drawer'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 import LessonItemQuiz from './Component/LessonItemQuiz'
-import QuizzDetail from './Component/QuizDetail'
+import QuizzDetail from './Component/Quiz/QuizDetail'
 function Course_detail() {
   // setting video from Youtube
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | ''; data: any }>({ type: '', data: null })
