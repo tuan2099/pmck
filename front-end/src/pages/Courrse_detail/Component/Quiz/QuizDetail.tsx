@@ -1,15 +1,17 @@
 import { useState, useEffect, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
-import { Alert, Avatar, Button, Divider } from '@mui/material'
+import { Alert, AlertTitle, Avatar, Button, Divider, Stack } from '@mui/material'
 import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
 
 const QuizzDetail = ({ id }: { id: any }) => {
+  const navigate = useNavigate()
   const { profile } = useContext(AppContext)
   const [quizz, setQuizz] = useState<any | null>(null)
   const [results, setResults] = useState<TResults[]>([])
@@ -39,7 +41,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
         }
       }, 0)
       const data = {
-        users_permissions_user: 3,
+        users_permissions_user: 1,
         quiz: 1,
         gr: totalScore
       }
@@ -169,6 +171,20 @@ const QuizzDetail = ({ id }: { id: any }) => {
               <p className='my-4 ml-3 font-semibold text-[#685f78]'>Lưu ý khi làm bài kiểm tra</p>
             </div>
             <Divider />
+            <Stack spacing={2} className='mt-10'>
+              <Alert severity='success'>
+                <AlertTitle>Info</AlertTitle>
+                This is an info alert — <strong>check it out!</strong>
+              </Alert>
+              <Alert severity='success'>
+                <AlertTitle>Info</AlertTitle>
+                This is an info alert — <strong>check it out!</strong>
+              </Alert>
+              <Alert severity='success'>
+                <AlertTitle>Info</AlertTitle>
+                This is an info alert — <strong>check it out!</strong>
+              </Alert>
+            </Stack>
           </section>
         </div>
       )}
