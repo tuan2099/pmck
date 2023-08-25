@@ -8,7 +8,6 @@ import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
-
 const QuizzDetail = ({ id }: { id: any }) => {
   const { profile } = useContext(AppContext)
   const [quizz, setQuizz] = useState<any | null>(null)
@@ -26,7 +25,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
     }
     setResults(newResults)
   }
-
+  // submit quiz
   const handleSubmit = useMutation({
     mutationFn: () => {
       const scorePerQuestion = 10 / quizz?.attributes?.questions?.data.length
@@ -49,7 +48,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
       toast(`Bạn được ${data.data.data.attributes.gr} điểm.`)
     }
   })
-
+  // call api check complete quiz
   const checkQuizCompleted = useQuery({
     queryKey: ['checkQuizCompleted', id, profile?.id],
     queryFn: () => courseApi.checkQuizComplete({ quizID: id, userID: profile?.id as number }),
@@ -59,13 +58,13 @@ const QuizzDetail = ({ id }: { id: any }) => {
       }
     }
   })
-
+  // call api quiz data
   const quizData = useQuery({
     queryKey: ['getQuizDetail', id],
     queryFn: () => courseApi.getQuizDetail(id),
     enabled: !checkQuizCompleted.data?.data.isCompleted
   })
-
+  // check time
   useEffect(() => {
     if (timeLimit === 0) {
       handleSubmit.mutate()
@@ -82,7 +81,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
       clearInterval(interval)
     }
   }, [timeLimit])
-
+  // onload submit quiz
   // useEffect(() => {
   //   window.addEventListener('beforeunload', () => {
   //     handleSubmit.mutate()
@@ -190,7 +189,12 @@ const QuizzDetail = ({ id }: { id: any }) => {
       {quizz && (
         <div className='w-full px-[10%]'>
           <div className='my-8 flex items-center justify-between border-t-4 p-3'>
-            <h1 className='text-xl font-semibold uppercase'>{quizz?.attributes.name}</h1>
+            <h1 className='flex items-center text-xl font-semibold uppercase'>
+              <Avatar sx={{ bgcolor: '#1e7115' }}>
+                <FaFileAlt />
+              </Avatar>
+              <span className='ml-3'>{quizz?.attributes.name}</span>
+            </h1>
             <h2>
               Thời gian làm bài:{' '}
               <span className='rounded-[5px] bg-[#1e7115] p-2 text-xl font-semibold text-white'>
@@ -203,7 +207,6 @@ const QuizzDetail = ({ id }: { id: any }) => {
               <QuizzGroup quizz={question} key={question.id} onChangeResult={onChangeResult} />
             ))}
           </div>
-
           <Button variant='contained' color='success' onClick={() => handleSubmit.mutate()}>
             Nộp bài
           </Button>
