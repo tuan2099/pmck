@@ -47,12 +47,6 @@
     "status_course": {
       "type": "boolean"
     },
-    "course_registrations": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::course-registration.course-registration",
-      "mappedBy": "courses"
-    },
     "learning_progresses": {
       "type": "relation",
       "relation": "manyToMany",
@@ -68,6 +62,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::chapter.chapter"
+    },
+    "course_registrations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course-registration.course-registration",
+      "mappedBy": "courses"
     }
   }
 }

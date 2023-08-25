@@ -1,16 +1,15 @@
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { TResults } from 'src/types/course.type'
-import QuizzGroup from './QuizzGroup'
-import { convertMinutes } from 'src/helper/coverTimeStamp'
 import { Button } from '@mui/material'
-import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
+
 import courseApi from 'src/apis/course.api'
+import QuizzGroup from './QuizzGroup'
+import { TResults } from 'src/types/course.type'
+import { convertMinutes } from 'src/helper/coverTimeStamp'
+import { AppContext } from 'src/context/app.context'
 
 const QuizzDetail = ({ id }: { id: any }) => {
-  const navigate = useNavigate()
   const { profile } = useContext(AppContext)
 
   const [quizz, setQuizz] = useState<any | null>(null)

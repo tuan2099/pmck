@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import SkeletonTypography from 'src/components/SkeletonTypography'
@@ -9,9 +9,12 @@ import ChapterItem from './component/ChapterItem'
 import Infocourse from './component/Infocourse'
 import useRegisteCourse from 'src/hooks/useRegisteCourse'
 import Popup from './component/Popup'
+import { AppContext } from 'src/context/app.context'
+import courseRegistationApi from 'src/apis/courseRegistation'
 
 function Course_enrol() {
   const { id } = useParams()
+  const { profile } = useContext(AppContext)
   const idCourse = getIdFromNameId(id as string)
   const [isOpenPopup, setIsopenPopup] = useState(false)
   const [totalTime, setTotalTime] = useState<number>(0)
@@ -23,6 +26,12 @@ function Course_enrol() {
     queryKey: ['detailCourse', idCourse],
     queryFn: () => courseApi.getDetailCourse(idCourse)
   })
+
+  const { data: courseRegisted } = useQuery({
+    queryKey: ['check-course-registed', id, profile?.id],
+    queryFn: () => courseRegistationApi.checkCourseRegisted({ courseID: id as string, userID: profile?.id as number })
+  })
+
   const { handleRegisteCourse, isRegisted } = useRegisteCourse({
     courseInfo: courseDetaildata?.data.data
   })

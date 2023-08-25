@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "course_registrations": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::course-registration.course-registration",
-      "inversedBy": "users"
-    },
     "profile_photo": {
       "type": "media",
       "multiple": true,
@@ -116,6 +110,12 @@
       "relation": "oneToOne",
       "target": "api::quiz-grade.quiz-grade",
       "mappedBy": "users_permissions_user"
+    },
+    "course_registration": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course-registration.course-registration",
+      "mappedBy": "user"
     }
   }
 }
