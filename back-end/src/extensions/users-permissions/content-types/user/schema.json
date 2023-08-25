@@ -116,6 +116,12 @@
       "relation": "oneToOne",
       "target": "api::quiz-grade.quiz-grade",
       "mappedBy": "users_permissions_user"
+    },
+    "certificates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::certificate.certificate",
+      "mappedBy": "user"
     }
   }
 }

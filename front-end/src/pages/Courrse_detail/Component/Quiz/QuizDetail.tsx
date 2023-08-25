@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
@@ -9,9 +8,7 @@ import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
-
 const QuizzDetail = ({ id }: { id: any }) => {
-  const navigate = useNavigate()
   const { profile } = useContext(AppContext)
   const [quizz, setQuizz] = useState<any | null>(null)
   const [results, setResults] = useState<TResults[]>([])
@@ -26,10 +23,9 @@ const QuizzDetail = ({ id }: { id: any }) => {
     } else {
       newResults.push(data)
     }
-
     setResults(newResults)
   }
-
+  // submit quiz
   const handleSubmit = useMutation({
     mutationFn: () => {
       const scorePerQuestion = 10 / quizz?.attributes?.questions?.data.length
@@ -40,9 +36,10 @@ const QuizzDetail = ({ id }: { id: any }) => {
           return total
         }
       }, 0)
+      console.log(totalScore)
       const data = {
-        users_permissions_user: 1,
-        quiz: 1,
+        users_permissions_user: profile.id,
+        quiz: quizz.id,
         gr: totalScore
       }
       return courseApi.postQuizGrade(data)
@@ -51,7 +48,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
       toast(`Bạn được ${data.data.data.attributes.gr} điểm.`)
     }
   })
-
+  // call api check complete quiz
   const checkQuizCompleted = useQuery({
     queryKey: ['checkQuizCompleted', id, profile?.id],
     queryFn: () => courseApi.checkQuizComplete({ quizID: id, userID: profile?.id as number }),
@@ -61,13 +58,13 @@ const QuizzDetail = ({ id }: { id: any }) => {
       }
     }
   })
-
+  // call api quiz data
   const quizData = useQuery({
     queryKey: ['getQuizDetail', id],
     queryFn: () => courseApi.getQuizDetail(id),
     enabled: !checkQuizCompleted.data?.data.isCompleted
   })
-
+  // check time
   useEffect(() => {
     if (timeLimit === 0) {
       handleSubmit.mutate()
@@ -84,22 +81,22 @@ const QuizzDetail = ({ id }: { id: any }) => {
       clearInterval(interval)
     }
   }, [timeLimit])
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', () => {
-      handleSubmit.mutate()
-    })
-    return () => {
-      window.removeEventListener('beforeunload', () => {
-        handleSubmit.mutate()
-      })
-    }
-  }, [])
+  // onload submit quiz
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', () => {
+  //     handleSubmit.mutate()
+  //   })
+  //   return () => {
+  //     window.removeEventListener('beforeunload', () => {
+  //       handleSubmit.mutate()
+  //     })
+  //   }
+  // }, [])
 
   return (
     <>
       {!quizz && (
-        <div className=' m-auto mt-6 h-[90vh] w-10/12'>
+        <div className=' m-auto mt-6 w-10/12'>
           <section className='mb-10 flex flex-wrap items-center justify-between'>
             <div className='flex items-center '>
               <Avatar sx={{ bgcolor: '#1e7115' }}>
@@ -154,7 +151,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
 
                 {checkQuizCompleted.data?.data.isCompleted && (
                   <button className='mr-[20px] flex cursor-not-allowed items-center rounded-[5px] bg-[#898891] px-[20px] py-[10px] text-white transition'>
-                    Bạn đã hoàn thành bài thi rồi
+                    Bạn đã hoàn thành bài thi
                   </button>
                 )}
               </div>
@@ -192,7 +189,12 @@ const QuizzDetail = ({ id }: { id: any }) => {
       {quizz && (
         <div className='w-full px-[10%]'>
           <div className='my-8 flex items-center justify-between border-t-4 p-3'>
-            <h1 className='text-xl font-semibold uppercase'>{quizz?.attributes.name}</h1>
+            <h1 className='flex items-center text-xl font-semibold uppercase'>
+              <Avatar sx={{ bgcolor: '#1e7115' }}>
+                <FaFileAlt />
+              </Avatar>
+              <span className='ml-3'>{quizz?.attributes.name}</span>
+            </h1>
             <h2>
               Thời gian làm bài:{' '}
               <span className='rounded-[5px] bg-[#1e7115] p-2 text-xl font-semibold text-white'>
@@ -205,7 +207,6 @@ const QuizzDetail = ({ id }: { id: any }) => {
               <QuizzGroup quizz={question} key={question.id} onChangeResult={onChangeResult} />
             ))}
           </div>
-
           <Button variant='contained' color='success' onClick={() => handleSubmit.mutate()}>
             Nộp bài
           </Button>
