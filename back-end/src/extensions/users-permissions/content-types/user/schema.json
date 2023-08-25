@@ -111,10 +111,17 @@
       "target": "api::quiz-grade.quiz-grade",
       "mappedBy": "users_permissions_user"
     },
+<<<<<<< HEAD
     "course_registration": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::course-registration.course-registration",
+=======
+    "certificates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::certificate.certificate",
+>>>>>>> 0ff5a13d7e3752e1094b8ad62df0f1e7b05b76ee
       "mappedBy": "user"
     }
   }

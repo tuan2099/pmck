@@ -134,9 +134,6 @@ const AllCoursePage = () => {
 
   return (
     <div className=''>
-      <div className=' p-[25px]'>
-        <Slider imageSliderdata={imageSliderdata} />
-      </div>
       <h2 className='px-20 text-center text-2xl font-bold uppercase'>Tất cả khóa học</h2>
       <p className='mt-4 text-center text-[#afafaf]'>
         Khám phá tri thức, thú vị và thành công với khóa học của chúng tôi

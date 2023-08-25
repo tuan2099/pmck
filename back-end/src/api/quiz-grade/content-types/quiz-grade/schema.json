@@ -13,7 +13,7 @@
   "pluginOptions": {},
   "attributes": {
     "gr": {
-      "type": "integer"
+      "type": "decimal"
     },
     "users_permissions_user": {
       "type": "relation",

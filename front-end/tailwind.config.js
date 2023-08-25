@@ -7,29 +7,31 @@ module.exports = {
         'user-width': 'calc(100% - 96px)'
       },
       boxShadow: {
-        '3xl': '0 -4px 32px rgba(0,0,0,.2);'
+        '3xl': '0 -4px 32px rgba(0,0,0,.2);',
+        'blue-custom': '0px 4px 34px #e0ebff;',
+        'teacher-shadown': '0 5px 13px 6px rgb(212 211 254/23%)'
       },
       colors: {
         modalColor: 'rgba(0,0,0,0.7)',
         yellowColor: '#eab830',
         grayColor: '#ced4da',
-        mainGreenColor: 'rgb(30, 113, 21)',
+        mainGreenColor: '#1e7115',
         subGreenColor: 'rgb(137, 180, 73)',
-        blueColor: "rgb(0, 86, 210)"
+        blueColor: 'rgb(0, 86, 210)'
       },
       screens: {
-        '601': '601px',
-        '500': '500px',
-        '480': '480px',
-        '425': '425px',
-        '360': '360px',
-        '842': '842px',
+        601: '601px',
+        500: '500px',
+        480: '480px',
+        425: '425px',
+        360: '360px',
+        842: '842px',
         '3xl': '1600px',
-        '4xl': '1920px',
+        '4xl': '1920px'
       },
       lineHeight: {
-        '150': '150%',
-      },
+        150: '150%'
+      }
     }
   },
   plugins: []

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "section",
     "pluralName": "sections",
-    "displayName": "Section"
+    "displayName": "Section",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,25 @@
       "type": "component",
       "repeatable": true,
       "component": "menu.link"
+    },
+    "link2": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.link"
+    },
+    "link3": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.link"
+    },
+    "label_col_1": {
+      "type": "string"
+    },
+    "label_col_2": {
+      "type": "string"
+    },
+    "label_col_3": {
+      "type": "string"
     }
   }
 }

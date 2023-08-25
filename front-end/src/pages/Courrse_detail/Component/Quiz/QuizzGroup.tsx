@@ -44,21 +44,17 @@ const QuizzGroup = (props: IProps) => {
   }
 
   return (
-    <div className='flex flex-col gap-2' key={quizz.id}>
-      <div className='items-top mt-4 flex text-xl '>
-        <h4 className='w-[12%] font-semibold'>{quizz.attributes.name} : </h4>
-
-        <p className='mt-1 w-[80%] text-base'>{quizz.attributes.questiontext}</p>
+    <div className='flex flex-col gap-2 rounded-[10px] border border-[#edf3fd] p-6' key={quizz.id}>
+      <div className='items-top mt-4 flex text-xl'>
+        <h4 className='w-[10%] text-[16px] font-semibold text-[#4F4F4F]'>{quizz.attributes.name}: </h4>
+        <p className='w-[80%] text-[16px] text-[#5C5C5C]'>{quizz.attributes.questiontext}</p>
       </div>
       {Boolean(quizz.attributes.question_media.data) && (
         <div className='flex gap-5'>
           {quizz.attributes.question_media.data.map((image: any) => (
-            <img
-              key={image.id}
-              className='h-32 w-52 object-cover'
-              src={`http://localhost:1337${image.attributes.url}`}
-              alt='hình ảnh'
-            />
+            <div key={image.id} className='m-auto w-[300px] max-w-[300px]'>
+              <img className='object-cover' src={`http://localhost:1337${image.attributes.url}`} alt='hình ảnh' />
+            </div>
           ))}
         </div>
       )}

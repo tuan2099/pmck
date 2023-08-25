@@ -12,10 +12,10 @@ function HomeUserLayout({ children }: Props) {
     <>
       <NavbarUser />
       <div className='flex min-h-screen '>
-        <div className='shrink-0'>
+        <div className='hidden shrink-0 lg:block'>
           <SidebarUser />
         </div>
-        <div className='w-[118rem] max-w-[calc(100%-96px)]'>{children}</div>
+        <div className='w-full lg:w-[118rem] lg:max-w-[calc(100%-96px)]'>{children}</div>
       </div>
       <Footer />
     </>

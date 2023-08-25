@@ -2,7 +2,6 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import RegisterLayout from './Layouts/RegisterLayout'
 import { AppContext } from './context/app.context'
 import { useContext } from 'react'
-
 import Login from './pages/Login'
 import Register from './pages/Register'
 import HomeGuest from './pages/HomeGuest'
@@ -18,9 +17,6 @@ import Course_detail from './pages/Courrse_detail'
 import EditProfile from './pages/Profile/EditProfile'
 import MyCourse from './pages/MyCourse'
 import LearningPath from './pages/LearningPath'
-import NewPage from './pages/NewPage/NewPage'
-import Partner from './pages/Partner/Partner'
-import Becometeacher from './pages/BecomeTeacher/BecomeTeacher'
 import Question from './pages/Question'
 
 function ProtectedRoute() {
@@ -42,10 +38,7 @@ export const ROUTES = {
   new: '/new',
   editProfile: '/edit-profile',
   profile: '/me',
-  courses: '/courses',
-  NewPage: '/newpage',
-  Partner: '/partner',
-  Becometeacher: '/becometeacher'
+  courses: '/courses'
 }
 
 export default function useRouterElement() {
@@ -151,18 +144,7 @@ export default function useRouterElement() {
         </HomeUserLayout>
       )
     },
-    {
-      path: ROUTES.NewPage,
-      element: <NewPage />
-    },
-    {
-      path: ROUTES.Partner,
-      element: <Partner />
-    },
-    {
-      path: ROUTES.Becometeacher,
-      element: <Becometeacher />
-    },
+
     {
       path: '/faq',
       element: <Question />

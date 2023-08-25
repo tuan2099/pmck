@@ -16,8 +16,8 @@ function Footer() {
     <footer>
       <div className='bg-[#181821] pb-[50px] pt-[65px] text-[#a9b3bb]'>
         <div className='m-auto w-full max-w-[1200px]'>
-          <div className='items-top flex justify-between'>
-            <section className='w-[25%]'>
+          <div className='items-top flex flex-wrap justify-between'>
+            <section className='m-auto w-full px-[12px] md:w-[45%] lg:w-[25%]'>
               <div className='flex items-center'>
                 <div className='w-[150px] pr-[10px]'>
                   <img src={logo} alt='logo' />
@@ -34,9 +34,12 @@ function Footer() {
             {footerData &&
               footerData.data?.data?.attributes.body.map((footerdata: any) => {
                 return (
-                  <section key={footerdata.id}>
+                  <section
+                    key={footerdata.id}
+                    className='m-auto mt-[30px] w-full px-[12px] md:mb-5 md:mt-0 md:w-[45%] lg:w-[25%]'
+                  >
                     <h4 className=' font-semibold uppercase'>{footerdata.sections.data[0].attributes.label}</h4>
-                    <ul className='mt-[30px] leading-[40px]'>
+                    <ul className='leading-[40px] md:mt-[30px]'>
                       {footerdata.sections.data[0].attributes.links.map((items: any) => {
                         return (
                           <li key={items.id}>
@@ -49,6 +52,7 @@ function Footer() {
                 )
               })}
           </div>
+
           <div className='m-auto my-8 h-[1px] w-10/12 bg-[#555555]'></div>
           <div className=''>
             <div className='flex items-center justify-center'>
