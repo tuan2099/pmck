@@ -50,9 +50,7 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
 
   React.useEffect(() => {
     if (courseInfo && courseRegisted) {
-      const courseRegistedItem = courseRegisted.find(
-        (course: any) => course.attributes.users.data[0].id === profile?.id
-      )
+      const courseRegistedItem = courseRegisted.find((course: any) => course.attributes.users.data?.id === profile?.id)
       courseRegistedItem && setRegisteItem(courseRegistedItem)
       if (courseRegistedItem && courseInfo.id) {
         setIsRegisted(courseRegistedItem.attributes.courses.data.some((item: any) => item.id === courseInfo.id))

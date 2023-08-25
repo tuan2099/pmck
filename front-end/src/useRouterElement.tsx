@@ -18,6 +18,7 @@ import EditProfile from './pages/Profile/EditProfile'
 import MyCourse from './pages/MyCourse'
 import LearningPath from './pages/LearningPath'
 import Question from './pages/Question'
+import Certificate from './pages/Courrse_detail/Component/Certificate'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -38,11 +39,17 @@ export const ROUTES = {
   new: '/new',
   editProfile: '/edit-profile',
   profile: '/me',
-  courses: '/courses'
+  courses: '/courses',
+  certificate: '/certificate'
 }
 
 export default function useRouterElement() {
   const routerElement = useRoutes([
+    {
+      path: ROUTES.certificate,
+      element: <Certificate />,
+      index: true
+    },
     {
       path: ROUTES.home,
       element: <HomeGuest />,

@@ -10,12 +10,12 @@ interface IProps {
 
 function CourseCard(props: IProps) {
   const { courseItem } = props
-  const { isRegisted } = useRegisteCourse({ courseInfo: courseItem })
+  // const { isRegisted } = useRegisteCourse({ courseInfo: courseItem })
   return (
     <>
       <Link
         to={
-          isRegisted
+          1
             ? `/learning/${generateNameId({
                 name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
                 id: courseItem.id

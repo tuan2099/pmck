@@ -54,7 +54,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const { refetch } = useQuery({
     queryKey: ['courseRegisted'],
     queryFn: () => courseApi.registerCoursess(),
-    onSuccess: (data) => setCourseRegisted(data.data.data),
+    onSuccess: (data) => {
+      setCourseRegisted(data.data.data)
+    },
     enabled: !Boolean(courseRegisted.length)
   })
 

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
 import Youtube from 'react-youtube'
 import Nav_course_detail from './Component/Nav_course_detail'
@@ -12,6 +12,7 @@ import Drawer from '@mui/material/Drawer'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 import LessonItemQuiz from './Component/LessonItemQuiz'
 import QuizzDetail from './Component/Quiz/QuizDetail'
+import { ROUTES } from 'src/useRouterElement'
 function Course_detail() {
   // setting video from Youtube
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | ''; data: any }>({ type: '', data: null })
@@ -156,6 +157,14 @@ function Course_detail() {
                           setChooseItem={setChooseItem}
                         />
                       ))}
+                    {item.attributes.certificate && (
+                      <Link
+                        to={ROUTES.certificate}
+                        className='flex cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
+                      >
+                        Chứng chỉ
+                      </Link>
+                    )}
                   </div>
                 </details>
               ))}

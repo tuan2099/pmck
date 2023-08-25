@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Cardnew(newsData: any) {
-  console.log(newsData.newsData?.data)
   return (
     <>
       {newsData &&
