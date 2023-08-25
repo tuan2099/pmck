@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
@@ -11,7 +10,6 @@ import courseApi from 'src/apis/course.api'
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
 
 const QuizzDetail = ({ id }: { id: any }) => {
-  const navigate = useNavigate()
   const { profile } = useContext(AppContext)
   const [quizz, setQuizz] = useState<any | null>(null)
   const [results, setResults] = useState<TResults[]>([])
@@ -26,7 +24,6 @@ const QuizzDetail = ({ id }: { id: any }) => {
     } else {
       newResults.push(data)
     }
-
     setResults(newResults)
   }
 
@@ -40,9 +37,10 @@ const QuizzDetail = ({ id }: { id: any }) => {
           return total
         }
       }, 0)
+      console.log(totalScore)
       const data = {
-        users_permissions_user: 1,
-        quiz: 1,
+        users_permissions_user: profile.id,
+        quiz: quizz.id,
         gr: totalScore
       }
       return courseApi.postQuizGrade(data)
@@ -85,21 +83,21 @@ const QuizzDetail = ({ id }: { id: any }) => {
     }
   }, [timeLimit])
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', () => {
-      handleSubmit.mutate()
-    })
-    return () => {
-      window.removeEventListener('beforeunload', () => {
-        handleSubmit.mutate()
-      })
-    }
-  }, [])
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', () => {
+  //     handleSubmit.mutate()
+  //   })
+  //   return () => {
+  //     window.removeEventListener('beforeunload', () => {
+  //       handleSubmit.mutate()
+  //     })
+  //   }
+  // }, [])
 
   return (
     <>
       {!quizz && (
-        <div className=' m-auto mt-6 h-[90vh] w-10/12'>
+        <div className=' m-auto mt-6 w-10/12'>
           <section className='mb-10 flex flex-wrap items-center justify-between'>
             <div className='flex items-center '>
               <Avatar sx={{ bgcolor: '#1e7115' }}>
@@ -154,7 +152,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
 
                 {checkQuizCompleted.data?.data.isCompleted && (
                   <button className='mr-[20px] flex cursor-not-allowed items-center rounded-[5px] bg-[#898891] px-[20px] py-[10px] text-white transition'>
-                    Bạn đã hoàn thành bài thi rồi
+                    Bạn đã hoàn thành bài thi
                   </button>
                 )}
               </div>
