@@ -25,15 +25,7 @@ module.exports = createCoreController(
           const quiz = datas.find(
             (item) => item.users_permissions_user?.id.toString() === userID
           );
-          if (quiz) {
-            ctx.body = {
-              isCompleted: true,
-            };
-          } else {
-            ctx.body = {
-              isCompleted: false,
-            };
-          }
+          ctx.body = { isCompleted: Boolean(quiz) };
         } else {
           ctx.body = {
             isCompleted: false,

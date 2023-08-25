@@ -6,6 +6,7 @@ import { AppContext } from 'src/context/app.context'
 
 const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
   const { courseRegisted, profile, refetchRegistedCourse } = useContext(AppContext)
+  console.log(courseRegisted)
   const [registeItem, setRegisteItem] = React.useState<any>(null)
   const [isRegisted, setIsRegisted] = React.useState<boolean>(false)
 
@@ -53,7 +54,7 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
       const courseRegistedItem = courseRegisted.find((course: any) => course.attributes.users.data?.id === profile?.id)
       courseRegistedItem && setRegisteItem(courseRegistedItem)
       if (courseRegistedItem && courseInfo.id) {
-        setIsRegisted(courseRegistedItem.attributes.courses.data.some((item: any) => item.id === courseInfo.id))
+        setIsRegisted(courseRegistedItem.attributes.courses.data?.some((item: any) => item.id === courseInfo.id))
       }
     }
   }, [courseInfo, courseRegisted])

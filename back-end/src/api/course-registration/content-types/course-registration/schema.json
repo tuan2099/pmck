@@ -12,11 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "users": {
+    "user": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "mappedBy": "course_registrations"
+      "inversedBy": "course_registration"
     },
     "courses": {
       "type": "relation",
