@@ -8,6 +8,7 @@ import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
+
 const QuizzDetail = ({ id }: { id: any }) => {
   const { profile } = useContext(AppContext)
   const [quizz, setQuizz] = useState<any | null>(null)
