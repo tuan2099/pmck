@@ -11,6 +11,7 @@ function MyCourse() {
     queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
+  console.log(profileData)
   return (
     <div className='mt-[50px]'>
       <h1 className='pl-3 text-xl font-bold uppercase'>Khóa học của tôi</h1>

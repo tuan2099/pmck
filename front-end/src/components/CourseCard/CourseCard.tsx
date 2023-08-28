@@ -10,12 +10,12 @@ interface IProps {
 
 function CourseCard(props: IProps) {
   const { courseItem } = props
-  // const { isRegisted } = useRegisteCourse({ courseInfo: courseItem })
+  const { isRegisted } = useRegisteCourse({ courseInfo: courseItem })
   return (
     <>
       <Link
         to={
-          1
+          isRegisted
             ? `/learning/${generateNameId({
                 name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
                 id: courseItem.id
@@ -40,7 +40,7 @@ function CourseCard(props: IProps) {
             } )`
           }}
         ></div>
-        <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-[#292929]'>
+        <h5 className='overflow-hiden mt-[5px] text-[16px] font-semibold leading-snug text-color1'>
           {courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name}
         </h5>
         <p className='flex text-sm text-slate-400'>

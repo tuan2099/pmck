@@ -22,7 +22,7 @@ const LessonItem = (props: IProps) => {
 
   return (
     <button
-      className='flex cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
+      className='flex  cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
       onClick={() => {
         setParams((prev) => {
           return { ...prev, id: item.attributes.title + item.id }

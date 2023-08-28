@@ -33,8 +33,8 @@ function SidebarUser() {
             )
           }
         >
-          <FaHome />
-          <div className='text-sm'>Home</div>
+          <FaHome className='text-color1' />
+          <div className='text-sm text-color1'>Home</div>
         </NavLink>
         <NavLink
           to='/learning-paths'
@@ -47,7 +47,7 @@ function SidebarUser() {
             )
           }
         >
-          <FaRoad />
+          <FaRoad className='text-color1' />
           <div className='text-sm'>Lộ trình</div>
         </NavLink>
         <NavLink
@@ -61,7 +61,7 @@ function SidebarUser() {
             )
           }
         >
-          <FaMicroblog />
+          <FaMicroblog className='text-color1' />
           <div className='text-sm'>Tin tức</div>
         </NavLink>
         <NavLink
@@ -75,7 +75,7 @@ function SidebarUser() {
             )
           }
         >
-          <FaHourglassHalf />
+          <FaHourglassHalf className='text-color1' />
           <div className='text-sm'>Học</div>
         </NavLink>
       </div>

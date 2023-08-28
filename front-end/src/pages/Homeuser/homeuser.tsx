@@ -35,7 +35,7 @@ function Homeuser() {
 
       <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[70px] lg:pl-[74px] lg:pr-[44px]'>
         <div className='flex items-center justify-between'>
-          <h4 className='mb-5  text-2xl font-bold'>
+          <h4 className='mb-5  text-2xl font-bold text-color1'>
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
@@ -90,7 +90,7 @@ function Homeuser() {
 
       <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[70px] lg:pl-[74px] lg:pr-[44px]'>
         <div className='flex items-center justify-between'>
-          <h4 className='mb-5 text-2xl font-bold'>
+          <h4 className='mb-5 text-2xl font-bold text-color1'>
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Miễn phí</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>
@@ -145,7 +145,7 @@ function Homeuser() {
 
       <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[70px] lg:pl-[74px] lg:pr-[44px]'>
         <div className='flex items-center justify-between'>
-          <h4 className='mb-5 text-2xl font-bold'>
+          <h4 className='mb-5 text-2xl font-bold text-color1'>
             Tin tức <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Nổi bật</span>
           </h4>
           <p className='mb-5  text-[#1e7115]'>

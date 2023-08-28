@@ -69,7 +69,9 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "full_name": {
       "type": "string"
@@ -82,7 +84,11 @@
     },
     "top_skill": {
       "type": "enumeration",
-      "enum": ["buôn thuốc", "chơi đồ ", "ăn hại"]
+      "enum": [
+        "buôn thuốc",
+        "chơi đồ ",
+        "ăn hại"
+      ]
     },
     "connect": {
       "type": "string"
@@ -105,15 +111,16 @@
       "target": "api::quiz-grade.quiz-grade",
       "mappedBy": "users_permissions_user"
     },
-    "course_registration": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::course-registration.course-registration"
-    },
     "certificates": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::certificate.certificate",
+      "mappedBy": "user"
+    },
+    "course_registrations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course-registration.course-registration",
       "mappedBy": "user"
     }
   }

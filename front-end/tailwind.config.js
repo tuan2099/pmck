@@ -12,22 +12,14 @@ module.exports = {
         'teacher-shadown': '0 5px 13px 6px rgb(212 211 254/23%)'
       },
       colors: {
-        modalColor: 'rgba(0,0,0,0.7)',
         yellowColor: '#eab830',
         grayColor: '#ced4da',
         mainGreenColor: '#1e7115',
         subGreenColor: 'rgb(137, 180, 73)',
-        blueColor: 'rgb(0, 86, 210)'
-      },
-      screens: {
-        601: '601px',
-        500: '500px',
-        480: '480px',
-        425: '425px',
-        360: '360px',
-        842: '842px',
-        '3xl': '1600px',
-        '4xl': '1920px'
+        blueColor: '#324FA2',
+        color1: '#4F4F4F',
+        color2: '#5c5c5c',
+        color3: '#292929'
       },
       lineHeight: {
         150: '150%'

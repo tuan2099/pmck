@@ -7,26 +7,33 @@ import Nav_course_detail from './Component/Nav_course_detail'
 import Control from './Component/Control'
 import learningProcessApi from 'src/apis/learningprocess.api'
 import { AppContext } from 'src/context/app.context'
-import LessonItem from './Component/LessonItem'
+import LessonItem from './Component/LessonItem/LessonItem'
 import Drawer from '@mui/material/Drawer'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
-import LessonItemQuiz from './Component/LessonItemQuiz'
+import LessonItemQuiz from './Component/LessonItem/LessonItemQuiz'
 import QuizzDetail from './Component/Quiz/QuizDetail'
 import { ROUTES } from 'src/useRouterElement'
+import { Avatar } from '@mui/material'
+import { FaTasks } from 'react-icons/fa'
+
 function Course_detail() {
   // setting video from Youtube
-  const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | ''; data: any }>({ type: '', data: null })
+  const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
+    type: '',
+    data: null
+  })
   const [total, setTotal] = useState<number>(0)
   const [newArrLesson, setNewArrLesson] = useState<any[]>([])
   const [lessonId, setLessonId] = useState(null)
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const { profile } = useContext(AppContext)
   const [_, setParams] = useSearchParams()
-
   // get id from url
   const { id } = useParams()
+
   // convert id get from url
   const pageID = id?.split('-')[id?.split('-').length - 1]
+
   // Get data course detail
   const courseData = useQuery({
     queryKey: ['course detail', pageID],
@@ -41,6 +48,7 @@ function Course_detail() {
       setLessonId(firstLeson.id)
     }
   })
+
   // getComplete lesson
   const { refetch } = useQuery({
     queryKey: ['complete lesson'],
@@ -60,7 +68,7 @@ function Course_detail() {
       for (const course of progress?.courses) {
         if (course.id === courseId) {
           // eslint-disable-next-line no-unsafe-optional-chaining
-          // lessonItems.push(...progress?.lesson_items)
+          lessonItems.push(...progress?.lesson_items)
           break
         }
       }
@@ -68,6 +76,7 @@ function Course_detail() {
     return lessonItems
   }
 
+  // total course
   useEffect(() => {
     const courseTotal = courseData.data?.data?.data?.attributes.chapters.data.reduce(
       (currentTotal: number, currentItem: any) => {
@@ -80,25 +89,26 @@ function Course_detail() {
 
   const handlePostVideoOnEnd = useMutation(learningProcessApi.createLearningProgesses)
 
-  const handleEndVideo = (id: any) => {
-    const check = newArrLesson.some((lesson: any) => lesson.id === id)
-    if (check) {
-      handlePostVideoOnEnd.mutate(
-        {
-          data: {
-            lesson_items: lessonId,
-            courses: pageID,
-            users_permissions_users: profile?.id
-          }
-        },
-        {
-          onSuccess: () => {
-            refetch()
-          }
+  // End video call api
+  const handleEndVideo = () => {
+    // const check = newArrLesson.some((lesson: any) => lesson.id === id)
+    handlePostVideoOnEnd.mutate(
+      {
+        data: {
+          lesson_items: lessonId,
+          courses: pageID,
+          users_permissions_users: profile?.id
         }
-      )
-    }
+      },
+      {
+        onSuccess: () => {
+          refetch()
+        }
+      }
+    )
   }
+
+  // open add note
   const toogleDrawer = () => {
     setOpenDrawer(!openDrawer)
   }
@@ -110,14 +120,19 @@ function Course_detail() {
         <div className='fixed bottom-[50px] right-0 top-0 z-[2] mt-[50px] w-[23%] border-l-2'>
           <div className='flex h-full w-full flex-col bg-white'>
             <header className='flex select-none items-center justify-between px-[16px] py-[12px]'>
-              <h1>Nội dung khóa học</h1>
+              <h1 className='flex items-center font-semibold text-color1'>
+                <Avatar sx={{ bgcolor: '#1e7115' }}>
+                  <FaTasks />
+                </Avatar>
+                <span className='ml-3'>Nội dung khóa học</span>
+              </h1>
             </header>
             <div className='overflow-y-auto overscroll-contain'>
               {courseData.data?.data.data.attributes.chapters.data?.map((item: any) => (
                 <details key={item.id}>
                   <summary>
                     <div className='sticky top-0 z-[2] flex cursor-pointer flex-col flex-wrap justify-between border-b-2 bg-[#f7f8fa] px-[20px] py-[8px] transition hover:bg-[#edeff1]'>
-                      <h3 className='text-base font-semibold text-black'>{item.attributes.lesson_name}</h3>
+                      <h3 className='w-[90%] text-base font-semibold text-black'>{item.attributes.lesson_name}</h3>
                       <span className='mt-[4px] text-xs font-normal text-black'>
                         {item.attributes.lesson_description}
                       </span>

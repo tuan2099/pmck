@@ -118,14 +118,6 @@ const AllCoursePage = () => {
     return category?.split('+').includes(name)
   }
 
-  // call api slider
-  const { data: imageSliderdata } = useQuery({
-    queryKey: ['sliderImage'],
-    queryFn: () => {
-      return sliderApi.getSlider()
-    }
-  })
-
   // call api course Category
   const { data: courseCategories } = useQuery({
     queryKey: ['course-categories'],

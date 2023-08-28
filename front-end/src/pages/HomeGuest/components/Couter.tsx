@@ -70,7 +70,7 @@ function Couter() {
           <span className='max-1041:text-[#1e7115] text-[20px] font-semibold leading-[150%] text-[#1e7115]'>
             Khám phá cùng PMC Knowledge
           </span>
-          <h1 className='mb-[20px] pt-[15px] text-[20px] font-bold leading-[120%] text-[#4F4F4F] md:mb-[20px] lg:mb-[50px] lg:text-[32px]'>
+          <h1 className='mb-[20px] pt-[15px] text-[20px] font-bold leading-[120%] text-color1 md:mb-[20px] lg:mb-[50px] lg:text-[32px]'>
             Được đào tạo bởi các chuyên gia hàng đầu trong lĩnh vực quản lý bất động sản
           </h1>
           <p className='max-600:text-[15px] mb-[20px] text-[16px] leading-[150%] md:mb-[20px] lg:mb-[50px]'>
