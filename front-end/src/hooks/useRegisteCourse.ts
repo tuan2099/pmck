@@ -19,7 +19,7 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
     mutationFn: () => {
       if (!registeItem) {
         return courseApi.createCourseRegisted({
-          users: [profile?.id],
+          user: [profile?.id],
           courses: [courseInfo.id]
         })
       }

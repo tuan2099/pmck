@@ -19,6 +19,7 @@ import MyCourse from './pages/MyCourse'
 import LearningPath from './pages/LearningPath'
 import Question from './pages/Question'
 import Certificate from './pages/Courrse_detail/Component/Certificate'
+import GuestLayout from './Layouts/GuestLayout'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -52,7 +53,11 @@ export default function useRouterElement() {
     },
     {
       path: ROUTES.home,
-      element: <HomeGuest />,
+      element: (
+        <GuestLayout>
+          <HomeGuest />
+        </GuestLayout>
+      ),
       index: true
     },
     {

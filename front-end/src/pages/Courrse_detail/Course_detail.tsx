@@ -256,7 +256,7 @@ function Course_detail() {
                     viewBox='0 0 24 24'
                     strokeWidth={1.5}
                     stroke='currentColor'
-                    className='mr-2 h-6 w-6 '
+                    className='mr-2 h-6 w-6'
                   >
                     <path
                       strokeLinecap='round'

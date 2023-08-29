@@ -19,7 +19,9 @@ module.exports = {
         blueColor: '#324FA2',
         color1: '#4F4F4F',
         color2: '#5c5c5c',
-        color3: '#292929'
+        color3: '#292929',
+        color4: 'rgba(0, 0, 0, 0.105) ',
+        color5: 'rgba(0, 0, 0)'
       },
       lineHeight: {
         150: '150%'
