@@ -17,7 +17,6 @@ import { Avatar } from '@mui/material'
 import { FaTasks } from 'react-icons/fa'
 
 function Course_detail() {
-  // setting video from Youtube
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
     type: '',
     data: null
@@ -28,10 +27,8 @@ function Course_detail() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const { profile } = useContext(AppContext)
   const [_, setParams] = useSearchParams()
-  // get id from url
   const { id } = useParams()
-
-  // convert id get from url
+  const [countDown, setCountDown] = useState<number>(0)
   const pageID = id?.split('-')[id?.split('-').length - 1]
 
   // Get data course detail
@@ -87,6 +84,39 @@ function Course_detail() {
     setTotal(courseTotal)
   }, [courseData.data?.data])
 
+  useEffect(() => {
+    if (chooseItem.type === 'video') {
+      const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${chooseItem.data.attributes.video_url}&key=AIzaSyB4j74m6L8f90SnuoyuzzYX5fy0aGnf64U`
+
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          const duration = data.items[0].contentDetails.duration
+          const timeArray = duration.match(/\d+/g)
+          const minutes = parseInt(timeArray[0], 10)
+          const seconds = parseInt(timeArray[1], 10)
+          const count = minutes * 60 + seconds
+          setCountDown(count)
+        })
+        .catch((error) => {
+          console.error('Failed to get video duration:', error)
+          return null
+        })
+    }
+  }, [chooseItem])
+
+  useEffect(() => {
+    if (countDown > 0) {
+      const interval = setInterval(() => {
+        setCountDown((prevSeconds) => prevSeconds - 1)
+      }, 1000)
+
+      return () => clearInterval(interval)
+    }
+  }, [countDown])
+
+  console.log(countDown)
+
   const handlePostVideoOnEnd = useMutation(learningProcessApi.createLearningProgesses)
 
   // End video call api
@@ -111,6 +141,43 @@ function Course_detail() {
   // open add note
   const toogleDrawer = () => {
     setOpenDrawer(!openDrawer)
+  }
+
+  const handleSetChooseItem = (item: any) => {
+    if (!countDown) {
+      setParams((prev) => {
+        return { ...prev, id: item.attributes.title + item.id }
+      })
+      const type = item.attributes.video_url ? 'video' : item.attributes.text_lesson ? 'text' : 'document'
+      setChooseItem({ type: type, data: item })
+      setLessonId(item.id)
+    }
+  }
+
+  const handleNextLesson = () => {
+    if (chooseItem.type !== 'quizz') {
+      let isLesson: boolean = true
+      courseData.data?.data.data.attributes.chapters.data?.forEach((chapter: any) => {
+        const position = chapter.attributes.lesson_items.data.findIndex((item: any) => item.id === chooseItem.data.id)
+        if (position !== -1 && position < chapter.attributes.lesson_items.data.length - 1) {
+          handleSetChooseItem(chapter.attributes.lesson_items.data[position + 1])
+          isLesson = true
+        }
+      })
+    }
+  }
+
+  const handlePrevLesson = () => {
+    if (chooseItem.type !== 'quizz') {
+      let isLesson: boolean = true
+      courseData.data?.data.data.attributes.chapters.data?.forEach((chapter: any) => {
+        const position = chapter.attributes.lesson_items.data.findIndex((item: any) => item.id === chooseItem.data.id)
+        if (position) {
+          handleSetChooseItem(chapter.attributes.lesson_items.data[position - 1])
+          isLesson = true
+        }
+      })
+    }
   }
 
   return (
@@ -156,8 +223,7 @@ function Course_detail() {
                         <LessonItem
                           item={item}
                           chooseItem={chooseItem}
-                          setLessonId={setLessonId}
-                          setChooseItem={setChooseItem}
+                          onSetChooseItem={handleSetChooseItem}
                           key={item.id}
                           completedLessonList={newArrLesson}
                         />
@@ -278,7 +344,7 @@ function Course_detail() {
             )}
           </div>
         </div>
-        <Control />
+        <Control onNextLesson={handleNextLesson} onPrevLesson={handlePrevLesson} />
       </section>
     </>
   )

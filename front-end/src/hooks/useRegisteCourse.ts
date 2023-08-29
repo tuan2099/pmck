@@ -48,16 +48,18 @@ const useRegisteCourse = ({ courseInfo }: { courseInfo?: any }) => {
     }
   }, [mutate])
 
-  React.useEffect(() => {
-    if (courseInfo && courseRegisted) {
-      console.log(courseRegisted)
-      const courseRegistedItem = courseRegisted.find((course: any) => course.attributes.user.data?.id === profile?.id)
-      courseRegistedItem && setRegisteItem(courseRegistedItem)
-      if (courseRegistedItem && courseInfo.id) {
-        setIsRegisted(courseRegistedItem.attributes.courses.data?.some((item: any) => item.id === courseInfo.id))
-      }
-    }
-  }, [courseInfo, courseRegisted])
+  console.log(courseRegisted)
+
+  // React.useEffect(() => {
+  //   if (courseInfo && courseRegisted) {
+  //     console.log(courseRegisted)
+  //     const courseRegistedItem = courseRegisted.find((course: any) => course.attributes.user.data?.id === profile?.id)
+  //     courseRegistedItem && setRegisteItem(courseRegistedItem)
+  //     if (courseRegistedItem && courseInfo.id) {
+  //       setIsRegisted(courseRegistedItem.attributes.courses.data?.some((item: any) => item.id === courseInfo.id))
+  //     }
+  //   }
+  // }, [courseInfo, courseRegisted])
 
   return { isRegisted, courseRegisted, profile, handleRegisteCourse: handleRegisteCourse }
 }

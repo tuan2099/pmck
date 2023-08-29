@@ -3,14 +3,13 @@ import { useSearchParams } from 'react-router-dom'
 
 interface IProps {
   item: any
-  setChooseItem: React.Dispatch<React.SetStateAction<any>>
-  setLessonId: React.Dispatch<React.SetStateAction<null>>
+  onSetChooseItem: (item: any) => void
   completedLessonList: any[]
   chooseItem: any
 }
 
 const LessonItem = (props: IProps) => {
-  const { item, setChooseItem, setLessonId, completedLessonList, chooseItem } = props
+  const { item, onSetChooseItem, completedLessonList, chooseItem } = props
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false)
 
@@ -23,13 +22,7 @@ const LessonItem = (props: IProps) => {
   return (
     <button
       className='flex  cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
-      onClick={() => {
-        setParams((prev) => {
-          return { ...prev, id: item.attributes.title + item.id }
-        })
-        setChooseItem({ type: 'video', data: item })
-        setLessonId(item.id)
-      }}
+      onClick={() => onSetChooseItem(item)}
       style={{
         backgroundColor: item?.id === chooseItem?.id ? '#bbf7d0' : ''
       }}

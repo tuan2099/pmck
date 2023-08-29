@@ -38,15 +38,22 @@ const CustomButton = styled(Button)({
   '&:focus': {}
 })
 
-function Control() {
+interface IProps {
+  onNextLesson: () => void
+  onPrevLesson: () => void
+}
+
+function Control(props: IProps) {
+  const { onNextLesson, onPrevLesson } = props
+
   return (
     <>
       <div className='fixed bottom-0 left-0 right-0 z-[2] flex h-[50px] items-center justify-center bg-[#f0f0f0]'>
         <Stack direction='row' spacing={2}>
-          <CustomButton variant='outlined' startIcon={<FaArrowLeft />}>
+          <CustomButton variant='outlined' startIcon={<FaArrowLeft />} onClick={onPrevLesson}>
             <div className='font-semibolds'>Bài trước</div>
           </CustomButton>
-          <CustomButton variant='outlined' endIcon={<FaArrowRight />}>
+          <CustomButton variant='outlined' endIcon={<FaArrowRight />} onClick={onNextLesson}>
             <div className='font-semibolds'>Bài tiếp theo</div>
           </CustomButton>
         </Stack>
