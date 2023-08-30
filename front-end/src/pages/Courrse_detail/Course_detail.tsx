@@ -211,6 +211,8 @@ function Course_detail() {
     }
   }
 
+  console.log(courseData.data?.data.data.attributes.chapters.data)
+
   return (
     <>
       <section className='m-auto w-full'>
@@ -269,7 +271,7 @@ function Course_detail() {
                           setChooseItem={setChooseItem}
                         />
                       ))}
-                    {item.attributes.certificate && (
+                    {item.attributes.certificate.data && (
                       <Link
                         to={ROUTES.certificate}
                         className='flex cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
