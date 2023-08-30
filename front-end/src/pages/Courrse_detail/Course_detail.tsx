@@ -46,17 +46,16 @@ function Course_detail() {
     }
   })
 
-  // getComplete lesson
-  const { refetch } = useQuery({
+  const { data: completedLesson, refetch } = useQuery({
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson(),
     onSuccess: (data) => {
+      console.log(data.data.learning_progresses[0].id)
       const completedArrLesson = getLessonItemsByCourseId(Number(pageID), data?.data.learning_progresses)
       setNewArrLesson(completedArrLesson)
     }
   })
 
-  // format complete course func
   function getLessonItemsByCourseId(courseId: number, data: any) {
     const lessonItems = []
 
@@ -85,23 +84,28 @@ function Course_detail() {
   }, [courseData.data?.data])
 
   useEffect(() => {
-    if (chooseItem.type === 'video') {
-      const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${chooseItem.data.attributes.video_url}&key=AIzaSyB4j74m6L8f90SnuoyuzzYX5fy0aGnf64U`
+    const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
+    if (!isCompleted) {
+      if (chooseItem.type === 'video') {
+        const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${chooseItem.data.attributes.video_url}&key=AIzaSyB4j74m6L8f90SnuoyuzzYX5fy0aGnf64U`
 
-      fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          const duration = data.items[0].contentDetails.duration
-          const timeArray = duration.match(/\d+/g)
-          const minutes = parseInt(timeArray[0], 10)
-          const seconds = parseInt(timeArray[1], 10)
-          const count = minutes * 60 + seconds
-          setCountDown(count)
-        })
-        .catch((error) => {
-          console.error('Failed to get video duration:', error)
-          return null
-        })
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            const duration = data.items[0].contentDetails.duration
+            const timeArray = duration.match(/\d+/g)
+            const minutes = parseInt(timeArray[0], 10)
+            const seconds = parseInt(timeArray[1], 10)
+            const count = minutes * 60 + seconds
+            setCountDown(count)
+          })
+          .catch((error) => {
+            console.error('Failed to get video duration:', error)
+            return null
+          })
+      } else {
+        handleUpdateOrPostLearningProcess()
+      }
     }
   }, [chooseItem])
 
@@ -113,38 +117,65 @@ function Course_detail() {
 
       return () => clearInterval(interval)
     }
+    if (countDown === 0) {
+      const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
+      if (!isCompleted) handleUpdateOrPostLearningProcess()
+    }
   }, [countDown])
 
-  console.log(countDown)
-
-  const handlePostVideoOnEnd = useMutation(learningProcessApi.createLearningProgesses)
-
-  // End video call api
-  const handleEndVideo = () => {
-    // const check = newArrLesson.some((lesson: any) => lesson.id === id)
-    handlePostVideoOnEnd.mutate(
-      {
+  const handlePostLearningProcess = useMutation({
+    mutationFn: () =>
+      learningProcessApi.createLearningProgesses({
         data: {
-          lesson_items: lessonId,
+          lesson_items: [lessonId],
           courses: pageID,
           users_permissions_users: profile?.id
         }
-      },
-      {
-        onSuccess: () => {
-          refetch()
+      }),
+    onSuccess: () => {
+      refetch()
+    }
+  })
+
+  const handleUpdateLearningProcess = useMutation({
+    mutationFn: () => {
+      const lesson_items = newArrLesson.map((item) => item.id)
+      return learningProcessApi.updateLearningProcess({
+        id: completedLesson?.data.learning_progresses[0]?.id,
+        data: {
+          lesson_items: [...lesson_items, lessonId],
+          courses: pageID,
+          users_permissions_users: profile?.id
         }
-      }
-    )
+      })
+    },
+    onSuccess: () => {
+      refetch()
+    }
+  })
+
+  const handleUpdateOrPostLearningProcess = () => {
+    if (newArrLesson.length) {
+      handleUpdateLearningProcess.mutate()
+    } else {
+      handlePostLearningProcess.mutate()
+    }
   }
 
-  // open add note
   const toogleDrawer = () => {
     setOpenDrawer(!openDrawer)
   }
 
   const handleSetChooseItem = (item: any) => {
-    if (!countDown) {
+    const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
+    if (isCompleted) {
+      setParams((prev) => {
+        return { ...prev, id: item.attributes.title + item.id }
+      })
+      const type = item.attributes.video_url ? 'video' : item.attributes.text_lesson ? 'text' : 'document'
+      setChooseItem({ type: type, data: item })
+      setLessonId(item.id)
+    } else if (!countDown) {
       setParams((prev) => {
         return { ...prev, id: item.attributes.title + item.id }
       })
@@ -292,7 +323,7 @@ function Course_detail() {
                         height: '100%'
                       }}
                       videoId={chooseItem?.data?.attributes.video_url.toString() || ''}
-                      onEnd={handleEndVideo}
+                      onEnd={handleUpdateOrPostLearningProcess}
                     />
                   </div>
                 </div>

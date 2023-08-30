@@ -14,21 +14,17 @@ function CourseCard(props: IProps) {
   return (
     <>
       <Link
-        // to={
-        //   isRegisted
-        //     ? `/learning/${generateNameId({
-        //         name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
-        //         id: courseItem.id
-        //       })}`
-        //     : `/course/${generateNameId({
-        //         name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
-        //         id: courseItem.id
-        //       })}`
-        // }
-        to={`/learning/${generateNameId({
-          name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
-          id: courseItem.id
-        })}`}
+        to={
+          isRegisted
+            ? `/learning/${generateNameId({
+                name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
+                id: courseItem.id
+              })}`
+            : `/course/${generateNameId({
+                name: courseItem.attributes?.course_name ? courseItem.attributes?.course_name : courseItem.course_name,
+                id: courseItem.id
+              })}`
+        }
         className='mb-[30px] w-full cursor-pointer px-1'
       >
         <div

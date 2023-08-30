@@ -20,6 +20,17 @@ const learningProcessApi = {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`
       }
     })
+  },
+  updateLearningProcess({ id, data }: { id: any; data: any }) {
+    return http.put(
+      `/learning-progresses/${id}`,
+      { data },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+      }
+    )
   }
 }
 
