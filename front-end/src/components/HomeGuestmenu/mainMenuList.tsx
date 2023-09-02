@@ -58,7 +58,7 @@ function MainMenuList({ title, items }: any) {
           onMouseEnter: handleMenuEnter
         }}
       >
-        <div className='items-top flex justify-between border p-7'>
+        <div className='items-top flex justify-between p-7'>
           <ul className='w-[30%]'>
             <li>
               <h4 className='font-bold text-slate-400'>{items.sections.data[0]?.attributes.label_col_1}</h4>
@@ -88,7 +88,7 @@ function MainMenuList({ title, items }: any) {
                 </li>
                 <li>
                   <Button variant='contained' fullWidth>
-                    Trải nghiệm PMCK
+                    Đăng kí
                   </Button>
                 </li>
               </ul>

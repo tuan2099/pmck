@@ -5,15 +5,16 @@ function InfoCertified() {
     <>
       <section className='m-auto max-w-[1320px]'>
         <div className='py-[60px] text-center'>
-          <span className='max-1041:text-orange1040 text-[20px] font-semibold leading-[150%] text-mainGreenColor'>
-            What's New
+          <span className='max-1041:text-orange1040 text-[20px] font-semibold italic leading-[150%] text-mainGreenColor'>
+            Cập nhật mới nhất
           </span>
           <h1 className='pb-[25px] pt-[15px] text-[20px] font-bold leading-[120%] text-[#4F4F4F] lg:text-[32px]'>
-            Master the skills to drive your career
+            Làm chủ các kỹ năng để thúc đẩy sự nghiệp của bạn
           </h1>
           <p className='m-auto text-[16px] leading-[150%] text-[#5C5C5C] xl:w-[45%]'>
-            Get certified, master modern tech skills, and level up your career — whether you’re starting out or a
-            seasoned pro. 95% of eLearning learners report our hands-on content directly helped their careers.
+            làm chủ những kỹ năng công nghệ hiện đại và nâng cao sự nghiệp — cho dù bạn đang bắt đầu hay là một chuyên
+            gia lão luyện. 95% của những người học trực tuyến báo cáo rằng học tập tại PMCK đã trực tiếp giúp ích cho sự
+            nghiệp của họ
           </p>
         </div>
         <div>

@@ -15,7 +15,7 @@ function Footer() {
   return (
     <footer>
       <div className='bg-[#181821] pb-[50px] pt-[65px] text-[#a9b3bb]'>
-        <div className='m-auto w-full max-w-[1200px]'>
+        <div className='m-auto w-full max-w-[1320px]'>
           <div className='items-top flex flex-wrap justify-between'>
             <section className='m-auto w-full px-[12px] md:w-[45%] lg:w-[25%]'>
               <div className='flex items-center'>

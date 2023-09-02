@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "course_categories",
+  "collectionName": "course_lists",
   "info": {
-    "singularName": "course-category",
-    "pluralName": "course-categories",
-    "displayName": "CourseCategory",
+    "singularName": "course-list",
+    "pluralName": "course-lists",
+    "displayName": "CourseList",
     "description": ""
   },
   "options": {
@@ -12,21 +12,22 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "label": {
       "type": "string"
     },
-    "title": {
+    "course_number": {
       "type": "string"
     },
-    "iconCategory": {
+    "icon": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     }
   }
 }

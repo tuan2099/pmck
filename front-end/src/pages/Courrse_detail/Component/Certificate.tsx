@@ -24,8 +24,6 @@ const Certificate = () => {
     })
   }
 
-  console.log(profile)
-
   useEffect(() => {
     if (certificateRef.current) {
       exportToPDF()

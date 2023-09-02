@@ -59,6 +59,9 @@ const courseApi = {
   },
   postQuizGrade(data: { users_permissions_user: number; quiz: number; gr: number }) {
     return http.post('/quiz-grades', { data })
+  },
+  getCourseList() {
+    return http.get('/course-lists?populate=*')
   }
 }
 

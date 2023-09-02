@@ -14,19 +14,18 @@ function Growup() {
           <div className='w-full px-[12px] lg:w-[50%]'>
             <div className=''>
               <div className='max-426:px-0 my-auto p-[12px]'>
-                <span className=' text-[20px] font-semibold leading-[150%] text-mainGreenColor'>Growup Your Skill</span>
+                <span className=' text-[20px] font-semibold italic leading-[150%] text-mainGreenColor'>
+                  Phát triển kĩ năng
+                </span>
                 <h1 className='pb-[24px] pt-[15px] text-[20px] font-bold leading-[120%] text-[#324FA2] lg:text-[32px]'>
-                  Learn Anything you want today
+                  Khám phá bất cứ điều gì bạn muốn
                 </h1>
                 <p className='text-[16px] font-normal leading-[150%] text-[#5C5C5C]'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quam dolor fermentum massa viverra congue
-                  proin. A volutpat eget ultrices velit nunc orci. Commodo quis integer a felis ac vel mauris a morbi.
-                  Scelerisque nunc accumsan elementum aenean nisl lacinia. Congue enim aliquet ac vitae turpis. Neque,
-                  bibendum imperdiet sed ullamcorper morbi amet. Facilisi odio amet, nunc quam ut nulla purus adipiscing
-                  pharetra.
+                  Hãy khám phá và tiếp thu mọi kiến thức bạn mong muốn với danh mục khóa học nghề quản lý bất động sản.
+                  Chắc chắn rằng bạn sẽ được trang bị đầy đủ để đối mặt với bất kỳ thách thức nào trong lĩnh vực này.
                 </p>
                 <button className='mt-[50px] flex h-[50px] items-center justify-center rounded-[5px] bg-mainGreenColor px-[46px] py-[13px] text-[16px] font-bold leading-[150%] text-[#FFF]'>
-                  Join Today
+                  Tham gia ngay
                 </button>
               </div>
             </div>
