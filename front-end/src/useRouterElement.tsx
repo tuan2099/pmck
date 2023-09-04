@@ -20,6 +20,7 @@ import LearningPath from './pages/LearningPath'
 import Question from './pages/Question'
 import Certificate from './pages/Courrse_detail/Component/Certificate'
 import GuestLayout from './Layouts/GuestLayout'
+import Setting from './pages/Setting'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -145,6 +146,14 @@ export default function useRouterElement() {
               <EditProfile />
             </HomeUserLayout>
           )
+        },
+        {
+          path: '/setting',
+          element: (
+            <HomeUserLayout>
+              <Setting />
+            </HomeUserLayout>
+          )
         }
       ]
     },
@@ -159,7 +168,11 @@ export default function useRouterElement() {
 
     {
       path: '/faq',
-      element: <Question />
+      element: (
+        <HomeUserLayout>
+          <Question />
+        </HomeUserLayout>
+      )
     },
     {
       path: '*',

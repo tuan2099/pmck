@@ -21,7 +21,7 @@ export const ListMenuItems = [
   },
   {
     name: 'Câu hỏi thường gặp',
-    link: 'me',
+    link: 'faq',
     icon: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -41,7 +41,7 @@ export const ListMenuItems = [
   },
   {
     name: 'Cài đặt',
-    link: 'me',
+    link: 'setting',
     icon: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
