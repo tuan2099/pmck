@@ -50,7 +50,6 @@ function Course_detail() {
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson(),
     onSuccess: (data) => {
-      console.log(data.data.learning_progresses[0].id)
       const completedArrLesson = getLessonItemsByCourseId(Number(pageID), data?.data.learning_progresses)
       setNewArrLesson(completedArrLesson)
     }
@@ -211,7 +210,7 @@ function Course_detail() {
     }
   }
 
-  console.log(courseData.data?.data.data.attributes.chapters.data)
+  // console.log(courseData.data?.data.data.attributes.chapters.data)
 
   return (
     <>
