@@ -369,7 +369,9 @@ function Course_detail() {
                     <div className='p-6'>
                       <h2 className='text-2xl font-bold'>Ghi chú của tôi</h2>
                     </div>
-                    <div className='p-6'>1</div>
+                    <div className='p-6'>
+                      <input type='text' />
+                    </div>
                   </div>
                 </Drawer>
               </div>

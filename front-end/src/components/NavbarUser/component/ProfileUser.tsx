@@ -112,7 +112,7 @@ function ProfileUser() {
               />
             </svg>
           </ListItemIcon>
-          Logout
+          Đăng xuất
         </MenuItem>
       </Menu>
     </>
