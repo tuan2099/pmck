@@ -21,6 +21,7 @@ import Question from './pages/Question'
 import Certificate from './pages/Courrse_detail/Component/Certificate'
 import GuestLayout from './Layouts/GuestLayout'
 import Setting from './pages/Setting'
+import LearningOutcomes from './pages/LearningOutcomes/LearningOutcomes'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -152,6 +153,14 @@ export default function useRouterElement() {
           element: (
             <HomeUserLayout>
               <Setting />
+            </HomeUserLayout>
+          )
+        },
+        {
+          path: '/learning-outcomes',
+          element: (
+            <HomeUserLayout>
+              <LearningOutcomes />
             </HomeUserLayout>
           )
         }
