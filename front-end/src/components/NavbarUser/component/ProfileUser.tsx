@@ -11,12 +11,43 @@ import { deleteStorage } from 'src/utils/storage'
 import { ListMenuItems } from './dataMenu'
 import Tooltip from '@mui/material/Tooltip'
 import { Link, useNavigate } from 'react-router-dom'
+import { Badge, ListItemText, Typography, styled } from '@mui/material'
+import { useQuery } from '@tanstack/react-query'
+import profileApi from 'src/apis/user.api'
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: '#44b700',
+    color: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: 'ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""'
+    }
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0
+    }
+  }
+}))
 
 function ProfileUser() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { setIsAuthenticate, setProfile } = useContext(AppContext)
   const navigate = useNavigate()
-
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -33,6 +64,11 @@ function ProfileUser() {
     navigate('/')
   }
 
+  const { data: profileData } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: () => profileApi.getProfile()
+  })
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -45,7 +81,7 @@ function ProfileUser() {
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }} src='' alt='Admin PMC'></Avatar>
+            <Avatar sx={{ width: 32, height: 32 }} src='' alt={`${profileData?.data.username}`}></Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -84,6 +120,24 @@ function ProfileUser() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
+        <MenuItem>
+          <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
+            <Avatar alt={`${profileData?.data.username}`} src='/static/images/avatar/1.jpg' />
+          </StyledBadge>
+          <div className='mr-2'></div>
+          <ListItemText
+            primary={profileData?.data.username}
+            secondary={
+              <React.Fragment>
+                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
+                  {profileData?.data.email}
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </MenuItem>
+        <Divider />
+
         {ListMenuItems.map((menuItem: any) => {
           return (
             <MenuItem onClick={handleClose} key={menuItem.id}>

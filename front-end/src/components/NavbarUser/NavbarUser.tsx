@@ -1,19 +1,9 @@
-import { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from 'src/assets/logo.png'
-import { AppContext } from 'src/context/app.context'
-import { useQuery } from '@tanstack/react-query'
-import profileApi from 'src/apis/user.api'
 import ProfileUser from './component/ProfileUser'
 import Notification from './component/Notification'
-function NavbarUser() {
-  // call api userinfo
-  const { data: profileData } = useQuery({
-    queryKey: ['userInfo'],
-    queryFn: () => profileApi.getProfile()
-  })
-  //
 
+function NavbarUser() {
   return (
     <>
       <div className='sticky left-0 right-0 top-0 z-[2] flex items-center justify-between border-b border-[#e8ebed] bg-white px-7 py-2'>
