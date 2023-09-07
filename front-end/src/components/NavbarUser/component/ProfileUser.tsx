@@ -14,6 +14,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Badge, ListItemText, Typography, styled } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import profileApi from 'src/apis/user.api'
+import { v4 as uuidv4 } from 'uuid'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -120,7 +121,7 @@ function ProfileUser() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
+        <MenuItem key={uuidv4()}>
           <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
             <Avatar alt={`${profileData?.data.username}`} src='/static/images/avatar/1.jpg' />
           </StyledBadge>
@@ -140,7 +141,7 @@ function ProfileUser() {
 
         {ListMenuItems.map((menuItem: any) => {
           return (
-            <MenuItem onClick={handleClose} key={menuItem.id}>
+            <MenuItem onClick={handleClose} key={uuidv4()}>
               <Link key={menuItem.id} className='my-1 block flex items-center' to={`/${menuItem.link}`}>
                 {menuItem.icon}
                 {menuItem.name}
@@ -149,7 +150,7 @@ function ProfileUser() {
           )
         })}
         <Divider />
-        <MenuItem onClick={handleLogout}>
+        <MenuItem onClick={handleLogout} key={uuidv4()}>
           <ListItemIcon>
             <svg
               xmlns='http://www.w3.org/2000/svg'

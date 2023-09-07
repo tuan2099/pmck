@@ -25,7 +25,7 @@ const LessonItem = (props: IProps) => {
       className='flex  cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
       onClick={() => onSetChooseItem(item)}
       style={{
-        backgroundColor: item?.id === chooseItem?.data.id ? '#e3fce0' : !isCompleted ? '#f1f1f1' : ''
+        backgroundColor: item?.id === chooseItem?.data?.id ? '#e3fce0' : !isCompleted ? '#f1f1f1' : ''
       }}
     >
       <div className=''>
@@ -67,7 +67,7 @@ const LessonItem = (props: IProps) => {
             </svg>
           </>
         )}
-        {!isCompleted && chooseItem.data.id !== item.id && (
+        {!isCompleted && chooseItem?.data?.id !== item?.id && (
           <div className='text-gray-500'>
             <FaLock />
           </div>
