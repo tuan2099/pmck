@@ -16,6 +16,12 @@
     },
     "answer": {
       "type": "string"
+    },
+    "q_and_a_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::q-and-a-category.q-and-a-category",
+      "inversedBy": "q_and_as"
     }
   }
 }

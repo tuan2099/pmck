@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
@@ -186,7 +187,7 @@ function Course_detail() {
 
   const handleNextLesson = () => {
     if (chooseItem.type !== 'quizz') {
-      let isLesson: boolean = true
+      let isLesson = true
       courseData.data?.data.data.attributes.chapters.data?.forEach((chapter: any) => {
         const position = chapter.attributes.lesson_items.data.findIndex((item: any) => item.id === chooseItem.data.id)
         if (position !== -1 && position < chapter.attributes.lesson_items.data.length - 1) {
@@ -199,7 +200,7 @@ function Course_detail() {
 
   const handlePrevLesson = () => {
     if (chooseItem.type !== 'quizz') {
-      let isLesson: boolean = true
+      let isLesson = true
       courseData.data?.data.data.attributes.chapters.data?.forEach((chapter: any) => {
         const position = chapter.attributes.lesson_items.data.findIndex((item: any) => item.id === chooseItem.data.id)
         if (position) {
@@ -209,8 +210,6 @@ function Course_detail() {
       })
     }
   }
-
-  // console.log(courseData.data?.data.data.attributes.chapters.data)
 
   return (
     <>

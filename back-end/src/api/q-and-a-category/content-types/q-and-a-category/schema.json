@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "q_and_a_categories",
+  "info": {
+    "singularName": "q-and-a-category",
+    "pluralName": "q-and-a-categories",
+    "displayName": "Q&A Category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "q_and_as": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::q-and-a.q-and-a",
+      "mappedBy": "q_and_a_category"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}
