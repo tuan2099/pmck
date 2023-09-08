@@ -83,7 +83,7 @@ function Question() {
             <div className='grid grid-cols-2 gap-2'>
               <div className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'>
                 <FaPhoneAlt />
-                <div className='mt-1 text-sm'>Gọi điện</div>
+                <div className='mt-1 text-sm'>Liên hệ</div>
               </div>
               <div className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'>
                 <FaMailBulk />

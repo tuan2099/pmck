@@ -37,7 +37,6 @@ const QuizzDetail = ({ id }: { id: any }) => {
           return total
         }
       }, 0)
-      console.log(totalScore)
       const data = {
         users_permissions_user: profile.id,
         quiz: quizz.id,

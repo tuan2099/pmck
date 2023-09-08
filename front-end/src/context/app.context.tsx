@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { useQuery } from '@tanstack/react-query'
 import { useState, createContext, useEffect } from 'react'
 import courseApi from 'src/apis/course.api'
@@ -8,7 +9,7 @@ import { getAccesTokenLocalStorage, getProfileFromLocalStorage } from 'src/utils
 interface AppContextInterface {
   isAuthenticated: boolean
   setIsAuthenticate: React.Dispatch<React.SetStateAction<boolean>>
-  profile: User | null
+  profile: User | any
   setProfile: React.Dispatch<React.SetStateAction<User | null>>
   userInfo: any
   setUserInfo: any
@@ -30,7 +31,6 @@ const initialAppContext: AppContextInterface = {
   setUserInfo: () => null,
   userInfo: [],
   courseRegisted: [],
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCourseRegisted: () => {},
   refetchRegistedCourse: () => {},
   allCourse: [],
@@ -57,6 +57,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     onSuccess: (data) => {
       setCourseRegisted(data.data.data)
     },
+    // eslint-disable-next-line no-extra-boolean-cast
     enabled: !Boolean(courseRegisted.length)
   })
 

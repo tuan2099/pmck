@@ -29,7 +29,6 @@ const Certificate = () => {
       exportToPDF()
     }
   }, [])
-
   return (
     <div className='relative mx-20' ref={certificateRef}>
       <p className='absolute right-1/2 top-[48%] translate-x-1/2 text-4xl font-bold'>{profile?.full_name}</p>
