@@ -13,13 +13,15 @@ function HeroSlice() {
           </div>
           <div className='flex flex-wrap items-center justify-between'>
             <div className='w-full px-[12px] py-[40px] lg:w-1/2 '>
-              <p className='text-center text-2xl font-bold italic text-[#392c7d] lg:text-left'>Take the first step</p>
+              <p className='text-center text-2xl font-bold italic text-[#392c7d] lg:text-left'>
+                Luôn luôn đi đầu trong lĩnh vực dạy học
+              </p>
               <h1 className='text-center text-[35px] font-bold text-mainGreenColor lg:text-left lg:text-[55px] 2xl:text-[50px]'>
-                Engaging & Accessible Online Courses For All
+                Học tập trực tuyến và dễ dàng tiếp cận
               </h1>
               <button className='m-auto mt-[20px] flex justify-center rounded-[5px] bg-[#392c7d] px-[45px] py-[10px] text-center text-white transition hover:bg-[#1d163f] lg:mx-0 '>
                 <Link to='/register' className='flex items-center'>
-                  Get Started{' '}
+                  Bát đầu học{' '}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'

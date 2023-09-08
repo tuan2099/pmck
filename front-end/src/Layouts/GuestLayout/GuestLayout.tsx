@@ -21,12 +21,16 @@ function GuestLayout({ children }: Props) {
           <MainMenu />
         </div>
         <div className='hidden md:block'>
-          <button className='mr-[20px] rounded-[5px] bg-[#392C7D] px-[45px] py-[10px] text-white transition hover:bg-[#2a205c]'>
-            <Link to='/login'>Đăng nhập</Link>
-          </button>
-          <button className='rounded-[5px] bg-[#1e7115] px-[45px] py-[10px] text-white transition hover:bg-[#173d13] '>
-            <Link to='/register'>Đăng kí</Link>
-          </button>
+          <Link to='/login'>
+            <button className='mr-[20px] rounded-[5px] bg-[#392C7D] px-[45px] py-[10px] text-white transition hover:bg-[#2a205c]'>
+              Đăng nhập
+            </button>
+          </Link>
+          <Link to='/register'>
+            <button className='rounded-[5px] bg-[#1e7115] px-[45px] py-[10px] text-white transition hover:bg-[#173d13] '>
+              Đăng kí
+            </button>
+          </Link>
         </div>
       </div>
       {children}
