@@ -4,7 +4,8 @@
   "info": {
     "singularName": "q-and-a",
     "pluralName": "q-and-as",
-    "displayName": "Q&A"
+    "displayName": "Q&A",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,6 +23,9 @@
       "relation": "manyToOne",
       "target": "api::q-and-a-category.q-and-a-category",
       "inversedBy": "q_and_as"
+    },
+    "isPopularQA": {
+      "type": "boolean"
     }
   }
 }
