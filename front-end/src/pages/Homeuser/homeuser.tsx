@@ -148,7 +148,7 @@ function Homeuser() {
           <h4 className='mb-5 text-2xl font-bold text-color1'>
             Tin tức <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Nổi bật</span>
           </h4>
-          <p className='mb-5  text-[#1e7115]'>
+          <p className='mb-5 text-[#1e7115]'>
             <Link to='/new' className='flex items-center'>
               Xem tất cả{'   '}
               <svg

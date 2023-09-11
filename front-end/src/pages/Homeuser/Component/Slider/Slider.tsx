@@ -2,6 +2,7 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
 import { Link } from 'react-router-dom'
+import Custombutton from 'src/components/Custombutton' // mui 5 custem button
 
 function Slider(props: any) {
   const { imageSliderdata } = props
@@ -29,9 +30,19 @@ function Slider(props: any) {
                   <div className='mt-3 w-[50%] px-[36px]'>
                     <h3 className='text-4xl font-bold leading-normal text-white'>{slider.attributes.title}</h3>
                     <p className='mb-[24px] max-w-[600px] text-white'>{slider.attributes.short_description}</p>
-                    <button className='rounded-[50px] border-2 border-white px-2.5 py-1 text-white transition hover:bg-white hover:text-black'>
+                    <Custombutton
+                      hoverBgColor='none'
+                      hoverBorderColor='#fff'
+                      textColor='#fff'
+                      urlButton
+                      bgcolor='none'
+                      borderColor='#fff'
+                      variant='outlined'
+                      borderRadius=''
+                      border='2px solid'
+                    >
                       Tìm hiểu thêm
-                    </button>
+                    </Custombutton>
                   </div>
                   <div className='w-[40%] '>
                     <div className=''>

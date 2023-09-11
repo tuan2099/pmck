@@ -4,24 +4,27 @@ import { Link } from 'react-router-dom'
 
 interface CustombuttonType {
   fullWidth?: boolean
-  bgcolor: string
-  lineHeight: number
-  borderColor: string
-  textSize: number
-  textColor: string
-  hoverBgColor: string
-  variant: string | any
-  children: any
-  hoverBorderColor: string
-  hoverBoxShadow: string
-  activeBoxShadowColor: string
-  activeBackgroundColor: string
-  activeBorderColor: string
-  focusBoxShadowColor: string
+  bgcolor?: string
+  lineHeight?: number
+  borderColor?: string
+  textSize?: number
+  textColor?: string
+  hoverBgColor?: string
+  variant?: string | any
+  children?: any
+  hoverBorderColor?: string
+  hoverBoxShadow?: string
+  activeBoxShadowColor?: string
+  activeBackgroundColor?: string
+  activeBorderColor?: string
+  focusBoxShadowColor?: string
   urlButton?: boolean
   loadingButton?: boolean
   startIcon?: any
   endIcon?: any
+  borderRadius?: string
+  padding?: string
+  border?: string
 }
 
 function Custombutton({
@@ -42,15 +45,18 @@ function Custombutton({
   activeBorderColor,
   focusBoxShadowColor,
   startIcon,
-  endIcon
+  endIcon,
+  padding,
+  border
 }: CustombuttonType) {
   const StyleCustomButton = styled(Button)({
     color: textColor || 'black',
     boxShadow: 'none',
     textTransform: 'none',
+    borderRadius: '50px',
     fontSize: textSize || 16,
-    padding: '6px 12px',
-    border: variant === 'contained' && 'outline' ? '1px solid' : '',
+    padding: padding || '6px 12px',
+    border: border || '1px solid',
     lineHeight: lineHeight || 1.5,
     backgroundColor: variant === 'text' && 'outline' ? '' : bgcolor || '#f2be05',
     borderColor: borderColor || '#0063cc',
