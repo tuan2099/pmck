@@ -86,6 +86,7 @@ function Question() {
             <div className='w-[43%] min-w-[720px] max-w-full'>
               <div className='flex items-center justify-between p-6'>
                 <h2 className='text-2xl font-bold'>Tiêu đề</h2>
+                <button onClick={handleCloseDrawer}>Đóng</button>
               </div>
               <div className='p-6'>
                 {QAList.map((item: any) => (
