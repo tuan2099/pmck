@@ -8,6 +8,7 @@ import { SupportType } from 'src/types/support.type'
 
 function Question() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
+  const [QAList, setQAList] = useState<any[]>([])
 
   const { data: supportQuestionApi } = useQuery({
     queryKey: ['support'],
@@ -16,8 +17,24 @@ function Question() {
     }
   })
 
-  const toogleDrawer = () => {
-    setOpenDrawer(!openDrawer)
+  const { data: QAApi } = useQuery({
+    queryKey: ['QA'],
+    queryFn: () => {
+      return supportApi.getQA()
+    }
+  })
+
+  console.log(QAApi?.data.data)
+
+  const handleOpenDrawer = (id: number) => {
+    const chooseCategory = supportQuestionApi?.data.data.find((item: any) => +item.id === id)
+    setQAList(chooseCategory?.attributes.q_and_as.data)
+    setOpenDrawer(true)
+  }
+
+  const handleCloseDrawer = () => {
+    setOpenDrawer(false)
+    setQAList([])
   }
 
   return (
@@ -50,7 +67,7 @@ function Question() {
               return (
                 <>
                   <button
-                    onClick={toogleDrawer}
+                    onClick={() => handleOpenDrawer(item.id)}
                     className='w-full cursor-pointer bg-[#f1f1f1] py-9 transition hover:bg-[#dbdbdb]'
                     key={item.id}
                   >
@@ -65,14 +82,33 @@ function Question() {
                 </>
               )
             })}
-          <Drawer open={openDrawer} anchor='right' onClose={toogleDrawer}>
+          <Drawer open={openDrawer} anchor='right' onClose={handleCloseDrawer}>
             <div className='w-[43%] min-w-[720px] max-w-full'>
               <div className='flex items-center justify-between p-6'>
                 <h2 className='text-2xl font-bold'>Tiêu đề</h2>
               </div>
-              <div className='p-6'></div>
+              <div className='p-6'>
+                {QAList.map((item) => (
+                  <div className='mb-2'>
+                    <h3 className='text-lg font-bold'>{`${item?.attributes.question} ?`}</h3>
+                    <p>{item?.attributes.answer}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </Drawer>
+
+          <div>
+            {QAApi?.data.data
+              .filter((item: any) => item.attributes.isPopularQA)
+              .map((qa: any) => (
+                <div className='mb-2'>
+                  <h3 className='text-lg font-bold'>{`${qa?.attributes.question} ?`}</h3>
+                  <p>{qa?.attributes.answer}</p>
+                </div>
+              ))}
+          </div>
+
           <div className='flex w-full cursor-pointer flex-col justify-between transition'>
             <div>
               <div className='mb-2 flex justify-center pt-3 text-color1'>
@@ -81,14 +117,20 @@ function Question() {
               <h3 className='text-center text-sm text-color1'>Nếu bạn không tìm thấy câu hỏi</h3>
             </div>
             <div className='grid grid-cols-2 gap-2'>
-              <div className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'>
+              <a
+                href='tel:000000000000'
+                className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'
+              >
                 <FaPhoneAlt />
                 <div className='mt-1 text-sm'>Liên hệ</div>
-              </div>
-              <div className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'>
+              </a>
+              <a
+                href='mailto:abc@gmail.com'
+                className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'
+              >
                 <FaMailBulk />
                 <div className='mt-1 text-sm'>Gửi Email</div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
