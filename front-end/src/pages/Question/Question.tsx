@@ -4,12 +4,12 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { FaLink, FaMailBulk, FaPhoneAlt, FaQuestionCircle } from 'react-icons/fa'
 import supportApi from 'src/apis/support.api'
+import Accordion from 'src/components/Accordion'
 import { SupportType } from 'src/types/support.type'
 
 function Question() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [QAList, setQAList] = useState<any[]>([])
-
   const { data: supportQuestionApi } = useQuery({
     queryKey: ['support'],
     queryFn: () => {
@@ -24,7 +24,7 @@ function Question() {
     }
   })
 
-  console.log(QAApi?.data.data)
+  // console.log(QAApi?.data.data)
 
   const handleOpenDrawer = (id: number) => {
     const chooseCategory = supportQuestionApi?.data.data.find((item: any) => +item.id === id)
@@ -88,26 +88,25 @@ function Question() {
                 <h2 className='text-2xl font-bold'>Tiêu đề</h2>
               </div>
               <div className='p-6'>
-                {QAList.map((item) => (
-                  <div className='mb-2'>
-                    <h3 className='text-lg font-bold'>{`${item?.attributes.question} ?`}</h3>
-                    <p>{item?.attributes.answer}</p>
+                {QAList.map((item: any) => (
+                  <div key={item.id} className='my-4'>
+                    <Accordion item={item} key={item.id} />
                   </div>
                 ))}
               </div>
             </div>
           </Drawer>
 
-          <div>
+          {/* <div>
             {QAApi?.data.data
               .filter((item: any) => item.attributes.isPopularQA)
               .map((qa: any) => (
-                <div className='mb-2'>
+                <div className='mb-2' key={qa.id}>
                   <h3 className='text-lg font-bold'>{`${qa?.attributes.question} ?`}</h3>
                   <p>{qa?.attributes.answer}</p>
                 </div>
               ))}
-          </div>
+          </div> */}
 
           <div className='flex w-full cursor-pointer flex-col justify-between transition'>
             <div>
@@ -118,7 +117,7 @@ function Question() {
             </div>
             <div className='grid grid-cols-2 gap-2'>
               <a
-                href='tel:000000000000'
+                href='tel:04853362'
                 className='flex w-full cursor-pointer flex-col items-center justify-center bg-[#f1f1f1] py-4 text-[25px] text-color1 transition hover:bg-[#dbdbdb]'
               >
                 <FaPhoneAlt />
