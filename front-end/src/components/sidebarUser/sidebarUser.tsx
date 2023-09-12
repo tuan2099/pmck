@@ -129,7 +129,7 @@ function SidebarUser() {
               NewsNotification.data.data.map((item: any) => {
                 return (
                   <>
-                    <div className='mb-12'>
+                    <div className='mb-12' key={item.id}>
                       <h3 className='my-2 text-lg font-semibold'>
                         <span className='mr-2 text-mainGreenColor'>#</span>
                         {item.attributes.label}

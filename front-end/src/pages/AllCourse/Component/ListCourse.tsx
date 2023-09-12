@@ -9,7 +9,7 @@ function ListCourse({ data, listStyle }: any) {
     <>
       {Boolean(data.length) && listStyle === 'list' && (
         <div className=''>
-          {data.map((course: any) => (
+          {data?.map((course: any) => (
             <Link
               to={
                 isRegisted

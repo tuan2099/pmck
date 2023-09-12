@@ -123,13 +123,13 @@ const AllCoursePage = () => {
   })
 
   return (
-    <div className=''>
+    <div className='mt-4'>
       <h2 className='px-20 text-center text-2xl font-bold uppercase'>Tất cả khóa học</h2>
       <p className='mt-4 text-center text-[#afafaf]'>
         Khám phá tri thức, thú vị và thành công với khóa học của chúng tôi
       </p>
-      <div className=' items-top mt-5 flex px-4 md:mt-14 md:px-20'>
-        <div className='w-[75%] px-[15px]'>
+      <div className='items-top mt-5 flex md:mt-14 md:px-20'>
+        <div className=''>
           <SearchAllCourse
             setListStyle={setListStyle}
             list={list}
@@ -148,7 +148,7 @@ const AllCoursePage = () => {
             </Stack>
           </div>
         </div>
-        <div className='w-[25%] px-[15px]'>
+        {/* <div className='w-[25%] px-[15px]'>
           <div className='pb-[50px]'>
             <div className='mt-[8px] flex items-center justify-between rounded border p-[10px]'>
               <h4 className='flex items-center text-[16px] font-semibold'>
@@ -182,7 +182,7 @@ const AllCoursePage = () => {
               expanded={expanded}
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-
+  // call data news feed
   const { data: newsData } = useQuery({
     queryKey: ['new'],
     queryFn: () => {
@@ -33,7 +33,7 @@ function Homeuser() {
         <Slider imageSliderdata={imageSliderdata} />
       </div>
 
-      <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[70px] lg:pl-[74px] lg:pr-[44px]'>
+      <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[10px] lg:pl-[74px] lg:pr-[44px]'>
         <div className='flex items-center justify-between'>
           <h4 className='mb-5  text-2xl font-bold text-color1'>
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Mới</span>
@@ -54,7 +54,7 @@ function Homeuser() {
             </Link>
           </p>
         </div>
-        <div className='grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {newCourses &&
             newCourses.map((courseItem: any) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
@@ -88,7 +88,7 @@ function Homeuser() {
         </div>
       </div>
 
-      <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[70px] lg:pl-[74px] lg:pr-[44px]'>
+      <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[10px] lg:pl-[74px] lg:pr-[44px]'>
         <div className='flex items-center justify-between'>
           <h4 className='mb-5 text-2xl font-bold text-color1'>
             Khóa học <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Miễn phí</span>
@@ -109,7 +109,7 @@ function Homeuser() {
             </Link>
           </p>
         </div>
-        <div className='grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {freeCourse &&
             freeCourse.map((courseItem: any) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
@@ -143,7 +143,7 @@ function Homeuser() {
         </div>
       </div>
 
-      <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[70px] lg:pl-[74px] lg:pr-[44px]'>
+      <div className='mt-[30px] overflow-hidden px-[12px] lg:mt-[10px] lg:pl-[74px] lg:pr-[44px]'>
         <div className='flex items-center justify-between'>
           <h4 className='mb-5 text-2xl font-bold text-color1'>
             Tin tức <span className='rounded bg-[#1e7115] p-1 text-xl text-white'>Nổi bật</span>
@@ -164,7 +164,7 @@ function Homeuser() {
             </Link>
           </p>
         </div>
-        <div className='grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           <Cardnew newsData={newsData} />
         </div>
       </div>

@@ -54,9 +54,10 @@ function SearchAllCourse({ setListStyle, data, list, setSortByName, sortByName }
               label='Age'
               value={sortByName}
               onChange={(e) => setSortByName(e.target.value)}
+              size='small'
             >
               <MenuItem value='none'>
-                <em className='text-[15px]'>Sắp xếp theo tên</em>
+                <em className='text-[15px]'>Mặc định</em>
               </MenuItem>
               <MenuItem value='A-Z'>Từ A-Z</MenuItem>
               <MenuItem value='Z-A'>Từ Z-A</MenuItem>
