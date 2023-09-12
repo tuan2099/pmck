@@ -141,12 +141,12 @@ function ProfileUser() {
 
         {ListMenuItems.map((menuItem: any) => {
           return (
-            <MenuItem onClick={handleClose} key={uuidv4()}>
-              <Link key={menuItem.id} className='my-1 block flex items-center' to={`/${menuItem.link}`}>
+            <Link key={menuItem.id} className='my-2 block items-center' to={`/${menuItem.link}`}>
+              <MenuItem onClick={handleClose} key={uuidv4()}>
                 {menuItem.icon}
                 {menuItem.name}
-              </Link>
-            </MenuItem>
+              </MenuItem>
+            </Link>
           )
         })}
         <Divider />

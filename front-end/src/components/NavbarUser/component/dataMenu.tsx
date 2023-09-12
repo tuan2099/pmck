@@ -61,7 +61,7 @@ export const ListMenuItems = [
     )
   },
   {
-    name: 'kết quả học tập',
+    name: 'Kết quả học tập',
     link: 'learning-outcomes',
     icon: (
       <svg
