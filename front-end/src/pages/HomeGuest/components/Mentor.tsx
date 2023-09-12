@@ -16,11 +16,11 @@ function Mentor() {
               <div className='flex flex-col justify-center px-[20px] pt-[30px] lg:px-[50px]'>
                 <div>
                   <h2 className='mb-[25px] text-[20px] font-bold text-[#5C5C5C] xl:text-[32px] '>
-                    Want to share your knowledge? Join us a Mentor
+                    Chia sẻ kiến thức của bạn trên website học tập của chúng tôi.
                   </h2>
                   <p className='mb-[47px] text-[16px] font-normal lg:mb-0 xl:mb-[47px]'>
-                    High-definition video is video of higher resolution and quality than standard-definition. While
-                    there is no standardized meaning for high-definition, generally any video.
+                    Tại PMCK, bạn có cơ hội chia sẻ kiến thức của mình và trở thành một cố vấn đáng tin cậy. Hãy cùng
+                    tham gia vào cộng đồng học tập của chúng tôi và đóng góp vào sự phát triển
                   </p>
                 </div>
                 <div>
