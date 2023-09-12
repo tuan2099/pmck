@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "new_notifications",
+  "info": {
+    "singularName": "new-notification",
+    "pluralName": "new-notifications",
+    "displayName": "New_notification"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Link": {
+      "type": "string"
+    },
+    "short_description": {
+      "type": "string"
+    }
+  }
+}

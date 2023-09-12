@@ -4,7 +4,9 @@ import Dialog from '@mui/material/Dialog'
 import { Link, NavLink } from 'react-router-dom'
 import { useState } from 'react'
 import Tooltip from '@mui/material/Tooltip'
-import { Fab } from '@mui/material'
+import { Divider, Fab, Skeleton } from '@mui/material'
+import { useQuery } from '@tanstack/react-query'
+import newApi from 'src/apis/new.api'
 
 function SidebarUser() {
   const [openDialog, setOpenDialog] = useState<boolean>(false)
@@ -16,6 +18,14 @@ function SidebarUser() {
     setOpenDialog(false)
   }
 
+  const {
+    data: NewsNotification,
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['NewsNotification'],
+    queryFn: () => newApi.getNewsNotification()
+  })
   return (
     <>
       <div className='sticky left-0 top-[94px] flex w-[96px] flex-col items-center px-[8px]'>
@@ -97,9 +107,9 @@ function SidebarUser() {
           </svg>
         </Tooltip>
       </div>
-      <Dialog open={openDialog} onClose={handleClose} maxWidth='lg' fullWidth>
-        <div className='p-6 '>
-          <div className='flex justify-between'>
+      <Dialog open={openDialog} onClose={handleClose} maxWidth='md' fullWidth>
+        <div className='p-6'>
+          <div className='flex justify-between pb-7'>
             <h2 className='text-2xl font-bold'>Bản tin PMCK</h2>
             <button className='cursor-pointer' onClick={handleClose}>
               <svg
@@ -114,7 +124,50 @@ function SidebarUser() {
               </svg>
             </button>
           </div>
-          <div style={{ height: 'calc(100vh - 200px)' }}></div>
+          <div style={{ height: 'calc(100vh - 200px)' }} className='overflow-auto overscroll-auto'>
+            {NewsNotification &&
+              NewsNotification.data.data.map((item: any) => {
+                return (
+                  <>
+                    <div className='mb-12'>
+                      <h3 className='my-2 text-lg font-semibold'>
+                        <span className='mr-2 text-mainGreenColor'>#</span>
+                        {item.attributes.label}
+                      </h3>
+                      <p className='mb-3 px-4 text-color1'>{item.attributes.short_description}</p>
+                      <div className='my-2 font-bold'>
+                        ✅ Tìm hiểu thêm:{' '}
+                        <span className='font-normal italic text-mainGreenColor underline'>
+                          http://127.0.0.1:3000/user
+                        </span>
+                      </div>
+                      <div
+                        key={item.id}
+                        className='h-[400px] rounded-2xl bg-cover bg-center bg-no-repeat'
+                        style={{
+                          backgroundImage: `url(http://localhost:1337${item.attributes.image.data[0].attributes.url})`
+                        }}
+                      ></div>
+
+                      <div className='my-4'>
+                        Đăng bởi <span className='font-bold text-mainGreenColor'>Admin PMCK</span>
+                      </div>
+                    </div>
+                    <Divider />
+                  </>
+                )
+              })}
+            {isLoading ? (
+              <>
+                <Skeleton variant='rectangular' height={260} />
+                <Skeleton />
+                <Skeleton height={20} />
+              </>
+            ) : (
+              ''
+            )}
+            {isError ? <>Dữ liệu đang gặp vấn đề</> : ''}
+          </div>
         </div>
       </Dialog>
     </>
