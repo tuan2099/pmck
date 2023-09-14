@@ -5,6 +5,7 @@ import { generateNameId } from 'src/utils/uitls'
 
 function ListCourse({ data, listStyle }: any) {
   const { isRegisted } = useRegisteCourse({ courseInfo: data })
+
   return (
     <>
       {Boolean(data.length) && listStyle === 'list' && (
