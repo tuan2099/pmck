@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Setting() {
-  return <div className='mt-[50px]'>Setting</div>
+  return <>Setting</>
 }
 
 export default Setting

@@ -35,7 +35,10 @@ export default class ErrorBoundary extends Component<Props, State> {
               <img src={logo} alt='404' />
             </div>
             <div>
-              <img src='http://localhost:1337/uploads/error_500_1febb6b79e.png' alt='' />
+              <img
+                src='http://localhost:1337/uploads/anh_Viber_2023_09_14_16_15_35_545_6f195de44e.png'
+                alt='error:500'
+              />
             </div>
             <div className='mt-12'>
               <h1 className='text-center text-4xl font-bold text-mainGreenColor'>Oops! 500 Internal Server Error</h1>
@@ -44,7 +47,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               </p>
               <div className='m-auto text-center'>
                 <Custombutton
-                  urlButtonLink='/user'
+                  urlButtonLink='/'
                   urlButton
                   bgcolor='#1e7115'
                   textColor='#fff'

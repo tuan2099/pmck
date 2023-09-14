@@ -8,7 +8,7 @@ function Cardnew(newsData) {
       {newsData &&
         newsData.newsData?.data?.data?.map((item: NewsType) => {
           return (
-            <Link to='/' key={item.id} className='mb-[30px] w-full cursor-pointer px-3'>
+            <Link to='/' key={item.id} className='mb-[30px] w-full cursor-pointer px-1'>
               <div
                 className='w-full rounded-2xl pt-[56.25%]'
                 style={{
