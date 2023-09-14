@@ -1,4 +1,3 @@
-import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import profileApi from 'src/apis/user.api'
 import CourseCard from 'src/components/CourseCard'
@@ -7,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function MyCourse() {
   // call api userinfo
-  const { data: profileData } = useQuery({
+  const { data: profileData, isLoading } = useQuery({
     queryKey: ['userInfo'],
     queryFn: () => profileApi.getProfile()
   })
@@ -17,7 +16,7 @@ function MyCourse() {
       <h1 className='pl-3 text-xl font-bold uppercase'>Khóa học của tôi</h1>
       <div className='mt-[50px] grid grid-cols-4 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {profileData &&
-          profileData?.data.course_registrations[0].courses.map((myCourseItem: any) => {
+          profileData?.data.course_registrations[0].courses.map((myCourseItem) => {
             return (
               <>
                 <CourseCard key={myCourseItem.id} courseItem={myCourseItem} />
@@ -44,7 +43,7 @@ function MyCourse() {
           </Link>
         )}
       </div>
-      {!profileData && (
+      {isLoading && (
         <div className='flex items-center justify-between'>
           {Array(4)
             .fill(0)
