@@ -44,7 +44,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               </p>
               <div className='m-auto text-center'>
                 <Custombutton
-                  urlButtonLink='/'
+                  urlButtonLink='/user'
                   urlButton
                   bgcolor='#1e7115'
                   textColor='#fff'

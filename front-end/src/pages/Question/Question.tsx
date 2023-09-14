@@ -10,7 +10,12 @@ import { SupportType } from 'src/types/support.type'
 function Question() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [QAList, setQAList] = useState<any[]>([])
-  const { data: supportQuestionApi } = useQuery({
+
+  const {
+    data: supportQuestionApi,
+    isLoading,
+    isError
+  } = useQuery({
     queryKey: ['support'],
     queryFn: () => {
       return supportApi.getCategorySupport()
@@ -82,6 +87,17 @@ function Question() {
                 </>
               )
             })}
+          {isLoading && (
+            <>
+              {Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <div key={index} className=''>
+                    <Skeleton variant='rounded' height={250} />
+                  </div>
+                ))}
+            </>
+          )}
           <Drawer open={openDrawer} anchor='right' onClose={handleCloseDrawer}>
             <div className='w-[43%] min-w-[720px] max-w-full'>
               <div className='flex items-center justify-between p-6'>

@@ -1,12 +1,12 @@
 import { Avatar } from '@mui/material'
-import React from 'react'
 import { Link } from 'react-router-dom'
+import { NewsType } from 'src/types/news.type'
 
-function Cardnew(newsData: any) {
+function Cardnew(newsData) {
   return (
     <>
       {newsData &&
-        newsData.newsData?.data?.data?.map((item: any) => {
+        newsData.newsData?.data?.data?.map((item: NewsType) => {
           return (
             <Link to='/' key={item.id} className='mb-[30px] w-full cursor-pointer px-3'>
               <div

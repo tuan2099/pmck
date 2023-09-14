@@ -13,7 +13,7 @@ function Homeuser() {
   const { freeCourse, newCourses } = useContext(AppContext)
 
   // call api slider
-  const { data: imageSliderdata, isLoading } = useQuery({
+  const { data: imageSliderdata } = useQuery({
     queryKey: ['sliderImage'],
     queryFn: () => {
       return sliderApi.getSlider()
@@ -56,7 +56,7 @@ function Homeuser() {
         </div>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {newCourses &&
-            newCourses.map((courseItem: any) => {
+            newCourses.map((courseItem) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
           {newCourses.length === 0 && (
@@ -110,7 +110,7 @@ function Homeuser() {
         </div>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {freeCourse &&
-            freeCourse.map((courseItem: any) => {
+            freeCourse.map((courseItem) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
           {freeCourse.length === 0 && (

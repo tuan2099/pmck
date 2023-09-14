@@ -4,8 +4,8 @@ import React from 'react'
 function SearchAllCourse({ setListStyle, data, list, setSortByName, sortByName }: any) {
   return (
     <>
-      <div className='flex items-center justify-between pb-[50px]'>
-        <div className='flex w-[40%] items-center '>
+      <div className='flex flex-wrap items-center justify-between pb-[50px]'>
+        <div className='flex w-full items-center md:w-[40%] '>
           <Tooltip title='Hiển thị dạng danh sách' placement='top' onClick={() => setListStyle('list')}>
             <div className='mx-[5px] flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-[5px] border hover:border-[#1e7115] hover:text-[#1e7115]'>
               <svg
@@ -46,7 +46,7 @@ function SearchAllCourse({ setListStyle, data, list, setSortByName, sortByName }
             {`Hiển thị ${data.length}/${list.length} khóa học`}{' '}
           </p>
         </div>
-        <div className='flex w-[40%] items-center justify-end'>
+        <div className='flex w-full items-center justify-end md:w-[40%]'>
           <FormControl sx={{ m: 1, minWidth: 240 }}>
             <Select
               labelId='demo-simple-select-standard-label'
