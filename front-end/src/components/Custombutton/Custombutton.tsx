@@ -25,6 +25,7 @@ interface CustombuttonType {
   borderRadius?: string
   padding?: string
   border?: string
+  urlButtonLink?: any
 }
 
 function Custombutton({
@@ -47,7 +48,8 @@ function Custombutton({
   startIcon,
   endIcon,
   padding,
-  border
+  border,
+  urlButtonLink
 }: CustombuttonType) {
   const StyleCustomButton = styled(Button)({
     color: textColor || 'black',
@@ -81,7 +83,7 @@ function Custombutton({
     case urlButton:
       resultButton = (
         <>
-          <Link to=''>
+          <Link to={`${urlButtonLink}`}>
             <StyleCustomButton fullWidth={fullWidth} variant={variant} startIcon={startIcon} endIcon={endIcon}>
               {children}
             </StyleCustomButton>

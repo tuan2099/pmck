@@ -13,7 +13,7 @@ function Homeuser() {
   const { freeCourse, newCourses } = useContext(AppContext)
 
   // call api slider
-  const { data: imageSliderdata } = useQuery({
+  const { data: imageSliderdata, isLoading } = useQuery({
     queryKey: ['sliderImage'],
     queryFn: () => {
       return sliderApi.getSlider()
@@ -59,8 +59,8 @@ function Homeuser() {
             newCourses.map((courseItem: any) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
-          {!newCourses && (
-            <div className='flex items-center justify-between'>
+          {newCourses.length === 0 && (
+            <>
               {Array(4)
                 .fill(0)
                 .map((_, index) => (
@@ -69,7 +69,7 @@ function Homeuser() {
                     className='mr-3 animate-pulse space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0'
                     key={index}
                   >
-                    <div className='flex h-48 w-[300px] items-center justify-center rounded bg-gray-300 dark:bg-gray-700'>
+                    <div className='flex h-60 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700'>
                       <svg
                         className='h-12 w-12 text-gray-200'
                         xmlns='http://www.w3.org/2000/svg'
@@ -82,9 +82,8 @@ function Homeuser() {
                     </div>
                   </div>
                 ))}
-            </div>
+            </>
           )}
-          {newCourses.length === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
         </div>
       </div>
 
@@ -114,8 +113,8 @@ function Homeuser() {
             freeCourse.map((courseItem: any) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
-          {!freeCourse && (
-            <div className='flex items-center justify-between'>
+          {freeCourse.length === 0 && (
+            <>
               {Array(4)
                 .fill(0)
                 .map((_, index) => (
@@ -124,7 +123,7 @@ function Homeuser() {
                     className='mr-3 animate-pulse space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0'
                     key={index}
                   >
-                    <div className='flex h-48 w-[300px] items-center justify-center rounded bg-gray-300 dark:bg-gray-700'>
+                    <div className='flex h-60 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700'>
                       <svg
                         className='h-12 w-12 text-gray-200'
                         xmlns='http://www.w3.org/2000/svg'
@@ -137,9 +136,8 @@ function Homeuser() {
                     </div>
                   </div>
                 ))}
-            </div>
+            </>
           )}
-          {freeCourse.length === 0 && <>Các khóa học sẽ được cập nhật trong thười gian tới</>}
         </div>
       </div>
 
