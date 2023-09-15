@@ -4,7 +4,7 @@ import { Button } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 import courseApi from 'src/apis/course.api'
-import QuizzGroup from './QuizzGroup'
+import QuizzGroup from './Quiz/QuizzGroup'
 import { TResults } from 'src/types/course.type'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
 import { AppContext } from 'src/context/app.context'

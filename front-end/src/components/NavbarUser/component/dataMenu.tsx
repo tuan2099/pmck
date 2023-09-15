@@ -41,7 +41,7 @@ export const ListMenuItems = [
   },
   {
     name: 'Cài đặt',
-    link: 'setting',
+    link: 'undercontruction',
     icon: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -62,7 +62,7 @@ export const ListMenuItems = [
   },
   {
     name: 'Kết quả học tập',
-    link: 'learning-outcomes',
+    link: 'undercontruction',
     icon: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
