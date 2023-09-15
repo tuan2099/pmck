@@ -1,20 +1,20 @@
 import { useState, useEffect, useContext } from 'react'
 import { toast } from 'react-toastify'
-import { Button } from '@mui/material'
+import { Button, Modal } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 import courseApi from 'src/apis/course.api'
-import QuizzGroup from './QuizzGroup'
+import QuizzGroup from './Quiz/QuizzGroup'
 import { TResults } from 'src/types/course.type'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
 import { AppContext } from 'src/context/app.context'
 
 const QuizzDetail = ({ id }: { id: any }) => {
   const { profile } = useContext(AppContext)
-
   const [quizz, setQuizz] = useState<any | null>(null)
   const [results, setResults] = useState<TResults[]>([])
   const [timeLimit, setTimeLimit] = useState<number | null>(null)
+  const [open, setOpen] = useState<boolean>(true)
 
   const onChangeResult = (data: TResults) => {
     const newResults = [...results]
@@ -48,6 +48,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
     },
     onSuccess: (data) => {
       toast(`Bạn được ${data.data.data.attributes.gr} điểm.`)
+      setOpen(true)
     }
   })
 
@@ -97,6 +98,7 @@ const QuizzDetail = ({ id }: { id: any }) => {
 
   return (
     <>
+      <Modal open={open} onClose={() => {}} children={<div>Hello</div>} />
       {!quizz && (
         <div className='flex h-[90vh] w-full'>
           <div className='m-auto'>
