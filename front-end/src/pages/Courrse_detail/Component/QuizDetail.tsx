@@ -98,7 +98,6 @@ const QuizzDetail = ({ id }: { id: any }) => {
 
   return (
     <>
-      <Modal open={open} onClose={() => {}} children={<div>Hello</div>} />
       {!quizz && (
         <div className='flex h-[90vh] w-full'>
           <div className='m-auto'>

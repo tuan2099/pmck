@@ -3,17 +3,21 @@ import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'
 import QuizzGroup from './QuizzGroup'
 import { convertMinutes } from 'src/helper/coverTimeStamp'
-import { Alert, AlertTitle, Avatar, Button, Divider, Stack } from '@mui/material'
+import { Alert, AlertTitle, Avatar, Button, Divider, Modal, Stack } from '@mui/material'
 import { AppContext } from 'src/context/app.context'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import { FaFileAlt, FaInfoCircle } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { ROUTES } from 'src/useRouterElement'
 
-const QuizzDetail = ({ id }: { id: any }) => {
+const QuizzDetail = ({ id, certificateId }: { id: any; certificateId: any }) => {
   const { profile } = useContext(AppContext)
   const [quizz, setQuizz] = useState<any | null>(null)
   const [results, setResults] = useState<TResults[]>([])
   const [timeLimit, setTimeLimit] = useState<number | null>(null)
+  const [open, setOpen] = useState<boolean>(false)
+  const [isPassQuizz, setIsPassQuizz] = useState<boolean>(false)
 
   const onChangeResult = (data: TResults) => {
     const newResults = [...results]
@@ -46,6 +50,16 @@ const QuizzDetail = ({ id }: { id: any }) => {
     },
     onSuccess: (data) => {
       toast(`Bạn được ${data.data.data.attributes.gr} điểm.`)
+      const scorePerQuestion = 10 / quizz?.attributes?.questions?.data.length
+      const totalScore = results.reduce((total, question) => {
+        if (question.fraction) {
+          return total + scorePerQuestion
+        } else {
+          return total
+        }
+      }, 0)
+      setIsPassQuizz(totalScore >= 7.5)
+      setOpen(true)
     }
   })
   // call api check complete quiz
@@ -95,6 +109,24 @@ const QuizzDetail = ({ id }: { id: any }) => {
 
   return (
     <>
+      <Modal
+        open={open}
+        children={
+          <div className='flex h-full w-full'>
+            <div className='m-auto min-w-[500px] rounded bg-white px-4 py-5'>
+              <div>
+                {isPassQuizz ? 'Chúc mừng bạn đã vượt qua bài thi.' : 'Rất tiếc bạn đã không vượt qua bài thi.'}
+              </div>
+              <Link
+                to={isPassQuizz ? `${ROUTES.certificate}?certificate=${certificateId}` : '/'}
+                className='mr-[20px] flex items-center rounded-[5px] bg-[#392C7D] px-[20px] py-[10px] text-white transition hover:bg-[#2a205c]'
+              >
+                {isPassQuizz ? 'Nhận chứng chỉ' : 'Quay lại trang chủ'}
+              </Link>
+            </div>
+          </div>
+        }
+      />
       {!quizz && (
         <div className=' m-auto mt-6 w-10/12'>
           <section className='mb-10 flex flex-wrap items-center justify-between'>

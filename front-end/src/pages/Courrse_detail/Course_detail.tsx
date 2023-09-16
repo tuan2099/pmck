@@ -333,7 +333,12 @@ function Course_detail() {
             </>
           )}
 
-          {chooseItem.type === 'quizz' && <QuizzDetail id={chooseItem.data.id} />}
+          {chooseItem.type === 'quizz' && (
+            <QuizzDetail
+              id={chooseItem.data.id}
+              certificateId={courseData.data?.data.data.attributes.chapters.data[0].attributes?.certificate?.data.id}
+            />
+          )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
             <div className='w-'>
               <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.data?.attributes.title}</h1>
