@@ -22,6 +22,7 @@ import Certificate from './pages/Courrse_detail/Component/Certificate'
 import GuestLayout from './Layouts/GuestLayout'
 import Setting from './pages/Setting'
 import LearningOutcomes from './pages/LearningOutcomes/LearningOutcomes'
+import UnderContruction from './pages/UnderContruction'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -163,6 +164,10 @@ export default function useRouterElement() {
               <LearningOutcomes />
             </HomeUserLayout>
           )
+        },
+        {
+          path: '/undercontruction',
+          element: <UnderContruction />
         }
       ]
     },

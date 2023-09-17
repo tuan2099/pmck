@@ -32,7 +32,7 @@ export default class ErrorBoundary extends Component<Props, State> {
         <div className='flex h-screen items-center justify-between bg-[url(http://localhost:1337/uploads/error_bg1_bc6c15a9a1.png)] bg-cover bg-no-repeat'>
           <div className='m-auto max-w-[570px] px-2'>
             <div className='m-auto my-2 w-full max-w-[100px]'>
-              <img src={logo} alt='404' />
+              <img src={logo} alt='404 error' />
             </div>
             <div>
               <img

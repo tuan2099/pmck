@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { FaFacebookSquare, FaViber, FaYoutube, FaTwitter } from 'react-icons/fa'
@@ -6,7 +7,11 @@ import footerApi from 'src/apis/footer.api'
 import logo from 'src/assets/logo.png'
 
 function Footer() {
-  const { data: footerData } = useQuery({
+  const {
+    data: footerData,
+    isLoading,
+    isError
+  } = useQuery({
     queryKey: ['footerdata'],
     queryFn: () => {
       return footerApi.getFooter()
@@ -36,9 +41,9 @@ function Footer() {
                 return (
                   <section
                     key={footerdata.id}
-                    className='m-auto mt-[30px] w-full px-[12px] md:mb-5 md:mt-0 md:w-[45%] lg:w-[25%]'
+                    className='m-auto mt-[30px] w-full px-[12px] md:my-1 md:mt-0 md:w-[45%] lg:w-[25%]'
                   >
-                    <h4 className=' font-semibold uppercase'>{footerdata.sections.data[0].attributes.label}</h4>
+                    <h4 className='font-semibold uppercase'>{footerdata.sections.data[0].attributes.label}</h4>
                     <ul className='leading-[40px] md:mt-[30px]'>
                       {footerdata.sections.data[0].attributes.links.map((items: any) => {
                         return (
@@ -51,6 +56,15 @@ function Footer() {
                   </section>
                 )
               })}
+            {isLoading && (
+              <>
+                <div className='flex flex-wrap items-center justify-between'>
+                  <Skeleton variant='circular' height={240} />
+                  <Skeleton variant='circular' height={240} />
+                  <Skeleton variant='circular' height={240} />
+                </div>
+              </>
+            )}
           </div>
 
           <div className='m-auto my-8 h-[1px] w-10/12 bg-[#555555]'></div>
@@ -59,10 +73,18 @@ function Footer() {
               <h4 className='font-semibold uppercase text-white'>PMC Knowledge</h4>
             </div>
             <div className='my-5 flex items-center justify-center '>
-              <FaFacebookSquare className='text-2xl' />
-              <FaYoutube className='mx-9 text-2xl' />
-              <FaViber className='text-2xl' />
-              <FaTwitter className='ml-9 text-2xl' />
+              <Link to='/'>
+                <FaFacebookSquare className='text-2xl' />
+              </Link>
+              <Link to='/'>
+                <FaYoutube className='mx-9 text-2xl' />
+              </Link>
+              <Link to='/'>
+                <FaViber className='text-2xl' />
+              </Link>
+              <Link to='/'>
+                <FaTwitter className='ml-9 text-2xl' />
+              </Link>
             </div>
           </div>
         </div>

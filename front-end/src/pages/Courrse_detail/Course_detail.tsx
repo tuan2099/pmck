@@ -19,6 +19,8 @@ import { ROUTES } from 'src/useRouterElement'
 import { Avatar } from '@mui/material'
 import { FaTasks } from 'react-icons/fa'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
+import Note from './Component/Note'
+
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
@@ -228,7 +230,7 @@ function Course_detail() {
                 <span className='ml-3'>Nội dung khóa học</span>
               </h1>
             </header>
-            <div className='overflow-y-auto overscroll-contain'>
+            <div className='overflow-y-auto overscroll-contain' data-tut='reactour__changelesson'>
               {courseData.data?.data.data.attributes.chapters.data?.map((item: any) => (
                 <details key={item.id}>
                   <summary>
@@ -316,7 +318,7 @@ function Course_detail() {
                 </>
               )}
               {chooseItem?.data?.attributes.video_url && (
-                <div className='relative w-full select-none bg-black px-[8.5%]'>
+                <div className='relative w-full select-none bg-black px-[8.5%]' data-tut='reactour__workspace'>
                   <div className='relative pt-[56.25%]'>
                     <Youtube
                       className='absolute inset-0 overflow-hidden'
@@ -353,6 +355,7 @@ function Course_detail() {
                 <button
                   onClick={toogleDrawer}
                   className='flex items-center rounded bg-[#ebebeb] px-[16px] py-[6px] transition hover:bg-[#b6b6b6]'
+                  data-tut='reactour__note'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -373,10 +376,10 @@ function Course_detail() {
                 <Drawer open={openDrawer} anchor='right' onClose={toogleDrawer}>
                   <div className='w-[43%] min-w-[720px] max-w-full'>
                     <div className='p-6'>
-                      <h2 className='text-2xl font-bold'>Ghi chú của tôi</h2>
+                      <h2 className='text-2xl font-bold'>Thêm ghi chú</h2>
                     </div>
                     <div className='p-6'>
-                      <input type='text' />
+                      <Note />
                     </div>
                   </div>
                 </Drawer>
