@@ -108,7 +108,12 @@ function SidebarUser() {
           </svg>
         </Tooltip>
       </div>
-      <Dialog open={openDialog} onClose={handleClose} maxWidth='md' fullWidth>
+      <Dialog
+        open={openDialog && !JSON.parse(localStorage.getItem('hidden_news_popup') as string)}
+        onClose={handleClose}
+        maxWidth='md'
+        fullWidth
+      >
         <div className='p-6'>
           <div className='flex justify-between pb-7'>
             <h2 className='text-2xl font-bold'>Bản tin PMCK</h2>
@@ -170,6 +175,15 @@ function SidebarUser() {
             {isError ? <>Dữ liệu đang gặp vấn đề</> : ''}
           </div>
         </div>
+        <button
+          className='mb-2 mr-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300'
+          onClick={() => {
+            handleClose()
+            localStorage.setItem('hidden_news_popup', JSON.stringify(true))
+          }}
+        >
+          Không hiển thị cho lần sau
+        </button>
       </Dialog>
     </>
   )

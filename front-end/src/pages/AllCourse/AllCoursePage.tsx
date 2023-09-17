@@ -1,5 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */ // hide err in line 44
-import { Pagination, Stack, Button } from '@mui/material'
+import { Pagination, Stack } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -9,9 +9,8 @@ import { CourseType } from 'src/types/course.type'
 import SearchAllCourse from './Component/searchAllCourse'
 import ListCourse from './Component/ListCourse'
 import GridCourse from './Component/GridCourse'
-import Fillter from './Component/Fillter'
 
-const COURSE_PER_PAGE = 9 // show number in course
+const COURSE_PER_PAGE = 9
 
 const AllCoursePage = () => {
   const { allCourse } = useContext(AppContext)

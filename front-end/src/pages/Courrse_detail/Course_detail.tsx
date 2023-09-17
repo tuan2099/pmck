@@ -18,7 +18,9 @@ import QuizzDetail from './Component/Quiz/QuizDetail'
 import { ROUTES } from 'src/useRouterElement'
 import { Avatar } from '@mui/material'
 import { FaTasks } from 'react-icons/fa'
+import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
+
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
@@ -60,7 +62,7 @@ function Course_detail() {
   })
 
   function getLessonItemsByCourseId(courseId: number, data: any) {
-    const lessonItems = []
+    const lessonItems: any[] = []
 
     for (const progress of data) {
       // eslint-disable-next-line no-unsafe-optional-chaining
@@ -273,12 +275,11 @@ function Course_detail() {
                         />
                       ))}
                     {item.attributes.certificate.data && (
-                      <Link
-                        to={ROUTES.certificate}
-                        className='flex cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
-                      >
-                        Chứng chỉ
-                      </Link>
+                      <CertificateItem
+                        quizzId={item.attributes.quizzes.data[0].id}
+                        certificateId={item.attributes.certificate.data.id}
+                        isCompleteAllLesson={newArrLesson.length >= item.attributes.lesson_items.data.length}
+                      />
                     )}
                   </div>
                 </details>
@@ -334,7 +335,12 @@ function Course_detail() {
             </>
           )}
 
-          {chooseItem.type === 'quizz' && <QuizzDetail id={chooseItem.data.id} />}
+          {chooseItem.type === 'quizz' && (
+            <QuizzDetail
+              id={chooseItem.data.id}
+              certificateId={courseData.data?.data.data.attributes.chapters.data[0].attributes?.certificate?.data.id}
+            />
+          )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
             <div className='w-'>
               <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.data?.attributes.title}</h1>

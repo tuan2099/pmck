@@ -1,4 +1,3 @@
-import React from 'react'
 import CourseCard from 'src/components/CourseCard'
 
 function GridCourse({ data, listStyle }: any) {

@@ -1,12 +1,16 @@
 import { useContext, useEffect, useRef } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import mau from '../../../assets/images/mau.png'
 import { AppContext } from 'src/context/app.context'
+import { useQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
+import courseApi from 'src/apis/course.api'
 
 const Certificate = () => {
   const certificateRef = useRef<any>(null)
   const { profile } = useContext(AppContext)
+  const [searchParams, _] = useSearchParams()
+  const certificateId = searchParams.get('certificate')
 
   const exportToPDF = () => {
     const certificateContent = certificateRef.current
@@ -24,20 +28,35 @@ const Certificate = () => {
     })
   }
 
+  const { data, isLoading } = useQuery({
+    queryKey: ['certificate', certificateId],
+    queryFn: () => courseApi.getCertificate(certificateId),
+    enabled: Boolean(certificateId)
+  })
+
   useEffect(() => {
-    if (certificateRef.current) {
+    if (certificateRef.current && data?.data?.data?.attributes?.pdf_file.data[0].attributes.url) {
       exportToPDF()
     }
   }, [])
   return (
-    <div className='relative mx-20' ref={certificateRef}>
-      <p className='absolute right-1/2 top-[48%] translate-x-1/2 text-4xl font-bold'>{profile?.full_name}</p>
+    <>
+      {isLoading && <div>Loading...</div>}
+      {!isLoading && (
+        <div className='relative mx-20' ref={certificateRef}>
+          <p className='absolute right-1/2 top-[48%] translate-x-1/2 text-4xl font-bold'>{profile?.full_name}</p>
 
-      <p className='absolute bottom-1/4 left-[20%] -translate-x-[20%] text-2xl font-bold'>
-        {new Date().toJSON().slice(0, 10).split('-').reverse().join('/')}
-      </p>
-      <img className='w-full' src={mau} alt='' />
-    </div>
+          <p className='absolute bottom-1/4 left-[20%] -translate-x-[20%] text-2xl font-bold'>
+            {new Date().toJSON().slice(0, 10).split('-').reverse().join('/')}
+          </p>
+          <img
+            className='w-full'
+            src={`http://localhost:1337${data?.data.data.attributes.pdf_file.data[0].attributes.url}`}
+            alt=''
+          />
+        </div>
+      )}
+    </>
   )
 }
 
