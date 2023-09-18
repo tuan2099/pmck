@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { useState, useEffect, useContext } from 'react'
 import { toast } from 'react-toastify'
 import { TResults } from 'src/types/course.type'

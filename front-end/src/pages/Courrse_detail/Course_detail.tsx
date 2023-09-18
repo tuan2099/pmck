@@ -21,7 +21,6 @@ import { FaTasks } from 'react-icons/fa'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
 
-
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
     type: '',
@@ -276,7 +275,7 @@ function Course_detail() {
                       ))}
                     {item.attributes.certificate.data && (
                       <CertificateItem
-                        quizzId={item.attributes.quizzes.data[0].id}
+                        quizzId={item.attributes.quizzes.data[0]?.id}
                         certificateId={item.attributes.certificate.data.id}
                         isCompleteAllLesson={newArrLesson.length >= item.attributes.lesson_items.data.length}
                       />
@@ -338,7 +337,7 @@ function Course_detail() {
           {chooseItem.type === 'quizz' && (
             <QuizzDetail
               id={chooseItem.data.id}
-              certificateId={courseData.data?.data.data.attributes.chapters.data[0].attributes?.certificate?.data.id}
+              certificateId={courseData.data?.data.data.attributes.chapters.data[0].attributes?.certificate?.data?.id}
             />
           )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
