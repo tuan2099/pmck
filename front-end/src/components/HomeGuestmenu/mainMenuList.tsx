@@ -96,6 +96,20 @@ function MainMenuList({ title, items }: any) {
           ) : (
             ''
           )}
+          {items.label === 'Cộng đồng' ? (
+            <>
+              <ul className='w-[30%]'>
+                <li>
+                  <h4 className='font-bold text-slate-400'>{items.sections.data[0]?.attributes.label_col_3}</h4>
+                </li>
+                {items.sections.data[0]?.attributes.link3.map((item: any) => {
+                  return <MainMenuItem key={item.id} item={item} />
+                })}
+              </ul>
+            </>
+          ) : (
+            ''
+          )}
         </div>
       </StyledMenu>
     </>

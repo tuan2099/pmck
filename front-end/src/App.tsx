@@ -12,7 +12,9 @@ function App() {
 
   return (
     <>
-      <ErrorBoundary>{routeElement}</ErrorBoundary>
+      {/* <ErrorBoundary> */}
+      {routeElement}
+      {/* </ErrorBoundary> */}
       <Tour
         steps={tourConfig}
         isOpen={isTourOpen}

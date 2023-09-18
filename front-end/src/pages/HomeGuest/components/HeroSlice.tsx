@@ -34,6 +34,7 @@ function HeroSlice() {
                   </svg>
                 </Link>
               </button>
+              <div></div>
             </div>
             <div className='hidden w-full lg:block lg:w-1/2'>
               <img src='http://localhost:1337/uploads/6454c59d7ae02da4b6083c29_header_web2x_2_3ae9db7b6f.jpg' alt='' />
