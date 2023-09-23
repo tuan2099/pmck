@@ -10,12 +10,12 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@strapi/plugin-documentation": "^4.13.7",
     "@strapi/plugin-i18n": "4.10.2",
     "@strapi/plugin-users-permissions": "4.10.2",
     "@strapi/provider-email-sendmail": "^4.10.2",
     "@strapi/strapi": "4.10.2",
-    "better-sqlite3": "8.0.1",
-    "strapi-plugin-entity-relationship-chart": "^4.1.0"
+    "better-sqlite3": "8.0.1"
   },
   "author": {
     "name": "A Strapi developer"

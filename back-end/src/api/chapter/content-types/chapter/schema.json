@@ -27,12 +27,6 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::lesson-item.lesson-item"
-    },
-    "certificate": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::certificate.certificate",
-      "inversedBy": "chapter"
     }
   }
 }

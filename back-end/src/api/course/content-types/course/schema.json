@@ -68,6 +68,12 @@
       "relation": "manyToMany",
       "target": "api::course-registration.course-registration",
       "mappedBy": "courses"
+    },
+    "certificate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::certificate.certificate",
+      "mappedBy": "course"
     }
   }
 }

@@ -12,30 +12,34 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "label": {
-      "type": "string"
-    },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "certificates"
     },
-    "chapter": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::chapter.chapter",
-      "mappedBy": "certificate"
-    },
     "pdf_file": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "certificate_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::certificate-type.certificate-type",
+      "mappedBy": "certificate"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course",
+      "inversedBy": "certificate"
     }
   }
 }

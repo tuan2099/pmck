@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certificate_types",
+  "info": {
+    "singularName": "certificate-type",
+    "pluralName": "certificate-types",
+    "displayName": "Certificate-type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "certificate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::certificate.certificate",
+      "inversedBy": "certificate_type"
+    },
+    "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
