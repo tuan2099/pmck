@@ -4,6 +4,7 @@ import MuiAccordion, { AccordionProps } from '@mui/material/Accordion'
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import { FaAngleRight } from 'react-icons/fa'
+import ReactMarkdown from 'react-markdown'
 
 function Accordion({ item }) {
   const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
@@ -48,7 +49,9 @@ function Accordion({ item }) {
         <div className='font-semibold'>{item.attributes.question}</div>
       </AccordionSummary>
       <AccordionDetails>
-        <div className='pl-6 text-sm'>{item.attributes.answer}</div>
+        <div className='pl-6 text-sm'>
+          <ReactMarkdown>{item.attributes.answer}</ReactMarkdown>
+        </div>
       </AccordionDetails>
     </Accordion>
   )

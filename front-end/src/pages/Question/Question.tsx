@@ -6,7 +6,6 @@ import { FaLink, FaMailBulk, FaPhoneAlt, FaQuestionCircle } from 'react-icons/fa
 import supportApi from 'src/apis/support.api'
 import Accordion from 'src/components/Accordion'
 import { SupportType } from 'src/types/support.type'
-
 function Question() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [QAList, setQAList] = useState<any[]>([])
