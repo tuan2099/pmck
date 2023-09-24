@@ -15,9 +15,6 @@
     "question": {
       "type": "string"
     },
-    "answer": {
-      "type": "string"
-    },
     "q_and_a_category": {
       "type": "relation",
       "relation": "manyToOne",
@@ -26,6 +23,9 @@
     },
     "isPopularQA": {
       "type": "boolean"
+    },
+    "answer": {
+      "type": "richtext"
     }
   }
 }
