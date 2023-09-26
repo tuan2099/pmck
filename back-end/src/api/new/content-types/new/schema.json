@@ -41,6 +41,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::new-tag.new-tag"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "integer"
     }
   }
 }

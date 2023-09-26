@@ -45,7 +45,7 @@ function MainMenuList({ title, items }: any) {
           onMouseLeave: handleClose
         })}
       >
-        <Link to='/' className='flex items-center'>
+        <Link to={items.url} className='flex items-center'>
           {title} {items.sections.data.length > 0 ? <FaAngleDown className='ml-1 mt-1' /> : ''}
         </Link>
       </StyleMenuItem>

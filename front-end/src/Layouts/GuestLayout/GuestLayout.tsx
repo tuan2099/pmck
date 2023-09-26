@@ -4,21 +4,33 @@ import Footer from 'src/components/Footer'
 import MainMenu from 'src/components/HomeGuestmenu/MainMenu'
 import MobileMenu from 'src/components/HomeGuestmenu/MobileMenu'
 import logo from 'src/assets/logo.png'
-
+import mainmenuApi from 'src/apis/menuApi'
+import { useQuery } from '@tanstack/react-query'
 interface Props {
   children?: React.ReactNode
 }
 
 function GuestLayout({ children }: Props) {
+  const {
+    data: mainMenuData,
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['mainMenuData'],
+    queryFn: () => {
+      return mainmenuApi.getMainmenu()
+    }
+  })
+
   return (
     <>
       <div className='m-auto flex w-full max-w-[1296px] items-center justify-between px-[12px]'>
         <div className='flex w-full items-center justify-between py-2 md:w-[100px] lg:py-0'>
-          <MobileMenu />
+          <MobileMenu mainMenuData={mainMenuData} isLoading={isLoading} />
           <img className='w-[100px]' src={logo} alt='logo web' />
         </div>
         <div className='hidden lg:block lg:w-[50%] xl:w-[40%]'>
-          <MainMenu />
+          <MainMenu mainMenuData={mainMenuData} isLoading={isLoading} />
         </div>
         <div className='hidden md:block'>
           <Link to='/login'>

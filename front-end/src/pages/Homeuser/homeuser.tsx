@@ -5,7 +5,7 @@ import Slider from './Component/Slider'
 import CourseCard from 'src/components/CourseCard'
 import { Link } from 'react-router-dom'
 import { AppContext } from 'src/context/app.context'
-import Cardnew from './Component/Cardnew'
+import Cardnew from '../../components/Cardnew'
 import newApi from 'src/apis/new.api'
 
 function Homeuser() {

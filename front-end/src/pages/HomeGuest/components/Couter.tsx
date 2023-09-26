@@ -1,4 +1,3 @@
-import React from 'react'
 import img1count from '../../../assets/images/img1count.png'
 import img2count from '../../../assets/images/img2count.png'
 import img3count from '../../../assets/images/img3count.png'
@@ -44,7 +43,7 @@ function Couter() {
               {infoCouterData.map((item: any) => {
                 return (
                   <>
-                    <div className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:w-[50%] md:w-[50%]'>
+                    <div key={item.id} className='sm m-auto mt-[20px] w-full p-[12px] sm:mt-[0] sm:w-[50%] md:w-[50%]'>
                       <div
                         style={{ marginTop: `${item.margin}px` }}
                         className='mb-24px flex items-center justify-center rounded-[10px] border bg-white p-2 shadow-blue-custom duration-500 hover:shadow-none md:h-[300px] lg:h-[230px] xl:h-[300px]'
