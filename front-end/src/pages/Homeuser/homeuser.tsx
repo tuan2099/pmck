@@ -7,10 +7,12 @@ import { Link } from 'react-router-dom'
 import { AppContext } from 'src/context/app.context'
 import Cardnew from '../../components/Cardnew'
 import newApi from 'src/apis/new.api'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 
 function Homeuser() {
   // get data from context
   const { freeCourse, newCourses } = useContext(AppContext)
+  const queryConfig = useQueryConfig()
 
   // call api slider
   const { data: imageSliderdata } = useQuery({
@@ -20,11 +22,13 @@ function Homeuser() {
     }
   })
   // call data news feed
-  const { data: newsData } = useQuery({
-    queryKey: ['new'],
+  const { data: newsData, isLoading } = useQuery({
+    queryKey: ['new', useQueryConfig],
     queryFn: () => {
-      return newApi.getNews()
-    }
+      return newApi.getNews(queryConfig as ConfigParams)
+    },
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
   })
 
   return (
