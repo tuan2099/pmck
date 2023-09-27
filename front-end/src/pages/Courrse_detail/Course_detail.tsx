@@ -273,7 +273,7 @@ function Course_detail() {
                           setChooseItem={setChooseItem}
                         />
                       ))}
-                    {item.attributes.certificate.data && (
+                    {item.attributes.certificate?.data && (
                       <CertificateItem
                         quizzId={item.attributes.quizzes.data[0]?.id}
                         certificateId={item.attributes.certificate.data.id}
