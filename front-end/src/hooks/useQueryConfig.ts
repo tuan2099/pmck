@@ -1,11 +1,17 @@
 import { isUndefined, omitBy } from 'lodash'
 import useQueryParams from './useQueryParams'
+
 export interface ConfigParams {
   populate?: string
   sort?: string
   fields?: string
   filters?: any
   locale?: string
+  pagination?: {
+    pageSize?: number
+    page?: number
+    limit?: number
+  }
 }
 
 export default function useQueryConfig() {
@@ -16,7 +22,12 @@ export default function useQueryConfig() {
       fields: queryParams.fields,
       filters: queryParams.filters,
       locale: queryParams.locale,
-      populate: queryParams.populate || '*'
+      populate: queryParams.populate || '*',
+      pagination: {
+        pageSize: queryParams.pageSize,
+        page: queryParams.page,
+        limit: queryParams.limit
+      }
     },
     isUndefined
   )

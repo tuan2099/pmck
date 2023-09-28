@@ -61,19 +61,19 @@ function Custombutton({
     border: border || '1px solid',
     lineHeight: lineHeight || 1.5,
     backgroundColor: variant === 'text' && 'outline' ? '' : bgcolor || '#f2be05',
-    borderColor: borderColor || '#0063cc',
+    borderColor: borderColor || 'none',
     '&:hover': {
-      backgroundColor: hoverBgColor || '#0069d9',
-      borderColor: hoverBorderColor || '#0062cc',
+      backgroundColor: hoverBgColor || '',
+      borderColor: hoverBorderColor || '',
       boxShadow: hoverBoxShadow || 'none'
     },
     '&:active': {
       boxShadow: activeBoxShadowColor || 'none',
-      backgroundColor: activeBackgroundColor || '#0062cc',
-      borderColor: activeBorderColor || '#005cbf'
+      backgroundColor: activeBackgroundColor || '',
+      borderColor: activeBorderColor || ''
     },
     '&:focus': {
-      boxShadow: focusBoxShadowColor || '0 0 0 0.2rem rgba(0,123,255,.5)'
+      boxShadow: focusBoxShadowColor || ''
     }
   })
 

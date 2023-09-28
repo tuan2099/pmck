@@ -1,5 +1,6 @@
 import { sortBy as sortConstant } from 'src/constant/sort'
 import { createSearchParams, useNavigate } from 'react-router-dom'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 function SortNew({ queryConfig }: any) {
   const navigate = useNavigate()
@@ -14,29 +15,20 @@ function SortNew({ queryConfig }: any) {
   }
   return (
     <>
-      <select
-        className='cursor-pointer rounded-full bg-white px-5 py-2 text-left text-[16px] capitalize text-color1 outline-none'
-        onChange={(e) => handleSort(e.target.value)}
-      >
-        <option disabled className='' value=''>
-          Sắp xếp
-        </option>
-        <option
-          value={sortConstant.arrangeTitleFromAtoZ}
-          className='bg-white text-color1 checked:bg-[#e8e8e8] hover:bg-[#e8e8e8]'
+      <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
+        <InputLabel id='demo-select-small-label'>Sắp xếp</InputLabel>
+        <Select
+          labelId='demo-select-small-label'
+          id='demo-select-small'
+          label='Age'
+          onChange={(e) => handleSort(e.target.value)}
         >
-          Theo tên: A - Z
-        </option>
-        <option value={sortConstant.arrangeTitleFromZtoA} className='bg-white text-color1 checked:bg-[#e8e8e8]'>
-          Theo tên: Z - A
-        </option>
-        <option value={sortConstant.newPost} className='bg-white text-color1 checked:bg-[#e8e8e8]'>
-          Mới nhất
-        </option>
-        <option value={sortConstant.lastPost} className='bg-white text-color1 checked:bg-[#e8e8e8]'>
-          Cũ nhất
-        </option>
-      </select>
+          <MenuItem value={sortConstant.arrangeTitleFromAtoZ}>Theo tên: A - Z</MenuItem>
+          <MenuItem value={sortConstant.arrangeTitleFromZtoA}>Theo tên: Z - A</MenuItem>
+          <MenuItem value={sortConstant.newPost}>Mới nhất</MenuItem>
+          <MenuItem value={sortConstant.lastPost}>Cũ nhất</MenuItem>
+        </Select>
+      </FormControl>
     </>
   )
 }

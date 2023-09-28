@@ -25,7 +25,7 @@ function Homeuser() {
   const { data: newsData, isLoading } = useQuery({
     queryKey: ['new', useQueryConfig],
     queryFn: () => {
-      return newApi.getNews(queryConfig as ConfigParams)
+      return newApi.getNews({ ...(queryConfig as ConfigParams), pagination: { limit: 4 } })
     },
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
