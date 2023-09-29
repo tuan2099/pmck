@@ -70,7 +70,7 @@ function ProfileUser() {
     queryFn: () => profileApi.getProfile()
   })
 
-  console.log(profileData?.data)
+  // console.log(profileData?.data)
 
   return (
     <>

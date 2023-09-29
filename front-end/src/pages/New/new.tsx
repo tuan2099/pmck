@@ -7,6 +7,7 @@ import Paginationcustom from './Components/Pagination'
 import Custombutton from 'src/components/Custombutton'
 import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
 import { IconButton, Tooltip } from '@mui/material'
+import Filters from './Components/Filters'
 export interface NewType {
   id: number
   attributes: {
@@ -36,7 +37,7 @@ function New() {
   return (
     <>
       <div className='ml-[50px] mt-5'>
-        <h1 className='mb-9 text-3xl font-bold'>Tin tức</h1>
+        <h1 className='mb-9 text-3xl font-bold'>🎉 Tin tức</h1>
         <div className='mt-[30px] overflow-hidden lg:mt-[10px] '>
           <div className='mb-7 flex items-center justify-between pr-8'>
             <SortNew queryConfig={queryConfig} />
@@ -63,6 +64,7 @@ function New() {
                   <FaGripHorizontal />
                 </IconButton>
               </Tooltip>
+              <Filters />
             </div>
           </div>
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
