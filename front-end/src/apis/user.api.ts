@@ -11,6 +11,23 @@ const profileApi = {
   },
   updateProfile(data: { id: number; data: any }) {
     return http.put(`/users/${data.id}`, data.data)
+  },
+  updateProfilePhoto(data: any) {
+    return http.post(
+      '/upload/',
+      {
+        ref: 'plugin::users-permissions.user',
+        refId: data.id,
+        field: 'profile_photo',
+        files: data.image
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+      }
+    )
   }
 }
 

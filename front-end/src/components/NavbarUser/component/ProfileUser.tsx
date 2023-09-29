@@ -70,6 +70,8 @@ function ProfileUser() {
     queryFn: () => profileApi.getProfile()
   })
 
+  console.log(profileData?.data)
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>

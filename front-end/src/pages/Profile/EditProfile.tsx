@@ -47,6 +47,14 @@ function EditProfile() {
     onError: (error) => console.log(error)
   })
 
+  const handleUpdatePhoto = useMutation({
+    mutationFn: () =>
+      profileApi.updateProfilePhoto({
+        id: profile?.id as number,
+        image: profile_photo
+      })
+  })
+
   return (
     <div className='h-full bg-[#F5F5F5] px-4 py-5 md:px-6 lg:px-10'>
       <div className='bg-white p-5'>
@@ -84,7 +92,10 @@ function EditProfile() {
               <input id='profile_photo' type='file' hidden onChange={handlePreviewImg} />
               <div className='flex flex-col gap-3'>
                 <div>
-                  <button className='rounded-sm bg-[#1e7115] px-4 py-2 text-sm font-medium text-white'>
+                  <button
+                    className='rounded-sm bg-[#1e7115] px-4 py-2 text-sm font-medium text-white'
+                    onClick={() => handleUpdatePhoto.mutate()}
+                  >
                     Tải ảnh lên
                   </button>
                 </div>
