@@ -20,7 +20,7 @@ export default function useQueryConfig() {
     {
       sort: queryParams.sort,
       fields: queryParams.fields,
-      filters: queryParams.filters === undefined || null ? {} : JSON.parse(queryParams.filters),
+      filters: queryParams.filters === undefined || null ? queryParams.filters : JSON.parse(queryParams.filters),
       locale: queryParams.locale,
       populate: queryParams.populate || '*',
       pagination: {
