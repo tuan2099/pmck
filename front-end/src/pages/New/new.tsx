@@ -8,6 +8,7 @@ import Custombutton from 'src/components/Custombutton'
 import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
 import { IconButton, Tooltip } from '@mui/material'
 import Filters from './Components/Filters'
+import { useState } from 'react'
 
 export interface NewType {
   id: number
@@ -26,6 +27,7 @@ export interface NewType {
 function New() {
   // get config param
   const queryConfig = useQueryConfig()
+  const [openFilterBox, setOpenFilterBox] = useState(false)
 
   // call api news
   const { data: newsData, isLoading } = useQuery({
@@ -36,6 +38,10 @@ function New() {
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
+
+  const open = () => {
+    setOpenFilterBox(!openFilterBox)
+  }
 
   return (
     <>
@@ -52,6 +58,7 @@ function New() {
                 borderColor='none'
                 hoverBgColor='none'
                 startIcon={<FaFilter />}
+                onClick={open}
               >
                 {' '}
                 Lọc tin tức
@@ -70,6 +77,46 @@ function New() {
               <Filters />
             </div>
           </div>
+          {openFilterBox && (
+            <section>
+              <form>
+                <label
+                  htmlFor='default-search'
+                  className='sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                >
+                  Search
+                </label>
+                <div className='relative'>
+                  <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
+                    <svg
+                      className='h-4 w-4 text-gray-500 dark:text-gray-400'
+                      aria-hidden='true'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 20 20'
+                    >
+                      <path
+                        stroke='currentColor'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type='search'
+                    id='default-search'
+                    className='block w-full rounded-full border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
+                    placeholder='Tìm kiếm... '
+                    required
+                  />
+                </div>
+              </form>
+              <div></div>
+            </section>
+          )}
+
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
             <Cardnew newsData={newsData} />
             {isLoading && (

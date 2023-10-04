@@ -1,12 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */ // hide err in line 44
-import { Pagination, Stack } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { CourseType } from 'src/types/course.type'
-import SearchAllCourse from './Component/searchAllCourse'
-import ListCourse from './Component/ListCourse'
-import GridCourse from './Component/GridCourse'
 import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 import courseApi from 'src/apis/course.api'
 import Custombutton from 'src/components/Custombutton'
@@ -17,23 +10,19 @@ import CourseCard from 'src/components/CourseCard'
 const COURSE_PER_PAGE = 9
 
 const AllCoursePage = () => {
-  const [serchParams, setSearchParams] = useSearchParams()
-  const category = serchParams.get('category')
-  const [list, setList] = useState<CourseType[]>([])
-  const [data, setData] = useState<CourseType[]>([])
-  const [page, setPage] = useState<number>(1)
-  const [sortByName, setSortByName] = useState<string>('none')
-  const [listStyle, setListStyle] = useState<'list' | 'grid'>('grid')
-
   const queryConfig = useQueryConfig()
 
-  const { data: courseData, isLoading, isError } = useQuery({
-      queryKey: ['allCourse', queryConfig],
-      queryFn: () => {
-        return courseApi.getCourse({ ...(queryConfig as ConfigParams) })
-      },
-      keepPreviousData: true,
-      staleTime: 3 * 60 * 1000
+  const {
+    data: courseData,
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['allCourse', queryConfig],
+    queryFn: () => {
+      return courseApi.getCourse({ ...(queryConfig as ConfigParams) })
+    },
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
   })
   return (
     <>

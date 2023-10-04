@@ -26,6 +26,7 @@ interface CustombuttonType {
   padding?: string
   border?: string
   urlButtonLink?: any
+  onClick?: () => void
 }
 
 function Custombutton({
@@ -49,7 +50,8 @@ function Custombutton({
   endIcon,
   padding,
   border,
-  urlButtonLink
+  urlButtonLink,
+  onClick
 }: CustombuttonType) {
   const StyleCustomButton = styled(Button)({
     color: textColor || 'black',
@@ -94,7 +96,13 @@ function Custombutton({
     default:
       resultButton = (
         <>
-          <StyleCustomButton fullWidth={fullWidth} variant={variant} startIcon={startIcon} endIcon={endIcon}>
+          <StyleCustomButton
+            fullWidth={fullWidth}
+            variant={variant}
+            startIcon={startIcon}
+            endIcon={endIcon}
+            onClick={onClick}
+          >
             {children}
           </StyleCustomButton>
         </>
