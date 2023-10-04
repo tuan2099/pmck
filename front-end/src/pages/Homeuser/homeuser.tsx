@@ -21,7 +21,8 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-  // call data news
+  
+  // call data news with limit 4 item
   const { data: newsData, isLoading } = useQuery({
     queryKey: ['new', useQueryConfig],
     queryFn: () => {

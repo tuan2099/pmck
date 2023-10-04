@@ -6,10 +6,11 @@ import { FaLink, FaMailBulk, FaPhoneAlt, FaQuestionCircle } from 'react-icons/fa
 import supportApi from 'src/apis/support.api'
 import Accordion from 'src/components/Accordion'
 import { SupportType } from 'src/types/support.type'
+
 function Question() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [QAList, setQAList] = useState<any[]>([])
-
+  
   const {
     data: supportQuestionApi,
     isLoading,
@@ -21,6 +22,7 @@ function Question() {
     }
   })
 
+  // call api Question
   const { data: QAApi } = useQuery({
     queryKey: ['QA'],
     queryFn: () => {
@@ -28,14 +30,13 @@ function Question() {
     }
   })
 
-  // console.log(QAApi?.data.data)
-
+  // setting open list question 
   const handleOpenDrawer = (id: number) => {
     const chooseCategory = supportQuestionApi?.data.data.find((item: any) => +item.id === id)
     setQAList(chooseCategory?.attributes.q_and_as.data)
     setOpenDrawer(true)
   }
-
+  // setting close list question 
   const handleCloseDrawer = () => {
     setOpenDrawer(false)
     setQAList([])

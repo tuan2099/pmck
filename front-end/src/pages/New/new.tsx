@@ -8,6 +8,7 @@ import Custombutton from 'src/components/Custombutton'
 import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
 import { IconButton, Tooltip } from '@mui/material'
 import Filters from './Components/Filters'
+
 export interface NewType {
   id: number
   attributes: {
@@ -21,7 +22,9 @@ export interface NewType {
   }
   item: any
 }
+
 function New() {
+  // get config param
   const queryConfig = useQueryConfig()
 
   // call api news

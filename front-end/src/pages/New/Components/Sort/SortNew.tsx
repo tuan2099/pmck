@@ -4,11 +4,12 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 function SortNew({ queryConfig }: any) {
   const navigate = useNavigate()
+  // setting sort 
   const handleSort = (sortbyValue: string) => {
     navigate({
-      pathname: '/new',
-      search: createSearchParams({
-        ...queryConfig,
+      pathname: '/new', // reset URL before transmit param
+      search: createSearchParams({ // transmit param with param is obj
+        ...queryConfig, 
         sort: sortbyValue
       }).toString()
     })

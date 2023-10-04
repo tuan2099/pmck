@@ -3,23 +3,28 @@ import { Pagination, Stack } from '@mui/material'
 import React, { useState } from 'react'
 
 function Paginationcustom({ queryConfig, pageCount }: any) {
+  
   const navigate = useNavigate()
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1) // default page
+  // setting pagination
   const handleChange = (even, value) => {
     navigate({
-      pathname: '/new',
-      search: createSearchParams({
+      pathname: '/new', //reset URL before transmit param
+      search: createSearchParams({ // transmit param with param
         ...queryConfig,
         page: value
-      }).toString()
+      }).toString() // url must be string
     })
-    setPage(value)
+    setPage(value) 
   }
   return (
     <>
-      <Stack spacing={2}>
-        <Pagination count={pageCount} page={page} onChange={handleChange} />
-      </Stack>
+      {pageCount === 1 ? '' : 
+        <Stack spacing={2}>
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
+        </Stack> 
+      }
+      
     </>
   )
 }
