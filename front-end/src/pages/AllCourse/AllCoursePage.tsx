@@ -7,6 +7,12 @@ import { CourseType } from 'src/types/course.type'
 import SearchAllCourse from './Component/searchAllCourse'
 import ListCourse from './Component/ListCourse'
 import GridCourse from './Component/GridCourse'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
+import courseApi from 'src/apis/course.api'
+import Custombutton from 'src/components/Custombutton'
+import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
+import { IconButton, Tooltip } from '@mui/material'
+import CourseCard from 'src/components/CourseCard'
 
 const COURSE_PER_PAGE = 9
 
@@ -19,56 +25,83 @@ const AllCoursePage = () => {
   const [sortByName, setSortByName] = useState<string>('none')
   const [listStyle, setListStyle] = useState<'list' | 'grid'>('grid')
 
+  const queryConfig = useQueryConfig()
+
+  const { data: courseData, isLoading, isError } = useQuery({
+      queryKey: ['allCourse', queryConfig],
+      queryFn: () => {
+        return courseApi.getCourse({ ...(queryConfig as ConfigParams) })
+      },
+      keepPreviousData: true,
+      staleTime: 3 * 60 * 1000
+  })
   return (
-    <div className='mt-4'>
-      <h2 className='px-20 text-center text-2xl font-bold uppercase'>Tất cả khóa học</h2>
-      <p className='mt-4 text-center text-[#afafaf]'>
-        Khám phá tri thức, thú vị và thành công với khóa học của chúng tôi
-      </p>
-      <div className='items-top mt-5 flex md:mt-14 md:px-20'>
-        <div className='w-full'>
-          <SearchAllCourse
-            setListStyle={setListStyle}
-            list={list}
-            data={data}
-            setSortByName={setSortByName}
-            sortByName={sortByName}
-          />
-          <GridCourse data={data} listStyle={listStyle} />
-
-          <ListCourse data={data} listStyle={listStyle} />
-
-          {!Boolean(data.length) && (
-            <>
-              <div className='pt-7 text-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth={1.5}
-                  stroke='currentColor'
-                  className='m-auto h-60 w-60  text-gray-200'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776'
-                  />
-                </svg>
-                <h5 className='text-gray-500'>
-                  Hiện chưa có khóa học nào, chúng tôi sẽ cập nhật trong thời gian sớm nhất ...
-                </h5>
-              </div>
-            </>
-          )}
-          <div className='my-8 flex justify-center'>
-            <Stack spacing={2}>
-              <Pagination count={Math.ceil(list.length / COURSE_PER_PAGE)} onChange={(_, value) => setPage(value)} />
-            </Stack>
+    <>
+      <div className='ml-[50px] mt-5'>
+        <h1 className='mb-9 text-3xl font-bold'>🎉 Danh sách khóa học</h1>
+        <div className='mt-[30px] overflow-hidden lg:mt-[10px] '>
+          <div className='mb-7 flex items-center justify-between pr-8'>
+            {/*<SortNew queryConfig={queryConfig} />*/}
+            <div className='flex'>
+              <Custombutton
+                textColor='#4F4F4F'
+                bgcolor='none'
+                border='none'
+                borderColor='none'
+                hoverBgColor='none'
+                startIcon={<FaFilter />}
+              >
+                {' '}
+                Lọc tin tức
+              </Custombutton>
+              <div className='border-r-1 mx-4 my-2 border' />
+              <Tooltip title='Hiển thị danh sách' placement='top'>
+                <IconButton aria-label='delete'>
+                  <FaListUl />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title='Hiển thị lưới' placement='top'>
+                <IconButton aria-label='delete'>
+                  <FaGripHorizontal />
+                </IconButton>
+              </Tooltip>
+              {/*<Filters />*/}
+            </div>
+          </div>
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
+            {/*<CourseCard courseItem={courseData} />*/}
+            {isLoading && (
+              <>
+                {Array(20)
+                  .fill(0)
+                  .map((_, index) => (
+                    <div
+                      role='status'
+                      className='mr-3 animate-pulse space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0'
+                      key={index}
+                    >
+                      <div className='flex h-60 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700'>
+                        <svg
+                          className='h-12 w-12 text-gray-200'
+                          xmlns='http://www.w3.org/2000/svg'
+                          aria-hidden='true'
+                          fill='currentColor'
+                          viewBox='0 0 640 512'
+                        >
+                          <path d='M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z' />
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+              </>
+            )}
+          </div>
+          <div className='my-9 flex justify-center'>
+            {/*<Paginationcustom queryConfig={queryConfig} pageCount={newsData?.data?.meta.pagination.pageCount} />*/}
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

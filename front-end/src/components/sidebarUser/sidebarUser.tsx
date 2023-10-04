@@ -7,6 +7,7 @@ import Tooltip from '@mui/material/Tooltip'
 import { Divider, Fab, Skeleton } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import newApi from 'src/apis/new.api'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 
 function SidebarUser() {
   const [openDialog, setOpenDialog] = useState<boolean>(false)
@@ -17,14 +18,17 @@ function SidebarUser() {
   const handleClose = () => {
     setOpenDialog(false)
   }
+  const queryConfig = useQueryConfig()
 
   const {
     data: NewsNotification,
     isLoading,
     isError
   } = useQuery({
-    queryKey: ['NewsNotification'],
-    queryFn: () => newApi.getNewsNotification()
+    queryKey: ['NewsNotification', queryConfig],
+    queryFn: () => newApi.getNewsNotification({ ...(queryConfig as ConfigParams) }),
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
   })
   return (
     <>

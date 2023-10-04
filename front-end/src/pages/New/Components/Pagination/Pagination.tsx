@@ -19,18 +19,13 @@ function Paginationcustom({ queryConfig, pageCount }: any) {
   }
   return (
     <>
-<<<<<<< HEAD
       {pageCount === 1 ? '' : 
         <Stack spacing={2}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Stack> 
       }
       
-=======
-      <Stack spacing={2}>
-        {pageCount === 1 ? '' : <Pagination count={pageCount} page={page} onChange={handleChange} />}
-      </Stack>
->>>>>>> da9afef20fb6be3c09bc9062b0a9d1508c479f76
+
     </>
   )
 }
