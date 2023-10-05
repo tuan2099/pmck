@@ -7,6 +7,7 @@ import courseApi from 'src/apis/course.api'
 import { CourseType } from 'src/types/course.type'
 import { User } from 'src/types/user.type'
 import { getAccesTokenLocalStorage, getProfileFromLocalStorage } from 'src/utils/auth'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 
 interface AppContextInterface {
   isAuthenticated: boolean
@@ -61,6 +62,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [newCourses, setNewCourses] = useState<CourseType[]>([])
   const [freeCourse, setFreeCourses] = useState<CourseType[]>([])
   const [isTourOpen, setIsTourOpen] = useState(initialAppContext.isTourOpen)
+  const queryConfig = useQueryConfig()
 
   const openTour = () => {
     setIsTourOpen(!isTourOpen)
@@ -141,8 +143,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   })
 
   const getAllCourse = useQuery({
-    queryKey: ['allCourse'],
-    queryFn: () => courseApi.getCourse(),
+    queryKey: ['allCourse', queryConfig],
+    queryFn: () => {
+      return courseApi.getCourse({ ...(queryConfig as ConfigParams) })
+    },
     onSuccess: (data) => {
       setAllCourse(data?.data.data)
     },
@@ -151,12 +155,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const news = allCourse.filter((course) => {
-      const check = course.attributes.course_categories.data.some((item) => item.attributes.name === 'new_course')
+      const check = course.attributes.course_categories?.data?.some((item) => item.attributes.name === 'new_course')
       if (check) return course
     })
 
     const free = allCourse.filter((course) => {
-      const check = course.attributes.course_categories.data.some((item) => item.attributes.name === 'free_course')
+      const check = course.attributes.course_categories?.data?.some((item) => item.attributes.name === 'free_course')
       if (check) return course
     })
 

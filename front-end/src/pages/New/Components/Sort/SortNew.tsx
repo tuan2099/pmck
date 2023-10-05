@@ -15,6 +15,8 @@ function SortNew({ queryConfig }: any) {
       }).toString()
     })
   }
+
+  
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
@@ -22,7 +24,7 @@ function SortNew({ queryConfig }: any) {
         <Select
           labelId='demo-select-small-label'
           id='demo-select-small'
-          label='Age'
+          label='Sắp xếp'
           onChange={(e) => handleSort(e.target.value)}
           defaultValue=''
         >

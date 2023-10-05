@@ -24,6 +24,8 @@ const AllCoursePage = () => {
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
+
+  console.log(courseData?.data?.data)
   return (
     <>
       <div className='ml-[50px] mt-5'>
@@ -58,7 +60,9 @@ const AllCoursePage = () => {
             </div>
           </div>
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
-            {/*<CourseCard courseItem={courseData} />*/}
+            {courseData?.data?.data?.map((courseItem) => {
+              return <CourseCard key={courseItem.id} courseItem={courseItem}/>
+            })}
             {isLoading && (
               <>
                 {Array(20)
