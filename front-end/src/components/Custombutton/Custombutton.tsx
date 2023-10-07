@@ -29,65 +29,42 @@ interface CustombuttonType {
   onClick?: () => void
 }
 
-function Custombutton({
-  fullWidth,
-  urlButton,
-  bgcolor,
-  lineHeight,
-  borderColor,
-  textSize,
-  textColor,
-  hoverBgColor,
-  variant,
-  children,
-  hoverBorderColor,
-  hoverBoxShadow,
-  activeBoxShadowColor,
-  activeBackgroundColor,
-  activeBorderColor,
-  focusBoxShadowColor,
-  startIcon,
-  endIcon,
-  padding,
-  border,
-  urlButtonLink,
-  onClick
-}: CustombuttonType) {
+function Custombutton({...props}: CustombuttonType) {
   const StyleCustomButton = styled(Button)({
-    color: textColor || 'black',
+    color: props.textColor || 'black',
     boxShadow: 'none',
     textTransform: 'none',
     borderRadius: '50px',
-    fontSize: textSize || 16,
-    padding: padding || '6px 12px',
-    border: border || '1px solid',
-    lineHeight: lineHeight || 1.5,
-    backgroundColor: variant === 'text' && 'outline' ? '' : bgcolor || '#f2be05',
-    borderColor: borderColor || 'none',
+    fontSize: props.textSize || 16,
+    padding: props.padding || '6px 12px',
+    border: props.border || '1px solid',
+    lineHeight: props.lineHeight || 1.5,
+    backgroundColor: props.variant === 'text' && 'outline' ? '' : props.bgcolor || '#f2be05',
+    borderColor: props.borderColor || 'none',
     '&:hover': {
-      backgroundColor: hoverBgColor || '',
-      borderColor: hoverBorderColor || '',
-      boxShadow: hoverBoxShadow || 'none'
+      backgroundColor: props.hoverBgColor || '',
+      borderColor: props.hoverBorderColor || '',
+      boxShadow: props.hoverBoxShadow || 'none'
     },
     '&:active': {
-      boxShadow: activeBoxShadowColor || 'none',
-      backgroundColor: activeBackgroundColor || '',
-      borderColor: activeBorderColor || ''
+      boxShadow: props.activeBoxShadowColor || 'none',
+      backgroundColor: props.activeBackgroundColor || '',
+      borderColor: props.activeBorderColor || ''
     },
     '&:focus': {
-      boxShadow: focusBoxShadowColor || ''
+      boxShadow: props.focusBoxShadowColor || ''
     }
   })
 
   let resultButton
 
   switch (true) {
-    case urlButton:
+    case props.urlButton:
       resultButton = (
         <>
-          <Link to={`${urlButtonLink}`}>
-            <StyleCustomButton fullWidth={fullWidth} variant={variant} startIcon={startIcon} endIcon={endIcon}>
-              {children}
+          <Link to={`${props.urlButtonLink}`}>
+            <StyleCustomButton fullWidth={props.fullWidth} variant={props.variant} startIcon={props.startIcon} endIcon={props.endIcon}>
+              {props.children}
             </StyleCustomButton>
           </Link>
         </>
@@ -97,13 +74,13 @@ function Custombutton({
       resultButton = (
         <>
           <StyleCustomButton
-            fullWidth={fullWidth}
-            variant={variant}
-            startIcon={startIcon}
-            endIcon={endIcon}
-            onClick={onClick}
+            fullWidth={props.fullWidth}
+            variant={props.variant}
+            startIcon={props.startIcon}
+            endIcon={props.endIcon}
+            onClick={props.onClick}
           >
-            {children}
+            {props.children}
           </StyleCustomButton>
         </>
       )

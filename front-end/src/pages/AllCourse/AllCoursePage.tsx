@@ -7,8 +7,6 @@ import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
 import { IconButton, Tooltip } from '@mui/material'
 import CourseCard from 'src/components/CourseCard'
 
-const COURSE_PER_PAGE = 9
-
 const AllCoursePage = () => {
   const queryConfig = useQueryConfig()
 
