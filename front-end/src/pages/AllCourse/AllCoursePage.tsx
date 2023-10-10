@@ -23,7 +23,6 @@ const AllCoursePage = () => {
     staleTime: 3 * 60 * 1000
   })
 
-  console.log(courseData?.data?.data)
   return (
     <>
       <div className='ml-[50px] mt-5'>
@@ -86,6 +85,7 @@ const AllCoursePage = () => {
                   ))}
               </>
             )}
+            {isError && (<div>Dữ liệu hiện đang gạp vấn đề</div>)}
           </div>
           <div className='my-9 flex justify-center'>
             {/*<Paginationcustom queryConfig={queryConfig} pageCount={newsData?.data?.meta.pagination.pageCount} />*/}
