@@ -10,7 +10,6 @@ const courseApi = {
     return http.get(LIST_COURSE_URL)
   },
   getCourse(params: ConfigParams) {
-    console.log(params)
     return http.get<CourseResponseType>(COURSE_URL, {params})
   },
   getDetailCourse(id: string) {
