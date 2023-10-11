@@ -6,7 +6,10 @@ import SortNew from './Components/Sort'
 import Paginationcustom from './Components/Pagination'
 import Custombutton from 'src/components/Custombutton'
 import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
-import { IconButton, Tooltip } from '@mui/material'
+import {  IconButton, Tooltip } from '@mui/material'
+import Filters from './Components/Filters'
+import { useState } from 'react'
+
 export interface NewType {
   id: number
   attributes: {
@@ -20,9 +23,12 @@ export interface NewType {
   }
   item: any
 }
-function New() {
-  const queryConfig = useQueryConfig()
 
+function New() {
+  // get config param
+  const queryConfig = useQueryConfig()
+  const [openFilterBox, setOpenFilterBox] = useState(false)
+  const [view, setView] = useState('grid')
   // call api news
   const { data: newsData, isLoading } = useQuery({
     queryKey: ['new', queryConfig],
@@ -33,10 +39,23 @@ function New() {
     staleTime: 3 * 60 * 1000
   })
 
+  const open = () => {
+    setOpenFilterBox(!openFilterBox)
+  }
+  
+  const renderNews = () => {
+    if(view === 'grid') {
+      return <Cardnew newsData={newsData} />
+    } else {
+      return 2
+    }
+
+  }
+
   return (
     <>
       <div className='ml-[50px] mt-5'>
-        <h1 className='mb-9 text-3xl font-bold'>Tin tức</h1>
+        <h1 className='mb-9 text-3xl font-bold'>🎉 Tin tức</h1>
         <div className='mt-[30px] overflow-hidden lg:mt-[10px] '>
           <div className='mb-7 flex items-center justify-between pr-8'>
             <SortNew queryConfig={queryConfig} />
@@ -48,25 +67,30 @@ function New() {
                 borderColor='none'
                 hoverBgColor='none'
                 startIcon={<FaFilter />}
+                onClick={open}
               >
                 {' '}
                 Lọc tin tức
               </Custombutton>
               <div className='border-r-1 mx-4 my-2 border' />
               <Tooltip title='Hiển thị danh sách' placement='top'>
-                <IconButton aria-label='delete'>
+                <IconButton aria-label='delete' onClick={() => setView('list')}>
                   <FaListUl />
                 </IconButton>
               </Tooltip>
               <Tooltip title='Hiển thị lưới' placement='top'>
-                <IconButton aria-label='delete'>
+                <IconButton aria-label='delete' onClick={() => setView('grid')}>
                   <FaGripHorizontal />
                 </IconButton>
               </Tooltip>
             </div>
           </div>
+          {openFilterBox && (
+           <Filters open={open}/>
+          )}
+
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
-            <Cardnew newsData={newsData} />
+            {renderNews()}
             {isLoading && (
               <>
                 {Array(20)
@@ -93,6 +117,7 @@ function New() {
               </>
             )}
           </div>
+         
           <div className='my-9 flex justify-center'>
             <Paginationcustom queryConfig={queryConfig} pageCount={newsData?.data?.meta.pagination.pageCount} />
           </div>

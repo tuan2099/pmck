@@ -13,14 +13,14 @@ export interface ConfigParams {
     limit?: number
   }
 }
-
+// JSON.parse('{' + queryParams.filters + '}')
 export default function useQueryConfig() {
   const queryParams = useQueryParams()
   const queryConfig: ConfigParams = omitBy(
     {
       sort: queryParams.sort,
       fields: queryParams.fields,
-      filters: queryParams.filters,
+      filters: queryParams.filters === undefined || null ? queryParams.filters : JSON.parse(queryParams.filters),
       locale: queryParams.locale,
       populate: queryParams.populate || '*',
       pagination: {

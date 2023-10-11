@@ -1,5 +1,6 @@
 import Custombutton from 'src/components/Custombutton'
 import logo from '../../assets/logo.png'
+
 function Notfound() {
   return (
     <div className='flex h-screen items-center justify-between bg-[url(http://localhost:1337/uploads/error_bg1_bc6c15a9a1.png)] bg-cover bg-no-repeat'>

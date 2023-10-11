@@ -1,189 +1,98 @@
 /* eslint-disable no-extra-boolean-cast */ // hide err in line 44
-import { Pagination, Stack } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
-import { useContext, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 import courseApi from 'src/apis/course.api'
-import { AppContext } from 'src/context/app.context'
-import { CourseType } from 'src/types/course.type'
-import SearchAllCourse from './Component/searchAllCourse'
-import ListCourse from './Component/ListCourse'
-import GridCourse from './Component/GridCourse'
-
-const COURSE_PER_PAGE = 9
+import Custombutton from 'src/components/Custombutton'
+import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
+import { IconButton, Tooltip } from '@mui/material'
+import CourseCard from 'src/components/CourseCard'
 
 const AllCoursePage = () => {
-  const { allCourse } = useContext(AppContext)
-  const [serchParams, setSearchParams] = useSearchParams()
-  const category = serchParams.get('category')
-  const [list, setList] = useState<CourseType[]>([])
-  const [data, setData] = useState<CourseType[]>([])
-  const [page, setPage] = useState<number>(1)
-  const [sortByName, setSortByName] = useState<string>('none')
-  const [expanded, setExpanded] = useState({
-    panel1: false,
-    panel2: false
-  })
-  const [listStyle, setListStyle] = useState<'list' | 'grid'>('grid')
-  const [isShowAll, setIsShowAll] = useState(false)
+  const queryConfig = useQueryConfig()
 
-  useEffect(() => {
-    const categoryList = category?.split('+')
-    if (category && allCourse.length) {
-      if (category === 'all' || category === '') {
-        setList(allCourse)
-      } else {
-        const data = allCourse?.filter((item) =>
-          categoryList
-            ?.filter((item) => item !== 'all')
-            ?.every((cate) => item.attributes.course_categories.data.some((obj) => obj.attributes.name === cate))
-        )
-        setList(data)
-      }
-    } else {
-      setList(allCourse)
-    }
-  }, [category, allCourse])
-
-  useEffect(() => {
-    const newData = JSON.parse(JSON.stringify(list))
-    const start = (page - 1) * COURSE_PER_PAGE
-    const end = start + COURSE_PER_PAGE
-    const currentCourse = newData.slice(start, end)
-    switch (sortByName) {
-      case 'A-Z':
-        currentCourse.sort((a: any, b: any) => a.attributes.course_name.localeCompare(b.attributes.course_name))
-        break
-      case 'Z-A':
-        currentCourse.sort((a: any, b: any) => b.attributes.course_name.localeCompare(a.attributes.course_name))
-        break
-      default:
-        currentCourse
-    }
-
-    setData(currentCourse)
-  }, [sortByName, page, list])
-
-  // toogle show fillter box
-  const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
-    const newExpanded = JSON.parse(JSON.stringify(expanded))
-    for (const key in expanded) {
-      if (key === panel) {
-        newExpanded[key] = isExpanded
-      }
-    }
-    setExpanded(newExpanded)
-  }
-
-  // toogle show all fillter boxex
-  const handleShowAllPanel = () => {
-    const newExpanded = JSON.parse(JSON.stringify(expanded))
-    if (isShowAll) {
-      for (const key in expanded) {
-        newExpanded[key] = false
-      }
-    } else {
-      for (const key in expanded) {
-        newExpanded[key] = true
-      }
-    }
-    setExpanded(newExpanded)
-    setIsShowAll(!isShowAll)
-  }
-
-  // setting checkbox filter
-  const handleChangeCategory = (checked: boolean, name: string) => {
-    const cloneCategory = category?.split('+')
-    const isExist = cloneCategory?.indexOf(name)
-    if (checked) {
-      if (category === '' || !category) {
-        setSearchParams({ ...Object.fromEntries([...serchParams]), category: name })
-      } else {
-        if (isExist === -1) {
-          cloneCategory?.push(name)
-          setSearchParams({ ...Object.fromEntries([...serchParams]), category: cloneCategory?.join('+') as string })
-        }
-      }
-    } else {
-      const newCategory = cloneCategory?.filter((item) => item != name)
-      setSearchParams({ ...Object.fromEntries([...serchParams]), category: newCategory?.join('+') as string })
-    }
-  }
-
-  // setting checkbox filter
-  const checkIncludeCategory = (name: string) => {
-    return category?.split('+').includes(name)
-  }
-
-  // call api course Category
-  const { data: courseCategories } = useQuery({
-    queryKey: ['course-categories'],
-    queryFn: () => courseApi.getCourseCategories()
+  const {
+    data: courseData,
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ['allCourse', queryConfig],
+    queryFn: () => {
+      return courseApi.getCourse({ ...(queryConfig as ConfigParams) })
+    },
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
   })
 
   return (
-    <div className='mt-4'>
-      <h2 className='px-20 text-center text-2xl font-bold uppercase'>Tất cả khóa học</h2>
-      <p className='mt-4 text-center text-[#afafaf]'>
-        Khám phá tri thức, thú vị và thành công với khóa học của chúng tôi
-      </p>
-      <div className='items-top mt-5 flex md:mt-14 md:px-20'>
-        <div className=''>
-          <SearchAllCourse
-            setListStyle={setListStyle}
-            list={list}
-            data={data}
-            setSortByName={setSortByName}
-            sortByName={sortByName}
-          />
-          <GridCourse data={data} listStyle={listStyle} />
-
-          <ListCourse data={data} listStyle={listStyle} />
-
-          {!Boolean(data.length) && <h3>Không có khóa học nào.</h3>}
-          <div className='my-8 flex justify-center'>
-            <Stack spacing={2}>
-              <Pagination count={Math.ceil(list.length / COURSE_PER_PAGE)} onChange={(_, value) => setPage(value)} />
-            </Stack>
-          </div>
-        </div>
-        {/* <div className='w-[25%] px-[15px]'>
-          <div className='pb-[50px]'>
-            <div className='mt-[8px] flex items-center justify-between rounded border p-[10px]'>
-              <h4 className='flex items-center text-[16px] font-semibold'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth={1.5}
-                  stroke='currentColor'
-                  className='mr-2 h-6 w-6'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z'
-                  />
-                </svg>
-                Tìm kiếm
-              </h4>
-              <Button className='cursor-pointer' onClick={handleShowAllPanel}>
-                <p className='font-semibold text-black'>Hiện toàn bộ</p>
-              </Button>
+    <>
+      <div className='ml-[50px] mt-5'>
+        <h1 className='mb-9 text-3xl font-bold'>🎉 Danh sách khóa học</h1>
+        <div className='mt-[30px] overflow-hidden lg:mt-[10px] '>
+          <div className='mb-7 flex items-center justify-between pr-8'>
+            {/*<SortNew queryConfig={queryConfig} />*/}
+            <div className='flex'>
+              <Custombutton
+                textColor='#4F4F4F'
+                bgcolor='none'
+                border='none'
+                borderColor='none'
+                hoverBgColor='none'
+                startIcon={<FaFilter />}
+              >
+                {' '}
+                Lọc tin tức
+              </Custombutton>
+              <div className='border-r-1 mx-4 my-2 border' />
+              <Tooltip title='Hiển thị danh sách' placement='top'>
+                <IconButton aria-label='delete'>
+                  <FaListUl />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title='Hiển thị lưới' placement='top'>
+                <IconButton aria-label='delete'>
+                  <FaGripHorizontal />
+                </IconButton>
+              </Tooltip>
+              {/*<Filters />*/}
             </div>
           </div>
-          <div className=''>
-            <Fillter
-              handleChange={handleChange}
-              checkIncludeCategory={checkIncludeCategory}
-              handleChangeCategory={handleChangeCategory}
-              courseCategories={courseCategories}
-              expanded={expanded}
-            />
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
+            {courseData?.data?.data?.map((courseItem) => {
+              return <CourseCard key={courseItem.id} courseItem={courseItem}/>
+            })}
+            {isLoading && (
+              <>
+                {Array(20)
+                  .fill(0)
+                  .map((_, index) => (
+                    <div
+                      role='status'
+                      className='mr-3 animate-pulse space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0'
+                      key={index}
+                    >
+                      <div className='flex h-60 w-full items-center justify-center rounded bg-gray-300 dark:bg-gray-700'>
+                        <svg
+                          className='h-12 w-12 text-gray-200'
+                          xmlns='http://www.w3.org/2000/svg'
+                          aria-hidden='true'
+                          fill='currentColor'
+                          viewBox='0 0 640 512'
+                        >
+                          <path d='M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z' />
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+              </>
+            )}
+            {isError && (<div>Dữ liệu hiện đang gạp vấn đề</div>)}
           </div>
-        </div> */}
+          <div className='my-9 flex justify-center'>
+            {/*<Paginationcustom queryConfig={queryConfig} pageCount={newsData?.data?.meta.pagination.pageCount} />*/}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

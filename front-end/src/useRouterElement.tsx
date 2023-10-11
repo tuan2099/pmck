@@ -34,6 +34,15 @@ function RejectedRoute() {
   return !isAuthenticated ? <Outlet /> : <Navigate to='/user' />
 }
 
+function CheckLayout() {
+  const { isAuthenticated } = useContext(AppContext)
+  return isAuthenticated ? <HomeUserLayout>
+    <New />
+  </HomeUserLayout> : <GuestLayout>
+    <New />
+  </GuestLayout>
+
+}
 export const ROUTES = {
   login: '/login',
   user: '/user',
@@ -173,11 +182,7 @@ export default function useRouterElement() {
     },
     {
       path: ROUTES.new,
-      element: (
-        <HomeUserLayout>
-          <New />
-        </HomeUserLayout>
-      )
+      element: (<CheckLayout />)
     },
 
     {

@@ -4,15 +4,19 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 function SortNew({ queryConfig }: any) {
   const navigate = useNavigate()
+  // setting sort
   const handleSort = (sortbyValue: string) => {
     navigate({
-      pathname: '/new',
+      pathname: '/new', // reset URL before transmit param
       search: createSearchParams({
+        // transmit param with param is obj
         ...queryConfig,
         sort: sortbyValue
       }).toString()
     })
   }
+
+  
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
@@ -20,8 +24,9 @@ function SortNew({ queryConfig }: any) {
         <Select
           labelId='demo-select-small-label'
           id='demo-select-small'
-          label='Age'
+          label='Sắp xếp'
           onChange={(e) => handleSort(e.target.value)}
+          defaultValue=''
         >
           <MenuItem value={sortConstant.arrangeTitleFromAtoZ}>Theo tên: A - Z</MenuItem>
           <MenuItem value={sortConstant.arrangeTitleFromZtoA}>Theo tên: Z - A</MenuItem>
