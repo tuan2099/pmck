@@ -339,6 +339,11 @@ function Course_detail() {
               certificateId={courseData.data?.data.data.attributes.chapters.data[0].attributes?.certificate?.data?.id}
             />
           )}
+          {chooseItem?.data?.attributes.text_lesson && (
+            <div className='items-top my-5 flex justify-between px-[8.5%]'>
+              {chooseItem?.data?.attributes.text_lesson}
+            </div>
+          )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
             <div className='w-'>
               <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.data?.attributes.title}</h1>
