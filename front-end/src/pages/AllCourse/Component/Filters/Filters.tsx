@@ -12,7 +12,7 @@ function Filters({ queryConfig, open }: any) {
   // call api Filters
   const handleFilters = (categoryName) => {
     navigate({
-      pathname: '/new', //reset URL before transmit param
+      pathname: '/courses', //reset URL before transmit param
       search: createSearchParams({ // transmit param with param is obj
         ...queryConfig,
         filters: JSON.stringify({
@@ -40,7 +40,7 @@ function Filters({ queryConfig, open }: any) {
 
   const resetSort = () => {
     navigate({
-      pathname: '/new'
+      pathname: '/courses'
     })
   }
   return (
