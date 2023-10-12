@@ -10,6 +10,7 @@ import SortCourse from './Component/Sort/SortCourse'
 import BlockSkeleton from 'src/components/BlockSkeleton'
 import { useState } from 'react'
 import Filters from './Component/Filters'
+import Paginationcustom from './Component/Pagination/Pagination'
 
 const AllCoursePage = () => {
   const queryConfig = useQueryConfig()
@@ -50,7 +51,7 @@ const AllCoursePage = () => {
                 onClick={open}
               >
                 {' '}
-                Lọc tin tức
+                Lọc khóa học
               </Custombutton>
               <div className='border-r-1 mx-4 my-2 border' />
               <Tooltip title='Hiển thị danh sách' placement='top'>
@@ -78,10 +79,10 @@ const AllCoursePage = () => {
                 <BlockSkeleton sklType="grid" className="2" number={20}/>
               </>
             )}
-            {isError && (<div>Dữ liệu hiện đang gạp vấn đề</div>)}
+            {isError && (<div>Dữ liệu hiện đang gặp vấn đề</div>)}
           </div>
           <div className='my-9 flex justify-center'>
-            {/* <Paginationcustom queryConfig={queryConfig} pageCount={newsData?.data?.meta.pagination.pageCount} /> */}
+            <Paginationcustom queryConfig={queryConfig} pageCount={courseData?.data?.meta.pagination.pageCount} />
           </div>
         </div>
       </div>

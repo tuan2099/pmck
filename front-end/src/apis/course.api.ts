@@ -2,11 +2,12 @@ import { CourseResponseType } from 'src/types/course.type'
 import http from 'src/utils/https'
 import { ConfigParams } from 'src/hooks/useQueryConfig'
 
-export const COURSE_URL = '/courses?'
-export const LIST_COURSE_URL = 'list-courses?populate[courses][populate][0]=banner_course'
-
+const COURSE_URL = '/courses?'
+const LIST_COURSE_URL = 'list-courses?populate[courses][populate][0]=banner_course'
+const CATEGORY_COURSE = '/course-lists?' 
+const COURSE_LEVEL = '/course-levels?'
 const courseApi = {
-  getListcourse() {
+   getListcourse() {
     return http.get(LIST_COURSE_URL)
   },
   getCourse(params: ConfigParams) {
@@ -64,8 +65,11 @@ const courseApi = {
   getQuizGrade() {
     return http.get('/quiz-grades?populate=*')
   },
-  getCourseList() {
-    return http.get('/course-lists?populate=*')
+  getCourseList(params: ConfigParams) {
+    return http.get(CATEGORY_COURSE, {params})
+  },
+  getCourseLevel(params: ConfigParams) {
+    return http.get(COURSE_LEVEL, {params})
   },
   getCertificate(id: any) {
     return http.get(`/certificates/${id}?populate=*`)

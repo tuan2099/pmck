@@ -1,43 +1,81 @@
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import Custombutton from 'src/components/Custombutton'
-import { FormControl, IconButton, InputLabel, MenuItem, Select, TextField, Tooltip } from '@mui/material'
-import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
+import { FormControl, InputLabel, MenuItem, Select} from '@mui/material'
+import  { ConfigParams } from 'src/hooks/useQueryConfig'
 import { HiTrash, HiXMark } from "react-icons/hi2";
 import { useQuery } from '@tanstack/react-query';
-import newApi from 'src/apis/new.api';
+import courseApi from 'src/apis/course.api';
 
 function Filters({ queryConfig, open }: any) {
   const navigate = useNavigate()
 
-  // call api Filters
-  const handleFilters = (categoryName) => {
+  // func call api Filters Coures
+  const handleFiltersCourse = (categoryId) => {
     navigate({
       pathname: '/courses', //reset URL before transmit param
       search: createSearchParams({ // transmit param with param is obj
         ...queryConfig,
         filters: JSON.stringify({
-          new_categories: {
-            category_name: categoryName
+          course_lists: {
+            id: categoryId
+          }
+        })
+      }).toString() // url must be string
+    })
+  }
+
+  // func call api Filters Level
+  const handleFiltersLevel = (level) => {
+    navigate({
+      pathname: '/courses', //reset URL before transmit param
+      search: createSearchParams({ // transmit param with param is obj
+        ...queryConfig,
+        filters: JSON.stringify({
+          course_levels: {
+            id: level
           }
         })
       }).toString() // url must be string
     })
   }
   
-  // call api category new
+  // 
+  const handleFiltersPrice = (price) => {
+    navigate({
+      pathname: '/courses', //reset URL before transmit param
+      search: createSearchParams({ // transmit param with param is obj
+        ...queryConfig,
+        filters: JSON.stringify({
+          IsFree: price
+        })
+      }).toString() // url must be string
+    })
+  }
+  // call api category course
   const {
-    data: newCategory,
-    isLoading,
-    isError
+    data: categoryCourse
   } = useQuery({
-    queryKey: ['allCourse', queryConfig],
+    queryKey: ['categortCourse', queryConfig],
     queryFn: () => {
-      return newApi.getCategoryNews({ ...(queryConfig as ConfigParams) })
+      return courseApi.getCourseList({ ...(queryConfig as ConfigParams) })
     },
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
-  }) 
+  })
 
+ // call api course level
+  const {
+    data: courseLevel
+  } = useQuery({
+    queryKey: ['courseLevel', queryConfig],
+    queryFn: () => {
+      return courseApi.getCourseLevel({ ...(queryConfig as ConfigParams) })
+    },
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
+  })
+
+  // reset
   const resetSort = () => {
     navigate({
       pathname: '/courses'
@@ -45,27 +83,58 @@ function Filters({ queryConfig, open }: any) {
   }
   return (
     <>
-      <div className='mb-4 flex items-center pr-8 pl-3'>
-                <TextField fullWidth label="Nhập từ khóa" id="fullWidth" size="small"/>
+      <div className='mb-4 flex items-center pr-8'>
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small" fullWidth>
-                  <InputLabel id="demo-select-small-label">Lọc tin tức</InputLabel>
+                  <InputLabel id="demo-select-small-label">Lọc khóa học</InputLabel>
                   <Select
                     labelId="demo-select-small-label"
                     id="demo-select-small"
-                    label="Lọc tin tức"
-                    onChange={(e) => handleFilters(e.target.value)}
+                    label="Lọc khóa học"
+                    onChange={(e) => handleFiltersCourse(e.target.value)}
                     defaultValue=''
                   >
-                    {newCategory?.data?.data.map((item) => {
-                      return <MenuItem key={item.id} value={item.attributes.category_name}>{item.attributes.category_name}</MenuItem>
+                    {categoryCourse?.data?.data?.map((item) => {
+                      return <MenuItem key={item.id} value={item.id
+                      }>{item.attributes.label
+                      }</MenuItem>
+                    })}
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small" fullWidth>
+                  <InputLabel id="demo-select-small-label">Theo giá cả</InputLabel>
+                  <Select
+                    labelId="demo-select-small-label"
+                    id="demo-select-small"
+                    label="Theo giá cả"
+                    onChange={(e) => handleFiltersPrice(e.target.value)}
+                    defaultValue=''
+                  >
+                    <MenuItem value={1}>Miễn phí</MenuItem>
+                    <MenuItem value={2}>Trả phí</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small" fullWidth>
+                  <InputLabel id="demo-select-small-label">Trình độ</InputLabel>
+                  <Select
+                    labelId="demo-select-small-label"
+                    id="demo-select-small"
+                    label="Trình độ"
+                    onChange={(e) => handleFiltersLevel(e.target.value)}
+                    defaultValue=''
+                  >
+                    {courseLevel?.data?.data?.map((item) => {
+                      return <MenuItem key={item.id} value={item.id
+                      }>{item.attributes.level
+                      }</MenuItem>
                     })}
                   </Select>
                 </FormControl>
               </div>
               <div className='mb-4 flex items-center pr-8 pl-3 justify-between'>
-                <div className='text-gray-500'>Được tìm kiếm nhiều nhất:{newCategory?.data?.data.map((item) => {
-                      return <span key={item.id} onClick={() => handleFilters(item.attributes.category_name)}  className='bg-gray-100 px-4 py-1 rounded-full mr-3 cursor-pointer hover:bg-gray-200'>{item.attributes.category_name}</span>
-                    })} </div>
+                <div className='text-gray-500'>Được tìm kiếm nhiều nhất:{categoryCourse?.data?.data.slice(0,3).map((item) => {
+                      return <span key={item.id} onClick={() => handleFiltersCourse(item.id)}  className='bg-gray-100 px-4 py-1 rounded-full mr-3 cursor-pointer hover:bg-gray-200'>{item.attributes.label}</span>
+                    })} 
+                </div>
                 <div><Custombutton
                   textColor='#4F4F4F'
                   bgcolor='none'
