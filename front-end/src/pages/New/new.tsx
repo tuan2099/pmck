@@ -6,7 +6,7 @@ import SortNew from './Components/Sort'
 import Paginationcustom from './Components/Pagination'
 import Custombutton from 'src/components/Custombutton'
 import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
-import {  IconButton, Tooltip } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import Filters from './Components/Filters'
 import { useState } from 'react'
 import BlockSkeleton from 'src/components/BlockSkeleton'
@@ -44,14 +44,13 @@ function New() {
   const open = () => {
     setOpenFilterBox(!openFilterBox)
   }
-  
+
   const renderNews = () => {
-    if(view === 'grid') {
+    if (view === 'grid') {
       return <Cardnew newsData={newsData} />
     } else {
-      return <ListNewCard newsData={newsData}/>
+      return <ListNewCard newsData={newsData} />
     }
-
   }
 
   return (
@@ -87,17 +86,19 @@ function New() {
               </Tooltip>
             </div>
           </div>
-          {openFilterBox && (
-           <Filters open={open}/>
-          )}
+          {openFilterBox && <Filters open={open} />}
 
-          <div  className={view === 'grid'? 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4' : 'grid grid-cols-2 gap-5'}>
+          <div
+            className={
+              view === 'grid'
+                ? 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'
+                : 'grid grid-cols-2 gap-5'
+            }
+          >
             {renderNews()}
-            {isLoading && (
-              <BlockSkeleton sklType="grid" className="2" number={20}/>
-            )}
+            {isLoading && <BlockSkeleton sklType='grid' className='2' number={20} />}
           </div>
-         
+
           <div className='my-9 flex justify-center'>
             <Paginationcustom queryConfig={queryConfig} pageCount={newsData?.data?.meta.pagination.pageCount} />
           </div>

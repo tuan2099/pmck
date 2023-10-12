@@ -1,17 +1,18 @@
-import React from 'react'
-
-
 interface BlockSkeletonType {
-    sklType : 'list' | 'grid' | 'text'
-    className?: string
-    number?: number
+  sklType: 'list' | 'grid' | 'text'
+  className?: string
+  number?: number
 }
-function BlockSkeleton({ sklType, className, number} : BlockSkeletonType) {
-    let resultSkeleton;
-    switch(sklType) {
-        case "list": resultSkeleton = (<>1</>)
-        break
-        case "grid": resultSkeleton = (<>{Array(number)
+function BlockSkeleton({ sklType, className, number }: BlockSkeletonType) {
+  let resultSkeleton
+  switch (sklType) {
+    case 'list':
+      resultSkeleton = <>1</>
+      break
+    case 'grid':
+      resultSkeleton = (
+        <>
+          {Array(number)
             .fill(0)
             .map((_, index) => (
               <div
@@ -31,17 +32,17 @@ function BlockSkeleton({ sklType, className, number} : BlockSkeletonType) {
                   </svg>
                 </div>
               </div>
-            ))}</>)
-        break 
-        case "text" : resultSkeleton = (<>3</>)
-        break
-        default : ''
-    }
-  return (
-    <>
-      {resultSkeleton}
-    </>
-  )
+            ))}
+        </>
+      )
+      break
+    case 'text':
+      resultSkeleton = <>3</>
+      break
+    default:
+      ''
+  }
+  return <>{resultSkeleton}</>
 }
 
 export default BlockSkeleton

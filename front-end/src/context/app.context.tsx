@@ -71,7 +71,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const closeTour = () => {
     setIsTourOpen(!isTourOpen)
   }
-  
 
   const { refetch } = useQuery({
     queryKey: ['courseRegisted'],
@@ -93,7 +92,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     },
     enabled: allCourse.length === 0
   })
-  
+
   useEffect(() => {
     const news = allCourse.filter((course) => {
       const check = course.attributes.course_categories?.data?.some((item) => item.attributes.name === 'new_course')

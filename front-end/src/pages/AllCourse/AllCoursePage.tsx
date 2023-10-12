@@ -64,22 +64,19 @@ const AllCoursePage = () => {
                   <FaGripHorizontal />
                 </IconButton>
               </Tooltip>
-              
             </div>
           </div>
-          {openFilterBox && (
-           <Filters open={open}/>
-          )}
+          {openFilterBox && <Filters open={open} />}
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
             {courseData?.data?.data?.map((courseItem) => {
-              return <CourseCard key={courseItem.id} courseItem={courseItem}/>
+              return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
             {isLoading && (
               <>
-                <BlockSkeleton sklType="grid" className="2" number={20}/>
+                <BlockSkeleton sklType='grid' className='2' number={20} />
               </>
             )}
-            {isError && (<div>Dữ liệu hiện đang gặp vấn đề</div>)}
+            {isError && <div>Dữ liệu hiện đang gặp vấn đề</div>}
           </div>
           <div className='my-9 flex justify-center'>
             <Paginationcustom queryConfig={queryConfig} pageCount={courseData?.data?.meta.pagination.pageCount} />

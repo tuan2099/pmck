@@ -1,17 +1,14 @@
 import { Skeleton } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import FacebookIcon from '@mui/icons-material/Facebook'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import YouTubeIcon from '@mui/icons-material/YouTube'
 import { Link } from 'react-router-dom'
 import footerApi from 'src/apis/footer.api'
 import logo from 'src/assets/logo.png'
 
 function Footer() {
-  const {
-    data: footerData,
-    isLoading
-  } = useQuery({
+  const { data: footerData, isLoading } = useQuery({
     queryKey: ['footerdata'],
     queryFn: () => {
       return footerApi.getFooter()

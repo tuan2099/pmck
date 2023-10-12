@@ -12,4 +12,4 @@ export const sort = {
   arrangeTitleFromZtoA: 'course_name:desc',
   newPost: 'createdAt:asc',
   lastPost: 'createdAt:desc'
-} as const 
+} as const
