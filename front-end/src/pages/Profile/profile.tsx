@@ -1,8 +1,20 @@
-import React from 'react'
 import Button from 'src/components/Button'
 import { Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import http from 'src/utils/https'
+import { ROUTES } from 'src/useRouterElement'
 
 function Profile() {
+  const { data } = useQuery({
+    queryKey: ['user-certificate'],
+    queryFn: () =>
+      http.get('/users/me?populate[certificates][populate]=*', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+      })
+  })
+
   return (
     <>
       <div>
@@ -132,6 +144,24 @@ function Profile() {
                     value='hi'
                   />
                 </div>
+              </div>
+            </div>
+            <hr className=' h-px border-0 bg-gray-100 dark:bg-gray-100'></hr>
+            <div className='my-6 flex items-start justify-between'>
+              <div className='text-lg font-semibold'>
+                Chứng chỉ
+                <br />
+                <span className='text-xs font-normal text-slate-400'></span>
+              </div>
+              <div className='col-span-2 mr-[20%] grid w-3/6 grid-cols-2 gap-2'>
+                {data?.data.certificates.map((certificate: any) => (
+                  <Link
+                    className='inline-flex items-center rounded-md border border-r-0 border-gray-300 bg-gray-200 p-3 text-sm font-semibold text-gray-400 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400'
+                    to={`${ROUTES.certificate}?certificate=${certificate.id}`}
+                  >
+                    {certificate?.certificate_type?.name}
+                  </Link>
+                ))}
               </div>
             </div>
             <hr className=' h-px border-0 bg-gray-100 dark:bg-gray-100'></hr>
