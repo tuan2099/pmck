@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import { FaLock } from 'react-icons/fa'
 
 interface IProps {
@@ -7,14 +6,13 @@ interface IProps {
   onSetChooseItem: (item: any) => void
   completedLessonList: any[]
   chooseItem: any
+  chapterID: any
 }
 
 const LessonItem = (props: IProps) => {
-  const { item, onSetChooseItem, completedLessonList, chooseItem } = props
+  const { item, onSetChooseItem, completedLessonList, chooseItem, chapterID } = props
 
   const [isCompleted, setIsCompleted] = useState<boolean>(false)
-
-  const [_, setParams] = useSearchParams()
 
   useEffect(() => {
     setIsCompleted(completedLessonList.some((lesson: any) => lesson.id === item.id))
@@ -23,7 +21,7 @@ const LessonItem = (props: IProps) => {
   return (
     <button
       className='flex  cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
-      onClick={() => onSetChooseItem(item)}
+      onClick={() => onSetChooseItem({ item, chapterID })}
       style={{
         backgroundColor: item?.id === chooseItem?.data?.id ? '#e3fce0' : !isCompleted ? '#f1f1f1' : ''
       }}

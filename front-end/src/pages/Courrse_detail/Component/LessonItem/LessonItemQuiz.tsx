@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { FaLock } from 'react-icons/fa'
 import { useSearchParams } from 'react-router-dom'
 
-function LessonItemQuiz({ item, chooseItem, setLessonId, setChooseItem }: any) {
-  const [isCompleted, setIsCompleted] = useState<boolean>(false)
+function LessonItemQuiz({ item, chooseItem, setLessonId, setChooseItem, chapter, completedLessonList }: any) {
+  const [isCompletedChapter, setIsCompletedChapter] = useState<boolean>(false)
+
+  useEffect(() => {
+    const idSetChapter = new Set(chapter.map((item: any) => item.id))
+    setIsCompletedChapter(completedLessonList.every((item: any) => idSetChapter.has(item.id)))
+  }, [completedLessonList, chapter])
 
   const [_, setParams] = useSearchParams()
 
+  const handleOpenQuizz = () => {
+    setParams((prev) => {
+      return { ...prev, id: item.attributes.title + item.id }
+    })
+    setChooseItem({ type: 'quizz', data: item })
+    setLessonId(item.id)
+  }
   return (
     <>
       <button
         className='flex cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'
-        onClick={() => {
-          setParams((prev) => {
-            return { ...prev, id: item.attributes.title + item.id }
-          })
-          setChooseItem({ type: 'quizz', data: item })
-          setLessonId(item.id)
-        }}
+        onClick={handleOpenQuizz}
         style={{
           backgroundColor: item?.id === chooseItem?.id ? '#bbf7d0' : ''
         }}
@@ -41,24 +48,11 @@ function LessonItemQuiz({ item, chooseItem, setLessonId, setChooseItem }: any) {
           </svg>
         </div>
         <div>
-          {/* {isCompleted && (
-            <>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='h-5 w-5 rounded-full bg-[#5db85c] text-white'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                />
-              </svg>
-            </>
-          )} */}
+          {!isCompletedChapter && (
+            <div className='text-gray-500'>
+              <FaLock />
+            </div>
+          )}
         </div>
       </button>
     </>
