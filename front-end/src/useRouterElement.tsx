@@ -23,6 +23,7 @@ import GuestLayout from './Layouts/GuestLayout'
 import Setting from './pages/Setting'
 import LearningOutcomes from './pages/LearningOutcomes/LearningOutcomes'
 import UnderContruction from './pages/UnderContruction'
+import About from './pages/About'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -53,7 +54,8 @@ export const ROUTES = {
   editProfile: '/edit-profile',
   profile: '/me',
   courses: '/courses',
-  certificate: '/certificate'
+  certificate: '/certificate',
+  about_us: '/about-us'
 }
 
 export default function useRouterElement() {
@@ -203,6 +205,14 @@ export default function useRouterElement() {
         <HomeUserLayout>
           <LearningPath />
         </HomeUserLayout>
+      )
+    },
+    {
+      path: ROUTES.about_us,
+      element:(
+        <GuestLayout>
+          <About/>
+        </GuestLayout>
       )
     }
   ])
