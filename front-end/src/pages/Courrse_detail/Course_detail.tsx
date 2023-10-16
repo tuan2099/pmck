@@ -1,24 +1,23 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
-import courseApi from 'src/apis/course.api'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { Avatar } from '@mui/material'
+import { FaTasks } from 'react-icons/fa'
 import Youtube from 'react-youtube'
+import Drawer from '@mui/material/Drawer'
+
+import { AppContext } from 'src/context/app.context'
+import { covertTimeStamp } from 'src/helper/coverTimeStamp'
+import courseApi from 'src/apis/course.api'
 import Nav_course_detail from './Component/Nav_course_detail'
 import Control from './Component/Control'
 import learningProcessApi from 'src/apis/learningprocess.api'
-import { AppContext } from 'src/context/app.context'
 import LessonItem from './Component/LessonItem/LessonItem'
-import Drawer from '@mui/material/Drawer'
-import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 import LessonItemQuiz from './Component/LessonItem/LessonItemQuiz'
 import QuizzDetail from './Component/Quiz/QuizDetail'
-import { Avatar } from '@mui/material'
-import { FaTasks } from 'react-icons/fa'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
+import { toast } from 'react-toastify'
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
@@ -34,6 +33,7 @@ function Course_detail() {
   const { id } = useParams()
   const [countDown, setCountDown] = useState<number>(0)
   const pageID = id?.split('-')[id?.split('-').length - 1]
+  const [currentChapter, setCurrentChapter] = useState()
 
   // Get data course detail
   const courseData = useQuery({
@@ -45,6 +45,7 @@ function Course_detail() {
       setParams((prev) => {
         return { ...prev, id: firstLeson.attributes.title + firstLeson.id }
       })
+      setCurrentChapter(data.data.data.attributes.chapters.data[0].id)
       setChooseItem({ type: 'video', data: firstLeson })
       setLessonId(firstLeson.id)
     }
@@ -169,22 +170,39 @@ function Course_detail() {
     setOpenDrawer(!openDrawer)
   }
 
-  const handleSetChooseItem = (item: any) => {
-    const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
-    if (isCompleted) {
-      setParams((prev) => {
-        return { ...prev, id: item.attributes.title + item.id }
-      })
-      const type = item.attributes.video_url ? 'video' : item.attributes.text_lesson ? 'text' : 'document'
-      setChooseItem({ type: type, data: item })
-      setLessonId(item.id)
-    } else if (!countDown) {
-      setParams((prev) => {
-        return { ...prev, id: item.attributes.title + item.id }
-      })
-      const type = item.attributes.video_url ? 'video' : item.attributes.text_lesson ? 'text' : 'document'
-      setChooseItem({ type: type, data: item })
-      setLessonId(item.id)
+  const checkQuizCompleted = useMutation({
+    mutationFn: (id: any) => courseApi.checkQuizComplete({ quizID: id, userID: profile?.id as number })
+  })
+
+  const handleSetItem = (item: any) => {
+    setParams((prev) => {
+      return { ...prev, id: item.attributes.title + item.id }
+    })
+    const type = item.attributes.video_url ? 'video' : item.attributes.text_lesson ? 'text' : 'document'
+    setChooseItem({ type: type, data: item })
+    setLessonId(item.id)
+  }
+
+  const handleSetChooseItem = async ({ item, chapterID }: any) => {
+    if (chapterID === currentChapter) {
+      const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
+      if (isCompleted || !countDown) {
+        handleSetItem(item)
+      }
+    } else {
+      const currenChapterQuizzId = courseData.data?.data.data.attributes.chapters.data.find(
+        (item) => item.id === currentChapter
+      ).attributes.quizzes.data[0].id
+      if (currenChapterQuizzId) {
+        const { data } = await checkQuizCompleted.mutateAsync(currenChapterQuizzId)
+        if (data && data.gr >= 7.5) {
+          handleSetItem(item)
+        } else {
+          toast.error('Bạn chưa hoàn thành chapter trước.')
+        }
+      } else {
+        handleSetItem(item)
+      }
     }
   }
 
@@ -253,23 +271,26 @@ function Course_detail() {
                   </summary>
                   <div className='flex flex-col'>
                     {item.attributes.lesson_items &&
-                      item.attributes.lesson_items.data?.map((item: any) => (
+                      item.attributes.lesson_items.data?.map((lesson: any) => (
                         <LessonItem
-                          item={item}
+                          item={lesson}
                           chooseItem={chooseItem}
                           onSetChooseItem={handleSetChooseItem}
-                          key={item.id}
+                          key={lesson.id}
                           completedLessonList={newArrLesson}
+                          chapterID={item.id}
                         />
                       ))}
                     {item.attributes.quizzes &&
-                      item.attributes.quizzes.data?.map((item: any) => (
+                      item.attributes.quizzes.data?.map((quizz: any) => (
                         <LessonItemQuiz
-                          item={item}
-                          key={item.id}
+                          item={quizz}
+                          key={quizz.id}
                           chooseItem={chooseItem}
                           setLessonId={setLessonId}
                           setChooseItem={setChooseItem}
+                          chapter={item.attributes.lesson_items.data}
+                          completedLessonList={newArrLesson}
                         />
                       ))}
                     {item.attributes.certificate?.data && (

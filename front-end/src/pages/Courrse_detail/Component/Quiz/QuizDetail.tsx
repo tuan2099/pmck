@@ -69,7 +69,8 @@ const QuizzDetail = ({ id, certificateId }: { id: any; certificateId: any }) => 
     queryFn: () => courseApi.checkQuizComplete({ quizID: id, userID: profile?.id as number }),
     onSuccess: (data) => {
       if (data.data.isCompleted) {
-        toast('Bạn đã hoàn thành bài thi')
+        setIsPassQuizz(data.data.gr >= 7.5)
+        setOpen(true)
       }
     }
   })
