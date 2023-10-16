@@ -31,7 +31,6 @@ function Homeuser() {
     keepPreviousData: true,
     staleTime: 3 * 60 * 1000
   })
-
   return (
     <>
       <div className='relative w-full p-[25px]'>
