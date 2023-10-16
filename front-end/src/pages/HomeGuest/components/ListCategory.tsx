@@ -1,13 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import courseApi from 'src/apis/course.api'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 
 function ListCategory() {
+  const queryConfig = useQueryConfig()
+
+
   const { data: courseListData } = useQuery({
-    queryKey: ['course-list'],
+    queryKey: ['categortCourse', useQueryConfig],
     queryFn: () => {
-      return courseApi.getCourseList()
-    }
+      return courseApi.getCourseList({ ...(queryConfig as ConfigParams) })
+    },
+    keepPreviousData: true,
+    staleTime: 3 * 60 * 1000
   })
   return (
     <>

@@ -29,7 +29,7 @@ interface CustombuttonType {
   onClick?: () => void
 }
 
-function Custombutton({...props}: CustombuttonType) {
+function Custombutton({ ...props }: CustombuttonType) {
   const StyleCustomButton = styled(Button)({
     color: props.textColor || 'black',
     boxShadow: 'none',
@@ -63,7 +63,12 @@ function Custombutton({...props}: CustombuttonType) {
       resultButton = (
         <>
           <Link to={`${props.urlButtonLink}`}>
-            <StyleCustomButton fullWidth={props.fullWidth} variant={props.variant} startIcon={props.startIcon} endIcon={props.endIcon}>
+            <StyleCustomButton
+              fullWidth={props.fullWidth}
+              variant={props.variant}
+              startIcon={props.startIcon}
+              endIcon={props.endIcon}
+            >
               {props.children}
             </StyleCustomButton>
           </Link>

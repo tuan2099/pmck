@@ -6,10 +6,10 @@ const URL_GET_QA = '/q-and-as?'
 
 const supportApi = {
   getCategorySupport(params: ConfigParams) {
-    return http.get(URL_GET_CATEGORY, {params})
+    return http.get(URL_GET_CATEGORY, { params })
   },
   getQA(params: ConfigParams) {
-    return http.get(URL_GET_QA, {params})
+    return http.get(URL_GET_QA, { params })
   }
 }
 

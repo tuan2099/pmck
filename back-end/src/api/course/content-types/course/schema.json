@@ -74,6 +74,21 @@
       "relation": "oneToOne",
       "target": "api::certificate.certificate",
       "mappedBy": "course"
+    },
+    "course_lists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course-list.course-list",
+      "mappedBy": "courses"
+    },
+    "IsFree": {
+      "type": "integer"
+    },
+    "course_levels": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course-level.course-level",
+      "mappedBy": "courses"
     }
   }
 }

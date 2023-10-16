@@ -10,12 +10,11 @@ const newApi = {
     return http.get(URL_NEWS, { params })
   },
   getNewsNotification(params: ConfigParams) {
-    return http.get(URL_NEWSNOTIFICATION, {params})
+    return http.get(URL_NEWSNOTIFICATION, { params })
   },
   getCategoryNews(params: ConfigParams) {
-    return http.get(URL_GETCATEGORY, {params})
+    return http.get(URL_GETCATEGORY, { params })
   }
-
 }
 
 export default newApi

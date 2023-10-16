@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles'
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion'
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import ReactMarkdown from 'react-markdown'
 
 function Accordion({ item }) {
@@ -23,7 +23,10 @@ function Accordion({ item }) {
     })
   )
   const AccordionSummary = styled((props: AccordionSummaryProps) => (
-    <MuiAccordionSummary expandIcon={<KeyboardArrowRightIcon sx={{ fontSize: '1.9rem', color: '#4F4F4F' }} />} {...props} />
+    <MuiAccordionSummary
+      expandIcon={<KeyboardArrowRightIcon sx={{ fontSize: '1.9rem', color: '#4F4F4F' }} />}
+      {...props}
+    />
   ))(({ theme }) => ({
     flexDirection: 'row-reverse',
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
