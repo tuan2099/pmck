@@ -45,9 +45,9 @@ const QuizzGroup = (props: IProps) => {
 
   return (
     <div className='flex flex-col gap-2 rounded-[10px] border border-[#edf3fd] p-6' key={quizz.id}>
-      <div className='items-top mt-4 flex text-xl'>
-        <h4 className='w-[10%] text-[16px] font-semibold text-[#4F4F4F]'>{quizz.attributes.name}: </h4>
-        <p className='w-[80%] text-[16px] text-[#5C5C5C]'>{quizz.attributes.questiontext}</p>
+      <div className='items-top mt-4 flex gap-2 text-xl'>
+        <h4 className='text-[16px] font-semibold text-[#4F4F4F]'>{quizz.attributes.name}: </h4>
+        <p className='text-[16px] text-[#5C5C5C]'>{quizz.attributes.questiontext}</p>
       </div>
       {Boolean(quizz.attributes.question_media.data) && (
         <div className='flex gap-5'>
