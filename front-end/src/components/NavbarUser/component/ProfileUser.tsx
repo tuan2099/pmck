@@ -70,8 +70,6 @@ function ProfileUser() {
     queryFn: () => profileApi.getProfile()
   })
 
-  console.log(profileData?.data)
-
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -125,7 +123,7 @@ function ProfileUser() {
       >
         <MenuItem key={uuidv4()}>
           <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
-            <Avatar alt={`${profileData?.data.username}`} src='/static/images/avatar/1.jpg' />
+            <Avatar alt={`${profileData?.data.username}`} src='' />
           </StyledBadge>
           <div className='mr-2'></div>
           <ListItemText

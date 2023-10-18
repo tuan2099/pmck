@@ -14,11 +14,7 @@ function MainMenu({ mainMenuData }: any) {
       <ul className='flex items-center justify-between'>
         {mainMenuData &&
           mainMenuData?.data.data.attributes.body?.map((item: any) => {
-            return (
-              <>
-                <MainMenuList key={item.id} items={item} title={item.label} />
-              </>
-            )
+            return <MainMenuList key={item.id} items={item} title={item.label} />
           })}
       </ul>
     </>

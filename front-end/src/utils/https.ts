@@ -12,7 +12,7 @@ class Http {
   constructor() {
     this.accessToken = getAccesTokenLocalStorage()
     this.instance = axios.create({
-      baseURL: 'http://localhost:1337/api',
+      baseURL: import.meta.env.VITE_BASE_URL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'

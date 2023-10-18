@@ -6,10 +6,13 @@ import { FaLink, FaMailBulk, FaPhoneAlt, FaQuestionCircle } from 'react-icons/fa
 import supportApi from 'src/apis/support.api'
 import Accordion from 'src/components/Accordion'
 import { SupportType } from 'src/types/support.type'
+import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
+
 function Question() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [QAList, setQAList] = useState<any[]>([])
-
+  const queryConfig = useQueryConfig()
+  
   const {
     data: supportQuestionApi,
     isLoading,
@@ -17,25 +20,25 @@ function Question() {
   } = useQuery({
     queryKey: ['support'],
     queryFn: () => {
-      return supportApi.getCategorySupport()
+      return supportApi.getCategorySupport( { ...(queryConfig as ConfigParams) })
     }
   })
 
+  // call api Question
   const { data: QAApi } = useQuery({
     queryKey: ['QA'],
     queryFn: () => {
-      return supportApi.getQA()
+      return supportApi.getQA( { ...(queryConfig as ConfigParams) })
     }
   })
 
-  // console.log(QAApi?.data.data)
-
+  // setting open list question 
   const handleOpenDrawer = (id: number) => {
     const chooseCategory = supportQuestionApi?.data.data.find((item: any) => +item.id === id)
     setQAList(chooseCategory?.attributes.q_and_as.data)
     setOpenDrawer(true)
   }
-
+  // setting close list question 
   const handleCloseDrawer = () => {
     setOpenDrawer(false)
     setQAList([])
@@ -69,21 +72,19 @@ function Question() {
           {supportQuestionApi &&
             supportQuestionApi?.data.data?.map((item: SupportType) => {
               return (
-                <>
-                  <button
-                    onClick={() => handleOpenDrawer(item.id)}
-                    className='w-full cursor-pointer bg-[#f1f1f1] py-9 transition hover:bg-[#dbdbdb]'
-                    key={item.id}
-                  >
-                    <div className='m-auto mb-3 flex w-[90px] justify-center '>
-                      <img
-                        src={`http://localhost:1337${item.attributes.image.data[0].attributes?.url}`}
-                        alt={`${item.attributes.label}`}
-                      />
-                    </div>
-                    <h3 className='text-center font-medium text-color1'>{item.attributes.label}</h3>
-                  </button>
-                </>
+                <button
+                  onClick={() => handleOpenDrawer(item.id)}
+                  className='w-full cursor-pointer bg-[#f1f1f1] py-9 transition hover:bg-[#dbdbdb]'
+                  key={item.id}
+                >
+                  <div className='m-auto mb-3 flex w-[90px] justify-center '>
+                    <img
+                      src={`http://localhost:1337${item.attributes.image.data[0].attributes?.url}`}
+                      alt={`${item.attributes.label}`}
+                    />
+                  </div>
+                  <h3 className='text-center font-medium text-color1'>{item.attributes.label}</h3>
+                </button>
               )
             })}
           {isLoading && (

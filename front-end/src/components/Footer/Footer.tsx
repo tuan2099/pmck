@@ -1,17 +1,14 @@
 import { Skeleton } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
-import { FaFacebookSquare, FaViber, FaYoutube, FaTwitter } from 'react-icons/fa'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import YouTubeIcon from '@mui/icons-material/YouTube'
 import { Link } from 'react-router-dom'
 import footerApi from 'src/apis/footer.api'
 import logo from 'src/assets/logo.png'
 
 function Footer() {
-  const {
-    data: footerData,
-    isLoading,
-    isError
-  } = useQuery({
+  const { data: footerData, isLoading } = useQuery({
     queryKey: ['footerdata'],
     queryFn: () => {
       return footerApi.getFooter()
@@ -74,16 +71,13 @@ function Footer() {
             </div>
             <div className='my-5 flex items-center justify-center '>
               <Link to='/'>
-                <FaFacebookSquare className='text-2xl' />
+                <FacebookIcon className='text-2xl' />
               </Link>
               <Link to='/'>
-                <FaYoutube className='mx-9 text-2xl' />
+                <YouTubeIcon className='mx-9 text-2xl' />
               </Link>
               <Link to='/'>
-                <FaViber className='text-2xl' />
-              </Link>
-              <Link to='/'>
-                <FaTwitter className='ml-9 text-2xl' />
+                <TwitterIcon className='ml-9 text-2xl' />
               </Link>
             </div>
           </div>

@@ -24,6 +24,7 @@ import Setting from './pages/Setting'
 import LearningOutcomes from './pages/LearningOutcomes/LearningOutcomes'
 import UnderContruction from './pages/UnderContruction'
 import DuoTrainning from './pages/Duo_Tranning'
+import About from './pages/About'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -35,6 +36,15 @@ function RejectedRoute() {
   return !isAuthenticated ? <Outlet /> : <Navigate to='/user' />
 }
 
+function CheckLayout() {
+  const { isAuthenticated } = useContext(AppContext)
+  return isAuthenticated ? <HomeUserLayout>
+    <New />
+  </HomeUserLayout> : <GuestLayout>
+    <New />
+  </GuestLayout>
+
+}
 export const ROUTES = {
   login: '/login',
   user: '/user',
@@ -46,7 +56,8 @@ export const ROUTES = {
   profile: '/me',
   courses: '/courses',
   certificate: '/certificate',
-  duoTrainning: '/duo-tranning'
+  duoTrainning: '/duo-tranning',
+  about_us: '/about-us'
 }
 
 export default function useRouterElement() {
@@ -184,11 +195,7 @@ export default function useRouterElement() {
     },
     {
       path: ROUTES.new,
-      element: (
-        <HomeUserLayout>
-          <New />
-        </HomeUserLayout>
-      )
+      element: (<CheckLayout />)
     },
 
     {
@@ -209,6 +216,14 @@ export default function useRouterElement() {
         <HomeUserLayout>
           <LearningPath />
         </HomeUserLayout>
+      )
+    },
+    {
+      path: ROUTES.about_us,
+      element:(
+        <GuestLayout>
+          <About/>
+        </GuestLayout>
       )
     }
   ])
