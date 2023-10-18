@@ -9,7 +9,8 @@ module.exports = {
       boxShadow: {
         '3xl': '0 -4px 32px rgba(0,0,0,.2);',
         'blue-custom': '0px 4px 34px #e0ebff;',
-        'teacher-shadown': '0 5px 13px 6px rgb(212 211 254/23%)'
+        'teacher-shadown': '0 5px 13px 6px rgb(212 211 254/23%)',
+        'insie-shadown' : 'rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset'
       },
       colors: {
         yellowColor: '#eab830',
