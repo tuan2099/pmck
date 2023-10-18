@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { FaTasks } from 'react-icons/fa'
 import Youtube from 'react-youtube'
@@ -18,6 +18,7 @@ import QuizzDetail from './Component/Quiz/QuizDetail'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
 import { toast } from 'react-toastify'
+import { ROUTES } from 'src/useRouterElement'
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
@@ -34,6 +35,7 @@ function Course_detail() {
   const [countDown, setCountDown] = useState<number>(0)
   const pageID = id?.split('-')[id?.split('-').length - 1]
   const [currentChapter, setCurrentChapter] = useState()
+  const navigate = useNavigate()
 
   // Get data course detail
   const courseData = useQuery({
@@ -206,6 +208,17 @@ function Course_detail() {
     }
   }
 
+  const handleChooseCertificateItem = async () => {
+    const chapterList = courseData.data?.data.data.attributes.chapters.data
+    const lastChapter = chapterList[chapterList.length - 1]
+    if (lastChapter.attributes.quizzes.data[0]) {
+      const { data } = await checkQuizCompleted.mutateAsync(lastChapter.attributes.quizzes.data[0].id)
+      if (data && data.gr >= 7.5) {
+        navigate(`${ROUTES.certificate}?certificate=${courseData.data?.data.data.attributes.certificate.data.id}`)
+      }
+    }
+  }
+
   const handleNextLesson = () => {
     if (chooseItem.type !== 'quizz') {
       let isLesson = true
@@ -300,6 +313,7 @@ function Course_detail() {
                         isCompleteAllLesson={newArrLesson.length >= item.attributes.lesson_items.data.length}
                       />
                     )}
+                    <div onClick={handleChooseCertificateItem}>Abc</div>
                   </div>
                 </details>
               ))}
