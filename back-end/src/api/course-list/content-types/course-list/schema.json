@@ -28,6 +28,12 @@
         "videos",
         "audios"
       ]
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course.course",
+      "inversedBy": "course_lists"
     }
   }
 }

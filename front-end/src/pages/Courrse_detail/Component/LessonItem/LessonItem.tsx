@@ -17,7 +17,6 @@ const LessonItem = (props: IProps) => {
   useEffect(() => {
     setIsCompleted(completedLessonList.some((lesson: any) => lesson.id === item.id))
   }, [completedLessonList])
-
   return (
     <button
       className='flex  cursor-pointer items-center justify-between px-[20px] py-[10px] hover:bg-[#f1f1f1]'

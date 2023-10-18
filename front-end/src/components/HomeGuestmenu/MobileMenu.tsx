@@ -46,51 +46,37 @@ function MobileMenu({ mainMenuData }: any) {
               <Box role='presentation'>
                 {mainMenuData?.data?.data?.attributes?.body.map((item) => {
                   return (
-                    <>
-                      <div key={item.id}>
-                        <ul>
-                          <li className='p-3 font-semibold'>
-                            <Link to='/' className=''>
-                              {item.label}
-                            </Link>
-                            {item.label === 'Cộng đồng' ? (
-                              <>
-                                <ul className='w-full'>
-                                  <li>
-                                    <h4 className='font-bold text-slate-400'>
-                                      {item.sections.data[0]?.attributes.label_col_3}
-                                    </h4>
-                                  </li>
-                                  {item.sections.data[0]?.attributes.link3.map((item: any) => {
-                                    return (
-                                      <>
-                                        <MainMenuItem key={item.id} item={item} />
-                                      </>
-                                    )
-                                  })}
-                                  {item.sections.data[0]?.attributes.link2.map((item: any) => {
-                                    return (
-                                      <>
-                                        <MainMenuItem key={item.id} item={item} />
-                                      </>
-                                    )
-                                  })}
-                                  {item.sections.data[0]?.attributes.links.map((item: any) => {
-                                    return (
-                                      <>
-                                        <MainMenuItem key={item.id} item={item} />
-                                      </>
-                                    )
-                                  })}
-                                </ul>
-                              </>
-                            ) : (
-                              ''
-                            )}
-                          </li>
-                        </ul>
-                      </div>
-                    </>
+                    <div key={item.id}>
+                      <ul>
+                        <li className='p-3 font-semibold'>
+                          <Link to='/' className=''>
+                            {item.label}
+                          </Link>
+                          {item.label === 'Cộng đồng' ? (
+                            <>
+                              <ul className='w-full'>
+                                <li>
+                                  <h4 className='font-bold text-slate-400'>
+                                    {item.sections.data[0]?.attributes.label_col_3}
+                                  </h4>
+                                </li>
+                                {item.sections.data[0]?.attributes.link3.map((item: any) => {
+                                  return <MainMenuItem key={item.id} item={item} />
+                                })}
+                                {item.sections.data[0]?.attributes.link2.map((item: any) => {
+                                  return <MainMenuItem key={item.id} item={item} />
+                                })}
+                                {item.sections.data[0]?.attributes.links.map((item: any) => {
+                                  return <MainMenuItem key={item.id} item={item} />
+                                })}
+                              </ul>
+                            </>
+                          ) : (
+                            ''
+                          )}
+                        </li>
+                      </ul>
+                    </div>
                   )
                 })}
               </Box>

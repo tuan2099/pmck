@@ -5,7 +5,6 @@ import { Avatar } from '@mui/material'
 import { FaTasks } from 'react-icons/fa'
 import Youtube from 'react-youtube'
 import Drawer from '@mui/material/Drawer'
-
 import { AppContext } from 'src/context/app.context'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 import courseApi from 'src/apis/course.api'
@@ -18,7 +17,11 @@ import QuizzDetail from './Component/Quiz/QuizDetail'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
 import { toast } from 'react-toastify'
+<<<<<<< HEAD
 import { ROUTES } from 'src/useRouterElement'
+=======
+import ReactMarkdown from 'react-markdown'
+>>>>>>> 1ddaf7ee701c9fa4a22f1e721c35598ac670af04
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
@@ -52,7 +55,7 @@ function Course_detail() {
       setLessonId(firstLeson.id)
     }
   })
-
+  // get complete lesson
   const { data: completedLesson, refetch } = useQuery({
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson(),
@@ -61,7 +64,8 @@ function Course_detail() {
       setNewArrLesson(completedArrLesson)
     }
   })
-
+  console.log(courseData.data?.data.data.attributes.chapters)
+  // 
   function getLessonItemsByCourseId(courseId: number, data: any) {
     const lessonItems: any[] = []
 
@@ -128,7 +132,8 @@ function Course_detail() {
       if (!isCompleted) handleUpdateOrPostLearningProcess()
     }
   }, [countDown])
-
+  
+  // update lesson data  
   const handlePostLearningProcess = useMutation({
     mutationFn: () =>
       learningProcessApi.createLearningProgesses({
@@ -194,7 +199,7 @@ function Course_detail() {
     } else {
       const currenChapterQuizzId = courseData.data?.data.data.attributes.chapters.data.find(
         (item) => item.id === currentChapter
-      ).attributes.quizzes.data[0].id
+      ).attributes.quizzes.data[0]?.id
       if (currenChapterQuizzId) {
         const { data } = await checkQuizCompleted.mutateAsync(currenChapterQuizzId)
         if (data && data.gr >= 7.5) {
@@ -244,7 +249,6 @@ function Course_detail() {
       })
     }
   }
-
   return (
     <>
       <section className='m-auto w-full'>
@@ -320,7 +324,7 @@ function Course_detail() {
             </div>
           </div>
         </div>
-        <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
+        <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain'>
           {chooseItem.type === 'video' && (
             <>
               {!chooseItem?.data?.attributes.video_url && (
@@ -375,9 +379,11 @@ function Course_detail() {
             />
           )}
           {chooseItem?.data?.attributes.text_lesson && (
-            <div className='items-top my-5 flex justify-between px-[8.5%]'>
-              {chooseItem?.data?.attributes.text_lesson}
-            </div>
+              <div className='items-top flex justify-between m-auto w-10/12 relative overflow-y-auto bg-white px-3'>
+                <div className='pt-[56.25%] '>
+                  <div className="absolute top-0 "><ReactMarkdown>{chooseItem?.data?.attributes.text_lesson}</ReactMarkdown></div>
+                </div>
+              </div>
           )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
             <div className='w-'>

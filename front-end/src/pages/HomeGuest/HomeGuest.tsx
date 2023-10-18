@@ -11,6 +11,7 @@ import Mentor from './components/Mentor'
 import Teacher from './components/Teacher'
 import HeroSlice from './components/HeroSlice'
 import Event from './components/Event'
+import { Button } from '@mui/material'
 
 function HomeGuest() {
   const { isAuthenticated } = useContext(AppContext)
