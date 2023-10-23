@@ -232,6 +232,8 @@ function Course_detail() {
     }
   }
 
+  console.log(courseData.data?.data.data.attributes)
+
   return (
     <>
       <section className='m-auto w-full'>
@@ -247,13 +249,13 @@ function Course_detail() {
               </h1>
             </header>
             <div className='overflow-y-auto overscroll-contain' data-tut='reactour__changelesson'>
-              {courseData.data?.data.data.attributes.chapters.data?.map((item: any) => (
-                <details key={item.id}>
+              {courseData.data?.data.data.attributes.chapters.data?.map((chapter: any) => (
+                <details key={chapter.id}>
                   <summary>
                     <div className='sticky top-0 z-[2] flex cursor-pointer flex-col flex-wrap justify-between border-b-2 bg-[#f7f8fa] px-[20px] py-[8px] transition hover:bg-[#edeff1]'>
-                      <h3 className='w-[90%] text-base font-semibold text-black'>{item.attributes.lesson_name}</h3>
+                      <h3 className='w-[90%] text-base font-semibold text-black'>{chapter.attributes.lesson_name}</h3>
                       <span className='mt-[4px] text-xs font-normal text-black'>
-                        {item.attributes.lesson_description}
+                        {chapter.attributes.lesson_description}
                       </span>
                       <span className='absolute right-[23px] top-[12px] text-base text-black'>
                         <svg
@@ -270,39 +272,48 @@ function Course_detail() {
                     </div>
                   </summary>
                   <div className='flex flex-col'>
-                    {item.attributes.lesson_items &&
-                      item.attributes.lesson_items.data?.map((lesson: any) => (
+                    {chapter.attributes.lesson_items &&
+                      chapter.attributes.lesson_items.data?.map((lesson: any) => (
                         <LessonItem
                           item={lesson}
                           chooseItem={chooseItem}
                           onSetChooseItem={handleSetChooseItem}
                           key={lesson.id}
                           completedLessonList={newArrLesson}
-                          chapterID={item.id}
+                          chapterID={chapter.id}
                         />
                       ))}
-                    {item.attributes.quizzes &&
-                      item.attributes.quizzes.data?.map((quizz: any) => (
+                    {chapter.attributes.quizzes &&
+                      chapter.attributes.quizzes.data?.map((quizz: any) => (
                         <LessonItemQuiz
                           item={quizz}
                           key={quizz.id}
                           chooseItem={chooseItem}
                           setLessonId={setLessonId}
                           setChooseItem={setChooseItem}
-                          chapter={item.attributes.lesson_items.data}
+                          chapter={chapter.attributes.lesson_items.data}
                           completedLessonList={newArrLesson}
                         />
                       ))}
-                    {item.attributes.certificate?.data && (
-                      <CertificateItem
-                        quizzId={item.attributes.quizzes.data[0]?.id}
-                        certificateId={item.attributes.certificate.data.id}
-                        isCompleteAllLesson={newArrLesson.length >= item.attributes.lesson_items.data.length}
-                      />
-                    )}
                   </div>
                 </details>
               ))}
+              {courseData.data?.data.data.attributes.certificate.data && (
+                <CertificateItem
+                  quizzId={
+                    courseData.data?.data.data.attributes.chapters.data[
+                      courseData.data?.data.data.attributes.chapters.data.length - 1
+                    ].attributes.quizzes.data[0].id
+                  }
+                  certificateId={courseData.data?.data.data.attributes.certificate.data.id}
+                  isCompleteAllLesson={
+                    newArrLesson.length >=
+                    courseData.data?.data.data.attributes.chapters.data.reduce((totalLesson: any, chapter: any) => {
+                      return totalLesson + chapter.attributes.lesson_items.data.length
+                    }, 0)
+                  }
+                />
+              )}
             </div>
           </div>
         </div>
