@@ -25,6 +25,7 @@ import LearningOutcomes from './pages/LearningOutcomes/LearningOutcomes'
 import UnderContruction from './pages/UnderContruction'
 import DuoTrainning from './pages/Duo_Tranning'
 import About from './pages/About'
+import Contact from './pages/Contact'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -57,7 +58,8 @@ export const ROUTES = {
   courses: '/courses',
   certificate: '/certificate',
   duoTrainning: '/duo-tranning',
-  about_us: '/about-us'
+  about_us: '/about-us',
+  contact: '/contact'
 }
 
 export default function useRouterElement() {
@@ -223,6 +225,14 @@ export default function useRouterElement() {
       element:(
         <GuestLayout>
           <About/>
+        </GuestLayout>
+      )
+    },
+    {
+      path: ROUTES.contact,
+      element:(
+        <GuestLayout>
+          <Contact/>
         </GuestLayout>
       )
     }

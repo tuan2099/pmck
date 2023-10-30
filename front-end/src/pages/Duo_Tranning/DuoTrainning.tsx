@@ -8,10 +8,10 @@ const DuoTrainning = () => {
     <div className=''>
       <div className='m-auto flex max-w-[1200px] flex-col justify-between gap-3 px-4 md:flex-row md:items-center'>
         <div className='w-full md:w-[45%]'>
-          <h1 className='mb-8 mt-6 text-4xl'>
+          <h1 className='mb-8 mt-6 font-bold text-color1 text-4xl'>
             Đào tạo kép <br /> - Lợi ích song đôi
           </h1>
-          <p>
+          <p className='text-color1'>
             Chứng chỉ học thuật trên PMCK giúp bạn sẵn sàng cho xu hướng nghề nghiệp tương lai và sự phát triển của thị
             trường.
           </p>
