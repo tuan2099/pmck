@@ -308,13 +308,6 @@ function Course_detail() {
                           completedLessonList={newArrLesson}
                         />
                       ))}
-                    {item.attributes.certificate?.data && (
-                      <CertificateItem
-                        quizzId={item.attributes.quizzes.data[0]?.id}
-                        certificateId={item.attributes.certificate.data.id}
-                        isCompleteAllLesson={newArrLesson.length >= item.attributes.lesson_items.data.length}
-                      />
-                    )}
                   </div>
                 </details>
               ))}
