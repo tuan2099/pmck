@@ -210,16 +210,16 @@ function Course_detail() {
     }
   }
 
-  const handleChooseCertificateItem = async () => {
-    const chapterList = courseData.data?.data.data.attributes.chapters.data
-    const lastChapter = chapterList[chapterList.length - 1]
-    if (lastChapter.attributes.quizzes.data[0]) {
-      const { data } = await checkQuizCompleted.mutateAsync(lastChapter.attributes.quizzes.data[0].id)
-      if (data && data.gr >= 7.5) {
-        navigate(`${ROUTES.certificate}?certificate=${courseData.data?.data.data.attributes.certificate.data.id}`)
-      }
-    }
-  }
+  // const handleChooseCertificateItem = async () => {
+  //   const chapterList = courseData.data?.data.data.attributes.chapters.data
+  //   const lastChapter = chapterList[chapterList.length - 1]
+  //   if (lastChapter.attributes.quizzes.data[0]) {
+  //     const { data } = await checkQuizCompleted.mutateAsync(lastChapter.attributes.quizzes.data[0].id)
+  //     if (data && data.gr >= 7.5) {
+  //       navigate(`${ROUTES.certificate}?certificate=${courseData.data?.data.data.attributes.certificate.data.id}`)
+  //     }
+  //   }
+  // }
 
   const handleNextLesson = () => {
     if (chooseItem.type !== 'quizz') {

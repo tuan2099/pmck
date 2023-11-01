@@ -47,7 +47,7 @@ function ListNewCard(newsData) {
                       </span>{' '}
                       Tin tức
                     </h4>
-                    <h5 className='overflow-hiden mt-[5px]  break-words text-[18px] font-semibold leading-snug text-[#292929]'>
+                    <h5 className='overflow-hidden mt-[5px]  break-words text-[18px] font-semibold leading-snug text-[#292929]'>
                       {item.attributes.title}
                     </h5>
                     <p className='mt-[25px] line-clamp-2 break-words text-[16px] leading-snug'>
