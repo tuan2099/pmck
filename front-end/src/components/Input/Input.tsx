@@ -1,7 +1,5 @@
 import { Input } from "@material-tailwind/react";
 
-
-
 function InputCustom(props) {
   const {
     errorsMesage,
