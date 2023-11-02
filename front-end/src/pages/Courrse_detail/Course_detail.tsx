@@ -17,11 +17,8 @@ import QuizzDetail from './Component/Quiz/QuizDetail'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
 import { toast } from 'react-toastify'
-<<<<<<< HEAD
-import { ROUTES } from 'src/useRouterElement'
-=======
 import ReactMarkdown from 'react-markdown'
->>>>>>> 1ddaf7ee701c9fa4a22f1e721c35598ac670af04
+import { ROUTES } from 'src/useRouterElement'
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({

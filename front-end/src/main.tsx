@@ -15,7 +15,7 @@ import App from './App.tsx'
 import './index.css'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import { ThemeProvider } from "@material-tailwind/react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -26,13 +26,15 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <AppProvider>
-          <ToastContainer />
-          <App />
-        </AppProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <AppProvider>
+            <ToastContainer />
+            <App />
+          </AppProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 )

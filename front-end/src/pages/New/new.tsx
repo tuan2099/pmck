@@ -6,12 +6,13 @@ import SortNew from './Components/Sort'
 import Paginationcustom from './Components/Pagination'
 import Custombutton from 'src/components/Custombutton'
 import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
-import { IconButton, Tooltip } from '@mui/material'
+import { IconButton } from '@mui/material'
 import Filters from './Components/Filters'
 import { useState } from 'react'
 import BlockSkeleton from 'src/components/BlockSkeleton'
 import ListNewCard from 'src/components/ListNewCard'
-
+import { Tooltip, Button } from "@material-tailwind/react";
+import ButtonCustom from 'src/components/Button/Button'
 export interface NewType {
   id: number
   attributes: {
@@ -61,25 +62,30 @@ function New() {
           <div className='mb-7 flex items-center justify-between pr-8'>
             <SortNew queryConfig={queryConfig} />
             <div className='flex'>
-              <Custombutton
-                textColor='#4F4F4F'
-                bgcolor='none'
-                border='none'
-                borderColor='none'
-                hoverBgColor='none'
-                startIcon={<FaFilter />}
+              <ButtonCustom
+                size="sm" 
+                variant="text"
+                className=" text-color1 shadow-[none] rounded-full  hover:shadow-[none] outline-none flex items-center gap-3"
                 onClick={open}
               >
-                {' '}
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                </svg>
                 Lọc tin tức
-              </Custombutton>
+              </ButtonCustom>
               <div className='border-r-1 mx-4 my-2 border' />
-              <Tooltip title='Hiển thị danh sách' placement='top'>
+              <Tooltip content='Hiển thị danh sách' placement='top' animate={{
+                mount: { scale: 1, y: 0 },
+                unmount: { scale: 0, y: 25 },
+              }}>
                 <IconButton aria-label='delete' onClick={() => setView('list')}>
                   <FaListUl />
                 </IconButton>
               </Tooltip>
-              <Tooltip title='Hiển thị lưới' placement='top'>
+              <Tooltip content='Hiển thị lưới' placement='top' animate={{
+                mount: { scale: 1, y: 0 },
+                unmount: { scale: 0, y: 25 },
+              }}>
                 <IconButton aria-label='delete' onClick={() => setView('grid')}>
                   <FaGripHorizontal />
                 </IconButton>

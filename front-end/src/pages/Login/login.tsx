@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -10,6 +9,8 @@ import { FaFacebook, FaYoutube, FaInstagram } from 'react-icons/fa'
 import { useMutation } from '@tanstack/react-query'
 import authApi from 'src/apis/auth.api'
 import { AppContext } from 'src/context/app.context'
+import ButtonCustom from 'src/components/Button/Button'
+import InputCustom from 'src/components/Input/Input'
 
 type FormData = Pick<Schema, 'identifier' | 'password'>
 const loginSchema = schema.pick(['identifier', 'password'])
@@ -77,12 +78,13 @@ function Login() {
                   >
                     Nhập email
                   </label>
-                  <Input
+                  <InputCustom
                     type='text'
                     placeholder='Nhập Email'
                     name='identifier'
                     register={register}
                     errorsMesage={errors.identifier?.message}
+                    
                   />
                 </div>
                 <div>
@@ -92,7 +94,7 @@ function Login() {
                   >
                     Nhập mật khẩu
                   </label>
-                  <Input
+                  <InputCustom
                     type='password'
                     placeholder='Password'
                     name='password'
@@ -100,21 +102,23 @@ function Login() {
                     errorsMesage={errors.password?.message}
                   />
                 </div>
-                <Button
+                <ButtonCustom
+                  type='submit'
                   isLoading={loginAccountMutation.isLoading}
                   disabled={loginAccountMutation.isLoading}
-                  className='my-6 inline-block w-full rounded bg-gradient-to-r from-green-600 to-green-700 px-6 py-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#0b1526] outline-none transition duration-150 ease-in-out hover:bg-[#103a0b] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-[#103a0b] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-[#217a17] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'
+                  fullWidth
+                  className='my-6 inline-block rounded bg-gradient-to-r from-green-600 to-green-700 px-6 py-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#0b1526] outline-none transition duration-150 ease-in-out hover:bg-[#103a0b] hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-[#103a0b] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-[#217a17] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]'
                 >
                   Đăng nhập
-                </Button>
-                <button className='flex w-full flex-wrap justify-center rounded-md border border-gray-300 px-2 py-1.5 hover:border-gray-500'>
+                </ButtonCustom>
+                <div className='flex w-full flex-wrap justify-center rounded-md border border-gray-300 px-2 py-1.5 hover:border-gray-500'>
                   <img
                     className='mr-2 w-5'
                     alt=''
                     src='https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA'
                   />
                   Sign in with Google
-                </button>
+                </div>
                 <div className='mt-4'>
                   <p className='text-center font-semibold'>
                     Bạn không có tài khoản?{' '}
