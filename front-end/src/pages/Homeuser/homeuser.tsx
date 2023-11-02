@@ -22,7 +22,7 @@ function Homeuser() {
       return sliderApi.getSlider()
     }
   })
-  
+
   // call data news with limit 4 item
   const { data: newsData, isLoading } = useQuery({
     queryKey: ['new', useQueryConfig],
@@ -168,7 +168,7 @@ function Homeuser() {
           </p>
         </div>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          <Cardnew newsData={newsData} />
+          {/* <Cardnew newsData={newsData} /> */}
         </div>
       </div>
     </>

@@ -16,9 +16,12 @@ function LessonItemQuiz({ item, chooseItem, setLessonId, setChooseItem, chapter,
     setParams((prev) => {
       return { ...prev, id: item.attributes.title + item.id }
     })
-    setChooseItem({ type: 'quizz', data: item })
+    if (isCompletedChapter) {
+      setChooseItem({ type: 'quizz', data: item })
+    }
     setLessonId(item.id)
   }
+
   return (
     <>
       <button
