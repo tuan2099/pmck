@@ -61,7 +61,7 @@ function Course_detail() {
       setNewArrLesson(completedArrLesson)
     }
   })
-  console.log(courseData.data?.data.data.attributes.chapters)
+  // console.log(courseData.data?.data.data.attributes.chapters)
   // 
   function getLessonItemsByCourseId(courseId: number, data: any) {
     const lessonItems: any[] = []
