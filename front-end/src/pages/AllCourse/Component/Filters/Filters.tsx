@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import Custombutton from 'src/components/Custombutton'
 // import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { ConfigParams } from 'src/hooks/useQueryConfig'
-import { HiTrash, HiXMark } from 'react-icons/hi2'
 import { useQuery } from '@tanstack/react-query'
 import courseApi from 'src/apis/course.api'
 import ButtonCustom from 'src/components/Button/Button'
@@ -74,7 +72,7 @@ function Filters({ queryConfig, open }: any) {
       return courseApi.getCourseLevel({ ...(queryConfig as ConfigParams) })
     },
     keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
+    // staleTime: 3 * 60 * 1000
   })
 
   // reset
@@ -85,35 +83,42 @@ function Filters({ queryConfig, open }: any) {
   }
   return (
     <>
-      <div className='mb-4 flex items-center pr-8'>
-          {/* <Select
+      <div className='mb-4 flex items-center pr-8 gap-5'>
+        <div className='w-full'>
+          <Select
             label='Danh mục khóa học'
             onChange={handleFiltersCourse}
           >
-            {categoryCourse?.data?.data?.map((item) => {
-              return (
-                <Option key={item.id} value={item.id}>
-                  {item.attributes.label}
-                </Option>
-              )
-            })}
-          </Select> */}
-          {/* <Select
+              {categoryCourse?.data?.data?.map((item) => {
+                return (
+                  <Option key={item.id} value={item.id}>
+                    {item.attributes.label}
+                  </Option>
+                )
+              })}
+          </Select>
+        </div>
+        <div className='w-full'>
+          <Select
             onChange={handleFiltersPrice}
             label='Theo giá cả'
           >
-                <Option value='1'>Miễn phí</Option>
-                <Option value='2'>Trả phí</Option>
-          </Select> */}
+            <Option value='1'>Miễn phí</Option>
+            <Option value='2'>Trả phí</Option>
+          </Select>
+        </div>
+        <div className='w-full'>
           <Select onChange={handleFiltersLevel} label='Trình độ'>
-            {courseLevel?.data?.data?.map((item) => {
+            <Option value='1234'>product</Option>
+            {courseLevel && courseLevel?.data?.data?.map((item) => {
               return (
                 <Option key={item.id} value={item.id}>
-                {item.attributes.level}
-              </Option>
+                  {item.attributes.level}
+                </Option>
               )
             })}
           </Select>
+        </div>
       </div>
       <div className='mb-4 flex items-center justify-between pl-3 pr-8'>
         <div className='text-gray-500'>
@@ -132,17 +137,17 @@ function Filters({ queryConfig, open }: any) {
           })}
         </div>
         <div className='flex'>
-        <ButtonCustom
-          size="sm"
-          variant="text"
-          className=" text-color1 shadow-[none] rounded-full  hover:shadow-[none] outline-none flex items-center gap-3 py-1"
-          onClick={open}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
-          </svg>
-          Đóng
-        </ButtonCustom>
+          <ButtonCustom
+            size="sm"
+            variant="text"
+            className=" text-color1 shadow-[none] rounded-full  hover:shadow-[none] outline-none flex items-center gap-3 py-1"
+            onClick={open}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+            </svg>
+            Đóng
+          </ButtonCustom>
           <ButtonCustom
             size="sm"
             variant="text"
