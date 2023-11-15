@@ -1,18 +1,42 @@
-import { Avatar, Drawer, InputAdornment, Skeleton, TextField } from '@mui/material'
-import { GridSearchIcon } from '@mui/x-data-grid'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { FaLink, FaMailBulk, FaPhoneAlt, FaQuestionCircle } from 'react-icons/fa'
 import supportApi from 'src/apis/support.api'
-import Accordion from 'src/components/Accordion'
 import { SupportType } from 'src/types/support.type'
 import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
+import { Avatar } from "@material-tailwind/react";
+import {
+  Input,
+  Drawer,
+  IconButton,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from '@material-tailwind/react'
+
+// icon setting for arcodion
+function Icon({ id, openArcodion }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      className={`${id === openArcodion ? "rotate-180" : ""} h-5 w-5 transition-transform`}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+    </svg>
+  );
+}
+
 
 function Question() {
+  const [openArcodion, setOpenArcodion] = useState(1)
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [QAList, setQAList] = useState<any[]>([])
   const queryConfig = useQueryConfig()
-  
+
   const {
     data: supportQuestionApi,
     isLoading,
@@ -20,15 +44,7 @@ function Question() {
   } = useQuery({
     queryKey: ['support'],
     queryFn: () => {
-      return supportApi.getCategorySupport( { ...(queryConfig as ConfigParams) })
-    }
-  })
-
-  // call api Question
-  const { data: QAApi } = useQuery({
-    queryKey: ['QA'],
-    queryFn: () => {
-      return supportApi.getQA( { ...(queryConfig as ConfigParams) })
+      return supportApi.getCategorySupport({ ...(queryConfig as ConfigParams) })
     }
   })
 
@@ -43,30 +59,19 @@ function Question() {
     setOpenDrawer(false)
     setQAList([])
   }
+  // toogle arrcodion
+  const handleOpenAccordion = (value: any) => {
+    setOpenArcodion(openArcodion === value ? 0 : value)
+  }
 
   return (
     <>
       <div className='min-h-sceen mx-auto bg-white px-5'>
         <div className='flex items-center justify-between'>
           <h1 className='my-8 flex items-center text-xl font-semibold text-color1'>
-            <Avatar sx={{ bgcolor: '#1e7115' }}>
-              <FaQuestionCircle />
-            </Avatar>
+            <Avatar src="https://docs.material-tailwind.com/img/face-2.jpg" alt="avatar" size='sm' />
             <span className='ml-2'>Hỗ trợ người dùng</span>
           </h1>
-          <div>
-            <TextField
-              size='small'
-              variant='outlined'
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='start'>
-                    <GridSearchIcon />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </div>
         </div>
         <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4'>
           {supportQuestionApi &&
@@ -93,38 +98,46 @@ function Question() {
                 .fill(0)
                 .map((_, index) => (
                   <div key={index} className=''>
-                    <Skeleton variant='rounded' height={250} />
+                    {/* <Skeleton variant='rounded' height={250} /> */}
                   </div>
                 ))}
             </>
           )}
-          <Drawer open={openDrawer} anchor='right' onClose={handleCloseDrawer}>
+          <Drawer open={openDrawer} placement="right" size={720} onClose={handleCloseDrawer}>
             <div className='w-[43%] min-w-[720px] max-w-full'>
               <div className='flex items-center justify-between p-6'>
                 <h2 className='text-2xl font-bold'>Tiêu đề</h2>
-                <button onClick={handleCloseDrawer}>Đóng</button>
+                <IconButton variant="text" onClick={handleCloseDrawer}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </IconButton>
               </div>
               <div className='p-6'>
                 {QAList.map((item: any) => (
                   <div key={item.id} className='my-4'>
-                    <Accordion item={item} key={item.id} />
+                    <Accordion open={openArcodion === item.id} icon={<Icon id={item.id} openArcodion={openArcodion}/>}>
+                      <AccordionHeader className='text-md' onClick={() => handleOpenAccordion(item.id)}>{item.attributes.question}</AccordionHeader>
+                      <AccordionBody>
+                        {item.attributes.answer}
+                      </AccordionBody>
+                    </Accordion>
                   </div>
                 ))}
               </div>
             </div>
           </Drawer>
-
-          {/* <div>
-            {QAApi?.data.data
-              .filter((item: any) => item.attributes.isPopularQA)
-              .map((qa: any) => (
-                <div className='mb-2' key={qa.id}>
-                  <h3 className='text-lg font-bold'>{`${qa?.attributes.question} ?`}</h3>
-                  <p>{qa?.attributes.answer}</p>
-                </div>
-              ))}
-          </div> */}
-
           <div className='flex w-full cursor-pointer flex-col justify-between transition'>
             <div>
               <div className='mb-2 flex justify-center pt-3 text-color1'>
@@ -150,34 +163,7 @@ function Question() {
             </div>
           </div>
         </div>
-        <div className='my-[120px] grid grid-cols-1 gap-4 lg:grid-cols-3'>
-          <div className='w-full'>
-            <h3 className='flex items-center font-semibold text-color1'>
-              <FaQuestionCircle />
-              <span className='ml-2 text-xl'>Câu hỏi phổ biến</span>
-            </h3>
-            <ul className='mt-7 list-outside  text-color1'>
-              <li className='list-inside list-disc text-sm'>
-                <a href='/' className='text-blue-700'>
-                  Làm thế nào để tôi đăng ký và truy cập khóa học trực tuyến?
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className='w-full'>
-            <h3 className='flex items-center font-semibold text-color1'>
-              <FaLink />
-              <span className='ml-2 text-xl'>Liên kết hữu ích</span>
-            </h3>
-            <ul className='mt-7 list-outside pl-4 text-color1'>
-              <li className='text-md list-inside list-disc text-sm'>
-                <a href='/' className='text-blue-700'>
-                  Làm thế nào để tôi đăng ký và truy cập khóa học trực tuyến?
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        
       </div>
     </>
   )

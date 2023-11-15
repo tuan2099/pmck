@@ -2,7 +2,6 @@
 import { useQuery } from '@tanstack/react-query'
 import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 import courseApi from 'src/apis/course.api'
-import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
 import CourseCard from 'src/components/CourseCard'
 import SortCourse from './Component/Sort/SortCourse'
 import BlockSkeleton from 'src/components/BlockSkeleton'

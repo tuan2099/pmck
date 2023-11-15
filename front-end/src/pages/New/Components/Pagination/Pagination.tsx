@@ -19,7 +19,7 @@ function Paginationcustom({ queryConfig, pageCount }: any) {
   }
   return (
     <>
-      {pageCount === 1 ? '' : 
+      {pageCount <= 1 ? '' : 
         <Stack spacing={2}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Stack> 

@@ -1,7 +1,6 @@
 import PlaceIcon from '@mui/icons-material/Place';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-import Custombutton from 'src/components/Custombutton';
 import SendIcon from '@mui/icons-material/Send';
 function Contact() {
   return (
@@ -87,7 +86,7 @@ function Contact() {
                         placeholder="Message" rows={6} cols={100}></textarea>
                 </div>
                 <div className="px-[15px] mt-[20px] flex justify-center">
-                    <Custombutton
+                    {/* <Custombutton
                     textColor='#fff'
                     bgcolor='#1E7115'
                     border='none'
@@ -97,7 +96,7 @@ function Contact() {
                     >
                         {' '}
                         Lọc tin tức
-                    </Custombutton>
+                    </Custombutton> */}
                 </div>
             </div>
         </div>

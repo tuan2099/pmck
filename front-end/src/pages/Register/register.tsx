@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import Button from 'src/components/Button'
 import Input from 'src/components/Input'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'

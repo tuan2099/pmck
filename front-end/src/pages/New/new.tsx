@@ -4,14 +4,13 @@ import Cardnew from 'src/components/Cardnew'
 import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
 import SortNew from './Components/Sort'
 import Paginationcustom from './Components/Pagination'
-import Custombutton from 'src/components/Custombutton'
-import { FaFilter, FaGripHorizontal, FaListUl } from 'react-icons/fa'
+import { FaGripHorizontal, FaListUl } from 'react-icons/fa'
 import { IconButton } from '@mui/material'
 import Filters from './Components/Filters'
 import { useState } from 'react'
 import BlockSkeleton from 'src/components/BlockSkeleton'
 import ListNewCard from 'src/components/ListNewCard'
-import { Tooltip, Button } from "@material-tailwind/react";
+import { Tooltip } from "@material-tailwind/react";
 import ButtonCustom from 'src/components/Button/Button'
 export interface NewType {
   id: number

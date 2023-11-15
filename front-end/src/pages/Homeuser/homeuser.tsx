@@ -8,7 +8,6 @@ import { AppContext } from 'src/context/app.context'
 import Cardnew from '../../components/Cardnew'
 import newApi from 'src/apis/new.api'
 import useQueryConfig, { ConfigParams } from 'src/hooks/useQueryConfig'
-import ButtonCustom from 'src/components/Button/Button'
 
 function Homeuser() {
   // get data from context
@@ -168,7 +167,7 @@ function Homeuser() {
           </p>
         </div>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-          {/* <Cardnew newsData={newsData} /> */}
+          <Cardnew newsData={newsData} />
         </div>
       </div>
     </>
