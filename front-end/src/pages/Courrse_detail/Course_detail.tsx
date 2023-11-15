@@ -62,7 +62,7 @@ function Course_detail() {
     }
   })
   // console.log(courseData.data?.data.data.attributes.chapters)
-  // 
+  //
   function getLessonItemsByCourseId(courseId: number, data: any) {
     const lessonItems: any[] = []
 
@@ -129,8 +129,8 @@ function Course_detail() {
       if (!isCompleted) handleUpdateOrPostLearningProcess()
     }
   }, [countDown])
-  
-  // update lesson data  
+
+  // update lesson data
   const handlePostLearningProcess = useMutation({
     mutationFn: () =>
       learningProcessApi.createLearningProgesses({
@@ -210,8 +210,6 @@ function Course_detail() {
     }
   }
 
-
-
   const handleNextLesson = () => {
     if (chooseItem.type !== 'quizz') {
       let isLesson = true
@@ -276,7 +274,7 @@ function Course_detail() {
                     </div>
                   </summary>
                   <div className='flex flex-col'>
-                    {chapter.attributes.lesson_items && 
+                    {chapter.attributes.lesson_items &&
                       chapter.attributes.lesson_items.data?.map((lesson: any) => (
                         <LessonItem
                           item={lesson}
@@ -307,7 +305,7 @@ function Course_detail() {
                   quizzId={
                     courseData.data?.data.data.attributes.chapters.data[
                       courseData.data?.data.data.attributes.chapters.data.length - 1
-                    ].attributes.quizzes.data[0].id
+                    ].attributes.quizzes.data[0]?.id
                   }
                   certificateId={courseData.data?.data.data.attributes.certificate.data.id}
                   isCompleteAllLesson={
@@ -376,16 +374,18 @@ function Course_detail() {
             />
           )}
           {chooseItem?.data?.attributes.text_lesson && (
-              <div className='items-top flex justify-between m-auto w-10/12 relative overflow-y-auto bg-white px-3'>
-                <div className='pt-[56.25%] '>
-                  <div className="absolute top-0 "><ReactMarkdown>{chooseItem?.data?.attributes.text_lesson}</ReactMarkdown></div>
+            <div className='items-top relative m-auto flex w-10/12 justify-between overflow-y-auto bg-white px-3'>
+              <div className='pt-[56.25%] '>
+                <div className='absolute top-0 '>
+                  <ReactMarkdown>{chooseItem?.data?.attributes.text_lesson}</ReactMarkdown>
                 </div>
               </div>
+            </div>
           )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>
             <div className='w-'>
               <h1 className='mb-[8px] mt-[48px] text-[28px] font-semibold'>{chooseItem?.data?.attributes.title}</h1>
-              <p className='text-[14px] text-slate-400'>
+              <p className='text-slate-400 text-[14px]'>
                 {Boolean(chooseItem?.data?.attributes.updatedAt) &&
                   `Cập nhập ${covertTimeStamp(chooseItem?.data?.attributes.updatedAt)}`}
               </p>
