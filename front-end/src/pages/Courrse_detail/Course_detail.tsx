@@ -1,10 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { FaTasks } from 'react-icons/fa'
 import Youtube from 'react-youtube'
 import Drawer from '@mui/material/Drawer'
+
 import { AppContext } from 'src/context/app.context'
 import { covertTimeStamp } from 'src/helper/coverTimeStamp'
 import courseApi from 'src/apis/course.api'
@@ -17,8 +18,6 @@ import QuizzDetail from './Component/Quiz/QuizDetail'
 import CertificateItem from './Component/CertificateItem/CertificateItem'
 import Note from './Component/Note'
 import { toast } from 'react-toastify'
-import { ROUTES } from 'src/useRouterElement'
-import ReactMarkdown from 'react-markdown'
 
 function Course_detail() {
   const [chooseItem, setChooseItem] = useState<{ type: 'video' | 'quizz' | 'document' | 'text' | ''; data: any }>({
@@ -35,7 +34,6 @@ function Course_detail() {
   const [countDown, setCountDown] = useState<number>(0)
   const pageID = id?.split('-')[id?.split('-').length - 1]
   const [currentChapter, setCurrentChapter] = useState()
-  const navigate = useNavigate()
 
   // Get data course detail
   const courseData = useQuery({
@@ -52,7 +50,7 @@ function Course_detail() {
       setLessonId(firstLeson.id)
     }
   })
-  // get complete lesson
+
   const { data: completedLesson, refetch } = useQuery({
     queryKey: ['complete lesson'],
     queryFn: () => learningProcessApi.getCompleteLesson(),
@@ -61,8 +59,7 @@ function Course_detail() {
       setNewArrLesson(completedArrLesson)
     }
   })
-  // console.log(courseData.data?.data.data.attributes.chapters)
-  //
+
   function getLessonItemsByCourseId(courseId: number, data: any) {
     const lessonItems: any[] = []
 
@@ -128,14 +125,13 @@ function Course_detail() {
       const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
       if (!isCompleted) handleUpdateOrPostLearningProcess()
     }
-  }, [countDown])
+  }, [countDown, chooseItem])
 
-  // update lesson data
   const handlePostLearningProcess = useMutation({
     mutationFn: () =>
       learningProcessApi.createLearningProgesses({
         data: {
-          lesson_items: [lessonId],
+          lesson_items: [chooseItem.data.id],
           courses: pageID,
           users_permissions_users: profile?.id
         }
@@ -187,16 +183,24 @@ function Course_detail() {
     setLessonId(item.id)
   }
 
+  const handleCheckPrevLessonComplete = (chapterId: any, lessonId: any) => {
+    const currentChapter = courseData.data?.data.data.attributes.chapters.data.find(
+      (chapter: any) => chapter.id === chapterId
+    )
+    const position = currentChapter.attributes.lesson_items.data.findIndex((lesson: any) => lesson.id === lessonId)
+    return newArrLesson.some(
+      (lesson: any) => lesson.id === currentChapter.attributes.lesson_items.data[position - 1].id
+    )
+  }
+
   const handleSetChooseItem = async ({ item, chapterID }: any) => {
+    if (!handleCheckPrevLessonComplete(chapterID, item.id)) return
     if (chapterID === currentChapter) {
-      const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
-      if (isCompleted || !countDown) {
-        handleSetItem(item)
-      }
+      handleSetItem(item)
     } else {
       const currenChapterQuizzId = courseData.data?.data.data.attributes.chapters.data.find(
-        (item) => item.id === currentChapter
-      ).attributes.quizzes.data[0]?.id
+        (item: any) => item.id === currentChapter
+      ).attributes.quizzes.data[0].id
       if (currenChapterQuizzId) {
         const { data } = await checkQuizCompleted.mutateAsync(currenChapterQuizzId)
         if (data && data.gr >= 7.5) {
@@ -210,14 +214,23 @@ function Course_detail() {
     }
   }
 
+  console.log(newArrLesson)
+
+  const handleSetQuizz = (chapter: any, quizz: any) => {
+    const idSetChapter = new Set(chapter.map((item: any) => item.id))
+    const isCompleteChapter = [...idSetChapter].every((item: any) => newArrLesson.some((lesson) => lesson.id === item))
+    if (isCompleteChapter) {
+      setChooseItem({ type: 'quizz', data: quizz })
+      return true
+    } else return false
+  }
+
   const handleNextLesson = () => {
     if (chooseItem.type !== 'quizz') {
-      let isLesson = true
       courseData.data?.data.data.attributes.chapters.data?.forEach((chapter: any) => {
         const position = chapter.attributes.lesson_items.data.findIndex((item: any) => item.id === chooseItem.data.id)
         if (position !== -1 && position < chapter.attributes.lesson_items.data.length - 1) {
           handleSetChooseItem(chapter.attributes.lesson_items.data[position + 1])
-          isLesson = true
         }
       })
     }
@@ -225,12 +238,10 @@ function Course_detail() {
 
   const handlePrevLesson = () => {
     if (chooseItem.type !== 'quizz') {
-      let isLesson = true
       courseData.data?.data.data.attributes.chapters.data?.forEach((chapter: any) => {
         const position = chapter.attributes.lesson_items.data.findIndex((item: any) => item.id === chooseItem.data.id)
         if (position) {
           handleSetChooseItem(chapter.attributes.lesson_items.data[position - 1])
-          isLesson = true
         }
       })
     }
@@ -289,10 +300,8 @@ function Course_detail() {
                       chapter.attributes.quizzes.data?.map((quizz: any) => (
                         <LessonItemQuiz
                           item={quizz}
-                          key={quizz.id}
-                          chooseItem={chooseItem}
                           setLessonId={setLessonId}
-                          setChooseItem={setChooseItem}
+                          onSetChooseItem={handleSetQuizz}
                           chapter={chapter.attributes.lesson_items.data}
                           completedLessonList={newArrLesson}
                         />
@@ -305,7 +314,7 @@ function Course_detail() {
                   quizzId={
                     courseData.data?.data.data.attributes.chapters.data[
                       courseData.data?.data.data.attributes.chapters.data.length - 1
-                    ].attributes.quizzes.data[0]?.id
+                    ].attributes.quizzes.data[0].id
                   }
                   certificateId={courseData.data?.data.data.attributes.certificate.data.id}
                   isCompleteAllLesson={
@@ -319,7 +328,7 @@ function Course_detail() {
             </div>
           </div>
         </div>
-        <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain'>
+        <div className='fixed bottom-[50px] left-0 top-0 mt-[50px] w-[77%] overflow-x-hidden overscroll-contain '>
           {chooseItem.type === 'video' && (
             <>
               {!chooseItem?.data?.attributes.video_url && (
@@ -374,12 +383,8 @@ function Course_detail() {
             />
           )}
           {chooseItem?.data?.attributes.text_lesson && (
-            <div className='items-top relative m-auto flex w-10/12 justify-between overflow-y-auto bg-white px-3'>
-              <div className='pt-[56.25%] '>
-                <div className='absolute top-0 '>
-                  <ReactMarkdown>{chooseItem?.data?.attributes.text_lesson}</ReactMarkdown>
-                </div>
-              </div>
+            <div className='items-top my-5 flex justify-between px-[8.5%]'>
+              {chooseItem?.data?.attributes.text_lesson}
             </div>
           )}
           <div className='items-top flex min-h-[400px] justify-between px-[8.5%]'>

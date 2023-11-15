@@ -2,24 +2,21 @@ import { useEffect, useState } from 'react'
 import { FaLock } from 'react-icons/fa'
 import { useSearchParams } from 'react-router-dom'
 
-function LessonItemQuiz({ item, chooseItem, setLessonId, setChooseItem, chapter, completedLessonList }: any) {
+function LessonItemQuiz({ item, chooseItem, setLessonId, onSetChooseItem, chapter }: any) {
   const [isCompletedChapter, setIsCompletedChapter] = useState<boolean>(false)
-
-  useEffect(() => {
-    const idSetChapter = new Set(chapter.map((item: any) => item.id))
-    setIsCompletedChapter(completedLessonList.every((item: any) => idSetChapter.has(item.id)))
-  }, [completedLessonList, chapter])
 
   const [_, setParams] = useSearchParams()
 
   const handleOpenQuizz = () => {
-    setParams((prev) => {
-      return { ...prev, id: item.attributes.title + item.id }
-    })
-    if (isCompletedChapter) {
-      setChooseItem({ type: 'quizz', data: item })
+    const isOpen = onSetChooseItem(chapter, item)
+    console.log(isOpen)
+    if (isOpen) {
+      setParams((prev) => {
+        return { ...prev, id: item.attributes.title + item.id }
+      })
+
+      setLessonId(item.id)
     }
-    setLessonId(item.id)
   }
 
   return (
