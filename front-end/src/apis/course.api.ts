@@ -10,8 +10,8 @@ const courseApi = {
   getListcourse() {
     return http.get(LIST_COURSE_URL)
   },
-  getCourse(params: ConfigParams) {
-    return http.get<CourseResponseType>(COURSE_URL, { params })
+  getCourse(params: ConfigParams, pagination: number) {
+    return http.get<CourseResponseType>(`${COURSE_URL}&pagination%5Bpage%5D=${pagination}`, { params })
   },
   getDetailCourse(id: string) {
     return http.get(

@@ -10,22 +10,26 @@ import Filters from './Component/Filters'
 import Paginationcustom from './Component/Pagination/Pagination'
 import ButtonCustom from 'src/components/Button/Button'
 import { Tooltip } from '@material-tailwind/react'
+import { Button } from '@mui/material'
 
 const AllCoursePage = () => {
   const queryConfig = useQueryConfig()
   const [openFilterBox, setOpenFilterBox] = useState(false)
   const [view, setView] = useState('grid')
+  const [pagination, setPagination] = useState(1)
+  const [list, setList] = useState<any[]>([])
   const {
     data: courseData,
     isLoading,
     isError
   } = useQuery({
-    queryKey: ['allCourse', queryConfig],
+    queryKey: ['allCourse', queryConfig, pagination],
     queryFn: () => {
-      return courseApi.getCourse({ ...(queryConfig as ConfigParams) })
+      return courseApi.getCourse({ ...(queryConfig as ConfigParams) }, pagination)
     },
     keepPreviousData: true,
-    staleTime: 3 * 60 * 1000
+    staleTime: 3 * 60 * 1000,
+    onSuccess: (courseData) => setList((prev) => [...prev, ...courseData.data.data])
   })
 
   const open = () => {
@@ -127,7 +131,7 @@ const AllCoursePage = () => {
           </div>
           {openFilterBox && <Filters open={open} />}
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:pr-[44px] xl:grid-cols-4'>
-            {courseData?.data?.data?.map((courseItem) => {
+            {list.map((courseItem) => {
               return <CourseCard key={courseItem.id} courseItem={courseItem} />
             })}
             {isLoading && (
@@ -136,6 +140,14 @@ const AllCoursePage = () => {
               </>
             )}
             {isError && <div>Dữ liệu hiện đang gặp vấn đề</div>}
+          </div>
+          <div className='flex justify-center'>
+            <button
+              type='button'
+              className='mb-2 me-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'
+            >
+              Xem thêm
+            </button>
           </div>
           <div className='my-9 flex justify-center'>
             <Paginationcustom queryConfig={queryConfig} pageCount={courseData?.data?.meta.pagination.pageCount} />
