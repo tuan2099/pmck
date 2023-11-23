@@ -1,15 +1,12 @@
 import './App.css'
-import useRouterElement from './useRouterElement'
-
-import { ToastContainer } from 'react-toastify'
+import MainLayout from './Layouts/Mainlayout'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
-  const routeElement = useRouterElement()
   return (
-    <>
-      <ToastContainer /> {routeElement}
-    </>
+    <MainLayout>
+      <div></div>
+    </MainLayout>
   )
 }
 
