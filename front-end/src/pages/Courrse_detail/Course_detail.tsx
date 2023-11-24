@@ -188,6 +188,7 @@ function Course_detail() {
       (chapter: any) => chapter.id === chapterId
     )
     const position = currentChapter.attributes.lesson_items.data.findIndex((lesson: any) => lesson.id === lessonId)
+    if (position === 0) return true
     return newArrLesson.some(
       (lesson: any) => lesson.id === currentChapter.attributes.lesson_items.data[position - 1].id
     )
