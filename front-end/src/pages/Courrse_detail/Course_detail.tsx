@@ -131,7 +131,7 @@ function Course_detail() {
     mutationFn: () =>
       learningProcessApi.createLearningProgesses({
         data: {
-          lesson_items: [chooseItem.data.id],
+          lesson_items: chooseItem.data?.id,
           courses: pageID,
           users_permissions_users: profile?.id
         }
@@ -189,7 +189,7 @@ function Course_detail() {
     )
     const position = currentChapter.attributes.lesson_items.data.findIndex((lesson: any) => lesson.id === lessonId)
     return newArrLesson.some(
-      (lesson: any) => lesson.id === currentChapter.attributes.lesson_items.data[position - 1].id
+      (lesson: any) => lesson.id === currentChapter.attributes.lesson_items.data[position - 1]?.id
     )
   }
 
@@ -213,8 +213,6 @@ function Course_detail() {
       }
     }
   }
-
-  console.log(newArrLesson)
 
   const handleSetQuizz = (chapter: any, quizz: any) => {
     const idSetChapter = new Set(chapter.map((item: any) => item.id))

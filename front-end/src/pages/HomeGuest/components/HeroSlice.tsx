@@ -20,7 +20,7 @@ function HeroSlice() {
                 Học tập trực tuyến và dễ dàng tiếp cận
               </h1>
               <button className='m-auto mt-[20px] flex justify-center rounded-[5px] bg-[#392c7d] px-[45px] py-[10px] text-center text-white transition hover:bg-[#1d163f] lg:mx-0 '>
-                <Link to='/register' className='flex items-center'>
+                <Link to='/register' className='flex items-center font-semibold'>
                   Bát đầu học{' '}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'

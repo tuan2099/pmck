@@ -19,6 +19,7 @@ const QuizzDetail = ({ id, certificateId }: { id: any; certificateId: any }) => 
   const [timeLimit, setTimeLimit] = useState<number | null>(null)
   const [open, setOpen] = useState<boolean>(false)
   const [isPassQuizz, setIsPassQuizz] = useState<boolean>(false)
+  const [startQuiz, setStartQuiz] = useState<boolean>(false)
 
   const onChangeResult = (data: TResults) => {
     const newResults = [...results]
@@ -97,6 +98,7 @@ const QuizzDetail = ({ id, certificateId }: { id: any; certificateId: any }) => 
       clearInterval(interval)
     }
   }, [timeLimit])
+
   // onload submit quiz
   // useEffect(() => {
   //   window.addEventListener('beforeunload', () => {
@@ -129,6 +131,7 @@ const QuizzDetail = ({ id, certificateId }: { id: any; certificateId: any }) => 
           </div>
         }
       />
+      {/* show ui when click to quizz */}
       {!quizz && (
         <div className=' m-auto mt-6 w-10/12'>
           <section className='mb-10 flex flex-wrap items-center justify-between'>

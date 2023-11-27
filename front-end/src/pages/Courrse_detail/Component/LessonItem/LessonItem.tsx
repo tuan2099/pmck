@@ -11,7 +11,6 @@ interface IProps {
 
 const LessonItem = (props: IProps) => {
   const { item, onSetChooseItem, completedLessonList, chooseItem, chapterID } = props
-
   const [isCompleted, setIsCompleted] = useState<boolean>(false)
 
   useEffect(() => {
