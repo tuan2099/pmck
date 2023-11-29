@@ -34,6 +34,7 @@ function Course_detail() {
   const [countDown, setCountDown] = useState<number>(0)
   const pageID = id?.split('-')[id?.split('-').length - 1]
   const [currentChapter, setCurrentChapter] = useState()
+  const [isFetchedData, setIsFetchedData] = useState(false)
 
   // Get data course detail
   const courseData = useQuery({
@@ -57,6 +58,7 @@ function Course_detail() {
     onSuccess: (data) => {
       const completedArrLesson = getLessonItemsByCourseId(Number(pageID), data?.data.learning_progresses)
       setNewArrLesson(completedArrLesson)
+      setIsFetchedData(true)
     }
   })
 
@@ -88,44 +90,49 @@ function Course_detail() {
   }, [courseData.data?.data])
 
   useEffect(() => {
-    const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
-    if (!isCompleted) {
-      if (chooseItem.type === 'video') {
-        const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${chooseItem.data.attributes.video_url}&key=AIzaSyB4j74m6L8f90SnuoyuzzYX5fy0aGnf64U`
+    if (isFetchedData) {
+      const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
+      if (!isCompleted) {
+        if (chooseItem.type === 'video') {
+          const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${chooseItem.data.attributes.video_url}&key=AIzaSyB4j74m6L8f90SnuoyuzzYX5fy0aGnf64U`
 
-        fetch(apiUrl)
-          .then((response) => response.json())
-          .then((data) => {
-            const duration = data.items[0].contentDetails.duration
-            const timeArray = duration.match(/\d+/g)
-            const minutes = parseInt(timeArray[0], 10)
-            const seconds = parseInt(timeArray[1], 10)
-            const count = minutes * 60 + seconds
-            setCountDown(count)
-          })
-          .catch((error) => {
-            console.error('Failed to get video duration:', error)
-            return null
-          })
-      } else {
-        handleUpdateOrPostLearningProcess()
+          fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+              const duration = data.items[0].contentDetails.duration
+              const timeArray = duration.match(/\d+/g)
+              const minutes = parseInt(timeArray[0], 10)
+              const seconds = parseInt(timeArray[1], 10)
+              const count = minutes * 60 + seconds
+              setCountDown(count)
+            })
+            .catch((error) => {
+              console.error('Failed to get video duration:', error)
+              return null
+            })
+        } else {
+          handleUpdateOrPostLearningProcess()
+        }
       }
     }
-  }, [chooseItem])
+  }, [chooseItem, isFetchedData])
 
+  //check countdown
   useEffect(() => {
-    if (countDown > 0) {
-      const interval = setInterval(() => {
-        setCountDown((prevSeconds) => prevSeconds - 1)
-      }, 1000)
+    if (isFetchedData) {
+      if (countDown > 0) {
+        const interval = setInterval(() => {
+          setCountDown((prevSeconds) => prevSeconds - 1)
+        }, 1000)
 
-      return () => clearInterval(interval)
+        return () => clearInterval(interval)
+      }
+      if (countDown === 0) {
+        const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
+        if (!isCompleted) handleUpdateOrPostLearningProcess()
+      }
     }
-    if (countDown === 0) {
-      const isCompleted = newArrLesson.some((lesson: any) => lesson.id === chooseItem.data.id)
-      if (!isCompleted) handleUpdateOrPostLearningProcess()
-    }
-  }, [countDown, chooseItem])
+  }, [countDown, chooseItem, isFetchedData])
 
   const handlePostLearningProcess = useMutation({
     mutationFn: () =>
