@@ -183,34 +183,32 @@ function Course_detail() {
     setLessonId(item.id)
   }
 
-  const handleCheckPrevLessonComplete = (chapterId: any, lessonId: any) => {
-    const currentChapter = courseData.data?.data.data.attributes.chapters.data.find(
-      (chapter: any) => chapter.id === chapterId
-    )
-    const position = currentChapter.attributes.lesson_items.data.findIndex((lesson: any) => lesson.id === lessonId)
-    return newArrLesson.some(
-      (lesson: any) => lesson.id === currentChapter.attributes.lesson_items.data[position - 1]?.id
-    )
-  }
-
-  const handleSetChooseItem = async ({ item, chapterID }: any) => {
-    if (!handleCheckPrevLessonComplete(chapterID, item.id)) return
-    if (chapterID === currentChapter) {
-      handleSetItem(item)
+  const handleCheckPrevLessonComplete = async (chapterId: any, lessonId: any) => {
+    if (currentChapter === chapterId) {
+      const chooseChapterId = courseData.data?.data.data.attributes.chapters.data.find(
+        (chapter: any) => chapter.id === chapterId
+      )
+      const position = chooseChapterId.attributes.lesson_items.data.findIndex((lesson: any) => lesson.id === lessonId)
+      if (position === 0 && chapterId === courseData.data?.data.data.attributes.chapters.data[0].id) return true
+      return newArrLesson.some(
+        (lesson: any) => lesson.id === chooseChapterId.attributes.lesson_items.data[position - 1].id
+      )
     } else {
       const currenChapterQuizzId = courseData.data?.data.data.attributes.chapters.data.find(
         (item: any) => item.id === currentChapter
       ).attributes.quizzes.data[0].id
       if (currenChapterQuizzId) {
         const { data } = await checkQuizCompleted.mutateAsync(currenChapterQuizzId)
-        if (data && data.gr >= 7.5) {
-          handleSetItem(item)
-        } else {
-          toast.error('Bạn chưa hoàn thành chapter trước.')
-        }
-      } else {
-        handleSetItem(item)
+        if (data && data.gr >= 7.5) return true
       }
+      return false
+    }
+  }
+
+  const handleSetChooseItem = async ({ item, chapterID }: any) => {
+    console.log(await handleCheckPrevLessonComplete(chapterID, item.id))
+    if (await handleCheckPrevLessonComplete(chapterID, item.id)) {
+      handleSetItem(item)
     }
   }
 
