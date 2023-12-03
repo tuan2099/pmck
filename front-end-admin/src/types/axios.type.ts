@@ -1,0 +1,3 @@
+interface MyApiResponse {
+  message: string
+}

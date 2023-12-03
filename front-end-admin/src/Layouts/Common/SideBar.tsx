@@ -3,6 +3,7 @@ import { SideBarContainer } from '../StyleComponents'
 import { logo } from '../../assets/images/index'
 import { Accordion, Box, Typography, AccordionSummary, AccordionDetails } from '@mui/material'
 import { FaAngleDown, FaCalendar, FaHome, FaTable } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
   return (
@@ -34,10 +35,14 @@ const SideBar = () => {
             </Box>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>Dashboard1</Typography>
+            <Link to='/course'>
+              <Typography>Quản lý khóa học</Typography>
+            </Link>
           </AccordionDetails>
           <AccordionDetails>
-            <Typography>Dashboard2</Typography>
+            <Link to='lessons'>
+              <Typography>Quản lý bài học</Typography>
+            </Link>
           </AccordionDetails>
         </Accordion>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', paddingY: '9px', marginTop: '8px' }}>

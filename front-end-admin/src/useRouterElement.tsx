@@ -3,6 +3,7 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import { AppContext } from './context/app.context'
 import RegisterLayout from './Layouts/RegisterLayout'
 import LoginAdmin from './pages/Login'
+import MainLayout from './Layouts/Mainlayout'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -27,6 +28,14 @@ export default function useRouterElement() {
         <RegisterLayout>
           <LoginAdmin />
         </RegisterLayout>
+      )
+    },
+    {
+      path: '/',
+      element: (
+        <MainLayout>
+          <LoginAdmin />
+        </MainLayout>
       )
     }
   ])

@@ -5,8 +5,44 @@ export const COURSE_URL = '/courses?populate=*'
 export const LIST_COURSE_URL = 'list-courses?populate[courses][populate][0]=banner_course'
 
 const courseApi = {
-  getListcourse() {
-    return http.get(LIST_COURSE_URL)
+  getListcourse({ page, courseName }: { page: string | any; courseName: string | null }) {
+    if (page && courseName) {
+      return http.get(`/courses?pagination%5Bpage%5D=${page}&filters%5Bcourse_name%5D=${courseName}&populate=*`)
+    } else if (page) return http.get(`/courses?pagination%5Bpage%5D=${page}&populate=*`)
+    else if (courseName) return http.get(`/courses?filters%5Bcourse_name%5D=${courseName}&populate=*`)
+    else return http.get(`/courses?populate=*`)
+  },
+  createCourse(data: any) {
+    return http.post(
+      '/courses',
+      { data },
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk5Mjg1NTA1LCJleHAiOjE3MDE4Nzc1MDV9.41jPwN84aT-3eb-ZQOkqOv4kFTFKz5BLL3s8bscrYhE'
+        }
+      }
+    )
+  },
+  updateCourse(id: any, data: any) {
+    return http.put(
+      `/courses/${id}`,
+      { data },
+      {
+        headers: {
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk5Mjg1NTA1LCJleHAiOjE3MDE4Nzc1MDV9.41jPwN84aT-3eb-ZQOkqOv4kFTFKz5BLL3s8bscrYhE'
+        }
+      }
+    )
+  },
+  deleteCourse(id: any) {
+    return http.delete(`/courses/${id}`, {
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk5Mjg1NTA1LCJleHAiOjE3MDE4Nzc1MDV9.41jPwN84aT-3eb-ZQOkqOv4kFTFKz5BLL3s8bscrYhE'
+      }
+    })
   },
   getCourse() {
     return http.get<CourseResponseType>(COURSE_URL)
